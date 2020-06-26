@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/PhantomJS%E7%AF%87/" target="_self">
+          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="PhantomJS篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/PhantomJS%E7%AF%87/">PhantomJS篇</a>
+
+      <a href="/2020/04/28/PhantomJS%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>PhantomJS 篇PhantomJS 组件常用在爬虫领域，但是它也有其非常灵活的一面，即用作截取网页长图，或者将网页内容存储为PDF
+PhantomJS 下载地址
+API文档库
+Windows使用下载完成后，直接解压即可直接进行使用，同时调用PhantomJS.exe时需要配合JS一同使用，以转出PNG图片或者PDF为例
+
+&#96;&#96;&#96;javascript
+&#x2F;&#x</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bugs-%E6%8A%80%E5%B7%A7%E7%AF%87/">Bugs & 技巧篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PhantomJS%E7%AF%87/">PhantomJS篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Ping%E4%B8%8ETelnet/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="Ping与Telnet">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Ping%E4%B8%8ETelnet/">Ping与Telnet</a>
+
+      <a href="/2020/04/28/Ping%E4%B8%8ETelnet/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Ping和Telnet的妙用ping  realtest.api.pro.testin.cn   ----&gt; 
+原理知识：
+由A主机发出 ping xxxx(域名或IP 称为主机B) 如果是域名则先进行DNS解析获取其IP地址，由主机A通过 -&gt; Ping命令会构建一个固定格式的ICMP请求数据包，由ICMP协议将目标IP和数据包一起交给IP协议，IP协议会把本机地址作为源地址，目标i</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bugs-%E6%8A%80%E5%B7%A7%E7%AF%87/">Bugs & 技巧篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Ping%E4%B8%8ETelnet/">Ping与Telnet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/" target="_self">
+          <img src="/img/articles/14.jpg" srcset="/img/loading.gif" alt="SpringBoot-自定义starter">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">SpringBoot-自定义starter</a>
+
+      <a href="/2020/04/28/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Spring Boot Starter简介Starter是Spring Boot中的一个非常重要的概念，Starter相当于模块，它能将模块所需的依赖整合起来并对模块内的Bean根据环境（ 条件）进行自动配置。使用者只需要依赖相应功能的Starter，无需做过多的配置和依赖，Spring Boot就能自动扫描并加载相应的模块。
+例如在Maven的依赖中加入spring-boot-starter-w</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">SpringBoot-自定义starter</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Spring-xsd/" target="_self">
+          <img src="/img/articles/7.jpg" srcset="/img/loading.gif" alt="Spring-xsd">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Spring-xsd/">Spring-xsd</a>
+
+      <a href="/2020/04/28/Spring-xsd/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Spring XSD篇错误描述有时候你会发现过去一直启动正常的系统，某天启动时会报出形如下面的错误： 
+org.xml.sax.SAXParseException: schema_reference.4: Failed to read schema document 'http://www.springframework.org/schema/beans/spring-beans-2.0.xsd'</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bugs-%E6%8A%80%E5%B7%A7%E7%AF%87/">Bugs & 技巧篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spring-xsd/">Spring-xsd</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/SpringBoot%E7%AF%87/" target="_self">
+          <img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="SpringBoot篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/SpringBoot%E7%AF%87/">SpringBoot篇</a>
+
+      <a href="/2020/04/28/SpringBoot%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SpringBoot篇问题41. 谈谈你对 Spring Boot 的理解？
+
+42. Spring Boot 的优势是什么？为什么要使用 Spring Boot？
+
+43. Spring Boot 的配置文件有几种格式？区别是什么？
+
+44. 谈谈你知道的 Spring Boot 核心注解。
+
+45. 如何自动开启 Spring Boot 各个组件？
+
+46. Spring Boot 中 sta</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringBoot%E7%AF%87/">SpringBoot篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/SpringCloud%E7%AF%87/" target="_self">
+          <img src="/img/articles/11.jpg" srcset="/img/loading.gif" alt="SpringCloud篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/SpringCloud%E7%AF%87/">SpringCloud篇</a>
+
+      <a href="/2020/04/28/SpringCloud%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SpringCloud篇问题51. 什么是 Spring Cloud？
+
+52. Spring Cloud 和 Spring 之间有什么关联关系？
+
+53. Spring Cloud 实现服务注册和发现的原理是什么？
+
+54. Ribbon 和 Feign 有什么区别？
+
+55. 为什么要使用 Spring Cloud 熔断器，它的作用是什么？
+
+56. 什么是 Hystrix？
+
+57. Eur</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringCloud%E7%AF%87/">SpringCloud篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Vue%E5%88%9D%E8%AF%86/" target="_self">
+          <img src="/img/articles/6.jpg" srcset="/img/loading.gif" alt="Vue初识">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Vue%E5%88%9D%E8%AF%86/">Vue初识</a>
+
+      <a href="/2020/04/28/Vue%E5%88%9D%E8%AF%86/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Vue初始本地构建Vue环境
+安装Node.js 并配置完成
+
+
+配置方式：https://blog.csdn.net/tjj3027/article/details/84751321 
+​                     https://www.cnblogs.com/fighxp/p/7411608.html 
+卸载，安装，设置数据源，配置环境变量，配置全局存储目录（node.js，F</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Vue%E5%88%9D%E8%AF%86/">Vue初识</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E4%BB%80%E4%B9%88%E6%98%AF%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88/" target="_self">
+          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="什么是高级工程师">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E4%BB%80%E4%B9%88%E6%98%AF%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88/">什么是高级工程师</a>
+
+      <a href="/2020/04/28/%E4%BB%80%E4%B9%88%E6%98%AF%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88/" class="index-excerpt">
+        
+        
+          
+        
+        <div>有人问我什么是高级程序员， 该怎么衡量？
+作者：码农翻身 - 大刘
+微信公众号：码农翻身
+
+工作了5年以上？带了十多人的团队？知识体系完整，基础扎实？开发了系统的核心模块？精通xxxx技术？代码写得极为优雅漂亮，并且Bug极少？特别擅长解决疑难杂症，找Bug特别快？……
+这些的确是一个高级程序员能表现出的特质， 但是高级程序员本身就是一个比较“虚”的词，在不同的公司对它的定义都不一样。 
+我在Qu</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BB%80%E4%B9%88%E6%98%AF%E9%AB%98%E7%BA%A7%E5%B7%A5%E7%A8%8B%E5%B8%88/">什么是高级工程师</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/articles/17.jpg" srcset="/img/loading.gif" alt="享元模式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/">享元模式</a>
+
+      <a href="/2020/04/28/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>享元模式篇官方解释享元模式（Flyweight Pattern）主要用于减少创建对象的数量，以减少内存占用和提高性能，这种类型的设计模式属于结构型模式，它提供了减少对象数量从而改善应用所需的对象结构的方式
+享元模式的使用 1、JAVA 中的 String，如果有则返回，如果没有则创建一个字符串保存在字符串缓存池里面 2、数据库的数据池
+官方示例Head First：https://www.cnbl</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/">享元模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Elasticsearch%E7%AF%87/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="Elasticsearch篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Elasticsearch%E7%AF%87/">Elasticsearch篇</a>
+
+      <a href="/2020/04/28/Elasticsearch%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Elasticsearch篇Bulk异常 相关分析博文
+Elasticsearch案例分析（一）：Bulk异常导致Elasticsearch内存泄漏https://blog.csdn.net/xiaoyu_BD/article/details/82715306
+Bulk异常引发的Elasticsearch内存泄漏https://www.jianshu.com/p/d4f7a6d58008
+ES 5</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">全文搜索引擎</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Elasticsearch%E7%AF%87/">Elasticsearch篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

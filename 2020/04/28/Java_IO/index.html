@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Java_IO - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-28 00:25">
+      2020年4月28日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Java-IO"><a href="#Java-IO" class="headerlink" title="Java IO"></a>Java IO</h1><h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><h3 id="1-磁盘操作（File）"><a href="#1-磁盘操作（File）" class="headerlink" title="1.磁盘操作（File）"></a>1.磁盘操作（File）</h3><blockquote>
+<p>File类可以用于表示文件和目录的信息，但是它不表示文件的内容。递归地列出一个目录下所有文件：</p>
+<pre><code class="hljs stata">public static void listAllFiles(<span class="hljs-keyword">File</span> <span class="hljs-keyword">dir</span>)&#123;
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">dir</span> == null || !<span class="hljs-keyword">dir</span>.exists()) &#123;
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-keyword">if</span> (<span class="hljs-keyword">dir</span>.isFile()) &#123;
+		System.<span class="hljs-keyword">out</span>.println(<span class="hljs-keyword">dir</span>.getName());
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">File</span> <span class="hljs-keyword">file</span> : <span class="hljs-keyword">dir</span>.listFiles()) &#123;
+		listAllFiles(<span class="hljs-keyword">file</span>);
+	&#125;
+&#125;</code></pre>
+
+</blockquote>
+<h3 id="2-字节操作（Stream）"><a href="#2-字节操作（Stream）" class="headerlink" title="2.字节操作（Stream）"></a>2.字节操作（Stream）</h3><blockquote>
+<p>实现文件复制</p>
+<pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">copyFile</span><span class="hljs-params">(<span class="hljs-keyword">String</span> src, <span class="hljs-keyword">String</span> dist)</span> throws IOException </span>&#123;
+	FileInputStream in = <span class="hljs-keyword">new</span> FileInputStream(src);
+	FileOutputStream out = <span class="hljs-keyword">new</span> FileOutputStream(dist);
+	
+	<span class="hljs-keyword">byte</span>[] <span class="hljs-built_in">buffer</span> = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">20</span> * <span class="hljs-number">1024</span>];
+	<span class="hljs-keyword">int</span> cnt;
+	
+	<span class="hljs-comment">// read() 最多读取 buffer.length 个字节</span>
+	<span class="hljs-comment">// 返回的是实际读取的个数</span>
+	<span class="hljs-comment">// 返回 -1 的时候表示读到 eof，即文件尾</span>
+	<span class="hljs-keyword">while</span> ((cnt = in.<span class="hljs-built_in">read</span>(<span class="hljs-built_in">buffer</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">buffer</span>.length)) != <span class="hljs-number">-1</span>) &#123;
+		out.<span class="hljs-built_in">write</span>(<span class="hljs-built_in">buffer</span>, <span class="hljs-number">0</span>, cnt);
+	&#125;
+	
+	in.<span class="hljs-built_in">close</span>();
+	out.<span class="hljs-built_in">close</span>();
+&#125;</code></pre>
+
+<p>装饰者模式</p>
+<p>Java I/O 使用了装饰者模式来实现。以InputStream为例，</p>
+<ul>
+<li>InputStream是抽象组件；</li>
+<li>FileInputStream是InputStream的子类，属于具体组件，提供了字节流的输入操作；</li>
+<li>FilterInputStream 属于抽象装饰者，装饰者用于装饰组件，为组件提供额外的功能。例如 BufferedInputStream 为 FileInputStream 提供缓存的功能。</li>
+</ul>
+<p>实例化一个具有缓存功能的字节流对象时，只需要在FileInputStream对象上再套一层BufferedInputStream对象即可。</p>
+<pre><code class="hljs reasonml">FileInputStream fileInputStream = <span class="hljs-keyword">new</span> <span class="hljs-constructor">FileInputStream(<span class="hljs-params">filePath</span>)</span>;
+BufferedInputStream bufferedInputStream = <span class="hljs-keyword">new</span> <span class="hljs-constructor">BufferdInputStream(<span class="hljs-params">fileInputStream</span>)</span>;</code></pre>
+
+<p>DataInpputStream 装饰者提供了对更多数据类型进行输入的操作，比如int、double等基本类型。</p>
+</blockquote>
+<h3 id="3-字符操作（Reader-Writer）"><a href="#3-字符操作（Reader-Writer）" class="headerlink" title="3.字符操作（Reader|Writer）"></a>3.字符操作（Reader|Writer）</h3><blockquote>
+<h4 id="编码与解码"><a href="#编码与解码" class="headerlink" title="编码与解码"></a>编码与解码</h4><p>编码就是把字符转换为字节，而解码是把字节重新组合成字符。</p>
+<p>如果编码和解码过程使用不同的编码方式那么就出现了乱码。</p>
+<ul>
+<li>GBK 编码中，中文字符占 2 个字节，英文字符占 1 个字节；</li>
+<li>UTF-8 编码中，中文字符占 3 个字节，英文字符占 1 个字节；</li>
+<li>UTF-16be 编码中，中文字符和英文字符都占 2 个字节。</li>
+</ul>
+<p>UTF-16be 中的 be 指的是 Big Endian，也就是大端。相应地也有 UTF-16le，le 指的是 Little Endian，也就是小端。</p>
+<p>Java 的内存编码使用双字节编码 UTF-16be，这不是指 Java 只支持这一种编码方式，而是说 char 这种类型使用 UTF-16be 进行编码。char 类型占 16 位，也就是两个字节，Java 使用这种双字节编码是为了让一个中文或者一个英文都能使用一个 char 来存储。</p>
+<h4 id="String-的编码方式"><a href="#String-的编码方式" class="headerlink" title="String 的编码方式"></a>String 的编码方式</h4><p>String 可以看成一个字符序列，可以指定一个编码方式将它编码为字节序列，也可以指定一个编码方式将一个字节序列解码为 String。</p>
+<pre><code class="hljs armasm"><span class="hljs-keyword">String </span><span class="hljs-keyword">str1 </span>= <span class="hljs-string">"中文"</span><span class="hljs-comment">;</span>
+<span class="hljs-keyword">byte[] </span><span class="hljs-keyword">bytes </span>= <span class="hljs-keyword">str1.getBytes("UTF-8");</span>
+<span class="hljs-keyword">String </span><span class="hljs-keyword">str2 </span>= new <span class="hljs-keyword">String(bytes, </span><span class="hljs-string">"UTF-8"</span>)<span class="hljs-comment">;</span>
+<span class="hljs-symbol">System.out.println</span>(<span class="hljs-keyword">str2);</span></code></pre>
+
+<p>在调用无参数 getBytes() 方法时，默认的编码方式不是 UTF-16be。双字节编码的好处是可以使用一个 char 存储中文和英文，而将 String 转为 bytes[] 字节数组就不再需要这个好处，因此也就不再需要双字节编码。getBytes() 的默认编码方式与平台有关，一般为 UTF-8。</p>
+<pre><code class="hljs armasm"><span class="hljs-keyword">byte[] </span><span class="hljs-keyword">bytes </span>= <span class="hljs-keyword">str1.getBytes();</span></code></pre>
+
+<h4 id="Reader-与-Writer"><a href="#Reader-与-Writer" class="headerlink" title="Reader 与 Writer"></a>Reader 与 Writer</h4><p>不管是磁盘还是网络传输，最小的存储单元都是字节，而不是字符。但是在程序中操作的通常是字符形式的数据，因此需要提供对字符进行操作的方法。</p>
+<ul>
+<li>InputStreamReader 实现从字节流解码成字符流；</li>
+<li>OutputStreamWriter 实现字符流编码成为字节流。</li>
+</ul>
+<h4 id="实现逐行输出文本文件的内容"><a href="#实现逐行输出文本文件的内容" class="headerlink" title="实现逐行输出文本文件的内容"></a>实现逐行输出文本文件的内容</h4><pre><code class="hljs processing"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> readFileContent(<span class="hljs-keyword">String</span> filePath) <span class="hljs-keyword">throws</span> IOException &#123;
+
+    FileReader fileReader = <span class="hljs-keyword">new</span> FileReader(filePath);
+    <span class="hljs-keyword">BufferedReader</span> bufferedReader = <span class="hljs-keyword">new</span> <span class="hljs-keyword">BufferedReader</span>(fileReader);
+
+    <span class="hljs-keyword">String</span> <span class="hljs-built_in">line</span>;
+    <span class="hljs-keyword">while</span> ((<span class="hljs-built_in">line</span> = bufferedReader.readLine()) != <span class="hljs-keyword">null</span>) &#123;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">line</span>);
+    &#125;
+
+    <span class="hljs-comment">// 装饰者模式使得 BufferedReader 组合了一个 Reader 对象</span>
+    <span class="hljs-comment">// 在调用 BufferedReader 的 close() 方法时会去调用 Reader 的 close() 方法</span>
+    <span class="hljs-comment">// 因此只要一个 close() 调用即可</span>
+    bufferedReader.close();
+&#125;</code></pre>
+</blockquote>
+<h3 id="4-对象操作"><a href="#4-对象操作" class="headerlink" title="4.对象操作"></a>4.对象操作</h3><blockquote>
+<h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><p>序列化就是将一个对象转换成字节序列，方便存储和传输。</p>
+<ul>
+<li>序列化：ObjectOutputStream.writeObject()</li>
+<li>反序列化：ObjectInputStream.readObject()</li>
+</ul>
+<p>不会对静态变量进行序列化，因为序列化只是保存对象的状态，静态变量属于类的状态。</p>
+<h4 id="Serializable"><a href="#Serializable" class="headerlink" title="Serializable"></a>Serializable</h4><p>序列化的类需要实现 Serializable 接口，它只是一个标准，没有任何方法需要实现，但是如果不去实现它的话而进行序列化，会抛出异常。</p>
+<pre><code class="hljs haxe"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> void main(<span class="hljs-keyword">String</span>[] args) throws IOException, ClassNotFoundException &#123;
+
+    A a1 = <span class="hljs-keyword">new</span> <span class="hljs-type">A</span>(<span class="hljs-number">123</span>, <span class="hljs-string">"abc"</span>);
+    <span class="hljs-keyword">String</span> objectFile = <span class="hljs-string">"file/a1"</span>;
+
+    ObjectOutputStream objectOutputStream = <span class="hljs-keyword">new</span> <span class="hljs-type">ObjectOutputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">FileOutputStream</span>(objectFile));
+    objectOutputStream.writeObject(a1);
+    objectOutputStream.close();
+
+    ObjectInputStream objectInputStream = <span class="hljs-keyword">new</span> <span class="hljs-type">ObjectInputStream</span>(<span class="hljs-keyword">new</span> <span class="hljs-type">FileInputStream</span>(objectFile));
+    A a2 = (A) objectInputStream.readObject();
+    objectInputStream.close();
+    System.out.println(a2);
+&#125;
+
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> <span class="hljs-keyword"><span class="hljs-keyword">implements</span> <span class="hljs-type">Serializable</span></span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> int x;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">String</span> y;
+
+    A(int x, <span class="hljs-keyword">String</span> y) &#123;
+        <span class="hljs-built_in">this</span>.x = x;
+        <span class="hljs-built_in">this</span>.y = y;
+    &#125;
+
+    @Override
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">String</span> toString() &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"x = "</span> + x + <span class="hljs-string">"  "</span> + <span class="hljs-string">"y = "</span> + y;
+    &#125;
+&#125;</code></pre>
+
+<h4 id="transient"><a href="#transient" class="headerlink" title="transient"></a>transient</h4><p>transient 关键字可以使一些属性不会被序列化。</p>
+<p>ArrayList 中存储数据的数组 elementData 是用 transient 修饰的，因为这个数组是动态扩展的，并不是所有的空间都被使用，因此就不需要所有的内容都被序列化。通过重写序列化和反序列化方法，使得可以只序列化数组中有内容的那部分数据。</p>
+<pre><code class="hljs processing"><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> <span class="hljs-keyword">Object</span>[] elementData;</code></pre>
+</blockquote>
+<h3 id="5-网络操作"><a href="#5-网络操作" class="headerlink" title="5.网络操作"></a>5.网络操作</h3><blockquote>
+<p>Java 中的网络支持：</p>
+<ul>
+<li>InetAddress：用于表示网络上的硬件资源，即 IP 地址；</li>
+<li>URL：统一资源定位符；</li>
+<li>Sockets：使用 TCP 协议实现网络通信；</li>
+<li>Datagram：使用 UDP 协议实现网络通信。</li>
+</ul>
+<h4 id="InetAddress"><a href="#InetAddress" class="headerlink" title="InetAddress"></a>InetAddress</h4><p>没有公有的构造函数，只能通过静态方法来创建实例。</p>
+<pre><code class="hljs reasonml"><span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">InetAddress</span>.</span></span>get<span class="hljs-constructor">ByName(String <span class="hljs-params">host</span>)</span>;
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">InetAddress</span>.</span></span>get<span class="hljs-constructor">ByAddress(<span class="hljs-params">byte</span>[] <span class="hljs-params">address</span>)</span>;</code></pre>
+
+<h4 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h4><p>可以直接从 URL 中读取字节流数据。</p>
+<pre><code class="hljs processing"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> main(<span class="hljs-keyword">String</span>[] args) <span class="hljs-keyword">throws</span> IOException &#123;
+
+    URL url = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">"http://www.baidu.com"</span>);
+
+    <span class="hljs-comment">/* 字节流 */</span>
+    InputStream is = url.openStream();
+
+    <span class="hljs-comment">/* 字符流 */</span>
+    InputStreamReader isr = <span class="hljs-keyword">new</span> InputStreamReader(is, <span class="hljs-string">"utf-8"</span>);
+
+    <span class="hljs-comment">/* 提供缓存功能 */</span>
+    <span class="hljs-keyword">BufferedReader</span> br = <span class="hljs-keyword">new</span> <span class="hljs-keyword">BufferedReader</span>(isr);
+
+    <span class="hljs-keyword">String</span> <span class="hljs-built_in">line</span>;
+    <span class="hljs-keyword">while</span> ((<span class="hljs-built_in">line</span> = br.readLine()) != <span class="hljs-keyword">null</span>) &#123;
+        System.out.<span class="hljs-built_in">println</span>(<span class="hljs-built_in">line</span>);
+    &#125;
+
+    br.close();
+&#125;</code></pre>
+
+<h4 id="Sockets"><a href="#Sockets" class="headerlink" title="Sockets"></a>Sockets</h4><ul>
+<li>ServerSocket：服务器端类</li>
+<li>Socket：客户端类</li>
+<li>服务器和客户端通过 InputStream 和 OutputStream 进行输入输出。</li>
+</ul>
+<h4 id="Datagram"><a href="#Datagram" class="headerlink" title="Datagram"></a>Datagram</h4><ul>
+<li>DatagramSocket：通信类</li>
+<li>DatagramPacket：数据包类</li>
+</ul>
+</blockquote>
+<h3 id="6-Java序列化，如何实现序列化和反序列化，常见的序列化协议有哪些？"><a href="#6-Java序列化，如何实现序列化和反序列化，常见的序列化协议有哪些？" class="headerlink" title="6. Java序列化，如何实现序列化和反序列化，常见的序列化协议有哪些？"></a>6. Java序列化，如何实现序列化和反序列化，常见的序列化协议有哪些？</h3><blockquote>
+<p><a href="https://blog.csdn.net/YANG_Gang2017/article/details/80260092" target="_blank" rel="noopener">https://blog.csdn.net/YANG_Gang2017/article/details/80260092</a></p>
+</blockquote>
+<h3 id="7-同步和异步"><a href="#7-同步和异步" class="headerlink" title="7.同步和异步"></a>7.同步和异步</h3><blockquote>
+<p>同步、异步、阻塞和非阻塞的概念</p>
+<p>在进行网络编程时，我们常常见到同步、异步、阻塞和非阻塞四种调用方式。这些方式彼此概念并不好理解。下面是我对这些术语的理解。<br>同步<br>所谓同步，就是在发出一个功能调用时，在没有得到结果之前，该调用就不返回。按照这个定义，其实绝大多数函数都是同步调用（例如sin, isdigit等）。但是一般而言，我们在说同步、异步的时候，特指那些需要其他部件协作或者需要一定时间完成的任务。最常见的例子就是 SendMessage。该函数发送一个消息给某个窗口，在对方处理完消息之前，这个函数不返回。当对方处理完毕以后，该函数才把消息处理函数所返回的 LRESULT值返回给调用者。<br>异步<br>异步的概念和同步相对。当一个异步过程调用发出后，调用者不能立刻得到结果。实际处理这个调用的部件在完成后，通过状态、通知和回调来通知调用者。以CAsycSocket类为例（注意，CSocket从CAsyncSocket派生，但是起功能已经由异步转化为同步），当一个客户端通过调用 Connect函数发出一个连接请求后，调用者线程立刻可以朝下运行。当连接真正建立起来以后，socket底层会发送一个消息通知该对象。这里提到执行部件和调用者通过三种途径返回结果：状态、通知和回调。可以使用哪一种依赖于执行部件的实现，除非执行部件提供多种选择，否则不受调用者控制。如果执行部件用状态来通知，那么调用者就需要每隔一定时间检查一次，效率就很低（有些初学多线程编程的人，总喜欢用一个循环去检查某个变量的值，这其实是一种很严重的错误）。如果是使用通知的方式，效率则很高，因为执行部件几乎不需要做额外的操作。至于回调函数，其实和通知没太多区别。<br>阻塞<br>阻塞调用是指调用结果返回之前，当前线程会被挂起。函数只有在得到结果之后才会返回。有人也许会把阻塞调用和同步调用等同起来，实际上他是不同的。对于同步调用来说，很多时候当前线程还是激活的，只是从逻辑上当前函数没有返回而已。例如，我们在CSocket中调用Receive函数，如果缓冲区中没有数据，这个函数就会一直等待，直到有数据才返回。而此时，当前线程还会继续处理各种各样的消息。如果主窗口和调用函数在同一个线程中，除非你在特殊的界面操作函数中调用，其实主界面还是应该可以刷新。socket接收数据的另外一个函数recv则是一个阻塞调用的例子。当socket工作在阻塞模式的时候，如果没有数据的情况下调用该函数，则当前线程就会被挂起，直到有数据为止。<br>非阻塞<br>非阻塞和阻塞的概念相对应，指在不能立刻得到结果之前，该函数不会阻塞当前线程，而会立刻返回。<br>对象的阻塞模式和阻塞函数调用<br>对象是否处于阻塞模式和函数是不是阻塞调用有很强的相关性，但是并不是一一对应的。阻塞对象上可以有非阻塞的调用方式，我们可以通过一定的API去轮询状态，在适当的时候调用阻塞函数，就可以避免阻塞。而对于非阻塞对象，调用特殊的函数也可以进入阻塞调用。函数select就是这样的一个例子</p>
+</blockquote>
+<h3 id="8-Java中的NIO-BIO-AIO分别是什么？它们的区别是什么？"><a href="#8-Java中的NIO-BIO-AIO分别是什么？它们的区别是什么？" class="headerlink" title="8. Java中的NIO,BIO,AIO分别是什么？它们的区别是什么？"></a>8. Java中的NIO,BIO,AIO分别是什么？它们的区别是什么？</h3><blockquote>
+<ul>
+<li><strong>BIO(Blocking I/O)</strong>：同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成。在活动连接数不是特别高（小于单机1000）的情况下，这种模型是比较不错的，可以让每一个连接专注于自己的I/O并且编程模型简单，也不用过多考虑系统的过载、限流等问题。线程池本身就是一个天然的漏斗，可以缓冲一些系统处理不了的连接或请求。但是，当面对十万甚至百万级连接的时候，传统的BIO模型是无能为力的。因此，我们需要一种更高效的I/O处理模型来应对更高的并发量。</li>
+<li><strong>NIO(New I/O)</strong>：NIO是一种同步非阻塞的I/O模型，在Java 1.4 中引入了NIO框架，对应java.nio包，提供了Channel，Selector，Buffer等抽象。NIO中的N可以理解为Non-blocking，不单纯是New。它支持面向缓冲的，基于通道的I/O操作方法。NIO提供了与传统BIO模型中的Socket和ServerSocket相对应的SocketChannel和ServerSocketChannel两种不同的套接字通道实现，两种通道都支持阻塞和非阻塞两种模式。阻塞模式使用就像传统中的支持一样，比较简单，但是性能和可靠性都不好；非阻塞模式正好与之相反。对于低负载，低并发的应用程序，可以使用同步阻塞I/O来提升开发速率和更好的维护性；对于高负载、高并发的（网络）应用，应使用NIO的非阻塞模式来开发</li>
+<li><strong>AIO(Asynchronous I/O)</strong>：AIO也就是NIO 2。在Java 7 中引入了 NIO 的改进版 NIO 2，它是异步非阻塞的IO模型。异步 IO 是基于事件和回调机制实现的，也就是应用操作之后会直接返回，不会堵塞在那里，当后台处理完成，操作系统会通知相应的线程进行后续的操作。AIO是异步IO的缩写，虽然NIO在网络操作中，提供了非阻塞的方法，但是NIO的IO行为还是同步的。对于NIO来说，我们的业务线程是在IO操作准备好时，得到通知，接着就由这个线程自行进行IO操作，IO操作本身是同步的。</li>
+</ul>
+</blockquote>
+<h3 id="9-Stock通信的伪代码实现流程"><a href="#9-Stock通信的伪代码实现流程" class="headerlink" title="9. Stock通信的伪代码实现流程"></a>9. Stock通信的伪代码实现流程</h3><blockquote>
+<p>服务器绑定端口：server = new ServerSocket(PORT)<br>服务器阻塞监听：socket = server.accept()<br>服务器开启线程：new Thread(Handle handle)<br>服务器读写数据：BufferedReader PrintWriter<br>客户端绑定IP和PORT：new Socket(IP_ADDRESS, PORT)<br>客户端传输接收数据：BufferedReader PrintWriter</p>
+</blockquote>
+<h3 id="10-知识扩展"><a href="#10-知识扩展" class="headerlink" title="10.知识扩展"></a>10.知识扩展</h3><blockquote>
+<ul>
+<li>区分同步或异步（synchronous/asynchronous）。简单来说，同步是一种可靠的有序运行机制，当我们进行同步操作时，后续的任务是等待当前调用返回，才会进行下一步；而异步则相反，其他任务不需要等待当前调用返回，通常依靠回调、事件等机制来实现任务间的次序关系。</li>
+<li>区分阻塞与非阻塞（blocking/non-blocking）。在进行阻塞操作时，当前线程会处于阻塞状态，无法从事其他任务，只有当条件就绪才能继续，比如ServerSocket新连接建立完毕，或数据读取、写入完成；而非阻塞则是不管IO操作是否结束，直接返回，相应操作在后台继续处理。</li>
+<li>不能一概而论认为同步或阻塞就是低效，具体还要看应用和系统特征。</li>
+<li>IO不仅仅是对文件的操作，网络编程中，比如Socket通信，都是典型的IO操作目标。</li>
+<li>输入流、输出流（InputStream/OutputStream）是用于读取或写入字节的，例如操作图书文件</li>
+<li>而Reader/Writer则是用于操作字符，增加了字符编解码等功能，适用于类似从文件中读取或写入文本信息。本质上计算机操作中都是字节，不管是网络通信还是文件读取，Reader/Writer相当于构建了应用逻辑和原始数据之间的桥梁。</li>
+<li>BufferedOutputStream等带缓冲区的实现，可以避免频繁的磁盘读写，进而提高IO处理效率。这种设计利用了缓冲区，将批量数据进行一次操作，但在使用中千万别忘了flush。</li>
+</ul>
+</blockquote>
+<h2 id="二、面试题"><a href="#二、面试题" class="headerlink" title="二、面试题"></a>二、面试题</h2><h3 id="获取用键盘输入常用的两种方法"><a href="#获取用键盘输入常用的两种方法" class="headerlink" title="获取用键盘输入常用的两种方法"></a>获取用键盘输入常用的两种方法</h3><blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-comment">//通过Scanner</span>
+Scanner sc = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Scanner(System.<span class="hljs-params">in</span>)</span>;
+String s = sc.next<span class="hljs-constructor">Line()</span>;
+sc.close<span class="hljs-literal">()</span>;
+
+<span class="hljs-comment">//通过BufferedReader</span>
+BufferedReader br = <span class="hljs-keyword">new</span> <span class="hljs-constructor">BufferedReader(<span class="hljs-params">new</span> InputStreamReader(System.<span class="hljs-params">in</span>)</span>);
+String s = input.read<span class="hljs-constructor">Line()</span>;</code></pre>
+
+</blockquote>
+<h3 id="Java中IO流分为几种？"><a href="#Java中IO流分为几种？" class="headerlink" title="Java中IO流分为几种？"></a>Java中IO流分为几种？</h3><blockquote>
+<img src="/2020/04/28/Java_IO/IO1.jpg" srcset="/img/loading.gif">
+
+<img src="/2020/04/28/Java_IO/IO2.jpg" srcset="/img/loading.gif">
+
+<ul>
+<li>按照流的流向分，可以分为输入流和输出流；</li>
+<li>按照操作单元划分，可以划分为字节流和字符流；</li>
+<li>按照流的角色划分为节点流和处理流。</li>
+</ul>
+<p>Java IO 流共设计40多个类，这些类看上去很杂乱，但实际上很有规则，而且彼此之间存在非常紧密的联系，，Java IO 流的40多个类都是从如下4个抽象类基类中派生出来的。</p>
+<ul>
+<li>InputStream/Reader: 所有的输入流的基类，前者是字节输入流，后者是字符输入流。</li>
+<li>OutputStream/Writer: 所有的输出流的基类，前者是字节输出流，后者是字符输出流。</li>
+</ul>
+</blockquote>
+<h3 id="Java提供了哪些IO方式？NIO如何实现多路复用？"><a href="#Java提供了哪些IO方式？NIO如何实现多路复用？" class="headerlink" title="Java提供了哪些IO方式？NIO如何实现多路复用？"></a>Java提供了哪些IO方式？NIO如何实现多路复用？</h3><blockquote>
+<p>Java IO方式有很多种，基于不同的IO抽象模型和交互方式，可以进行简单区分。</p>
+<p>首先，传统的java.io包，它基于流模型实现，提供了我们最熟知的IO功能，比如File抽象，输入输出流等。交互方式是同步、阻塞的方式，也就是说，在读取输入流或者写入输出流时，在读、写动作完成之前，线程会一直阻塞在那里，它们之间的调用是可靠的先行顺序。</p>
+<p>java.io包的好处是代码比较简单、直观，缺点则是IO效率和扩展性存在局限性，容易成为应用性能的瓶颈。</p>
+<p>很多时候，人们也把java.net下面提供的部分网络API，比如Socket、ServerSocket、HttpURLConnection也归类到同步阻塞IO类库，因为网络通信同样是IO行为。</p>
+<p>第二，在Java 1.4 中引入了NIO框架（java.nio包），提供了Channel、Selector、Buffer等新的抽象，可以构建多路复用、同步非阻塞IO程序，同时提供了更接近操作系统底层的高性能数据操作方式。</p>
+<p>第三，在Java 7 中，NIO有了进一步的改进，也就是NIO 2，引入了异步非阻塞IO方式，也有很多人叫它AIO（Asynchronous IO）。异步IO操作基于时间和回调机制，可以简单理解为，应用操作直接返回，而不会阻塞在那里，当后台处理完成，操作系统会通知相应线程进行后续工作。</p>
+<p><strong>NIO</strong></p>
+<p>主要组成部分：Buffer、Channel、Selector</p>
+<ul>
+<li><p>Buffer，高效的数据容器，除了布尔类型，所有原始数据类型都有相应的Buffer实现。</p>
+</li>
+<li><p>Channel，类似在Linux之类操作系统上看到的文件描述符，是NIO中被用来支持批量式IO操作的一种抽象。</p>
+<p>File或者Socket，通常被认为是比较高层次的抽象，而Channel则是更加操作系统底层的一种抽象，这也使得NIO得以充分利用现代操作系统底层机制，获得特定场景的性能优化，例如，DMA（Direct Memory Access）等。不同层次的抽象是相互关联的，我们可以通过Socket获取Channel，反之亦然。</p>
+</li>
+<li><p>Selector，是NIO实现多路复用的基础，它提供了一种高效的机制，可以检测到注册在Selector上的多个Channel中，是否有Channel处于就绪状态，进而实现了单线程对多Channel的高效管理。</p>
+</li>
+</ul>
+<p>IO都是同步阻塞磨时，所以需要多线程以实现多任务处理。而NIO则是利用了单线程轮询事件的机制，通过高效地定位就绪地Channel，来决定做什么，仅仅select阶段是阻塞的，可以有效避免大量数据处理时，频繁线程切换带来的问题，应用的扩展能力有了非常大的提高。</p>
+</blockquote>
+<h3 id="Files的常用方法都有哪些？"><a href="#Files的常用方法都有哪些？" class="headerlink" title="Files的常用方法都有哪些？"></a>Files的常用方法都有哪些？</h3><blockquote>
+<p>Files.exists() 检测文件路径是否存在</p>
+<p>Files.createFile() 创建文件</p>
+<p>Files.createDirectory() 创建文件夹</p>
+<p>Files.delete() 删除文件或者目录</p>
+<p>Files.copy() 复制文件</p>
+<p>Files.move() 移动文件</p>
+<p>Files.size() 查看文件个数</p>
+<p>Files.read() 读取文件</p>
+<p>Files.write() 写入文件</p>
+</blockquote>
+<h3 id="Java如何进行文件读取？"><a href="#Java如何进行文件读取？" class="headerlink" title="Java如何进行文件读取？"></a>Java如何进行文件读取？</h3><blockquote>
+<p>FileReader类是将文件按字符流的方式读取char数组或者String.FileInputStream则按字符流的方式读取文件byte数组。</p>
+<ul>
+<li>1.首先获得一个文件句柄。 File fille= new File();file即为文件句柄。两人之间连 通电话网络了。接下来可以开始打电话了</li>
+<li>2.通过这条线路读取甲方的信息: new FileInputStream(file)目前这个信息已经 读进来内存当中了。接下来需要解读成乙方可以理解的东西</li>
+<li>3.既然你使用了 FileInputStream()。那么对应的需要使用 InputStreamReader() 这个方法进行解读刚才装进来内存当中的数据</li>
+<li>4.解读完成后要输出呀。那当然要转换成IO可以识别的数据呀。那就需要调用字节 码读取的方法 Bufferedreader ()。同时使用 bufferedReader()的 readline()方 法读取txt文件中的每一行数据哈。</li>
+</ul>
+</blockquote>
+<h3 id="Java有几种文件拷贝方式？哪一种最高效？"><a href="#Java有几种文件拷贝方式？哪一种最高效？" class="headerlink" title="Java有几种文件拷贝方式？哪一种最高效？"></a>Java有几种文件拷贝方式？哪一种最高效？</h3><blockquote>
+<p>Java有多种比较典型的文件拷贝实现方式，比如：</p>
+<p>利用java.io类库，直接为源文件构建一个FileInputStream读取，然后再为目标文件构建一个FileOutputStream，完成写入工作。</p>
+<pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">copyFileByStream</span><span class="hljs-params">(<span class="hljs-built_in">File</span> source, <span class="hljs-built_in">File</span> dest)</span> throws IOException</span>&#123;
+	<span class="hljs-keyword">try</span> (InputStream is = <span class="hljs-keyword">new</span> FileInputStram(source);
+		OutputStream os = <span class="hljs-keyword">new</span> FileOutputStream(dest);)&#123;
+		<span class="hljs-keyword">byte</span>[] <span class="hljs-built_in">buffer</span> = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];
+		<span class="hljs-keyword">int</span> length;
+		<span class="hljs-keyword">while</span> ((length == is.<span class="hljs-built_in">read</span>(<span class="hljs-built_in">buffer</span>)) &gt; <span class="hljs-number">0</span>) &#123;
+			os.<span class="hljs-built_in">write</span>(<span class="hljs-built_in">buffer</span>, <span class="hljs-number">0</span>, length);
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+<p>或者，利用java.nio类库提供的transferTo或transferFrom方法实现</p>
+<pre><code class="hljs gradle"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> copyFileByChannel(<span class="hljs-keyword">File</span> <span class="hljs-keyword">source</span>, <span class="hljs-keyword">File</span> dest) <span class="hljs-keyword">throws</span> IOException&#123;
+	<span class="hljs-keyword">try</span>(FileChannel sourceChannel = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-keyword">source</span>).getChannel();
+		FileChannel targetChannel = <span class="hljs-keyword">new</span> FileOutputStream(dest).getChannel();)&#123;
+		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">long</span> <span class="hljs-keyword">count</span> = sourceChannel.<span class="hljs-keyword">size</span>();<span class="hljs-keyword">count</span>&gt;<span class="hljs-number">0</span>;)&#123;
+			<span class="hljs-keyword">long</span> transferred = sourceChannel.transferTo(
+				sourceChannel.position(),<span class="hljs-keyword">count</span>,targetChannel);
+			sourceChannel.position(sourceChannel.position() + transferred);
+			<span class="hljs-keyword">count</span> -= transferred;
+		&#125;
+	&#125;
+&#125;</code></pre>
+
+<p>当然，Java标准类库本身已经提供了几种Files.copy的实现</p>
+<p>对于Copy的效率，这个其实与操作系统和配置等情况相关，总体上来说，NIO transferTo/From 的方式可能更快，因为它更能利用现代操作系统底层机制，避免不必要的拷贝和上下文切换。</p>
+<p>补充：</p>
+<ul>
+<li>不同的copy方式，底层的机制有什么区别？</li>
+<li>为什么零拷贝（zero-copy）可能有性能优势？</li>
+<li>Buffer分类与使用？</li>
+<li>Direct Buffer 对垃圾收集等方面的影响与实践选择。</li>
+</ul>
+</blockquote>
+<h3 id="字节流与字符流的区别"><a href="#字节流与字符流的区别" class="headerlink" title="字节流与字符流的区别"></a>字节流与字符流的区别</h3><blockquote>
+<p>字节流和字符流使用是非常相似的，那么除了操作代码的不同之外，还有的区别有：</p>
+<ul>
+<li>1、字节流在操作的时候本身是不会用到缓冲区(内存)的，是与文件本身直接操作的；而字符流在操作的时候是使用到缓冲区的</li>
+<li>2、字节流在操作文件时，即使不关闭资源(close方法)，文件也能输出，但是如果字符流不适用close方法的话，则不会输出任何内容，说明字符流用的时缓冲区，并且可以使用flush方法强制进行刷新缓冲区，这时才能在不close的情况下输出内容</li>
+<li>3、Reader类的read()方法返回类型为int：作为整数读取的字符(占两个字节共16位)，范围在0到65535之间(0x00-0xffff)，如果已到达流的末尾，则返回-1；inputStream的read()虽然也返回int，但由于此类是面向字节流的，一个字节占8个位，所以返回0到255范围内的int字节值。如果因为已经到达流末尾而没有可用的字节，则返回值-1。因此对于不能用0-255来表示的值就得用字符流来读取，比如说汉字。</li>
+</ul>
+</blockquote>
+<h3 id="既然已经有了字节流，为什么还要有字符流？"><a href="#既然已经有了字节流，为什么还要有字符流？" class="headerlink" title="既然已经有了字节流，为什么还要有字符流？"></a>既然已经有了字节流，为什么还要有字符流？</h3><blockquote>
+<p><strong>问题本质想问</strong>：不管是文件读写还是网络发送接收，信息的最小存储单元都是字节，那为什么I/O流操作要分为字节流操作和字符流操作呢？</p>
+<p>字符流是由Java虚拟机将字节转换得到的，问题就出在这个过程还算是非常耗时，并且，如果我们不知道编码类型就很容易出现乱码问题。所以，I/O流就干脆提供了一个直接操作字符的接口，方便我们平时对字符进行流操作。如果音频文件、图片等媒体文件用字节流比较好，如果涉及到字符的话使用字符流比较好。</p>
+</blockquote>
+<h2 id="三、参考资料"><a href="#三、参考资料" class="headerlink" title="三、参考资料"></a>三、参考资料</h2><blockquote>
+<p>NIO入门：<a href="https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/education/java/j-nio/j-nio.html</a></p>
+<p>NIO浅析：<a href="https://tech.meituan.com/2016/11/04/nio.html" target="_blank" rel="noopener">https://tech.meituan.com/2016/11/04/nio.html</a></p>
+<p>深入分析Java I/O的工作机制：<a href="https://www.ibm.com/developerworks/cn/java/j-lo-javaio/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-lo-javaio/index.html</a></p>
+<p>深入分析Java中的中文编码问题：<a href="https://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-lo-chinesecoding/index.html</a></p>
+<p>Java序列化的高级认识：<a href="https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/j-lo-serial/index.html</a></p>
+<p>NIO与传统IO的区别：<a href="https://blog.csdn.net/shimiso/article/details/24990499" target="_blank" rel="noopener">https://blog.csdn.net/shimiso/article/details/24990499</a></p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java-IO/">Java-IO</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java-IO/">Java_IO</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/28/Hexo%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hexo篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/28/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/">
+                        <span class="hidden-mobile">日志套餐篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Java_IO&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
