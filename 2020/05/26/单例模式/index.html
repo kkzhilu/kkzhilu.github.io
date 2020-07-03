@@ -1,218 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
-  <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
-  <title>单例模式 - Kerwin&#39;s Blog</title>
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
-  
-
-  
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
-
-
-<body>
-  <header style="height: 70vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-    <div class="view intro-2" id="background" parallax=true
-         style="background: url('/img/article.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container text-center white-text fadeInUp">
-            <span class="h2" id="subtitle">
-              
-            </span>
-
-            
-              
-  <div class="mt-3 post-meta">
-    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-05-26 20:38">
-      2020年5月26日 晚上
-    </time>
-  </div>
-
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      1.3k 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      16
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
-          </div>
-
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-md">
-      <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <div class="post-content mx-auto" id="post">
-            
-            <article class="markdown-body">
-              <h1 id="单例模式篇"><a href="#单例模式篇" class="headerlink" title="单例模式篇"></a>单例模式篇</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
-<p><font color="red">别名：单件模式</font></p>
-<h2 id="单例模式的诞生"><a href="#单例模式的诞生" class="headerlink" title="单例模式的诞生"></a>单例模式的诞生</h2><p>【<font color="blue">开发</font>】：老大，为什么我保存配置信息，每次都和我预期的不一样啊，总是会覆盖？</p>
-<p>【<font color="red">BOSS</font>】：哈？我来看看。</p>
-<p>【<font color="red">BOSS</font>】：你每次使用的时候都会new一个新的配置对象吗？</p>
-<p>【<font color="blue">开发</font>】：对啊，有什么问题？</p>
-<p>【<font color="red">BOSS</font>】：那肯定不对啊，像这种配置信息，全局只应该有一个，不然会互相影响！</p>
-<p><img src="/2020/05/26/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/image-20200524135834920.png" srcset="/img/loading.gif" alt="image-20200524135834920"></p>
-<h2 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h2><h3 id="饿汉型-（不推荐）"><a href="#饿汉型-（不推荐）" class="headerlink" title="饿汉型 （不推荐）"></a>饿汉型 （不推荐）</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HazardousTypeSingleton</span> </span>&#123;
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>单例模式 - Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/article.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-05-26 20:38">2020年5月26日 晚上</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.3k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 16 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="单例模式篇"><a href="#单例模式篇" class="headerlink" title="单例模式篇"></a>单例模式篇</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p><p><font color="red">别名：单件模式</font></p><h2 id="单例模式的诞生"><a href="#单例模式的诞生" class="headerlink" title="单例模式的诞生"></a>单例模式的诞生</h2><p>【<font color="blue">开发</font>】：老大，为什么我保存配置信息，每次都和我预期的不一样啊，总是会覆盖？</p><p>【<font color="red">BOSS</font>】：哈？我来看看。</p><p>【<font color="red">BOSS</font>】：你每次使用的时候都会new一个新的配置对象吗？</p><p>【<font color="blue">开发</font>】：对啊，有什么问题？</p><p>【<font color="red">BOSS</font>】：那肯定不对啊，像这种配置信息，全局只应该有一个，不然会互相影响！</p><p><img src="/2020/05/26/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/image-20200524135834920.png" srcset="/img/loading.gif" alt="image-20200524135834920"></p><h2 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h2><h3 id="饿汉型-（不推荐）"><a href="#饿汉型-（不推荐）" class="headerlink" title="饿汉型 （不推荐）"></a>饿汉型 （不推荐）</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HazardousTypeSingleton</span> </span>&#123;
 
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> App APP = <span class="hljs-keyword">new</span> App();
 
@@ -224,13 +10,7 @@
         System.out.println(<span class="hljs-string">"APP - 饿汉型模式"</span>);
         <span class="hljs-keyword">return</span> APP;
     &#125;
-&#125;</code></pre>
-
-<blockquote>
-<p>名字由来：因为随着类加载而加载，显得很“急迫”，所以称之为饿汉型</p>
-</blockquote>
-<p><strong>评价：</strong>这样的写法和全局变量没有本质的区别，不推荐</p>
-<h3 id="懒汉型-（不推荐）"><a href="#懒汉型-（不推荐）" class="headerlink" title="懒汉型 （不推荐）"></a>懒汉型 （不推荐）</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazyTypeSingleton</span> </span>&#123;
+&#125;</code></pre><blockquote><p>名字由来：因为随着类加载而加载，显得很“急迫”，所以称之为饿汉型</p></blockquote><p><strong>评价：</strong>这样的写法和全局变量没有本质的区别，不推荐</p><h3 id="懒汉型-（不推荐）"><a href="#懒汉型-（不推荐）" class="headerlink" title="懒汉型 （不推荐）"></a>懒汉型 （不推荐）</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazyTypeSingleton</span> </span>&#123;
 
     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">LazyTypeSingleton</span> <span class="hljs-params">()</span> </span>&#123;&#125;
 
@@ -248,13 +28,7 @@
         &#125;
         <span class="hljs-keyword">return</span> intance;
     &#125;
-&#125;</code></pre>
-
-<blockquote>
-<p>名字由来：调用时才加载，因此称之为懒汉型</p>
-</blockquote>
-<p><strong>评价：</strong>这样写有延迟加载的功能，但是加了一个synchronized大锁，因此多线程环境下效率较低</p>
-<h3 id="懒汉型之双重锁校验-🧡"><a href="#懒汉型之双重锁校验-🧡" class="headerlink" title="懒汉型之双重锁校验 🧡"></a>懒汉型之双重锁校验 🧡</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazyTypeSingleton</span> </span>&#123;
+&#125;</code></pre><blockquote><p>名字由来：调用时才加载，因此称之为懒汉型</p></blockquote><p><strong>评价：</strong>这样写有延迟加载的功能，但是加了一个synchronized大锁，因此多线程环境下效率较低</p><h3 id="懒汉型之双重锁校验-🧡"><a href="#懒汉型之双重锁校验-🧡" class="headerlink" title="懒汉型之双重锁校验 🧡"></a>懒汉型之双重锁校验 🧡</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LazyTypeSingleton</span> </span>&#123;
 
     <span class="hljs-comment">// volatile关键字修饰，防止指令重排</span>
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> App app = <span class="hljs-keyword">null</span>;
@@ -274,13 +48,7 @@
         &#125;
         <span class="hljs-keyword">return</span> app;
     &#125;
-&#125;</code></pre>
-
-<blockquote>
-<p>注意volatile关键字起到的作用，详情请见：<a href="https://juejin.im/post/5ebadd9df265da7bda414c20" target="_blank" rel="noopener">https://juejin.im/post/5ebadd9df265da7bda414c20</a></p>
-</blockquote>
-<p><strong>评价：</strong>比较推荐的写法，可以保证线程安全，同时具备延时加载的效果</p>
-<h3 id="静态内部类方式🧡"><a href="#静态内部类方式🧡" class="headerlink" title="静态内部类方式🧡"></a>静态内部类方式🧡</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InnterTypeSingleton</span> </span>&#123;
+&#125;</code></pre><blockquote><p>注意volatile关键字起到的作用，详情请见：<a href="https://juejin.im/post/5ebadd9df265da7bda414c20" target="_blank" rel="noopener">https://juejin.im/post/5ebadd9df265da7bda414c20</a></p></blockquote><p><strong>评价：</strong>比较推荐的写法，可以保证线程安全，同时具备延时加载的效果</p><h3 id="静态内部类方式🧡"><a href="#静态内部类方式🧡" class="headerlink" title="静态内部类方式🧡"></a>静态内部类方式🧡</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InnterTypeSingleton</span> </span>&#123;
 
     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">InnterTypeSingleton</span><span class="hljs-params">()</span></span>&#123;
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException();
@@ -295,10 +63,7 @@
         System.out.println(<span class="hljs-string">"APP - 静态内部类方式(Holder)"</span>);
         <span class="hljs-keyword">return</span> SingletonHolder.app;
     &#125;
-&#125;</code></pre>
-
-<p><strong>评价：</strong>线程安全，调用效率高，可以延时加载</p>
-<h3 id="静态内部类之神奇的报错"><a href="#静态内部类之神奇的报错" class="headerlink" title="静态内部类之神奇的报错"></a>静态内部类之神奇的报错</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InnterTypeSingletonError</span> </span>&#123;
+&#125;</code></pre><p><strong>评价：</strong>线程安全，调用效率高，可以延时加载</p><h3 id="静态内部类之神奇的报错"><a href="#静态内部类之神奇的报错" class="headerlink" title="静态内部类之神奇的报错"></a>静态内部类之神奇的报错</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InnterTypeSingletonError</span> </span>&#123;
 
     <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">InnterTypeSingletonError</span><span class="hljs-params">()</span></span>&#123;
         System.out.println(<span class="hljs-number">5</span> / <span class="hljs-number">0</span>);
@@ -326,17 +91,9 @@
             t.printStackTrace();
         &#125;
     &#125;
-&#125;</code></pre>
-
-<p>注意看上文中代码块：</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">InnterTypeSingletonError</span><span class="hljs-params">()</span></span>&#123;
+&#125;</code></pre><p>注意看上文中代码块：</p><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">InnterTypeSingletonError</span><span class="hljs-params">()</span></span>&#123;
 	System.out.println(<span class="hljs-number">5</span> / <span class="hljs-number">0</span>);
-&#125;</code></pre>
-
-
-
-<p>这样一定会出错，运行结果报错信息如下：</p>
-<pre><code class="hljs properties"><span class="hljs-attr">APP</span> <span class="hljs-string">- 静态内部类方式(Holder)</span>
+&#125;</code></pre><p>这样一定会出错，运行结果报错信息如下：</p><pre><code class="hljs properties"><span class="hljs-attr">APP</span> <span class="hljs-string">- 静态内部类方式(Holder)</span>
 <span class="hljs-attr">APP</span> <span class="hljs-string">- 静态内部类方式(Holder)</span>
 <span class="hljs-attr">java.lang.ExceptionInInitializerError</span>
 	<span class="hljs-attr">at</span> <span class="hljs-string">com.design.singleton.InnterTypeSingletonError.getInstance(InnterTypeSingletonError.java:23)</span>
@@ -348,14 +105,7 @@
 	<span class="hljs-meta">...</span> <span class="hljs-string">2 more</span>
 <span class="hljs-meta">java.lang.NoClassDefFoundError</span>: <span class="hljs-string">Could not initialize class com.design.singleton.InnterTypeSingletonError$SingletonHolder</span>
 	<span class="hljs-attr">at</span> <span class="hljs-string">com.design.singleton.InnterTypeSingletonError.getInstance(InnterTypeSingletonError.java:23)</span>
-	<span class="hljs-attr">at</span> <span class="hljs-string">com.design.singleton.InnterTypeSingletonError.main(InnterTypeSingletonError.java:34)</span></code></pre>
-
-
-
-<p>可以发现它第一次报错是正常的异常，第二次如果再报错就是<font color="blue">Could not initialize class </font>，为什么呢？</p>
-<p>因为：<strong>类加载时静态变量只会在第一次加载时，进行初始化，此后不管成不成功，都不会进行第二次初始化了</strong></p>
-<p>所以使用的时候需要注意</p>
-<h3 id="枚举方式🧡"><a href="#枚举方式🧡" class="headerlink" title="枚举方式🧡"></a>枚举方式🧡</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span>  EnumSingleton &#123;
+	<span class="hljs-attr">at</span> <span class="hljs-string">com.design.singleton.InnterTypeSingletonError.main(InnterTypeSingletonError.java:34)</span></code></pre><p>可以发现它第一次报错是正常的异常，第二次如果再报错就是<font color="blue">Could not initialize class </font>，为什么呢？</p><p>因为：<strong>类加载时静态变量只会在第一次加载时，进行初始化，此后不管成不成功，都不会进行第二次初始化了</strong></p><p>所以使用的时候需要注意</p><h3 id="枚举方式🧡"><a href="#枚举方式🧡" class="headerlink" title="枚举方式🧡"></a>枚举方式🧡</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span>  EnumSingleton &#123;
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * APP对象</span>
 <span class="hljs-comment">     */</span>
@@ -372,265 +122,7 @@
         System.out.println(<span class="hljs-string">"APP - 枚举方式"</span>);
         <span class="hljs-keyword">return</span> app;
     &#125;
-&#125;</code></pre>
-
-<p><strong>评价：</strong>线程安全，调用效率高，不能延时加载，可以天然的防止反射和反序列化调用</p>
-<h3 id="什么场景适用"><a href="#什么场景适用" class="headerlink" title="什么场景适用"></a>什么场景适用</h3><p>在以下情况可以使用单例模式：</p>
-<ul>
-<li>当类只能有一个实例而且客户可以从一个众所周知的访问点访问它时</li>
-<li>当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能使用一个扩展的实例时</li>
-</ul>
-<h3 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h3><p>在很多项目中的数据库连接池，亦或是配置中心，配置文件对象等等，非常常见~</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>感谢Java3Y的文章：<a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247487997&idx=1&sn=49c53a5cd66a6abf6cdf261de501206a&chksm=ebd750fcdca0d9eab476e21dfae06a4a81da4732fdc8698536e6466a7c8843ab6d9dcfa3a003&scene=126&sessionid=1590301045&key=b1bca8bd86b0ad8c164b148788862fa06cb138632b5964ec6f43017e86abb318e4ae4ace123f10a8a5cddff82896564cc9aaf68ba9a06e75a7c15da859f29061a6ca6b313fc185edf422dd6fd48b1778&ascene=1&uin=MjMxMjY2NTAwMw%3D%3D&devicetype=Windows+10+x64&version=62090070&lang=zh_CN&exportkey=Ac5DfHaLdHapqlkgTQV%2F0uY%3D&pass_ticket=52XHEG2v%2F3jbLNsGB58V0iQlGTQCZcBqIQ64EdwtExoOuAs8XSGQBjaGtniIitaV" target="_blank" rel="noopener">三歪写Bug写哭了</a>，从中学习到了内部类使用时的神器报错</p>
-<p>单例模式使用的场景其实固化，任何需要单一对象工作时的场景都可以使用单例模式，同时只推荐以下三种写法：</p>
-<ul>
-<li>基于双重锁校验的懒汉型</li>
-<li>静态内部类方式</li>
-<li>枚举方式</li>
-</ul>
-<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
-<ul>
-<li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
-<li>提供了友好的阅读指导</li>
-</ul>
-<p><img src="/2020/05/26/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png" srcset="/img/loading.gif" alt></p>
-
-            </article>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a>
-                    
-                  </div>
-                
-              </div>
-              
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
-              
-              
-                <div class="post-prevnext row">
-                  <div class="post-prev col-6">
-                    
-                    
-                      <a href="/2020/06/02/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">适配器模式和外观模式</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </div>
-                  <div class="post-next col-6">
-                    
-                    
-                      <a href="/2020/05/23/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">工厂模式</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </div>
-                </div>
-              
-            </div>
-
-            
-              <!-- Comments -->
-              <div class="comments" id="comments">
-                
-                
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
-
-
-              </div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
-    
-  </main>
-
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
-
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-  
-
-  
-
-  
-
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
-      <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-    </div>
-    
-
-    
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
-
-    
-  </div>
-</footer>
-
-<!-- SCRIPTS -->
-<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/lazyload.js" ></script>
-  
-
-
-
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
-
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: 'article.markdown-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
-  <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "单例模式&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
+&#125;</code></pre><p><strong>评价：</strong>线程安全，调用效率高，不能延时加载，可以天然的防止反射和反序列化调用</p><h3 id="什么场景适用"><a href="#什么场景适用" class="headerlink" title="什么场景适用"></a>什么场景适用</h3><p>在以下情况可以使用单例模式：</p><ul><li>当类只能有一个实例而且客户可以从一个众所周知的访问点访问它时</li><li>当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能使用一个扩展的实例时</li></ul><h3 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h3><p>在很多项目中的数据库连接池，亦或是配置中心，配置文件对象等等，非常常见~</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>感谢Java3Y的文章：<a href="https://mp.weixin.qq.com/s?__biz=MzI4Njg5MDA5NA==&mid=2247487997&idx=1&sn=49c53a5cd66a6abf6cdf261de501206a&chksm=ebd750fcdca0d9eab476e21dfae06a4a81da4732fdc8698536e6466a7c8843ab6d9dcfa3a003&scene=126&sessionid=1590301045&key=b1bca8bd86b0ad8c164b148788862fa06cb138632b5964ec6f43017e86abb318e4ae4ace123f10a8a5cddff82896564cc9aaf68ba9a06e75a7c15da859f29061a6ca6b313fc185edf422dd6fd48b1778&ascene=1&uin=MjMxMjY2NTAwMw%3D%3D&devicetype=Windows+10+x64&version=62090070&lang=zh_CN&exportkey=Ac5DfHaLdHapqlkgTQV%2F0uY%3D&pass_ticket=52XHEG2v%2F3jbLNsGB58V0iQlGTQCZcBqIQ64EdwtExoOuAs8XSGQBjaGtniIitaV" target="_blank" rel="noopener">三歪写Bug写哭了</a>，从中学习到了内部类使用时的神器报错</p><p>单例模式使用的场景其实固化，任何需要单一对象工作时的场景都可以使用单例模式，同时只推荐以下三种写法：</p><ul><li>基于双重锁校验的懒汉型</li><li>静态内部类方式</li><li>枚举方式</li></ul><h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p><ul><li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li><li>提供了友好的阅读指导</li></ul><p><img src="/2020/05/26/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png" srcset="/img/loading.gif" alt></p></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"><a href="/2020/06/02/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">适配器模式和外观模式</span> <span class="visible-mobile">上一篇</span></a></div><div class="post-next col-6"><a href="/2020/05/23/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"><span class="hidden-mobile">工厂模式</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",app_key:"oc2dzMKP9uJXsnOOhIxAr94f",placeholder:"说点什么吧~",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!0,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:6,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","单例模式&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
       placement: "right",
       visible: "hover",
       
@@ -640,62 +132,4 @@
     for (item of el) {
       res.push(".markdown-body > " + item)
     }
-    anchors.add(res.join(", "))
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
-      }
-    );
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
-
-
-
-
-
-
-
-</body>
-</html>
+    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"default"})</script></body></html>
