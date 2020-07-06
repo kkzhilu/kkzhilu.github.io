@@ -1,4 +1,210 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>SpringMVC篇 - Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/article.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-04-28 00:25">2020年4月28日 凌晨</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 1.3k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 19 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="SpringMVC篇"><a href="#SpringMVC篇" class="headerlink" title="SpringMVC篇"></a>SpringMVC篇</h1><h2 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h2><pre><code class="hljs angelscript"><span class="hljs-number">11.</span> 简单谈谈你对 MVC 的理解。
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>SpringMVC篇 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-28 00:25">
+      2020年4月28日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="SpringMVC篇"><a href="#SpringMVC篇" class="headerlink" title="SpringMVC篇"></a>SpringMVC篇</h1><h2 id="面试问题"><a href="#面试问题" class="headerlink" title="面试问题"></a>面试问题</h2><pre><code class="hljs angelscript"><span class="hljs-number">11.</span> 简单谈谈你对 MVC 的理解。
 
 <span class="hljs-number">12.</span> 什么是 Spring MVC ？简单介绍下你对 Spring MVC 的理解?
 
@@ -16,7 +222,11 @@
 
 <span class="hljs-number">19.</span> 说说你对自定义数据类型转换器的理解。
 
-<span class="hljs-number">20.</span> 使用 Hibernate Validator 注解方式校验 Email 数据格式应该怎么写？</code></pre><h2 id="ModelAttribute注解"><a href="#ModelAttribute注解" class="headerlink" title="@ModelAttribute注解"></a>@ModelAttribute注解</h2><pre><code class="hljs java">Controller层一般都单独作为一个类使用，但是一个合理的设计，可以设计如 BaseController，通过继承的方式，让所有的controller都可以有一定的公共参数
+<span class="hljs-number">20.</span> 使用 Hibernate Validator 注解方式校验 Email 数据格式应该怎么写？</code></pre>
+
+
+
+<h2 id="ModelAttribute注解"><a href="#ModelAttribute注解" class="headerlink" title="@ModelAttribute注解"></a>@ModelAttribute注解</h2><pre><code class="hljs java">Controller层一般都单独作为一个类使用，但是一个合理的设计，可以设计如 BaseController，通过继承的方式，让所有的controller都可以有一定的公共参数
 
 <span class="hljs-comment">// 该注解会在所有方法之前被调用，可以用作公共配置的设置等等</span>
 <span class="hljs-meta">@ModelAttribute</span>
@@ -32,7 +242,11 @@
 	System.out.println(<span class="hljs-string">"查询所有"</span>);
 	System.out.println(request.getAttribute(<span class="hljs-string">"myTest"</span>));
 	<span class="hljs-keyword">return</span> <span class="hljs-string">"ok"</span>;
-&#125;</code></pre><h2 id="统一异常处理-注解方式"><a href="#统一异常处理-注解方式" class="headerlink" title="统一异常处理 - 注解方式"></a>统一异常处理 - 注解方式</h2><pre><code class="hljs @ControllerAdvice">
+&#125;</code></pre>
+
+
+
+<h2 id="统一异常处理-注解方式"><a href="#统一异常处理-注解方式" class="headerlink" title="统一异常处理 - 注解方式"></a>统一异常处理 - 注解方式</h2><pre><code class="hljs @ControllerAdvice">
 博文地址：https:&#x2F;&#x2F;www.jianshu.com&#x2F;p&#x2F;3f3d9e8d1efa?utm_campaign&#x3D;haruki&amp;utm_content&#x3D;note&amp;utm_medium&#x3D;reader_share&amp;utm_source&#x3D;weixin
 
 &gt; 注意 ExceptionHandler不能同时重复捕获Excepiton
@@ -90,7 +304,9 @@ public class MyExceptionHandler &#123;
         &#125;
         return res;
     &#125;
-&#125;</code></pre><pre><code class="hljs java"><span class="hljs-comment">// 原来的mapping - 直接抛异常即可</span>
+&#125;</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">// 原来的mapping - 直接抛异常即可</span>
 
 <span class="hljs-comment">/***</span>
 <span class="hljs-comment"> * 告警类型占比分析</span>
@@ -104,9 +320,16 @@ public class MyExceptionHandler &#123;
 
     List&lt;Map&lt;String,Object&gt;&gt; dataList = ialarmflowservice.getAlarmTypeData(conditionMap);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BaseResult&lt;&gt;(ResultCode.success.getCode(), ResultCode.success.getDescr(), dataList);
-&#125;</code></pre><h3 id="404异常配置"><a href="#404异常配置" class="headerlink" title="404异常配置"></a>404异常配置</h3><pre><code class="hljs java"># 404 交给异常处理器处理
+&#125;</code></pre>
+
+<h3 id="404异常配置"><a href="#404异常配置" class="headerlink" title="404异常配置"></a>404异常配置</h3><pre><code class="hljs java"># 404 交给异常处理器处理
 spring.mvc.<span class="hljs-keyword">throw</span>-exception-<span class="hljs-keyword">if</span>-no-handler-found=<span class="hljs-keyword">true</span>
-spring.resources.add-mappings=<span class="hljs-keyword">false</span></code></pre><h2 id="统一异常处理-接口实现"><a href="#统一异常处理-接口实现" class="headerlink" title="统一异常处理 - 接口实现"></a>统一异常处理 - 接口实现</h2><p>详情见：KerwinBoots - boot_code_generator分支</p><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
+spring.resources.add-mappings=<span class="hljs-keyword">false</span></code></pre>
+
+
+
+<h2 id="统一异常处理-接口实现"><a href="#统一异常处理-接口实现" class="headerlink" title="统一异常处理 - 接口实现"></a>统一异常处理 - 接口实现</h2><p>详情见：KerwinBoots - boot_code_generator分支</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebConfigurer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>&#123;
 
     <span class="hljs-comment">/***</span>
@@ -160,10 +383,274 @@ spring.resources.add-mappings=<span class="hljs-keyword">false</span></code></pr
             logger.error(ex.getMessage());
         &#125;
     &#125;
-&#125;</code></pre><h3 id="404异常配置-1"><a href="#404异常配置-1" class="headerlink" title="404异常配置"></a>404异常配置</h3><pre><code class="hljs java"># 404 交给异常处理器处理
+&#125;</code></pre>
+
+<h3 id="404异常配置-1"><a href="#404异常配置-1" class="headerlink" title="404异常配置"></a>404异常配置</h3><pre><code class="hljs java"># 404 交给异常处理器处理
 spring.mvc.<span class="hljs-keyword">throw</span>-exception-<span class="hljs-keyword">if</span>-no-handler-found=<span class="hljs-keyword">true</span>
-spring.resources.add-mappings=<span class="hljs-keyword">false</span></code></pre><h2 id="ResponseBody-注解作用及原理"><a href="#ResponseBody-注解作用及原理" class="headerlink" title="@ResponseBody 注解作用及原理"></a>@ResponseBody 注解作用及原理</h2><blockquote><p>MVC中@ResponseBody可以把结果返回值以JSON字符串的形式输出，所以@ResponseBody注解到底做了什么事？</p><ol><li>ModelAndView 类型对象会有JSPView处理器进行处理，而@ResponseBody会通过response进行输出</li><li>HttpMessageConverter 进行数据转换，把输入流转化成对象，对象返回值转化为输出流，而@ResponseBody注解工作的实质即以下两行代码</li></ol><pre><code class="hljs java">response.setContentType(<span class="hljs-string">"application/json;charset=UTF-8"</span>);
-response.getWriter().write(JSON.toJSONString(invoke));</code></pre><p>无论是调用该注解，或者自行response输出json字符串，返回结果都可以保证是JSON字符串，但为什么只有加了注解的才可以在ajax中，直接作为对象使用？ 关键在于头信息</p><p>JQuery有内部处理机制去识别 -》 application/json;charset=UTF-8</p><p><img src="/2020/04/28/SpringMVC%E7%AF%87/image-20191125163620881.png" srcset="/img/loading.gif" alt="image-20191125163620881"></p><p>关键词：【HttpMessageConverter】</p><p>参考博文： <a href="https://www.jianshu.com/p/333ed5ee958d" target="_blank" rel="noopener">https://www.jianshu.com/p/333ed5ee958d</a></p></blockquote><h2 id="Service，-Controller注解互换可以吗"><a href="#Service，-Controller注解互换可以吗" class="headerlink" title="@Service，@Controller注解互换可以吗"></a>@Service，@Controller注解互换可以吗</h2><blockquote><p>@Service，@Controller的本质和@Component一致，都是为了标明一个bean</p><p>因此，@Service注解换成@Controller，或者@Component都是可以的，@Service只是用作业务上的区分</p><p>@Controller不同，它还包含@RequestMapping注解的配合使用，如果用@service代替，会让所有的mapping都失效，所有请求都是404</p></blockquote></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/SpringMVC%E7%AF%87/">SpringMVC篇</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"><a href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">SpringBoot配置多数据源</span> <span class="visible-mobile">上一篇</span></a></div><div class="post-next col-6"><a href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/"><span class="hidden-mobile">JSMap-跨页</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",app_key:"oc2dzMKP9uJXsnOOhIxAr94f",placeholder:"说点什么吧~",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!0,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:6,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","SpringMVC篇&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+spring.resources.add-mappings=<span class="hljs-keyword">false</span></code></pre>
+
+
+
+<h2 id="ResponseBody-注解作用及原理"><a href="#ResponseBody-注解作用及原理" class="headerlink" title="@ResponseBody 注解作用及原理"></a>@ResponseBody 注解作用及原理</h2><blockquote>
+<p>MVC中@ResponseBody可以把结果返回值以JSON字符串的形式输出，所以@ResponseBody注解到底做了什么事？</p>
+<ol>
+<li>ModelAndView 类型对象会有JSPView处理器进行处理，而@ResponseBody会通过response进行输出</li>
+<li>HttpMessageConverter 进行数据转换，把输入流转化成对象，对象返回值转化为输出流，而@ResponseBody注解工作的实质即以下两行代码</li>
+</ol>
+<pre><code class="hljs java">response.setContentType(<span class="hljs-string">"application/json;charset=UTF-8"</span>);
+response.getWriter().write(JSON.toJSONString(invoke));</code></pre>
+
+<p>无论是调用该注解，或者自行response输出json字符串，返回结果都可以保证是JSON字符串，但为什么只有加了注解的才可以在ajax中，直接作为对象使用？ 关键在于头信息</p>
+<p>JQuery有内部处理机制去识别 -》 application/json;charset=UTF-8</p>
+<p> <img src="/2020/04/28/SpringMVC%E7%AF%87/image-20191125163620881.png" srcset="/img/loading.gif" alt="image-20191125163620881"></p>
+<p>关键词：【HttpMessageConverter】</p>
+<p>参考博文： <a href="https://www.jianshu.com/p/333ed5ee958d" target="_blank" rel="noopener">https://www.jianshu.com/p/333ed5ee958d</a> </p>
+</blockquote>
+<h2 id="Service，-Controller注解互换可以吗"><a href="#Service，-Controller注解互换可以吗" class="headerlink" title="@Service，@Controller注解互换可以吗"></a>@Service，@Controller注解互换可以吗</h2><blockquote>
+<p>@Service，@Controller的本质和@Component一致，都是为了标明一个bean</p>
+<p>因此，@Service注解换成@Controller，或者@Component都是可以的，@Service只是用作业务上的区分</p>
+<p>@Controller不同，它还包含@RequestMapping注解的配合使用，如果用@service代替，会让所有的mapping都失效，所有请求都是404</p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SpringMVC%E7%AF%87/">SpringMVC篇</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringBoot配置多数据源</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">
+                        <span class="hidden-mobile">Testin - JSP项目有感</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "SpringMVC篇&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
       placement: "right",
       visible: "hover",
       
@@ -173,4 +660,62 @@ response.getWriter().write(JSON.toJSONString(invoke));</code></pre><p>无论是�
     for (item of el) {
       res.push(".markdown-body > " + item)
     }
-    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"default"})</script></body></html>
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

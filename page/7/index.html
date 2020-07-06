@@ -1,3 +1,845 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:100vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/index.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span></div><div class="scroll-down-bar"><i class="iconfont icon-arrowdown"></i></div></div></div></div></header><main><div class="container nopadding-md"><div class="py-5" id="board" style="margin-top:0"><div class="container"><div class="row"><div class="col-12 col-md-10 m-auto"><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/" target="_self"><img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="手写简易MyBatis"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">手写简易MyBatis</a> <a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/" class="index-excerpt"><div>手写简易的Mybatis此篇文章用来记录今天花个五个小时写出来的简易版mybatis，主要实现了基于注解方式的增删查改，目前支持List，Object类型的查找，参数都是基于Map集合的，可以先看一下接口：public interface StudentInterface &#123; @Select(value = " select * from student where age &</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">手写简易MyBatis</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_self"><img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="JavaScript-回调函数"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript-回调函数</a> <a href="/2020/04/28/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="index-excerpt"><div>JavaScript-回调函数函数也是对象// 可以这样创建函数 var fn = new Function("arg1", "arg2", "return arg1 * arg2;"); // 6 fn(2, 3);简单解释一下回调函数的使用场景： 你自己打包方法的时候发现用return来返回数据不行，那就用回调函数来接收返回的数据，或者觉得这个方法就可以决定下一步该怎么做，就用回调函数Jav</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript-回调函数</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/" target="_self"><img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="手写简易SpringMVC"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">手写简易SpringMVC</a> <a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/" class="index-excerpt"><div>手写简易SpringMVC手写系列框架代码基于普通Maven构建，因此在手写SpringMVC的过程中，需要手动的集成Tomcat容器必备知识：Servlet相关理解和使用，Maven，Java 反射，Java自定义注解配置Web类型结构 ![1567700174356](手写简易SpringMVC&#x2F;1567700174356.png) 注意 要设置 webapp为web moudle</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">手写简易SpringMVC</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/" target="_self"><img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="第1章  Mysql架构与历史"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/">第1章 Mysql架构与历史</a> <a href="/2020/04/28/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/" class="index-excerpt"><div>第1章 Mysql架构与历史MYSQL最重要、最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理( Query Processing)及其他系统任务( Server Task)和数据的存储/提取相分离。这种处理和存储分离的设计可以在使用时根据性能、特性、以及其他需求来选择数据存储的方式。MySQL逻辑架构![image-20200208231431188](第1章 Mysql架构与历史/</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87/">数据库篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E7%AC%AC1%E7%AB%A0-Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/">第1章 Mysql架构与历史</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/" target="_self"><img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="JavaScript定时器及回调用法"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">JavaScript定时器及回调用法</a> <a href="/2020/04/28/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/" class="index-excerpt"><div>JavaScript定时器及回调用法循环定时任务// 假设现在有这样一个需求：我需要请求一个接口，根据返回结果判断需不需要重复请求，直到达到某一条件为止,停止请求执行某操作 &lt;script type="text/javascript"&gt; var timer; var index = 0; function tim()&#123; timer =</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">JavaScript定时器及回调用法</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E7%AC%AC5%E7%AB%A0%20%20%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/" target="_self"><img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="第5章  创建高性能的索引"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E7%AC%AC5%E7%AB%A0%20%20%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/">第5章 创建高性能的索引</a> <a href="/2020/04/28/%E7%AC%AC5%E7%AB%A0%20%20%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/" class="index-excerpt"><div>第5章 创建高性能的索引本文为《高性能Mysql 第三版》第四章读书笔记，Mysql版本为5.5索引基础索引的重要性：找一本800面的书的某一段内容，没有目录也没有页码（页码也可类比是索引）索引类型B-Tree 索引 ： 可用于全值匹配、最左前缀匹配、列前缀匹配、范围值匹配、精确匹配某一列并范围匹配另外一列、只访问索引的查询 ，原文截图：![image-20200223222150784](第5章</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87/">数据库篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E7%AC%AC5%E7%AB%A0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/">第5章 创建高性能的索引</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self"><img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="观察者模式"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a> <a href="/2020/04/28/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="index-excerpt"><div>观察者模式篇意图定义对象间的一种一对多的依赖关系,当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新别名：发布-订阅模式观察者模式的诞生将一个系统分割成一系列相互协作的类有一个常见的副作用：需要维护相关对象间的致性，我们不希望为了维持一致性而使各类紧密耦合，因为这样降低了它们的可重用性。说人话就是：【产品】：开发小哥，我需要你设计一个天气预报显示大屏，气象站会给你发送数据，你需要</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" target="_self"><img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="Linux-中文字体"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">Linux-中文字体</a> <a href="/2020/04/28/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" class="index-excerpt"><div>Linux 字体安装与卸载UbuntuUbuntu如果需要安装其他字体，参考步骤：# 安装字体管理工具 sudo apt-get install font-manager # 查看现有字体（可查看到字体安装位置） fc-list安装字体：# 安装字体 # 方式一： # 在/usr/share/fonts目录下，新建如 chinese文件夹，将需要的tff文件复制进文件夹，如微软雅黑等 # 然后</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/Linux%E7%AF%87/">Linux篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">Linux-中文字体</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E9%99%90%E6%B5%81%E7%AF%87/" target="_self"><img src="/img/articles/19.jpg" srcset="/img/loading.gif" alt="限流篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E9%99%90%E6%B5%81%E7%AF%87/">限流篇</a> <a href="/2020/04/28/%E9%99%90%E6%B5%81%E7%AF%87/" class="index-excerpt"><div>请求限流开发高并发系统时，有三把利器用来保护系统：缓存、降级和限流通过限流，我们可以很好地控制系统的qps，从而达到保护系统的目的。计数算法（不常用）// 模拟的伪代码 public static void main(String[] args) throws InterruptedException &#123; AtomicLong atomicLong = new AtomicLon</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E7%BC%93%E5%AD%98%E9%99%90%E6%B5%81%E7%AF%87/">缓存限流篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E9%99%90%E6%B5%81%E7%AF%87/">限流篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/JVM%E7%AF%87/" target="_self"><img src="/img/articles/20.jpg" srcset="/img/loading.gif" alt="JVM篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/JVM%E7%AF%87/">JVM篇</a> <a href="/2020/04/28/JVM%E7%AF%87/" class="index-excerpt"><div>java中垃圾收集的方法有哪些?标记-清除:这是垃圾收集算法中最基础的，根据名字就可以知道，它的思想就是标记哪些要被回收的对象，然后统一回收。这种方法很简单，但是会有两个主要问题：1.效率不高，标记和清除的效率都很低；2.会产生大量不连续的内存碎片，导致以后程序在分配较大的对象时，由于没有充足的连续内存而提前触发一次GC动作。复制算法:为了解决效率问题，复制算法将可用内存按容量划分为相等的两部分，</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/JVM%E7%AF%87/">JVM篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/JVM%E7%AF%87/">JVM篇</a></div></div></div></div><nav aria-label="navigation"><span class="pagination" id="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="iconfont icon-arrowright"></i></a></span></nav><script>for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="手写简易SpringMVC">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">手写简易SpringMVC</a>
+
+      <a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/" class="index-excerpt">
+        
+        
+          
+        
+        <div>手写简易SpringMVC
+手写系列框架代码基于普通Maven构建，因此在手写SpringMVC的过程中，需要手动的集成Tomcat容器
+必备知识：Servlet相关理解和使用，Maven，Java 反射，Java自定义注解
+
+配置Web类型结构
+![1567700174356](手写简易SpringMVC&#x2F;1567700174356.png)
+
+注意 要设置 webapp为web mo</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">手写简易SpringMVC</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/" target="_self">
+          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="手写简易MyBatis">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">手写简易MyBatis</a>
+
+      <a href="/2020/04/28/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/" class="index-excerpt">
+        
+        
+          
+        
+        <div>手写简易的Mybatis此篇文章用来记录今天花个五个小时写出来的简易版mybatis，主要实现了基于注解方式的增删查改，目前支持List，Object类型的查找，参数都是基于Map集合的，可以先看一下接口：
+public interface StudentInterface &#123;
+
+    @Select(value = " select * from student where age </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">手写简易MyBatis</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="JavaScript定时器及回调用法">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">JavaScript定时器及回调用法</a>
+
+      <a href="/2020/04/28/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JavaScript定时器及回调用法循环定时任务// 假设现在有这样一个需求：我需要请求一个接口，根据返回结果判断需不需要重复请求，直到达到某一条件为止,停止请求执行某操作
+&lt;script type="text/javascript"&gt;
+    var timer;
+    var index = 0;
+    function tim()&#123;
+        timer = </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">JavaScript定时器及回调用法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="FastJson使用记录">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">FastJson使用记录</a>
+
+      <a href="/2020/04/28/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>FastJson getBytes
+在使用FastJson过程中出现了
+Exception in thread "main" com.alibaba.fastjson.JSONException: can not cast to int, value : [-119,80,78,71,13]
+
+异常，现来分析其报错原因
+
+getBytes 异常// ImgUtilApp 具备 byte[] 变量
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Bugs-%E6%8A%80%E5%B7%A7%E7%AF%87/">Bugs & 技巧篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">FastJson使用记录</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/" target="_self">
+          <img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="第1章  Mysql架构与历史">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/">第1章  Mysql架构与历史</a>
+
+      <a href="/2020/04/28/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/" class="index-excerpt">
+        
+        
+          
+        
+        <div>第1章  Mysql架构与历史
+MYSQL最重要、最与众不同的特性是它的存储引擎架构，这种架构的设计将查询处理( Query Processing)及其他系统任务( Server Task)和数据的存储/提取相分离。这种处理和存储分离的设计可以在使用时根据性能、特性、以及其他需求来选择数据存储的方式。
+
+MySQL逻辑架构![image-20200208231431188](第1章  Mysql架</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87/">数据库篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%AC1%E7%AB%A0-Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/">第1章  Mysql架构与历史</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E7%AC%AC5%E7%AB%A0%20%20%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/" target="_self">
+          <img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="第5章  创建高性能的索引">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E7%AC%AC5%E7%AB%A0%20%20%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/">第5章  创建高性能的索引</a>
+
+      <a href="/2020/04/28/%E7%AC%AC5%E7%AB%A0%20%20%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>第5章  创建高性能的索引
+本文为《高性能Mysql 第三版》第四章读书笔记，Mysql版本为5.5
+
+索引基础索引的重要性：找一本800面的书的某一段内容，没有目录也没有页码（页码也可类比是索引）
+索引类型
+B-Tree 索引 ： 可用于全值匹配、最左前缀匹配、列前缀匹配、范围值匹配、精确匹配某一列并范围匹配另外一列、只访问索引的查询 ，原文截图：
+
+![image-20200223222150</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AF%87/">数据库篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%AC5%E7%AB%A0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/">第5章  创建高性能的索引</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="观察者模式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a>
+
+      <a href="/2020/04/28/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>观察者模式篇意图定义对象间的一种一对多的依赖关系,当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新
+别名：发布-订阅模式
+观察者模式的诞生将一个系统分割成一系列相互协作的类有一个常见的副作用：需要维护相关对象间的致性，我们不希望为了维持一致性而使各类紧密耦合，因为这样降低了它们的可重用性。
+说人话就是：
+【产品】：开发小哥，我需要你设计一个天气预报显示大屏，气象站会给你发送数据</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" target="_self">
+          <img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="Linux-中文字体">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">Linux-中文字体</a>
+
+      <a href="/2020/04/28/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Linux 字体安装与卸载UbuntuUbuntu如果需要安装其他字体，参考步骤：
+# 安装字体管理工具
+sudo apt-get install font-manager
+
+# 查看现有字体（可查看到字体安装位置）
+fc-list
+
+
+
+安装字体：
+# 安装字体
+
+# 方式一：
+# 在/usr/share/fonts目录下，新建如 chinese文件夹，将需要的tff文件复制进文件夹，如微软雅黑</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Linux%E7%AF%87/">Linux篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux-%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93/">Linux-中文字体</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E9%99%90%E6%B5%81%E7%AF%87/" target="_self">
+          <img src="/img/articles/19.jpg" srcset="/img/loading.gif" alt="限流篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E9%99%90%E6%B5%81%E7%AF%87/">限流篇</a>
+
+      <a href="/2020/04/28/%E9%99%90%E6%B5%81%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>请求限流开发高并发系统时，有三把利器用来保护系统：缓存、降级和限流
+通过限流，我们可以很好地控制系统的qps，从而达到保护系统的目的。
+计数算法（不常用）// 模拟的伪代码
+public static void main(String[] args) throws InterruptedException &#123;
+    AtomicLong atomicLong = new AtomicL</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%93%E5%AD%98%E9%99%90%E6%B5%81%E7%AF%87/">缓存限流篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%99%90%E6%B5%81%E7%AF%87/">限流篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/JVM%E7%AF%87/" target="_self">
+          <img src="/img/articles/20.jpg" srcset="/img/loading.gif" alt="JVM篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/JVM%E7%AF%87/">JVM篇</a>
+
+      <a href="/2020/04/28/JVM%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>java中垃圾收集的方法有哪些?标记-清除:这是垃圾收集算法中最基础的，根据名字就可以知道，它的思想就是标记哪些要被回收的对象，然后统一回收。这种方法很简单，但是会有两个主要问题：1.效率不高，标记和清除的效率都很低；2.会产生大量不连续的内存碎片，导致以后程序在分配较大的对象时，由于没有充足的连续内存而提前触发一次GC动作。
+复制算法:为了解决效率问题，复制算法将可用内存按容量划分为相等的两部分</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JVM%E7%AF%87/">JVM篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JVM%E7%AF%87/">JVM篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/6/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
       ele.href += '#board';
-    }</script></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","一切都是有可能的，甚至那些不可能的也是&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script></body></html>
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,4 +1,213 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>Java8新特性 - Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/article.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-04-28 00:25">2020年4月28日 凌晨</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 6.5k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 86 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="Java-8-新特性总结"><a href="#Java-8-新特性总结" class="headerlink" title="Java 8 新特性总结"></a>Java 8 新特性总结</h1><h3 id="接口的默认方法-Default-Methods-for-Interfaces"><a href="#接口的默认方法-Default-Methods-for-Interfaces" class="headerlink" title="接口的默认方法(Default Methods for Interfaces)"></a>接口的默认方法(Default Methods for Interfaces)</h3><blockquote><p>Java 8使我们能够通过使用 <code>default</code> 关键字向接口添加非抽象方法实现。 此功能也称为<a href="http://stackoverflow.com/a/24102730" target="_blank" rel="noopener">虚拟扩展方法</a>。</p><p>第一个例子：</p><pre><code class="hljs aspectj"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Formula</span></span>&#123;
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Java8新特性 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-28 00:25">
+      2020年4月28日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      86
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Java-8-新特性总结"><a href="#Java-8-新特性总结" class="headerlink" title="Java 8 新特性总结"></a>Java 8 新特性总结</h1><h3 id="接口的默认方法-Default-Methods-for-Interfaces"><a href="#接口的默认方法-Default-Methods-for-Interfaces" class="headerlink" title="接口的默认方法(Default Methods for Interfaces)"></a>接口的默认方法(Default Methods for Interfaces)</h3><blockquote>
+<p>Java 8使我们能够通过使用 <code>default</code> 关键字向接口添加非抽象方法实现。 此功能也称为<a href="http://stackoverflow.com/a/24102730" target="_blank" rel="noopener">虚拟扩展方法</a>。</p>
+<p>第一个例子：</p>
+<pre><code class="hljs aspectj"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Formula</span></span>&#123;
 
     <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">calculate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a)</span></span>;
 
@@ -6,7 +215,10 @@
         <span class="hljs-function"><span class="hljs-keyword">return</span> Math.<span class="hljs-title">sqrt</span><span class="hljs-params">(a)</span></span>;
     &#125;
 
-&#125;</code></pre><p>Formula 接口中除了抽象方法计算接口公式还定义了默认方法 <code>sqrt</code>。 实现该接口的类只需要实现抽象方法 <code>calculate</code>。 默认方法<code>sqrt</code> 可以直接使用。当然你也可以直接通过接口创建对象，然后实现接口中的默认方法就可以了，我们通过代码演示一下这种方式。</p><pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
+&#125;</code></pre>
+
+<p>Formula 接口中除了抽象方法计算接口公式还定义了默认方法 <code>sqrt</code>。 实现该接口的类只需要实现抽象方法 <code>calculate</code>。 默认方法<code>sqrt</code> 可以直接使用。当然你也可以直接通过接口创建对象，然后实现接口中的默认方法就可以了，我们通过代码演示一下这种方式。</p>
+<pre><code class="hljs arduino"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> &#123;</span>
 
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">String</span>[] args)</span> </span>&#123;
     <span class="hljs-comment">// TODO 通过匿名内部类方式访问接口</span>
@@ -22,25 +234,60 @@
 
   &#125;
 
-&#125;</code></pre><p>formula 是作为匿名对象实现的。该代码非常容易理解，6行代码实现了计算 <code>sqrt(a * 100)</code>。在下一节中，我们将会看到在 Java 8 中实现单个方法对象有一种更好更方便的方法。</p><p><strong>译者注：</strong> 不管是抽象类还是接口，都可以通过匿名内部类的方式访问。不能通过抽象类或者接口直接创建对象。对于上面通过匿名内部类方式访问接口，我们可以这样理解：一个内部类实现了接口里的抽象方法并且返回一个内部类对象，之后我们让接口的引用来指向这个对象。</p></blockquote><h3 id="Lambda表达式-Lambda-expressions"><a href="#Lambda表达式-Lambda-expressions" class="headerlink" title="Lambda表达式(Lambda expressions)"></a>Lambda表达式(Lambda expressions)</h3><blockquote><p>首先看看在老版本的Java中是如何排列字符串的：</p><pre><code class="hljs reasonml">List&lt;String&gt; names = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span><span class="hljs-keyword">as</span><span class="hljs-constructor">List(<span class="hljs-string">"peter"</span>, <span class="hljs-string">"anna"</span>, <span class="hljs-string">"mike"</span>, <span class="hljs-string">"xenia"</span>)</span>;
+&#125;</code></pre>
+
+<p>formula 是作为匿名对象实现的。该代码非常容易理解，6行代码实现了计算 <code>sqrt(a * 100)</code>。在下一节中，我们将会看到在 Java 8 中实现单个方法对象有一种更好更方便的方法。</p>
+<p><strong>译者注：</strong> 不管是抽象类还是接口，都可以通过匿名内部类的方式访问。不能通过抽象类或者接口直接创建对象。对于上面通过匿名内部类方式访问接口，我们可以这样理解：一个内部类实现了接口里的抽象方法并且返回一个内部类对象，之后我们让接口的引用来指向这个对象。</p>
+</blockquote>
+<h3 id="Lambda表达式-Lambda-expressions"><a href="#Lambda表达式-Lambda-expressions" class="headerlink" title="Lambda表达式(Lambda expressions)"></a>Lambda表达式(Lambda expressions)</h3><blockquote>
+<p>首先看看在老版本的Java中是如何排列字符串的：</p>
+<pre><code class="hljs reasonml">List&lt;String&gt; names = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Arrays</span>.</span></span><span class="hljs-keyword">as</span><span class="hljs-constructor">List(<span class="hljs-string">"peter"</span>, <span class="hljs-string">"anna"</span>, <span class="hljs-string">"mike"</span>, <span class="hljs-string">"xenia"</span>)</span>;
 
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collections</span>.</span></span>sort(names, <span class="hljs-keyword">new</span> Comparator&lt;String&gt;<span class="hljs-literal">()</span> &#123;
     @Override
     public <span class="hljs-built_in">int</span> compare(String a, String b) &#123;
         return b.compare<span class="hljs-constructor">To(<span class="hljs-params">a</span>)</span>;
     &#125;
-&#125;);</code></pre><p>只需要给静态方法<code>Collections.sort</code> 传入一个 List 对象以及一个比较器来按指定顺序排列。通常做法都是创建一个匿名的比较器对象然后将其传递给 <code>sort</code> 方法。</p><p>在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了更简洁的语法，lambda表达式：</p><pre><code class="hljs livescript">Collections.sort<span class="hljs-function"><span class="hljs-params">(names, (String a, String b) -&gt; &#123;</span></span>
+&#125;);</code></pre>
+
+<p>只需要给静态方法<code>Collections.sort</code> 传入一个 List 对象以及一个比较器来按指定顺序排列。通常做法都是创建一个匿名的比较器对象然后将其传递给 <code>sort</code> 方法。</p>
+<p>在Java 8 中你就没必要使用这种传统的匿名对象的方式了，Java 8提供了更简洁的语法，lambda表达式：</p>
+<pre><code class="hljs livescript">Collections.sort<span class="hljs-function"><span class="hljs-params">(names, (String a, String b) -&gt; &#123;</span></span>
 <span class="hljs-function"><span class="hljs-params">    <span class="hljs-keyword">return</span> b.compareTo(a);</span></span>
-<span class="hljs-function"><span class="hljs-params">&#125;)</span>;</span></code></pre><p>可以看出，代码变得更段且更具有可读性，但是实际上还可以写得更短：</p><pre><code class="hljs livescript">Collections.sort<span class="hljs-function"><span class="hljs-params">(names, (String a, String b) -&gt; b.compareTo(a))</span>;</span></code></pre><p>对于函数体只有一行代码的，你可以去掉大括号{}以及return关键字，但是你还可以写得更短点：</p><pre><code class="hljs livescript">names.sort<span class="hljs-function"><span class="hljs-params">((a, b) -&gt; b.compareTo(a))</span>;</span></code></pre><p>List 类本身就有一个 <code>sort</code> 方法。并且Java编译器可以自动推导出参数类型，所以你可以不用再写一次类型。接下来我们看看lambda表达式还有什么其他用法。</p></blockquote><h3 id="函数式接口-Functional-Interfaces"><a href="#函数式接口-Functional-Interfaces" class="headerlink" title="函数式接口(Functional Interfaces)"></a>函数式接口(Functional Interfaces)</h3><blockquote><p><strong>译者注：</strong> 原文对这部分解释不太清楚，故做了修改！</p><p>Java 语言设计者们投入了大量精力来思考如何使现有的函数友好地支持Lambda。最终采取的方法是：增加函数式接口的概念。<strong>“函数式接口”是指仅仅只包含一个抽象方法,但是可以有多个非抽象方法(也就是上面提到的默认方法)的接口。</strong> 像这样的接口，可以被隐式转换为lambda表达式。<code>java.lang.Runnable</code> 与 <code>java.util.concurrent.Callable</code> 是函数式接口最典型的两个例子。Java 8增加了一种特殊的注解<code>@FunctionalInterface</code>,但是这个注解通常不是必须的(某些情况建议使用)，只要接口只包含一个抽象方法，虚拟机会自动判断该接口为函数式接口。一般建议在接口上使用<code>@FunctionalInterface</code> 注解进行声明，这样的话，编译器如果发现你标注了这个注解的接口有多于一个抽象方法的时候会报错的，如下图所示</p><p><img src="/2020/04/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/@FunctionalInterface.png" srcset="/img/loading.gif" alt="@FunctionalInterface 注解"></p><p>示例：</p><pre><code class="hljs pgsql">@FunctionalInterface
+<span class="hljs-function"><span class="hljs-params">&#125;)</span>;</span></code></pre>
+
+<p>可以看出，代码变得更段且更具有可读性，但是实际上还可以写得更短：</p>
+<pre><code class="hljs livescript">Collections.sort<span class="hljs-function"><span class="hljs-params">(names, (String a, String b) -&gt; b.compareTo(a))</span>;</span></code></pre>
+
+<p>对于函数体只有一行代码的，你可以去掉大括号{}以及return关键字，但是你还可以写得更短点：</p>
+<pre><code class="hljs livescript">names.sort<span class="hljs-function"><span class="hljs-params">((a, b) -&gt; b.compareTo(a))</span>;</span></code></pre>
+
+<p>List 类本身就有一个 <code>sort</code> 方法。并且Java编译器可以自动推导出参数类型，所以你可以不用再写一次类型。接下来我们看看lambda表达式还有什么其他用法。</p>
+</blockquote>
+<h3 id="函数式接口-Functional-Interfaces"><a href="#函数式接口-Functional-Interfaces" class="headerlink" title="函数式接口(Functional Interfaces)"></a>函数式接口(Functional Interfaces)</h3><blockquote>
+<p><strong>译者注：</strong> 原文对这部分解释不太清楚，故做了修改！</p>
+<p>Java 语言设计者们投入了大量精力来思考如何使现有的函数友好地支持Lambda。最终采取的方法是：增加函数式接口的概念。<strong>“函数式接口”是指仅仅只包含一个抽象方法,但是可以有多个非抽象方法(也就是上面提到的默认方法)的接口。</strong> 像这样的接口，可以被隐式转换为lambda表达式。<code>java.lang.Runnable</code> 与 <code>java.util.concurrent.Callable</code> 是函数式接口最典型的两个例子。Java 8增加了一种特殊的注解<code>@FunctionalInterface</code>,但是这个注解通常不是必须的(某些情况建议使用)，只要接口只包含一个抽象方法，虚拟机会自动判断该接口为函数式接口。一般建议在接口上使用<code>@FunctionalInterface</code> 注解进行声明，这样的话，编译器如果发现你标注了这个注解的接口有多于一个抽象方法的时候会报错的，如下图所示</p>
+<p><img src="/2020/04/28/Java8%E6%96%B0%E7%89%B9%E6%80%A7/@FunctionalInterface.png" srcset="/img/loading.gif" alt="@FunctionalInterface 注解"></p>
+<p>示例：</p>
+<pre><code class="hljs pgsql">@FunctionalInterface
 <span class="hljs-built_in">public</span> interface Converter&lt;F, T&gt; &#123;
   T convert(F <span class="hljs-keyword">from</span>);
 &#125;
     // TODO 将数字字符串转换为整数类型
     Converter&lt;String, <span class="hljs-type">Integer</span>&gt; converter = (<span class="hljs-keyword">from</span>) -&gt; <span class="hljs-type">Integer</span>.valueOf(<span class="hljs-keyword">from</span>);
     <span class="hljs-type">Integer</span> converted = converter.convert("123");
-    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(converted.getClass()); //<span class="hljs-keyword">class</span> java.lang.Integer</code></pre><p><strong>译者注：</strong> 大部分函数式接口都不用我们自己写，Java8都给我们实现好了，这些接口都在java.util.function包里。</p></blockquote><h3 id="方法和构造函数引用-Method-and-Constructor-References"><a href="#方法和构造函数引用-Method-and-Constructor-References" class="headerlink" title="方法和构造函数引用(Method and Constructor References)"></a>方法和构造函数引用(Method and Constructor References)</h3><blockquote><p>前一节中的代码还可以通过静态方法引用来表示：</p><pre><code class="hljs pgsql">Converter&lt;String, <span class="hljs-type">Integer</span>&gt; converter = <span class="hljs-type">Integer</span>::valueOf;
+    <span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(converted.getClass()); //<span class="hljs-keyword">class</span> java.lang.Integer</code></pre>
+
+<p><strong>译者注：</strong> 大部分函数式接口都不用我们自己写，Java8都给我们实现好了，这些接口都在java.util.function包里。</p>
+</blockquote>
+<h3 id="方法和构造函数引用-Method-and-Constructor-References"><a href="#方法和构造函数引用-Method-and-Constructor-References" class="headerlink" title="方法和构造函数引用(Method and Constructor References)"></a>方法和构造函数引用(Method and Constructor References)</h3><blockquote>
+<p>前一节中的代码还可以通过静态方法引用来表示：</p>
+<pre><code class="hljs pgsql">Converter&lt;String, <span class="hljs-type">Integer</span>&gt; converter = <span class="hljs-type">Integer</span>::valueOf;
 <span class="hljs-type">Integer</span> converted = converter.convert("123");
-<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(converted.getClass());   //<span class="hljs-keyword">class</span> java.lang.Integer</code></pre><p>Java 8允许您通过<code>::</code>关键字传递方法或构造函数的引用。 上面的示例显示了如何引用静态方法。 但我们也可以引用对象方法：</p><pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Something</span> &#123;</span>
+<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>.println(converted.getClass());   //<span class="hljs-keyword">class</span> java.lang.Integer</code></pre>
+
+<p>Java 8允许您通过<code>::</code>关键字传递方法或构造函数的引用。 上面的示例显示了如何引用静态方法。 但我们也可以引用对象方法：</p>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Something</span> &#123;</span>
     <span class="hljs-function"><span class="hljs-keyword">String</span> <span class="hljs-title">startsWith</span><span class="hljs-params">(<span class="hljs-keyword">String</span> s)</span> </span>&#123;
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">String</span>.valueOf(s.charAt(<span class="hljs-number">0</span>));
     &#125;
@@ -48,7 +295,10 @@
 Something something = <span class="hljs-keyword">new</span> Something();
 Converter&lt;<span class="hljs-keyword">String</span>, <span class="hljs-keyword">String</span>&gt; converter = something::startsWith;
 <span class="hljs-keyword">String</span> converted = converter.convert(<span class="hljs-string">"Java"</span>);
-System.out.<span class="hljs-built_in">println</span>(converted);    <span class="hljs-comment">// "J"</span></code></pre><p>接下来看看构造函数是如何使用<code>::</code>关键字来引用的，首先我们定义一个包含多个构造函数的简单类：</p><pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> &#123;</span>
+System.out.<span class="hljs-built_in">println</span>(converted);    <span class="hljs-comment">// "J"</span></code></pre>
+
+<p>接下来看看构造函数是如何使用<code>::</code>关键字来引用的，首先我们定义一个包含多个构造函数的简单类：</p>
+<pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> &#123;</span>
     <span class="hljs-keyword">String</span> firstName;
     <span class="hljs-keyword">String</span> lastName;
 
@@ -58,21 +308,43 @@ System.out.<span class="hljs-built_in">println</span>(converted);    <span class
         <span class="hljs-keyword">this</span>.firstName = firstName;
         <span class="hljs-keyword">this</span>.lastName = lastName;
     &#125;
-&#125;</code></pre><p>接下来我们指定一个用来创建Person对象的对象工厂接口：</p><pre><code class="hljs angelscript"><span class="hljs-keyword">interface</span> <span class="hljs-symbol">PersonFactory</span>&lt;<span class="hljs-symbol">P</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">Person</span>&gt; &#123;
+&#125;</code></pre>
+
+<p>接下来我们指定一个用来创建Person对象的对象工厂接口：</p>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">interface</span> <span class="hljs-symbol">PersonFactory</span>&lt;<span class="hljs-symbol">P</span> <span class="hljs-symbol">extends</span> <span class="hljs-symbol">Person</span>&gt; &#123;
     P create(String firstName, String lastName);
-&#125;</code></pre><p>这里我们使用构造函数引用来将他们关联起来，而不是手动实现一个完整的工厂：</p><pre><code class="hljs autohotkey"><span class="hljs-title">PersonFactory&lt;Person&gt; personFactory = Person::</span><span class="hljs-keyword">new</span><span class="hljs-comment">;</span>
-Person person = personFactory.create(<span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Parker"</span>)<span class="hljs-comment">;</span></code></pre><p>我们只需要使用 <code>Person::new</code> 来获取Person类构造函数的引用，Java编译器会自动根据<code>PersonFactory.create</code>方法的参数类型来选择合适的构造函数。</p></blockquote><h3 id="Lambda表达式作用域-Lambda-Scopes"><a href="#Lambda表达式作用域-Lambda-Scopes" class="headerlink" title="Lambda表达式作用域(Lambda Scopes)"></a>Lambda表达式作用域(Lambda Scopes)</h3><h4 id="访问局部变量"><a href="#访问局部变量" class="headerlink" title="访问局部变量"></a>访问局部变量</h4><blockquote><p>我们可以直接在 lambda 表达式中访问外部的局部变量：</p><pre><code class="hljs angelscript"><span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> num = <span class="hljs-number">1</span>;
+&#125;</code></pre>
+
+<p>这里我们使用构造函数引用来将他们关联起来，而不是手动实现一个完整的工厂：</p>
+<pre><code class="hljs autohotkey"><span class="hljs-title">PersonFactory&lt;Person&gt; personFactory = Person::</span><span class="hljs-keyword">new</span><span class="hljs-comment">;</span>
+Person person = personFactory.create(<span class="hljs-string">"Peter"</span>, <span class="hljs-string">"Parker"</span>)<span class="hljs-comment">;</span></code></pre>
+
+<p>我们只需要使用 <code>Person::new</code> 来获取Person类构造函数的引用，Java编译器会自动根据<code>PersonFactory.create</code>方法的参数类型来选择合适的构造函数。</p>
+</blockquote>
+<h3 id="Lambda表达式作用域-Lambda-Scopes"><a href="#Lambda表达式作用域-Lambda-Scopes" class="headerlink" title="Lambda表达式作用域(Lambda Scopes)"></a>Lambda表达式作用域(Lambda Scopes)</h3><h4 id="访问局部变量"><a href="#访问局部变量" class="headerlink" title="访问局部变量"></a>访问局部变量</h4><blockquote>
+<p>我们可以直接在 lambda 表达式中访问外部的局部变量：</p>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> num = <span class="hljs-number">1</span>;
 Converter&lt;Integer, String&gt; <span class="hljs-built_in">string</span>Converter =
         (<span class="hljs-keyword">from</span>) -&gt; String.valueOf(<span class="hljs-keyword">from</span> + num);
 
-<span class="hljs-built_in">string</span>Converter.convert(<span class="hljs-number">2</span>);     <span class="hljs-comment">// 3</span></code></pre><p>但是和匿名对象不同的是，这里的变量num可以不用声明为final，该代码同样正确：</p><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> num = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">string</span>Converter.convert(<span class="hljs-number">2</span>);     <span class="hljs-comment">// 3</span></code></pre>
+
+<p>但是和匿名对象不同的是，这里的变量num可以不用声明为final，该代码同样正确：</p>
+<pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> num = <span class="hljs-number">1</span>;
 Converter&lt;Integer, String&gt; <span class="hljs-built_in">string</span>Converter =
         (<span class="hljs-keyword">from</span>) -&gt; String.valueOf(<span class="hljs-keyword">from</span> + num);
 
-<span class="hljs-built_in">string</span>Converter.convert(<span class="hljs-number">2</span>);     <span class="hljs-comment">// 3</span></code></pre><p>不过这里的 num 必须不可被后面的代码修改（即隐性的具有final的语义），例如下面的就无法编译：</p><pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> num = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">string</span>Converter.convert(<span class="hljs-number">2</span>);     <span class="hljs-comment">// 3</span></code></pre>
+
+<p>不过这里的 num 必须不可被后面的代码修改（即隐性的具有final的语义），例如下面的就无法编译：</p>
+<pre><code class="hljs angelscript"><span class="hljs-built_in">int</span> num = <span class="hljs-number">1</span>;
 Converter&lt;Integer, String&gt; <span class="hljs-built_in">string</span>Converter =
         (<span class="hljs-keyword">from</span>) -&gt; String.valueOf(<span class="hljs-keyword">from</span> + num);
-num = <span class="hljs-number">3</span>;<span class="hljs-comment">//在lambda表达式中试图修改num同样是不允许的。</span></code></pre></blockquote><h4 id="访问字段和静态变量"><a href="#访问字段和静态变量" class="headerlink" title="访问字段和静态变量"></a>访问字段和静态变量</h4><blockquote><p>与局部变量相比，我们对lambda表达式中的实例字段和静态变量都有读写访问权限。 该行为和匿名对象是一致的。</p><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Lambda4</span> &#123;
+num = <span class="hljs-number">3</span>;<span class="hljs-comment">//在lambda表达式中试图修改num同样是不允许的。</span></code></pre>
+</blockquote>
+<h4 id="访问字段和静态变量"><a href="#访问字段和静态变量" class="headerlink" title="访问字段和静态变量"></a>访问字段和静态变量</h4><blockquote>
+<p>与局部变量相比，我们对lambda表达式中的实例字段和静态变量都有读写访问权限。 该行为和匿名对象是一致的。</p>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">Lambda4</span> &#123;
     static <span class="hljs-built_in">int</span> outerStaticNum;
     <span class="hljs-built_in">int</span> outerNum;
 
@@ -87,7 +359,21 @@ num = <span class="hljs-number">3</span>;<span class="hljs-comment">//在lambda�
             <span class="hljs-keyword">return</span> String.valueOf(<span class="hljs-keyword">from</span>);
         &#125;;
     &#125;
-&#125;</code></pre></blockquote><h4 id="访问默认接口方法"><a href="#访问默认接口方法" class="headerlink" title="访问默认接口方法"></a>访问默认接口方法</h4><blockquote><p>还记得第一节中的 formula 示例吗？ <code>Formula</code> 接口定义了一个默认方法<code>sqrt</code>，可以从包含匿名对象的每个 formula 实例访问该方法。 这不适用于lambda表达式。</p><p>无法从 lambda 表达式中访问默认方法,故以下代码无法编译：</p><pre><code class="hljs gcode">Formula formula = <span class="hljs-comment">(a)</span> -&gt; sqrt<span class="hljs-comment">(a * 100)</span>;</code></pre></blockquote><h3 id="内置函数式接口-Built-in-Functional-Interfaces"><a href="#内置函数式接口-Built-in-Functional-Interfaces" class="headerlink" title="内置函数式接口(Built-in Functional Interfaces)"></a>内置函数式接口(Built-in Functional Interfaces)</h3><blockquote><p>JDK 1.8 API包含许多内置函数式接口。 其中一些借口在老版本的 Java 中是比较常见的比如： <code>Comparator</code> 或<code>Runnable</code>，这些接口都增加了<code>@FunctionalInterface</code>注解以便能用在 lambda 表达式上。</p><p>但是 Java 8 API 同样还提供了很多全新的函数式接口来让你的编程工作更加方便，有一些接口是来自 <a href="https://code.google.com/p/guava-libraries/" target="_blank" rel="noopener">Google Guava</a> 库里的，即便你对这些很熟悉了，还是有必要看看这些是如何扩展到lambda上使用的。</p></blockquote><h4 id="Predicates"><a href="#Predicates" class="headerlink" title="Predicates"></a>Predicates</h4><blockquote><p>Predicate 接口是只有一个参数的返回布尔类型值的 <strong>断言型</strong> 接口。该接口包含多种默认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）：</p><p><strong>译者注：</strong> Predicate 接口源码如下</p><pre><code class="hljs java"><span class="hljs-keyword">package</span> java.util.function;
+&#125;</code></pre>
+</blockquote>
+<h4 id="访问默认接口方法"><a href="#访问默认接口方法" class="headerlink" title="访问默认接口方法"></a>访问默认接口方法</h4><blockquote>
+<p>还记得第一节中的 formula 示例吗？ <code>Formula</code> 接口定义了一个默认方法<code>sqrt</code>，可以从包含匿名对象的每个 formula 实例访问该方法。 这不适用于lambda表达式。</p>
+<p>无法从 lambda 表达式中访问默认方法,故以下代码无法编译：</p>
+<pre><code class="hljs gcode">Formula formula = <span class="hljs-comment">(a)</span> -&gt; sqrt<span class="hljs-comment">(a * 100)</span>;</code></pre>
+</blockquote>
+<h3 id="内置函数式接口-Built-in-Functional-Interfaces"><a href="#内置函数式接口-Built-in-Functional-Interfaces" class="headerlink" title="内置函数式接口(Built-in Functional Interfaces)"></a>内置函数式接口(Built-in Functional Interfaces)</h3><blockquote>
+<p>JDK 1.8 API包含许多内置函数式接口。 其中一些借口在老版本的 Java 中是比较常见的比如： <code>Comparator</code> 或<code>Runnable</code>，这些接口都增加了<code>@FunctionalInterface</code>注解以便能用在 lambda 表达式上。</p>
+<p>但是 Java 8 API 同样还提供了很多全新的函数式接口来让你的编程工作更加方便，有一些接口是来自 <a href="https://code.google.com/p/guava-libraries/" target="_blank" rel="noopener">Google Guava</a> 库里的，即便你对这些很熟悉了，还是有必要看看这些是如何扩展到lambda上使用的。</p>
+</blockquote>
+<h4 id="Predicates"><a href="#Predicates" class="headerlink" title="Predicates"></a>Predicates</h4><blockquote>
+<p>Predicate 接口是只有一个参数的返回布尔类型值的 <strong>断言型</strong> 接口。该接口包含多种默认方法来将 Predicate 组合成其他复杂的逻辑（比如：与，或，非）：</p>
+<p><strong>译者注：</strong> Predicate 接口源码如下</p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> java.util.function;
 <span class="hljs-keyword">import</span> java.util.Objects;
 
 <span class="hljs-meta">@FunctionalInterface</span>
@@ -115,7 +401,10 @@ num = <span class="hljs-number">3</span>;<span class="hljs-comment">//在lambda�
         <span class="hljs-keyword">return</span> (<span class="hljs-keyword">null</span> == targetRef)
                 ? Objects::isNull
                 : object -&gt; targetRef.equals(object);
-    &#125;</code></pre><p>示例：</p><pre><code class="hljs lasso">Predicate&lt;<span class="hljs-built_in">String</span>&gt; predicate = (s) -&gt; s.length() &gt; <span class="hljs-number">0</span>;
+    &#125;</code></pre>
+
+<p>示例：</p>
+<pre><code class="hljs lasso">Predicate&lt;<span class="hljs-built_in">String</span>&gt; predicate = (s) -&gt; s.length() &gt; <span class="hljs-number">0</span>;
 
 predicate.test(<span class="hljs-string">"foo"</span>);              <span class="hljs-comment">// true</span>
 predicate.negate().test(<span class="hljs-string">"foo"</span>);     <span class="hljs-comment">// false</span>
@@ -124,7 +413,12 @@ Predicate&lt;<span class="hljs-built_in">Boolean</span>&gt; nonNull = Objects<sp
 Predicate&lt;<span class="hljs-built_in">Boolean</span>&gt; isNull = Objects<span class="hljs-type">::isNull</span>;
 
 Predicate&lt;<span class="hljs-built_in">String</span>&gt; isEmpty = <span class="hljs-built_in">String</span><span class="hljs-type">::isEmpty</span>;
-Predicate&lt;<span class="hljs-built_in">String</span>&gt; isNotEmpty = isEmpty.negate();</code></pre></blockquote><h4 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h4><blockquote><p>Function 接口接受一个参数并生成结果。默认方法可用于将多个函数链接在一起（compose, andThen）：</p><p><strong>译者注：</strong> Function 接口源码如下</p><pre><code class="hljs fortran">package java.util<span class="hljs-function">.<span class="hljs-keyword">function</span></span>;
+Predicate&lt;<span class="hljs-built_in">String</span>&gt; isNotEmpty = isEmpty.negate();</code></pre>
+</blockquote>
+<h4 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h4><blockquote>
+<p>Function 接口接受一个参数并生成结果。默认方法可用于将多个函数链接在一起（compose, andThen）：</p>
+<p><strong>译者注：</strong> Function 接口源码如下</p>
+<pre><code class="hljs fortran">package java.util<span class="hljs-function">.<span class="hljs-keyword">function</span></span>;
  
 <span class="hljs-keyword">import</span> java.util.Objects;
  
@@ -150,15 +444,33 @@ Predicate&lt;<span class="hljs-built_in">String</span>&gt; isNotEmpty = isEmpty.
 &#125;
 <span class="hljs-function"><span class="hljs-keyword">Function</span></span>&lt;String, <span class="hljs-keyword">Integer</span>&gt; toInteger = <span class="hljs-keyword">Integer</span>::valueOf;
 <span class="hljs-function"><span class="hljs-keyword">Function</span></span>&lt;String, String&gt; backToString = toInteger.andThen(String::valueOf);
-backToString.apply(<span class="hljs-string">"123"</span>);     // <span class="hljs-string">"123"</span></code></pre></blockquote><h4 id="Suppliers"><a href="#Suppliers" class="headerlink" title="Suppliers"></a>Suppliers</h4><blockquote><p>Supplier 接口产生给定泛型类型的结果。 与 Function 接口不同，Supplier 接口不接受参数。</p><pre><code class="hljs haxe">Supplier&lt;Person&gt; personSupplier = Person:<span class="hljs-type"></span>:<span class="hljs-keyword">new</span><span class="hljs-type"></span>;
-personSupplier.<span class="hljs-keyword">get</span>();   <span class="hljs-comment">// new Person</span></code></pre></blockquote><h4 id="Consumers"><a href="#Consumers" class="headerlink" title="Consumers"></a>Consumers</h4><blockquote><p>Consumer 接口表示要对单个输入参数执行的操作。</p><pre><code class="hljs coffeescript">Consumer&lt;Person&gt; greeter = <span class="hljs-function"><span class="hljs-params">(p)</span> -&gt;</span> System.out.println(<span class="hljs-string">"Hello, "</span> + p.firstName);
-greeter.accept(<span class="hljs-keyword">new</span> Person(<span class="hljs-string">"Luke"</span>, <span class="hljs-string">"Skywalker"</span>));</code></pre></blockquote><h4 id="Comparators"><a href="#Comparators" class="headerlink" title="Comparators"></a>Comparators</h4><blockquote><p>Comparator 是老Java中的经典接口， Java 8在此之上添加了多种默认方法：</p><pre><code class="hljs armasm"><span class="hljs-symbol">Comparator</span>&lt;Person&gt; comparator = (<span class="hljs-built_in">p1</span>, <span class="hljs-built_in">p2</span>) -&gt; <span class="hljs-built_in">p1</span>.firstName.compareTo(<span class="hljs-built_in">p2</span>.firstName)<span class="hljs-comment">;</span>
+backToString.apply(<span class="hljs-string">"123"</span>);     // <span class="hljs-string">"123"</span></code></pre>
+</blockquote>
+<h4 id="Suppliers"><a href="#Suppliers" class="headerlink" title="Suppliers"></a>Suppliers</h4><blockquote>
+<p>Supplier 接口产生给定泛型类型的结果。 与 Function 接口不同，Supplier 接口不接受参数。</p>
+<pre><code class="hljs haxe">Supplier&lt;Person&gt; personSupplier = Person:<span class="hljs-type"></span>:<span class="hljs-keyword">new</span><span class="hljs-type"></span>;
+personSupplier.<span class="hljs-keyword">get</span>();   <span class="hljs-comment">// new Person</span></code></pre>
+</blockquote>
+<h4 id="Consumers"><a href="#Consumers" class="headerlink" title="Consumers"></a>Consumers</h4><blockquote>
+<p>Consumer 接口表示要对单个输入参数执行的操作。</p>
+<pre><code class="hljs coffeescript">Consumer&lt;Person&gt; greeter = <span class="hljs-function"><span class="hljs-params">(p)</span> -&gt;</span> System.out.println(<span class="hljs-string">"Hello, "</span> + p.firstName);
+greeter.accept(<span class="hljs-keyword">new</span> Person(<span class="hljs-string">"Luke"</span>, <span class="hljs-string">"Skywalker"</span>));</code></pre>
+</blockquote>
+<h4 id="Comparators"><a href="#Comparators" class="headerlink" title="Comparators"></a>Comparators</h4><blockquote>
+<p>Comparator 是老Java中的经典接口， Java 8在此之上添加了多种默认方法：</p>
+<pre><code class="hljs armasm"><span class="hljs-symbol">Comparator</span>&lt;Person&gt; comparator = (<span class="hljs-built_in">p1</span>, <span class="hljs-built_in">p2</span>) -&gt; <span class="hljs-built_in">p1</span>.firstName.compareTo(<span class="hljs-built_in">p2</span>.firstName)<span class="hljs-comment">;</span>
 
 <span class="hljs-symbol">Person</span> <span class="hljs-built_in">p1</span> = new Person(<span class="hljs-string">"John"</span>, <span class="hljs-string">"Doe"</span>)<span class="hljs-comment">;</span>
 <span class="hljs-symbol">Person</span> <span class="hljs-built_in">p2</span> = new Person(<span class="hljs-string">"Alice"</span>, <span class="hljs-string">"Wonderland"</span>)<span class="hljs-comment">;</span>
 
 <span class="hljs-symbol">comparator.compare</span>(<span class="hljs-built_in">p1</span>, <span class="hljs-built_in">p2</span>)<span class="hljs-comment">;             // &gt; 0</span>
-<span class="hljs-symbol">comparator.reversed</span>().compare(<span class="hljs-built_in">p1</span>, <span class="hljs-built_in">p2</span>)<span class="hljs-comment">;  // &lt; 0</span></code></pre></blockquote><h3 id="Optionals"><a href="#Optionals" class="headerlink" title="Optionals"></a>Optionals</h3><blockquote><p>Optionals不是函数式接口，而是用于防止 NullPointerException 的漂亮工具。这是下一节的一个重要概念，让我们快速了解一下Optionals的工作原理。</p><p>Optional 是一个简单的容器，其值可能是null或者不是null。在Java 8之前一般某个函数应该返回非空对象但是有时却什么也没有返回，而在Java 8中，你应该返回 Optional 而不是 null。</p><p>译者注：示例中每个方法的作用已经添加。</p><pre><code class="hljs reasonml"><span class="hljs-comment">//of（）：为非null的值创建一个Optional</span>
+<span class="hljs-symbol">comparator.reversed</span>().compare(<span class="hljs-built_in">p1</span>, <span class="hljs-built_in">p2</span>)<span class="hljs-comment">;  // &lt; 0</span></code></pre>
+</blockquote>
+<h3 id="Optionals"><a href="#Optionals" class="headerlink" title="Optionals"></a>Optionals</h3><blockquote>
+<p>Optionals不是函数式接口，而是用于防止 NullPointerException 的漂亮工具。这是下一节的一个重要概念，让我们快速了解一下Optionals的工作原理。</p>
+<p>Optional 是一个简单的容器，其值可能是null或者不是null。在Java 8之前一般某个函数应该返回非空对象但是有时却什么也没有返回，而在Java 8中，你应该返回 Optional 而不是 null。</p>
+<p>译者注：示例中每个方法的作用已经添加。</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">//of（）：为非null的值创建一个Optional</span>
 Optional&lt;String&gt; optional = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Optional</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-string">"bam"</span>);
 <span class="hljs-comment">// isPresent（）： 如果值存在返回true，否则返回false</span>
 optional.is<span class="hljs-constructor">Present()</span>;           <span class="hljs-comment">// true</span>
@@ -167,7 +479,14 @@ optional.get<span class="hljs-literal">()</span>;                 <span class="h
 <span class="hljs-comment">//orElse（）：如果有值则将其返回，否则返回指定的其它值</span>
 optional.<span class="hljs-keyword">or</span><span class="hljs-constructor">Else(<span class="hljs-string">"fallback"</span>)</span>;    <span class="hljs-comment">// "bam"</span>
 <span class="hljs-comment">//ifPresent（）：如果Optional实例有值则为其调用consumer，否则不做处理</span>
-optional.<span class="hljs-keyword">if</span><span class="hljs-constructor">Present((<span class="hljs-params">s</span>)</span> -&gt; <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(s.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(0)</span>));     <span class="hljs-comment">// "b"</span></code></pre><p>推荐阅读：<a href="https://blog.kaaass.net/archives/764" target="_blank" rel="noopener">[Java8]如何正确使用Optional</a></p></blockquote><h3 id="Streams-流"><a href="#Streams-流" class="headerlink" title="Streams(流)"></a>Streams(流)</h3><blockquote><p><code>java.util.Stream</code> 表示能应用在一组元素上一次执行的操作序列。Stream 操作分为中间操作或者最终操作两种，最终操作返回一特定类型的计算结果，而中间操作返回Stream本身，这样你就可以将多个操作依次串起来。Stream 的创建需要指定一个数据源，比如<code>java.util.Collection</code> 的子类，List 或者 Set， Map 不支持。Stream 的操作可以串行执行或者并行执行。</p><p>首先看看Stream是怎么用，首先创建实例代码的用到的数据List：</p><pre><code class="hljs dockerfile">List&lt;String&gt; stringList = new ArrayList&lt;&gt;();
+optional.<span class="hljs-keyword">if</span><span class="hljs-constructor">Present((<span class="hljs-params">s</span>)</span> -&gt; <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(s.<span class="hljs-built_in">char</span><span class="hljs-constructor">At(0)</span>));     <span class="hljs-comment">// "b"</span></code></pre>
+
+<p>推荐阅读：<a href="https://blog.kaaass.net/archives/764" target="_blank" rel="noopener">[Java8]如何正确使用Optional</a></p>
+</blockquote>
+<h3 id="Streams-流"><a href="#Streams-流" class="headerlink" title="Streams(流)"></a>Streams(流)</h3><blockquote>
+<p><code>java.util.Stream</code> 表示能应用在一组元素上一次执行的操作序列。Stream 操作分为中间操作或者最终操作两种，最终操作返回一特定类型的计算结果，而中间操作返回Stream本身，这样你就可以将多个操作依次串起来。Stream 的创建需要指定一个数据源，比如<code>java.util.Collection</code> 的子类，List 或者 Set， Map 不支持。Stream 的操作可以串行执行或者并行执行。</p>
+<p>首先看看Stream是怎么用，首先创建实例代码的用到的数据List：</p>
+<pre><code class="hljs dockerfile">List&lt;String&gt; stringList = new ArrayList&lt;&gt;();
 stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"ddd2"</span>);</span>
 stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"aaa2"</span>);</span>
 stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"bbb1"</span>);</span>
@@ -175,21 +494,45 @@ stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class=
 stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"bbb3"</span>);</span>
 stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"ccc"</span>);</span>
 stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"bbb2"</span>);</span>
-stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"ddd1"</span>);</span></code></pre><p>Java 8扩展了集合类，可以通过 Collection.stream() 或者 Collection.parallelStream() 来创建一个Stream。下面几节将详细解释常用的Stream操作，见下方👇</p></blockquote><h4 id="Filter-过滤"><a href="#Filter-过滤" class="headerlink" title="Filter(过滤)"></a>Filter(过滤)</h4><blockquote><p>过滤通过一个predicate接口来过滤并只保留符合条件的元素，该操作属于<strong>中间操作</strong>，所以我们可以在过滤后的结果来应用其他Stream操作（比如forEach）。forEach需要一个函数来对过滤后的元素依次执行。forEach是一个最终操作，所以我们不能在forEach之后来执行其他Stream操作。</p><pre><code class="hljs less"><span class="hljs-comment">// 测试 Filter(过滤)</span>
+stringList.<span class="hljs-keyword">add</span><span class="bash">(<span class="hljs-string">"ddd1"</span>);</span></code></pre>
+
+<p>Java 8扩展了集合类，可以通过 Collection.stream() 或者 Collection.parallelStream() 来创建一个Stream。下面几节将详细解释常用的Stream操作，见下方👇</p>
+</blockquote>
+<h4 id="Filter-过滤"><a href="#Filter-过滤" class="headerlink" title="Filter(过滤)"></a>Filter(过滤)</h4><blockquote>
+<p>过滤通过一个predicate接口来过滤并只保留符合条件的元素，该操作属于<strong>中间操作</strong>，所以我们可以在过滤后的结果来应用其他Stream操作（比如forEach）。forEach需要一个函数来对过滤后的元素依次执行。forEach是一个最终操作，所以我们不能在forEach之后来执行其他Stream操作。</p>
+<pre><code class="hljs less"><span class="hljs-comment">// 测试 Filter(过滤)</span>
 <span class="hljs-selector-tag">stringList</span>
         <span class="hljs-selector-class">.stream</span>()
         <span class="hljs-selector-class">.filter</span>((s) -&gt; s.startsWith(<span class="hljs-string">"a"</span>))
-        <span class="hljs-selector-class">.forEach</span>(System.<span class="hljs-attribute">out</span>::println);<span class="hljs-comment">//aaa2 aaa1</span></code></pre><p>forEach 是为 Lambda 而设计的，保持了最紧凑的风格。而且 Lambda 表达式本身是可以重用的，非常方便。</p></blockquote><h4 id="Sorted-排序"><a href="#Sorted-排序" class="headerlink" title="Sorted(排序)"></a>Sorted(排序)</h4><blockquote><p>排序是一个 <strong>中间操作</strong>，返回的是排序好后的 Stream。<strong>如果你不指定一个自定义的 Comparator 则会使用默认排序。</strong></p><pre><code class="hljs less"><span class="hljs-comment">// 测试 Sort (排序)</span>
+        <span class="hljs-selector-class">.forEach</span>(System.<span class="hljs-attribute">out</span>::println);<span class="hljs-comment">//aaa2 aaa1</span></code></pre>
+
+<p>forEach 是为 Lambda 而设计的，保持了最紧凑的风格。而且 Lambda 表达式本身是可以重用的，非常方便。</p>
+</blockquote>
+<h4 id="Sorted-排序"><a href="#Sorted-排序" class="headerlink" title="Sorted(排序)"></a>Sorted(排序)</h4><blockquote>
+<p>排序是一个 <strong>中间操作</strong>，返回的是排序好后的 Stream。<strong>如果你不指定一个自定义的 Comparator 则会使用默认排序。</strong></p>
+<pre><code class="hljs less"><span class="hljs-comment">// 测试 Sort (排序)</span>
 <span class="hljs-selector-tag">stringList</span>
         <span class="hljs-selector-class">.stream</span>()
         <span class="hljs-selector-class">.sorted</span>()
         <span class="hljs-selector-class">.filter</span>((s) -&gt; s.startsWith(<span class="hljs-string">"a"</span>))
-        <span class="hljs-selector-class">.forEach</span>(System.<span class="hljs-attribute">out</span>::println);<span class="hljs-comment">// aaa1 aaa2</span></code></pre><p>需要注意的是，排序只创建了一个排列好后的Stream，而不会影响原有的数据源，排序之后原数据stringCollection是不会被修改的：</p><pre><code class="hljs armasm"><span class="hljs-symbol">System.out.println</span>(<span class="hljs-keyword">stringList);// </span>ddd2, aaa2, <span class="hljs-keyword">bbb1, </span>aaa1, <span class="hljs-keyword">bbb3, </span>ccc, <span class="hljs-keyword">bbb2, </span>ddd1</code></pre></blockquote><h4 id="Map-映射"><a href="#Map-映射" class="headerlink" title="Map(映射)"></a>Map(映射)</h4><blockquote><p>中间操作 map 会将元素根据指定的 Function 接口来依次将元素转成另外的对象。</p><p>下面的示例展示了将字符串转换为大写字符串。你也可以通过map来将对象转换成其他类型，map返回的Stream类型是根据你map传递进去的函数的返回值决定的。</p><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 测试 Map 操作
+        <span class="hljs-selector-class">.forEach</span>(System.<span class="hljs-attribute">out</span>::println);<span class="hljs-comment">// aaa1 aaa2</span></code></pre>
+
+<p>需要注意的是，排序只创建了一个排列好后的Stream，而不会影响原有的数据源，排序之后原数据stringCollection是不会被修改的：</p>
+<pre><code class="hljs armasm"><span class="hljs-symbol">System.out.println</span>(<span class="hljs-keyword">stringList);// </span>ddd2, aaa2, <span class="hljs-keyword">bbb1, </span>aaa1, <span class="hljs-keyword">bbb3, </span>ccc, <span class="hljs-keyword">bbb2, </span>ddd1</code></pre>
+</blockquote>
+<h4 id="Map-映射"><a href="#Map-映射" class="headerlink" title="Map(映射)"></a>Map(映射)</h4><blockquote>
+<p>中间操作 map 会将元素根据指定的 Function 接口来依次将元素转成另外的对象。</p>
+<p>下面的示例展示了将字符串转换为大写字符串。你也可以通过map来将对象转换成其他类型，map返回的Stream类型是根据你map传递进去的函数的返回值决定的。</p>
+<pre><code class="hljs jboss-cli"><span class="hljs-string">//</span> 测试 Map 操作
 stringList
         <span class="hljs-string">.stream</span><span class="hljs-params">()</span>
         <span class="hljs-string">.map</span><span class="hljs-params">(String::toUpperCase)</span>
         <span class="hljs-string">.sorted</span><span class="hljs-params">((a, b)</span> -&gt; b.compareTo<span class="hljs-params">(a)</span>)
-        <span class="hljs-string">.forEach</span><span class="hljs-params">(System.out::println)</span>;<span class="hljs-string">//</span> <span class="hljs-string">"DDD2"</span>, <span class="hljs-string">"DDD1"</span>, <span class="hljs-string">"CCC"</span>, <span class="hljs-string">"BBB3"</span>, <span class="hljs-string">"BBB2"</span>, <span class="hljs-string">"AAA2"</span>, <span class="hljs-string">"AAA1"</span></code></pre></blockquote><h4 id="Match-匹配"><a href="#Match-匹配" class="headerlink" title="Match(匹配)"></a>Match(匹配)</h4><blockquote><p>Stream提供了多种匹配操作，允许检测指定的Predicate是否匹配整个Stream。所有的匹配操作都是 <strong>最终操作</strong> ，并返回一个 boolean 类型的值。</p><pre><code class="hljs reasonml"><span class="hljs-comment">// 测试 Match (匹配)操作</span>
+        <span class="hljs-string">.forEach</span><span class="hljs-params">(System.out::println)</span>;<span class="hljs-string">//</span> <span class="hljs-string">"DDD2"</span>, <span class="hljs-string">"DDD1"</span>, <span class="hljs-string">"CCC"</span>, <span class="hljs-string">"BBB3"</span>, <span class="hljs-string">"BBB2"</span>, <span class="hljs-string">"AAA2"</span>, <span class="hljs-string">"AAA1"</span></code></pre>
+</blockquote>
+<h4 id="Match-匹配"><a href="#Match-匹配" class="headerlink" title="Match(匹配)"></a>Match(匹配)</h4><blockquote>
+<p>Stream提供了多种匹配操作，允许检测指定的Predicate是否匹配整个Stream。所有的匹配操作都是 <strong>最终操作</strong> ，并返回一个 boolean 类型的值。</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">// 测试 Match (匹配)操作</span>
 boolean anyStartsWithA =
         stringList
                 .stream<span class="hljs-literal">()</span>
@@ -208,20 +551,31 @@ boolean noneStartsWithZ =
                 .stream<span class="hljs-literal">()</span>
                 .none<span class="hljs-constructor">Match((<span class="hljs-params">s</span>)</span> -&gt; s.starts<span class="hljs-constructor">With(<span class="hljs-string">"z"</span>)</span>);
 
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(noneStartsWithZ);      <span class="hljs-comment">// true</span></code></pre></blockquote><h4 id="Count-计数"><a href="#Count-计数" class="headerlink" title="Count(计数)"></a>Count(计数)</h4><blockquote><p>计数是一个 <strong>最终操作</strong>，返回Stream中元素的个数，<strong>返回值类型是 long</strong>。</p><pre><code class="hljs swift"><span class="hljs-comment">//测试 Count (计数)操作</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(noneStartsWithZ);      <span class="hljs-comment">// true</span></code></pre>
+</blockquote>
+<h4 id="Count-计数"><a href="#Count-计数" class="headerlink" title="Count(计数)"></a>Count(计数)</h4><blockquote>
+<p>计数是一个 <strong>最终操作</strong>，返回Stream中元素的个数，<strong>返回值类型是 long</strong>。</p>
+<pre><code class="hljs swift"><span class="hljs-comment">//测试 Count (计数)操作</span>
   long startsWithB =
           stringList
                   .stream()
                   .<span class="hljs-built_in">filter</span>((s) -&gt; s.<span class="hljs-built_in">startsWith</span>(<span class="hljs-string">"b"</span>))
                   .<span class="hljs-built_in">count</span>();
-  <span class="hljs-type">System</span>.out.<span class="hljs-built_in">println</span>(startsWithB);    <span class="hljs-comment">// 3</span></code></pre></blockquote><h4 id="Reduce-规约"><a href="#Reduce-规约" class="headerlink" title="Reduce(规约)"></a>Reduce(规约)</h4><blockquote><p>这是一个 <strong>最终操作</strong> ，允许通过指定的函数来讲stream中的多个元素规约为一个元素，规约后的结果是通过Optional 接口表示的：</p><pre><code class="hljs armasm">//测试 Reduce (规约)操作
+  <span class="hljs-type">System</span>.out.<span class="hljs-built_in">println</span>(startsWithB);    <span class="hljs-comment">// 3</span></code></pre>
+</blockquote>
+<h4 id="Reduce-规约"><a href="#Reduce-规约" class="headerlink" title="Reduce(规约)"></a>Reduce(规约)</h4><blockquote>
+<p>这是一个 <strong>最终操作</strong> ，允许通过指定的函数来讲stream中的多个元素规约为一个元素，规约后的结果是通过Optional 接口表示的：</p>
+<pre><code class="hljs armasm">//测试 Reduce (规约)操作
 <span class="hljs-symbol">Optional</span>&lt;<span class="hljs-keyword">String&gt; </span>reduced =
         <span class="hljs-keyword">stringList</span>
 <span class="hljs-keyword"> </span>               .<span class="hljs-keyword">stream()</span>
 <span class="hljs-keyword"> </span>               .sorted()
                 .reduce((<span class="hljs-built_in">s1</span>, <span class="hljs-built_in">s2</span>) -&gt; <span class="hljs-built_in">s1</span> + <span class="hljs-string">"#"</span> + <span class="hljs-built_in">s2</span>)<span class="hljs-comment">;</span>
 
-<span class="hljs-symbol">reduced.ifPresent</span>(System.out::println)<span class="hljs-comment">;//aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2</span></code></pre><p><strong>译者注：</strong> 这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。从这个意义上说，字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce。例如 Stream 的 sum 就相当于<code>Integer sum = integers.reduce(0, (a, b) -&gt; a+b);</code>也有没有起始值的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。</p><pre><code class="hljs arduino"><span class="hljs-comment">// 字符串连接，concat = "ABCD"</span>
+<span class="hljs-symbol">reduced.ifPresent</span>(System.out::println)<span class="hljs-comment">;//aaa1#aaa2#bbb1#bbb2#bbb3#ccc#ddd1#ddd2</span></code></pre>
+
+<p><strong>译者注：</strong> 这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。从这个意义上说，字符串拼接、数值的 sum、min、max、average 都是特殊的 reduce。例如 Stream 的 sum 就相当于<code>Integer sum = integers.reduce(0, (a, b) -&gt; a+b);</code>也有没有起始值的情况，这时会把 Stream 的前面两个元素组合起来，返回的是 Optional。</p>
+<pre><code class="hljs arduino"><span class="hljs-comment">// 字符串连接，concat = "ABCD"</span>
 <span class="hljs-keyword">String</span> concat = <span class="hljs-built_in">Stream</span>.of(<span class="hljs-string">"A"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"C"</span>, <span class="hljs-string">"D"</span>).reduce(<span class="hljs-string">""</span>, <span class="hljs-keyword">String</span>::concat); 
 <span class="hljs-comment">// 求最小值，minValue = -3.0</span>
 <span class="hljs-keyword">double</span> minValue = <span class="hljs-built_in">Stream</span>.of(<span class="hljs-number">-1.5</span>, <span class="hljs-number">1.0</span>, <span class="hljs-number">-3.0</span>, <span class="hljs-number">-2.0</span>).reduce(Double.MAX_VALUE, Double::<span class="hljs-built_in">min</span>); 
@@ -232,12 +586,25 @@ sumValue = <span class="hljs-built_in">Stream</span>.of(<span class="hljs-number
 <span class="hljs-comment">// 过滤，字符串连接，concat = "ace"</span>
 concat = <span class="hljs-built_in">Stream</span>.of(<span class="hljs-string">"a"</span>, <span class="hljs-string">"B"</span>, <span class="hljs-string">"c"</span>, <span class="hljs-string">"D"</span>, <span class="hljs-string">"e"</span>, <span class="hljs-string">"F"</span>).
  filter(x -&gt; x.compareTo(<span class="hljs-string">"Z"</span>) &gt; <span class="hljs-number">0</span>).
- reduce(<span class="hljs-string">""</span>, <span class="hljs-keyword">String</span>::concat);</code></pre><p>上面代码例如第一个示例的 reduce()，第一个参数（空白字符）即为起始值，第二个参数（String::concat）为 BinaryOperator。这类有起始值的 reduce() 都返回具体的对象。而对于第四个示例没有起始值的 reduce()，由于可能没有足够的元素，返回的是 Optional，请留意这个区别。更多内容查看： <a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">IBM：Java 8 中的 Streams API 详解</a></p></blockquote><h3 id="Parallel-Streams-并行流"><a href="#Parallel-Streams-并行流" class="headerlink" title="Parallel Streams(并行流)"></a>Parallel Streams(并行流)</h3><blockquote><p>前面提到过Stream有串行和并行两种，串行Stream上的操作是在一个线程中依次完成，而并行Stream则是在多个线程上同时执行。</p><p>下面的例子展示了是如何通过并行Stream来提升性能：</p><p>首先我们创建一个没有重复元素的大表：</p><pre><code class="hljs pgsql"><span class="hljs-type">int</span> max = <span class="hljs-number">1000000</span>;
+ reduce(<span class="hljs-string">""</span>, <span class="hljs-keyword">String</span>::concat);</code></pre>
+
+<p>上面代码例如第一个示例的 reduce()，第一个参数（空白字符）即为起始值，第二个参数（String::concat）为 BinaryOperator。这类有起始值的 reduce() 都返回具体的对象。而对于第四个示例没有起始值的 reduce()，由于可能没有足够的元素，返回的是 Optional，请留意这个区别。更多内容查看： <a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">IBM：Java 8 中的 Streams API 详解</a></p>
+</blockquote>
+<h3 id="Parallel-Streams-并行流"><a href="#Parallel-Streams-并行流" class="headerlink" title="Parallel Streams(并行流)"></a>Parallel Streams(并行流)</h3><blockquote>
+<p>前面提到过Stream有串行和并行两种，串行Stream上的操作是在一个线程中依次完成，而并行Stream则是在多个线程上同时执行。</p>
+<p>下面的例子展示了是如何通过并行Stream来提升性能：</p>
+<p>首先我们创建一个没有重复元素的大表：</p>
+<pre><code class="hljs pgsql"><span class="hljs-type">int</span> max = <span class="hljs-number">1000000</span>;
 List&lt;String&gt; <span class="hljs-keyword">values</span> = <span class="hljs-built_in">new</span> ArrayList&lt;&gt;(max);
 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; max; i++) &#123;
     <span class="hljs-type">UUID</span> <span class="hljs-type">uuid</span> = <span class="hljs-type">UUID</span>.randomUUID();
     <span class="hljs-keyword">values</span>.<span class="hljs-keyword">add</span>(<span class="hljs-type">uuid</span>.toString());
-&#125;</code></pre><p>我们分别用串行和并行两种方式对其进行排序，最后看看所用时间的对比。👇</p></blockquote><h4 id="Sequential-Sort-串行排序"><a href="#Sequential-Sort-串行排序" class="headerlink" title="Sequential Sort(串行排序)"></a>Sequential Sort(串行排序)</h4><blockquote><pre><code class="hljs reasonml"><span class="hljs-comment">//串行排序</span>
+&#125;</code></pre>
+
+<p>我们分别用串行和并行两种方式对其进行排序，最后看看所用时间的对比。👇</p>
+</blockquote>
+<h4 id="Sequential-Sort-串行排序"><a href="#Sequential-Sort-串行排序" class="headerlink" title="Sequential Sort(串行排序)"></a>Sequential Sort(串行排序)</h4><blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-comment">//串行排序</span>
 long t0 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>nano<span class="hljs-constructor">Time()</span>;
 long count = values.stream<span class="hljs-literal">()</span>.sorted<span class="hljs-literal">()</span>.count<span class="hljs-literal">()</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(count);
@@ -247,7 +614,10 @@ long t1 = <span class="hljs-module-access"><span class="hljs-module"><span class
 long millis = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">TimeUnit</span>.</span><span class="hljs-module"><span class="hljs-identifier">NANOSECONDS</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Millis(<span class="hljs-params">t1</span> - <span class="hljs-params">t0</span>)</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">String</span>.</span></span>format(<span class="hljs-string">"sequential sort took: %d ms"</span>, millis));
 <span class="hljs-number">1000000</span>
-sequential sort took: <span class="hljs-number">709</span> ms<span class="hljs-comment">//串行排序所用的时间</span></code></pre></blockquote><h4 id="Parallel-Sort-并行排序"><a href="#Parallel-Sort-并行排序" class="headerlink" title="Parallel Sort(并行排序)"></a>Parallel Sort(并行排序)</h4><blockquote><pre><code class="hljs reasonml"><span class="hljs-comment">//并行排序</span>
+sequential sort took: <span class="hljs-number">709</span> ms<span class="hljs-comment">//串行排序所用的时间</span></code></pre>
+</blockquote>
+<h4 id="Parallel-Sort-并行排序"><a href="#Parallel-Sort-并行排序" class="headerlink" title="Parallel Sort(并行排序)"></a>Parallel Sort(并行排序)</h4><blockquote>
+<pre><code class="hljs reasonml"><span class="hljs-comment">//并行排序</span>
 long t0 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>nano<span class="hljs-constructor">Time()</span>;
 
 long count = values.parallel<span class="hljs-constructor">Stream()</span>.sorted<span class="hljs-literal">()</span>.count<span class="hljs-literal">()</span>;
@@ -258,13 +628,23 @@ long t1 = <span class="hljs-module-access"><span class="hljs-module"><span class
 long millis = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">TimeUnit</span>.</span><span class="hljs-module"><span class="hljs-identifier">NANOSECONDS</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">Millis(<span class="hljs-params">t1</span> - <span class="hljs-params">t0</span>)</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">String</span>.</span></span>format(<span class="hljs-string">"parallel sort took: %d ms"</span>, millis));
 <span class="hljs-number">1000000</span>
-parallel sort took: <span class="hljs-number">475</span> ms<span class="hljs-comment">//串行排序所用的时间</span></code></pre></blockquote><p><strong><code>上面两个代码几乎是一样的，但是并行版的快了 50% 左右，唯一需要做的改动就是将</code>stream()<code>改为</code>parallelStream()<code>。</code></strong></p><h3 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h3><blockquote><p>前面提到过，Map 类型不支持 streams，不过Map提供了一些新的有用的方法来处理一些日常任务。Map接口本身没有可用的 <code>stream（）</code>方法，但是你可以在键，值上创建专门的流或者通过 <code>map.keySet().stream()</code>,<code>map.values().stream()</code>和<code>map.entrySet().stream()</code>。</p><p>此外,Maps 支持各种新的和有用的方法来执行常见任务。</p><pre><code class="hljs reasonml">Map&lt;Integer, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;<span class="hljs-literal">()</span>;
+parallel sort took: <span class="hljs-number">475</span> ms<span class="hljs-comment">//串行排序所用的时间</span></code></pre>
+</blockquote>
+<p><strong><code>上面两个代码几乎是一样的，但是并行版的快了 50% 左右，唯一需要做的改动就是将</code>stream()<code>改为</code>parallelStream()<code>。</code></strong></p>
+<h3 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h3><blockquote>
+<p>前面提到过，Map 类型不支持 streams，不过Map提供了一些新的有用的方法来处理一些日常任务。Map接口本身没有可用的 <code>stream（）</code>方法，但是你可以在键，值上创建专门的流或者通过 <code>map.keySet().stream()</code>,<code>map.values().stream()</code>和<code>map.entrySet().stream()</code>。</p>
+<p>此外,Maps 支持各种新的和有用的方法来执行常见任务。</p>
+<pre><code class="hljs reasonml">Map&lt;Integer, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;<span class="hljs-literal">()</span>;
 
 for (<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
     map.put<span class="hljs-constructor">IfAbsent(<span class="hljs-params">i</span>, <span class="hljs-string">"val"</span> + <span class="hljs-params">i</span>)</span>;
 &#125;
 
-map.for<span class="hljs-constructor">Each((<span class="hljs-params">id</span>, <span class="hljs-params">val</span>)</span> -&gt; <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-keyword">val</span>));<span class="hljs-comment">//val0 val1 val2 val3 val4 val5 val6 val7 val8 val9</span></code></pre><p><code>putIfAbsent</code> 阻止我们在null检查时写入额外的代码;<code>forEach</code>接受一个 consumer 来对 map 中的每个元素操作。</p><p>此示例显示如何使用函数在 map 上计算代码：</p><pre><code class="hljs livescript"><span class="hljs-keyword">map</span>.computeIfPresent<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">3</span>, (num, val) -&gt; val + num)</span>;</span>
+map.for<span class="hljs-constructor">Each((<span class="hljs-params">id</span>, <span class="hljs-params">val</span>)</span> -&gt; <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-keyword">val</span>));<span class="hljs-comment">//val0 val1 val2 val3 val4 val5 val6 val7 val8 val9</span></code></pre>
+
+<p><code>putIfAbsent</code> 阻止我们在null检查时写入额外的代码;<code>forEach</code>接受一个 consumer 来对 map 中的每个元素操作。</p>
+<p>此示例显示如何使用函数在 map 上计算代码：</p>
+<pre><code class="hljs livescript"><span class="hljs-keyword">map</span>.computeIfPresent<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">3</span>, (num, val) -&gt; val + num)</span>;</span>
 <span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span>;             // <span class="hljs-title">val33</span></span>
 <span class="hljs-function"></span>
 <span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">computeIfPresent</span><span class="hljs-params">(<span class="hljs-number">9</span>, (num, val) -&gt; <span class="hljs-literal">null</span>)</span>;</span>
@@ -274,25 +654,57 @@ map.for<span class="hljs-constructor">Each((<span class="hljs-params">id</span>,
 <span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">containsKey</span><span class="hljs-params">(<span class="hljs-number">23</span>)</span>;    // <span class="hljs-title">true</span></span>
 <span class="hljs-function"></span>
 <span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">computeIfAbsent</span><span class="hljs-params">(<span class="hljs-number">3</span>, num -&gt; <span class="hljs-string">"bam"</span>)</span>;</span>
-<span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span>;             // <span class="hljs-title">val33</span></span></code></pre><p>接下来展示如何在Map里删除一个键值全都匹配的项：</p><pre><code class="hljs arduino"><span class="hljs-built_in">map</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-number">3</span>, <span class="hljs-string">"val3"</span>);
+<span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-number">3</span>)</span>;             // <span class="hljs-title">val33</span></span></code></pre>
+
+<p>接下来展示如何在Map里删除一个键值全都匹配的项：</p>
+<pre><code class="hljs arduino"><span class="hljs-built_in">map</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-number">3</span>, <span class="hljs-string">"val3"</span>);
 <span class="hljs-built_in">map</span>.<span class="hljs-built_in">get</span>(<span class="hljs-number">3</span>);             <span class="hljs-comment">// val33</span>
 <span class="hljs-built_in">map</span>.<span class="hljs-built_in">remove</span>(<span class="hljs-number">3</span>, <span class="hljs-string">"val33"</span>);
-<span class="hljs-built_in">map</span>.<span class="hljs-built_in">get</span>(<span class="hljs-number">3</span>);             <span class="hljs-comment">// null</span></code></pre><p>另外一个有用的方法：</p><pre><code class="hljs cpp"><span class="hljs-built_in">map</span>.getOrDefault(<span class="hljs-number">42</span>, <span class="hljs-string">"not found"</span>);  <span class="hljs-comment">// not found</span></code></pre><p>对Map的元素做合并也变得很容易了：</p><pre><code class="hljs livescript"><span class="hljs-keyword">map</span>.merge<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">9</span>, <span class="hljs-string">"val9"</span>, (value, newValue) -&gt; value.concat(newValue))</span>;</span>
+<span class="hljs-built_in">map</span>.<span class="hljs-built_in">get</span>(<span class="hljs-number">3</span>);             <span class="hljs-comment">// null</span></code></pre>
+
+<p>另外一个有用的方法：</p>
+<pre><code class="hljs cpp"><span class="hljs-built_in">map</span>.getOrDefault(<span class="hljs-number">42</span>, <span class="hljs-string">"not found"</span>);  <span class="hljs-comment">// not found</span></code></pre>
+
+<p>对Map的元素做合并也变得很容易了：</p>
+<pre><code class="hljs livescript"><span class="hljs-keyword">map</span>.merge<span class="hljs-function"><span class="hljs-params">(<span class="hljs-number">9</span>, <span class="hljs-string">"val9"</span>, (value, newValue) -&gt; value.concat(newValue))</span>;</span>
 <span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-number">9</span>)</span>;             // <span class="hljs-title">val9</span></span>
 <span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-number">9</span>, <span class="hljs-string">"concat"</span>, (value, newValue) -&gt; value.concat(newValue))</span>;</span>
-<span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-number">9</span>)</span>;             // <span class="hljs-title">val9concat</span></span></code></pre><p>Merge 做的事情是如果键名不存在则插入，否则则对原键对应的值做合并操作并重新插入到map中。</p></blockquote><h3 id="Date-API-日期相关API"><a href="#Date-API-日期相关API" class="headerlink" title="Date API(日期相关API)"></a>Date API(日期相关API)</h3><blockquote><p>Java 8在 <code>java.time</code> 包下包含一个全新的日期和时间API。新的Date API与Joda-Time库相似，但它们不一样。以下示例涵盖了此新 API 的最重要部分。译者对这部分内容参考相关书籍做了大部分修改。</p><p><strong>译者注(总结)：</strong></p><ul><li>Clock 类提供了访问当前日期和时间的方法，Clock 是时区敏感的，可以用来取代 <code>System.currentTimeMillis()</code> 来获取当前的微秒数。某一个特定的时间点也可以使用 <code>Instant</code> 类来表示，<code>Instant</code> 类也可以用来创建旧版本的<code>java.util.Date</code> 对象。</li><li>在新API中时区使用 ZoneId 来表示。时区可以很方便的使用静态方法of来获取到。 抽象类<code>ZoneId</code>（在<code>java.time</code>包中）表示一个区域标识符。 它有一个名为<code>getAvailableZoneIds</code>的静态方法，它返回所有区域标识符。</li><li>jdk1.8中新增了 LocalDate 与 LocalDateTime等类来解决日期处理方法，同时引入了一个新的类DateTimeFormatter 来解决日期格式化问题。可以使用Instant代替 Date，LocalDateTime代替 Calendar，DateTimeFormatter 代替 SimpleDateFormat。</li></ul></blockquote><h4 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h4><blockquote><p>Clock 类提供了访问当前日期和时间的方法，Clock 是时区敏感的，可以用来取代 <code>System.currentTimeMillis()</code> 来获取当前的微秒数。某一个特定的时间点也可以使用 <code>Instant</code> 类来表示，<code>Instant</code> 类也可以用来创建旧版本的<code>java.util.Date</code> 对象。</p><pre><code class="hljs reasonml">Clock clock = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Clock</span>.</span></span>system<span class="hljs-constructor">DefaultZone()</span>;
+<span class="hljs-function"><span class="hljs-title">map</span>.<span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-number">9</span>)</span>;             // <span class="hljs-title">val9concat</span></span></code></pre>
+
+<p>Merge 做的事情是如果键名不存在则插入，否则则对原键对应的值做合并操作并重新插入到map中。</p>
+</blockquote>
+<h3 id="Date-API-日期相关API"><a href="#Date-API-日期相关API" class="headerlink" title="Date API(日期相关API)"></a>Date API(日期相关API)</h3><blockquote>
+<p>Java 8在 <code>java.time</code> 包下包含一个全新的日期和时间API。新的Date API与Joda-Time库相似，但它们不一样。以下示例涵盖了此新 API 的最重要部分。译者对这部分内容参考相关书籍做了大部分修改。</p>
+<p><strong>译者注(总结)：</strong></p>
+<ul>
+<li>Clock 类提供了访问当前日期和时间的方法，Clock 是时区敏感的，可以用来取代 <code>System.currentTimeMillis()</code> 来获取当前的微秒数。某一个特定的时间点也可以使用 <code>Instant</code> 类来表示，<code>Instant</code> 类也可以用来创建旧版本的<code>java.util.Date</code> 对象。</li>
+<li>在新API中时区使用 ZoneId 来表示。时区可以很方便的使用静态方法of来获取到。 抽象类<code>ZoneId</code>（在<code>java.time</code>包中）表示一个区域标识符。 它有一个名为<code>getAvailableZoneIds</code>的静态方法，它返回所有区域标识符。</li>
+<li>jdk1.8中新增了 LocalDate 与 LocalDateTime等类来解决日期处理方法，同时引入了一个新的类DateTimeFormatter 来解决日期格式化问题。可以使用Instant代替 Date，LocalDateTime代替 Calendar，DateTimeFormatter 代替 SimpleDateFormat。</li>
+</ul>
+</blockquote>
+<h4 id="Clock"><a href="#Clock" class="headerlink" title="Clock"></a>Clock</h4><blockquote>
+<p>Clock 类提供了访问当前日期和时间的方法，Clock 是时区敏感的，可以用来取代 <code>System.currentTimeMillis()</code> 来获取当前的微秒数。某一个特定的时间点也可以使用 <code>Instant</code> 类来表示，<code>Instant</code> 类也可以用来创建旧版本的<code>java.util.Date</code> 对象。</p>
+<pre><code class="hljs reasonml">Clock clock = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Clock</span>.</span></span>system<span class="hljs-constructor">DefaultZone()</span>;
 long millis = clock.millis<span class="hljs-literal">()</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(millis);<span class="hljs-comment">//1552379579043</span>
 Instant instant = clock.instant<span class="hljs-literal">()</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(instant);
 Date legacyDate = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Date</span>.</span></span>from(instant); <span class="hljs-comment">//2019-03-12T08:46:42.588Z</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(legacyDate);<span class="hljs-comment">//Tue Mar 12 16:32:59 CST 2019</span></code></pre></blockquote><h3 id="Timezones-时区"><a href="#Timezones-时区" class="headerlink" title="Timezones(时区)"></a>Timezones(时区)</h3><blockquote><p>在新API中时区使用 ZoneId 来表示。时区可以很方便的使用静态方法of来获取到。 抽象类<code>ZoneId</code>（在<code>java.time</code>包中）表示一个区域标识符。 它有一个名为<code>getAvailableZoneIds</code>的静态方法，它返回所有区域标识符。</p><pre><code class="hljs reasonml"><span class="hljs-comment">//输出所有区域标识符</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(legacyDate);<span class="hljs-comment">//Tue Mar 12 16:32:59 CST 2019</span></code></pre>
+</blockquote>
+<h3 id="Timezones-时区"><a href="#Timezones-时区" class="headerlink" title="Timezones(时区)"></a>Timezones(时区)</h3><blockquote>
+<p>在新API中时区使用 ZoneId 来表示。时区可以很方便的使用静态方法of来获取到。 抽象类<code>ZoneId</code>（在<code>java.time</code>包中）表示一个区域标识符。 它有一个名为<code>getAvailableZoneIds</code>的静态方法，它返回所有区域标识符。</p>
+<pre><code class="hljs reasonml"><span class="hljs-comment">//输出所有区域标识符</span>
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">ZoneId</span>.</span></span>get<span class="hljs-constructor">AvailableZoneIds()</span>);
 
 ZoneId zone1 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">ZoneId</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-string">"Europe/Berlin"</span>);
 ZoneId zone2 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">ZoneId</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-string">"Brazil/East"</span>);
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(zone1.get<span class="hljs-constructor">Rules()</span>);<span class="hljs-comment">// ZoneRules[currentStandardOffset=+01:00]</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(zone2.get<span class="hljs-constructor">Rules()</span>);<span class="hljs-comment">// ZoneRules[currentStandardOffset=-03:00]</span></code></pre></blockquote><h4 id="LocalTime-本地时间"><a href="#LocalTime-本地时间" class="headerlink" title="LocalTime(本地时间)"></a>LocalTime(本地时间)</h4><blockquote><p>LocalTime 定义了一个没有时区信息的时间，例如 晚上10点或者 17:30:15。下面的例子使用前面代码创建的时区创建了两个本地时间。之后比较时间并以小时和分钟为单位计算两个时间的时间差：</p><pre><code class="hljs reasonml">LocalTime now1 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalTime</span>.</span></span>now(zone1);
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(zone2.get<span class="hljs-constructor">Rules()</span>);<span class="hljs-comment">// ZoneRules[currentStandardOffset=-03:00]</span></code></pre>
+</blockquote>
+<h4 id="LocalTime-本地时间"><a href="#LocalTime-本地时间" class="headerlink" title="LocalTime(本地时间)"></a>LocalTime(本地时间)</h4><blockquote>
+<p>LocalTime 定义了一个没有时区信息的时间，例如 晚上10点或者 17:30:15。下面的例子使用前面代码创建的时区创建了两个本地时间。之后比较时间并以小时和分钟为单位计算两个时间的时间差：</p>
+<pre><code class="hljs reasonml">LocalTime now1 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalTime</span>.</span></span>now(zone1);
 LocalTime now2 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalTime</span>.</span></span>now(zone2);
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(now1.is<span class="hljs-constructor">Before(<span class="hljs-params">now2</span>)</span>);  <span class="hljs-comment">// false</span>
 
@@ -300,7 +712,10 @@ long hoursBetween = <span class="hljs-module-access"><span class="hljs-module"><
 long minutesBetween = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">ChronoUnit</span>.</span><span class="hljs-module"><span class="hljs-identifier">MINUTES</span>.</span></span>between(now1, now2);
 
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(hoursBetween);       <span class="hljs-comment">// -3</span>
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(minutesBetween);     <span class="hljs-comment">// -239</span></code></pre><p>LocalTime 提供了多种工厂方法来简化对象的创建，包括解析时间字符串.</p><pre><code class="hljs reasonml">LocalTime late = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalTime</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-number">23</span>, <span class="hljs-number">59</span>, <span class="hljs-number">59</span>);
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(minutesBetween);     <span class="hljs-comment">// -239</span></code></pre>
+
+<p>LocalTime 提供了多种工厂方法来简化对象的创建，包括解析时间字符串.</p>
+<pre><code class="hljs reasonml">LocalTime late = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalTime</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-number">23</span>, <span class="hljs-number">59</span>, <span class="hljs-number">59</span>);
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(late);       <span class="hljs-comment">// 23:59:59</span>
 DateTimeFormatter germanFormatter =
     DateTimeFormatter
@@ -308,7 +723,11 @@ DateTimeFormatter germanFormatter =
         .<span class="hljs-keyword">with</span><span class="hljs-constructor">Locale(Locale.GERMAN)</span>;
 
 LocalTime leetTime = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalTime</span>.</span></span>parse(<span class="hljs-string">"13:37"</span>, germanFormatter);
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(leetTime);   <span class="hljs-comment">// 13:37</span></code></pre></blockquote><h4 id="LocalDate-本地日期"><a href="#LocalDate-本地日期" class="headerlink" title="LocalDate(本地日期)"></a>LocalDate(本地日期)</h4><blockquote><p>LocalDate 表示了一个确切的日期，比如 2014-03-11。该对象值是不可变的，用起来和LocalTime基本一致。下面的例子展示了如何给Date对象加减天/月/年。另外要注意的是这些对象是不可变的，操作返回的总是一个新实例。</p><pre><code class="hljs reasonml">LocalDate today = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDate</span>.</span></span>now<span class="hljs-literal">()</span>;<span class="hljs-comment">//获取现在的日期</span>
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(leetTime);   <span class="hljs-comment">// 13:37</span></code></pre>
+</blockquote>
+<h4 id="LocalDate-本地日期"><a href="#LocalDate-本地日期" class="headerlink" title="LocalDate(本地日期)"></a>LocalDate(本地日期)</h4><blockquote>
+<p>LocalDate 表示了一个确切的日期，比如 2014-03-11。该对象值是不可变的，用起来和LocalTime基本一致。下面的例子展示了如何给Date对象加减天/月/年。另外要注意的是这些对象是不可变的，操作返回的总是一个新实例。</p>
+<pre><code class="hljs reasonml">LocalDate today = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDate</span>.</span></span>now<span class="hljs-literal">()</span>;<span class="hljs-comment">//获取现在的日期</span>
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"今天的日期: "</span>+today);<span class="hljs-comment">//2019-03-12</span>
 LocalDate tomorrow = today.plus(<span class="hljs-number">1</span>, ChronoUnit.DAYS);
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"明天的日期: "</span>+tomorrow);<span class="hljs-comment">//2019-03-13</span>
@@ -316,7 +735,10 @@ LocalDate yesterday = tomorrow.minus<span class="hljs-constructor">Days(2)</span
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"昨天的日期: "</span>+yesterday);<span class="hljs-comment">//2019-03-11</span>
 LocalDate independenceDay = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDate</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-number">2019</span>, Month.MARCH, <span class="hljs-number">12</span>);
 DayOfWeek dayOfWeek = independenceDay.get<span class="hljs-constructor">DayOfWeek()</span>;
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"今天是周几:"</span>+dayOfWeek);<span class="hljs-comment">//TUESDAY</span></code></pre><p>从字符串解析一个 LocalDate 类型和解析 LocalTime 一样简单,下面是使用 <code>DateTimeFormatter</code> 解析字符串的例子：</p><pre><code class="hljs reasonml">String str1 = <span class="hljs-string">"2014==04==12 01时06分09秒"</span>;
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-string">"今天是周几:"</span>+dayOfWeek);<span class="hljs-comment">//TUESDAY</span></code></pre>
+
+<p>从字符串解析一个 LocalDate 类型和解析 LocalTime 一样简单,下面是使用 <code>DateTimeFormatter</code> 解析字符串的例子：</p>
+<pre><code class="hljs reasonml">String str1 = <span class="hljs-string">"2014==04==12 01时06分09秒"</span>;
     <span class="hljs-comment">// 根据需要解析的日期、时间字符串定义解析所用的格式器</span>
     DateTimeFormatter fomatter1 = DateTimeFormatter
             .<span class="hljs-keyword">of</span><span class="hljs-constructor">Pattern(<span class="hljs-string">"yyyy==MM==dd HH时mm分ss秒"</span>)</span>;
@@ -328,11 +750,18 @@ DayOfWeek dayOfWeek = independenceDay.get<span class="hljs-constructor">DayOfWee
     DateTimeFormatter fomatter2 = DateTimeFormatter
             .<span class="hljs-keyword">of</span><span class="hljs-constructor">Pattern(<span class="hljs-string">"yyy$$$MMM$$$dd HH小时"</span>)</span>;
     LocalDateTime dt2 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDateTime</span>.</span></span>parse(str2, fomatter2);
-    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(dt2); <span class="hljs-comment">// 输出 2014-04-13T20:00</span></code></pre><p>再来看一个使用 <code>DateTimeFormatter</code> 格式化日期的示例</p><pre><code class="hljs reasonml">LocalDateTime rightNow=<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDateTime</span>.</span></span>now<span class="hljs-literal">()</span>;
+    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(dt2); <span class="hljs-comment">// 输出 2014-04-13T20:00</span></code></pre>
+
+<p>再来看一个使用 <code>DateTimeFormatter</code> 格式化日期的示例</p>
+<pre><code class="hljs reasonml">LocalDateTime rightNow=<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDateTime</span>.</span></span>now<span class="hljs-literal">()</span>;
 String date=<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DateTimeFormatter</span>.</span><span class="hljs-module"><span class="hljs-identifier">ISO_LOCAL_DATE_TIME</span>.</span></span>format(rightNow);
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(date);<span class="hljs-comment">//2019-03-12T16:26:48.29</span>
 DateTimeFormatter formatter=<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">DateTimeFormatter</span>.</span></span><span class="hljs-keyword">of</span><span class="hljs-constructor">Pattern(<span class="hljs-string">"YYYY-MM-dd HH:mm:ss"</span>)</span>;
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(formatter.format(rightNow));<span class="hljs-comment">//2019-03-12 16:26:48</span></code></pre></blockquote><h4 id="LocalDateTime-本地日期时间"><a href="#LocalDateTime-本地日期时间" class="headerlink" title="LocalDateTime(本地日期时间)"></a>LocalDateTime(本地日期时间)</h4><blockquote><p>LocalDateTime 同时表示了时间和日期，相当于前两节内容合并到一个对象上了。LocalDateTime 和 LocalTime还有 LocalDate 一样，都是不可变的。LocalDateTime 提供了一些能访问具体字段的方法。</p><pre><code class="hljs reasonml">LocalDateTime sylvester = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDateTime</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-number">2014</span>, Month.DECEMBER, <span class="hljs-number">31</span>, <span class="hljs-number">23</span>, <span class="hljs-number">59</span>, <span class="hljs-number">59</span>);
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(formatter.format(rightNow));<span class="hljs-comment">//2019-03-12 16:26:48</span></code></pre>
+</blockquote>
+<h4 id="LocalDateTime-本地日期时间"><a href="#LocalDateTime-本地日期时间" class="headerlink" title="LocalDateTime(本地日期时间)"></a>LocalDateTime(本地日期时间)</h4><blockquote>
+<p>LocalDateTime 同时表示了时间和日期，相当于前两节内容合并到一个对象上了。LocalDateTime 和 LocalTime还有 LocalDate 一样，都是不可变的。LocalDateTime 提供了一些能访问具体字段的方法。</p>
+<pre><code class="hljs reasonml">LocalDateTime sylvester = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDateTime</span>.</span></span><span class="hljs-keyword">of</span>(<span class="hljs-number">2014</span>, Month.DECEMBER, <span class="hljs-number">31</span>, <span class="hljs-number">23</span>, <span class="hljs-number">59</span>, <span class="hljs-number">59</span>);
 
 DayOfWeek dayOfWeek = sylvester.get<span class="hljs-constructor">DayOfWeek()</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(dayOfWeek);      <span class="hljs-comment">// WEDNESDAY</span>
@@ -341,33 +770,298 @@ Month month = sylvester.get<span class="hljs-constructor">Month()</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(month);          <span class="hljs-comment">// DECEMBER</span>
 
 long minuteOfDay = sylvester.get<span class="hljs-constructor">Long(ChronoField.MINUTE_OF_DAY)</span>;
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(minuteOfDay);    <span class="hljs-comment">// 1439</span></code></pre><p>只要附加上时区信息，就可以将其转换为一个时间点Instant对象，Instant时间点对象可以很容易的转换为老式的<code>java.util.Date</code>。</p><pre><code class="hljs reasonml">Instant instant = sylvester
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(minuteOfDay);    <span class="hljs-comment">// 1439</span></code></pre>
+
+<p>只要附加上时区信息，就可以将其转换为一个时间点Instant对象，Instant时间点对象可以很容易的转换为老式的<code>java.util.Date</code>。</p>
+<pre><code class="hljs reasonml">Instant instant = sylvester
         .at<span class="hljs-constructor">Zone(ZoneId.<span class="hljs-params">systemDefault</span>()</span>)
         .<span class="hljs-keyword">to</span><span class="hljs-constructor">Instant()</span>;
 
 Date legacyDate = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Date</span>.</span></span>from(instant);
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(legacyDate);     <span class="hljs-comment">// Wed Dec 31 23:59:59 CET 2014</span></code></pre><p>格式化LocalDateTime和格式化时间和日期一样的，除了使用预定义好的格式外，我们也可以自己定义格式：</p><pre><code class="hljs reasonml">DateTimeFormatter formatter =
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(legacyDate);     <span class="hljs-comment">// Wed Dec 31 23:59:59 CET 2014</span></code></pre>
+
+<p>格式化LocalDateTime和格式化时间和日期一样的，除了使用预定义好的格式外，我们也可以自己定义格式：</p>
+<pre><code class="hljs reasonml">DateTimeFormatter formatter =
     DateTimeFormatter
         .<span class="hljs-keyword">of</span><span class="hljs-constructor">Pattern(<span class="hljs-string">"MMM dd, yyyy - HH:mm"</span>)</span>;
 LocalDateTime parsed = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LocalDateTime</span>.</span></span>parse(<span class="hljs-string">"Nov 03, 2014 - 07:13"</span>, formatter);
 String <span class="hljs-built_in">string</span> = formatter.format(parsed);
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-built_in">string</span>);     <span class="hljs-comment">// Nov 03, 2014 - 07:13</span></code></pre><p>和java.text.NumberFormat不一样的是新版的DateTimeFormatter是不可变的，所以它是线程安全的。 关于时间日期格式的详细信息在<a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html" target="_blank" rel="noopener">这里</a>。</p></blockquote><h3 id="Annotations-注解"><a href="#Annotations-注解" class="headerlink" title="Annotations(注解)"></a>Annotations(注解)</h3><blockquote><p>在Java 8中支持多重注解了，先看个例子来理解一下是什么意思。 首先定义一个包装类Hints注解用来放置一组具体的Hint注解：</p><pre><code class="hljs angelscript">@<span class="hljs-keyword">interface</span> <span class="hljs-symbol">Hints</span> &#123;
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(<span class="hljs-built_in">string</span>);     <span class="hljs-comment">// Nov 03, 2014 - 07:13</span></code></pre>
+
+<p>和java.text.NumberFormat不一样的是新版的DateTimeFormatter是不可变的，所以它是线程安全的。 关于时间日期格式的详细信息在<a href="https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html" target="_blank" rel="noopener">这里</a>。</p>
+</blockquote>
+<h3 id="Annotations-注解"><a href="#Annotations-注解" class="headerlink" title="Annotations(注解)"></a>Annotations(注解)</h3><blockquote>
+<p>在Java 8中支持多重注解了，先看个例子来理解一下是什么意思。 首先定义一个包装类Hints注解用来放置一组具体的Hint注解：</p>
+<pre><code class="hljs angelscript">@<span class="hljs-keyword">interface</span> <span class="hljs-symbol">Hints</span> &#123;
     Hint[] value();
 &#125;
 @Repeatable(Hints.<span class="hljs-keyword">class</span>)
 @<span class="hljs-symbol">interface</span> <span class="hljs-symbol">Hint</span> &#123;
     String value();
-&#125;</code></pre><p>Java 8允许我们把同一个类型的注解使用多次，只需要给该注解标注一下<code>@Repeatable</code>即可。</p><p>例 1: 使用包装类当容器来存多个注解（老方法）</p><pre><code class="hljs less"><span class="hljs-variable">@Hints</span>(&#123;<span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint1"</span>), <span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint2"</span>)&#125;)
-class Person &#123;&#125;</code></pre><p>例 2：使用多重注解（新方法）</p><pre><code class="hljs less"><span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint1"</span>)
+&#125;</code></pre>
+
+<p>Java 8允许我们把同一个类型的注解使用多次，只需要给该注解标注一下<code>@Repeatable</code>即可。</p>
+<p>例 1: 使用包装类当容器来存多个注解（老方法）</p>
+<pre><code class="hljs less"><span class="hljs-variable">@Hints</span>(&#123;<span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint1"</span>), <span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint2"</span>)&#125;)
+class Person &#123;&#125;</code></pre>
+
+<p>例 2：使用多重注解（新方法）</p>
+<pre><code class="hljs less"><span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint1"</span>)
 <span class="hljs-variable">@Hint</span>(<span class="hljs-string">"hint2"</span>)
-class Person &#123;&#125;</code></pre><p>第二个例子里java编译器会隐性的帮你定义好@Hints注解，了解这一点有助于你用反射来获取这些信息：</p><pre><code class="hljs reasonml">Hint hint = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Person</span>.</span></span><span class="hljs-keyword">class</span>.get<span class="hljs-constructor">Annotation(Hint.<span class="hljs-params">class</span>)</span>;
+class Person &#123;&#125;</code></pre>
+
+<p>第二个例子里java编译器会隐性的帮你定义好@Hints注解，了解这一点有助于你用反射来获取这些信息：</p>
+<pre><code class="hljs reasonml">Hint hint = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Person</span>.</span></span><span class="hljs-keyword">class</span>.get<span class="hljs-constructor">Annotation(Hint.<span class="hljs-params">class</span>)</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(hint);                   <span class="hljs-comment">// null</span>
 Hints hints1 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Person</span>.</span></span><span class="hljs-keyword">class</span>.get<span class="hljs-constructor">Annotation(Hints.<span class="hljs-params">class</span>)</span>;
 <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(hints1.value<span class="hljs-literal">()</span>.length);  <span class="hljs-comment">// 2</span>
 
 Hint<span class="hljs-literal">[]</span> hints2 = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Person</span>.</span></span><span class="hljs-keyword">class</span>.get<span class="hljs-constructor">AnnotationsByType(Hint.<span class="hljs-params">class</span>)</span>;
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(hints2.length);          <span class="hljs-comment">// 2</span></code></pre><p>即便我们没有在 <code>Person</code>类上定义 <code>@Hints</code>注解，我们还是可以通过 <code>getAnnotation(Hints.class)</code>来获取 <code>@Hints</code>注解，更加方便的方法是使用 <code>getAnnotationsByType</code> 可以直接获取到所有的<code>@Hint</code>注解。 另外Java 8的注解还增加到两种新的target上了：</p><pre><code class="hljs less"><span class="hljs-variable">@Target</span>(&#123;ElementType.TYPE_PARAMETER, ElementType.TYPE_USE&#125;)
-<span class="hljs-variable">@interface</span> MyAnnotation &#123;&#125;</code></pre></blockquote></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/Java8/">Java8</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">Java8新特性</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"><a href="/2020/04/28/%E7%BD%91%E7%BB%9C/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">网络</span> <span class="visible-mobile">上一篇</span></a></div><div class="post-next col-6"><a href="/2020/04/28/%E7%AE%97%E6%B3%95%E7%AF%87/"><span class="hidden-mobile">算法篇</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",app_key:"oc2dzMKP9uJXsnOOhIxAr94f",placeholder:"说点什么吧~",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!0,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:6,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Java8新特性&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">System</span>.</span></span>out.println(hints2.length);          <span class="hljs-comment">// 2</span></code></pre>
+
+<p>即便我们没有在 <code>Person</code>类上定义 <code>@Hints</code>注解，我们还是可以通过 <code>getAnnotation(Hints.class)</code>来获取 <code>@Hints</code>注解，更加方便的方法是使用 <code>getAnnotationsByType</code> 可以直接获取到所有的<code>@Hint</code>注解。 另外Java 8的注解还增加到两种新的target上了：</p>
+<pre><code class="hljs less"><span class="hljs-variable">@Target</span>(&#123;ElementType.TYPE_PARAMETER, ElementType.TYPE_USE&#125;)
+<span class="hljs-variable">@interface</span> MyAnnotation &#123;&#125;</code></pre></blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java8/">Java8</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java8%E6%96%B0%E7%89%B9%E6%80%A7/">Java8新特性</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/28/%E7%BD%91%E7%BB%9C/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">网络</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/28/%E7%AE%97%E6%B3%95%E7%AF%87/">
+                        <span class="hidden-mobile">算法篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Java8新特性&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
       placement: "right",
       visible: "hover",
       
@@ -377,4 +1071,62 @@ Hint<span class="hljs-literal">[]</span> hints2 = <span class="hljs-module-acces
     for (item of el) {
       res.push(".markdown-body > " + item)
     }
-    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"default"})</script></body></html>
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

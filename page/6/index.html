@@ -1,3 +1,856 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:100vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/index.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span></div><div class="scroll-down-bar"><i class="iconfont icon-arrowdown"></i></div></div></div></div></header><main><div class="container nopadding-md"><div class="py-5" id="board" style="margin-top:0"><div class="container"><div class="row"><div class="col-12 col-md-10 m-auto"><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/" target="_self"><img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="Java语法糖之泛型"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">Java语法糖之泛型</a> <a href="/2020/04/28/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/" class="index-excerpt"><div>聊一聊-JAVA 泛型中的通配符 T，E，K，V，？原文来源：掘金原文链接：https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension前言Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许开发者在编译时检测到非法的类型。泛型的本质</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/Java-%E8%BF%9B%E9%98%B6%E7%AF%87/">Java 进阶篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">Java语法糖之泛型</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Nginx%E7%AF%87/" target="_self"><img src="/img/articles/15.jpg" srcset="/img/loading.gif" alt="Nginx篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Nginx%E7%AF%87/">Nginx篇</a> <a href="/2020/04/28/Nginx%E7%AF%87/" class="index-excerpt"><div>Nginx篇Windows Nginx配置使用Nginx 负载均衡模式1)、轮询 ——1：1 轮流处理请求（默认） 每个请求按时间顺序逐一分配到不同的应用服务器，如果应用服务器down掉，自动剔除，剩下的继续轮询。 2)、权重 ——you can you up 通过配置权重，指定轮询几率，权重和访问比率成正比，用于应用服务器性能不均的情况。 3)、ip_哈希算法</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E4%B8%BB%E6%B5%81%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%E7%AF%87/">主流技术组件篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Nginx%E7%AF%87/">Nginx篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/" target="_self"><img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="IO字符串类库"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/">IO字符串类库</a> <a href="/2020/04/28/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/" class="index-excerpt"><div>推荐 16 个超级实用的 Java 工具类一. org.apache.commons.io.IOUtilscloseQuietly：关闭一个IO流、socket、或者selector且不抛出异常，通常放在finally块toString：转换IO流、 Uri、 byte[]为Stringcopy：IO流数据复制，从输入流写到输出流中，最大支持2GBtoByteArray：从输入流、URI获取byt</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E7%B1%BB%E5%BA%93%E5%B7%A5%E5%85%B7%E7%AF%87/">类库工具篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/">IO字符串类库</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" target="_self"><img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="SpringBoot配置多数据源"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a> <a href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" class="index-excerpt"><div>SpringBoot配置多数据源核心技术点​ 在Spring 2.x 中引入了AbstractRoutingDataSource, 该类充当了DataSource的路由中介, 能有在运行时, 根据某种key值来动态切换到真正的DataSource上。​ Spring动态配置多数据源，即在大型应用中对数据进行切分，并且采用多个数据库实例进行管理，这样可以有效提高系统的水平伸缩性。而这样的方案就会不同</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/SpringMVC%E7%AF%87/" target="_self"><img src="/img/articles/10.jpg" srcset="/img/loading.gif" alt="SpringMVC篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/SpringMVC%E7%AF%87/">SpringMVC篇</a> <a href="/2020/04/28/SpringMVC%E7%AF%87/" class="index-excerpt"><div>SpringMVC篇面试问题11. 简单谈谈你对 MVC 的理解。 12. 什么是 Spring MVC ？简单介绍下你对 Spring MVC 的理解? 13. Spring MVC 的优点有哪些？ 14. Spring MVC 的核心组件有哪些？ 15. Spring MVC 的实现流程是什么？ 16. Spring MVC 怎么样设定重定向和转发的？ 17. 如何解决 POST</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/SpringMVC%E7%AF%87/">SpringMVC篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/" target="_self"><img src="/img/articles/7.jpg" srcset="/img/loading.gif" alt="JSMap-跨页"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/">JSMap-跨页</a> <a href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/" class="index-excerpt"><div>JSMap-跨页认识提示:JavaScript 真正的万物皆为对象JavaScript以键值对的方式构造对象JS方法封装技巧 —&gt; 方法嵌套, this调用JS Map Code/** * MAP对象，实现MAP功能 * * 例子： * var map = new JsMap(); * * map.put("key", "value"); * var val = map.get</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/JSMap-%E8%B7%A8%E9%A1%B5/">JSMap-跨页</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/" target="_self"><img src="/img/articles/6.jpg" srcset="/img/loading.gif" alt="Testin - JSP项目有感"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">Testin - JSP项目有感</a> <a href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/" class="index-excerpt"><div>Testin - JSP项目有感最近被分配到Web自动化测试的项目开发任务，由于时间紧张，因此为求迅速，节约前端成本，把部分的前端开发任务挪给后端，通过JSP这种老掉牙的技术去做，但是在真正的制作当中，有很多以往没有想到，或者没有规范话的好经验值得我去深思和回顾，大致内容如下：公共分页展示JS真正的官网或者Web项目中，分页随处可见，且复杂的工程分页要求也比较麻烦，比如默认如何显示，比如还需要显示</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Testin-JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">Testin - JSP项目有感</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/JRebel%E7%AF%87/" target="_self"><img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="JRebel篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/JRebel%E7%AF%87/">JRebel篇</a> <a href="/2020/04/28/JRebel%E7%AF%87/" class="index-excerpt"><div>JRebel篇JRebel是一个非常厉害的热部署工具，可以大大的减少项目的重启次数，极大的节约开发者们的时间IDEA插件：搜索JRebel for IntelliJ破解方法步骤1:生成一个GUID：在线生成GUID地址步骤2: 根据反向代理服务器地址拼接激活地址服务器地址： https://jrebel.qekang.com/{GUID}PS：如果失效刷新GUID替换就可以！步骤3: 打开jreb</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E7%B1%BB%E5%BA%93%E5%B7%A5%E5%85%B7%E7%AF%87/">类库工具篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/JRebel%E7%AF%87/">JRebel篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" target="_self"><img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="命令模式"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a> <a href="/2020/04/28/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" class="index-excerpt"><div>命令模式篇意图将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。命令模式的诞生【产品】：开发小哥，来活啦，咱们需要设计一款遥控器，核心功能就是几个按键，但是可能要控制很多不同品牌的设备，你们构思构思吧~【开发】：按键？不存在的，对我来说就是请求罢了，Boss，帮我想一下怎么适配不同的品牌的设备啊？【BOSS】：适配设备这个事，仅仅靠我</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Elasticsearch%E7%AF%87/" target="_self"><img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="Elasticsearch篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Elasticsearch%E7%AF%87/">Elasticsearch篇</a> <a href="/2020/04/28/Elasticsearch%E7%AF%87/" class="index-excerpt"><div>Elasticsearch篇Bulk异常 相关分析博文Elasticsearch案例分析（一）：Bulk异常导致Elasticsearch内存泄漏https://blog.csdn.net/xiaoyu_BD/article/details/82715306Bulk异常引发的Elasticsearch内存泄漏https://www.jianshu.com/p/d4f7a6d58008ES 5.x</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">全文搜索引擎</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Elasticsearch%E7%AF%87/">Elasticsearch篇</a></div></div></div></div><nav aria-label="navigation"><span class="pagination" id="pagination"><a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a></span></nav><script>for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/" target="_self">
+          <img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="Java语法糖之泛型">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">Java语法糖之泛型</a>
+
+      <a href="/2020/04/28/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/" class="index-excerpt">
+        
+        
+          
+        
+        <div>聊一聊-JAVA 泛型中的通配符 T，E，K，V，？
+原文来源：掘金
+原文链接：https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension
+
+前言Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许开发者在编译时检测到非法的类型。
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java-%E8%BF%9B%E9%98%B6%E7%AF%87/">Java 进阶篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">Java语法糖之泛型</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Nginx%E7%AF%87/" target="_self">
+          <img src="/img/articles/15.jpg" srcset="/img/loading.gif" alt="Nginx篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Nginx%E7%AF%87/">Nginx篇</a>
+
+      <a href="/2020/04/28/Nginx%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Nginx篇Windows Nginx配置使用Nginx 负载均衡模式1)、轮询 ——1：1 轮流处理请求（默认）
+      每个请求按时间顺序逐一分配到不同的应用服务器，如果应用服务器down掉，自动剔除，剩下的继续轮询。 
+2)、权重 ——you can you up
+      通过配置权重，指定轮询几率，权重和访问比率成正比，用于应用服务器性能不均的情况。 
+3)、ip_哈希算法
+
+  </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E4%B8%BB%E6%B5%81%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%E7%AF%87/">主流技术组件篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Nginx%E7%AF%87/">Nginx篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/JRebel%E7%AF%87/" target="_self">
+          <img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="JRebel篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/JRebel%E7%AF%87/">JRebel篇</a>
+
+      <a href="/2020/04/28/JRebel%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JRebel篇JRebel是一个非常厉害的热部署工具，可以大大的减少项目的重启次数，极大的节约开发者们的时间
+IDEA插件：搜索JRebel for IntelliJ
+破解方法
+步骤1:生成一个GUID：在线生成GUID地址
+步骤2: 根据反向代理服务器地址拼接激活地址
+
+服务器地址： https://jrebel.qekang.com/{GUID}
+PS：如果失效刷新GUID替换就可以！
+
+步骤</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%B1%BB%E5%BA%93%E5%B7%A5%E5%85%B7%E7%AF%87/">类库工具篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JRebel%E7%AF%87/">JRebel篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="SpringBoot配置多数据源">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a>
+
+      <a href="/2020/04/28/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SpringBoot配置多数据源核心技术点​        在Spring 2.x 中引入了AbstractRoutingDataSource, 该类充当了DataSource的路由中介, 能有在运行时, 根据某种key值来动态切换到真正的DataSource上。
+​        Spring动态配置多数据源，即在大型应用中对数据进行切分，并且采用多个数据库实例进行管理，这样可以有效提高系统的水</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/SpringMVC%E7%AF%87/" target="_self">
+          <img src="/img/articles/10.jpg" srcset="/img/loading.gif" alt="SpringMVC篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/SpringMVC%E7%AF%87/">SpringMVC篇</a>
+
+      <a href="/2020/04/28/SpringMVC%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SpringMVC篇面试问题11. 简单谈谈你对 MVC 的理解。
+
+12. 什么是 Spring MVC ？简单介绍下你对 Spring MVC 的理解?
+
+13. Spring MVC 的优点有哪些？
+
+14. Spring MVC 的核心组件有哪些？
+
+15. Spring MVC 的实现流程是什么？
+
+16. Spring MVC 怎么样设定重定向和转发的？
+
+17. 如何解决 POST </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringMVC%E7%AF%87/">SpringMVC篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/" target="_self">
+          <img src="/img/articles/6.jpg" srcset="/img/loading.gif" alt="Testin - JSP项目有感">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">Testin - JSP项目有感</a>
+
+      <a href="/2020/04/28/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Testin - JSP项目有感最近被分配到Web自动化测试的项目开发任务，由于时间紧张，因此为求迅速，节约前端成本，把部分的前端开发任务挪给后端，通过JSP这种老掉牙的技术去做，但是在真正的制作当中，有很多以往没有想到，或者没有规范话的好经验值得我去深思和回顾，大致内容如下：
+公共分页展示JS真正的官网或者Web项目中，分页随处可见，且复杂的工程分页要求也比较麻烦，比如默认如何显示，比如还需要显</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F/">程序人生</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Testin-JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">Testin - JSP项目有感</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/" target="_self">
+          <img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="IO字符串类库">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/">IO字符串类库</a>
+
+      <a href="/2020/04/28/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/" class="index-excerpt">
+        
+        
+          
+        
+        <div>推荐 16 个超级实用的 Java 工具类一. org.apache.commons.io.IOUtils
+closeQuietly：关闭一个IO流、socket、或者selector且不抛出异常，通常放在finally块
+toString：转换IO流、 Uri、 byte[]为String
+copy：IO流数据复制，从输入流写到输出流中，最大支持2GB
+toByteArray：从输入流、URI获</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%B1%BB%E5%BA%93%E5%B7%A5%E5%85%B7%E7%AF%87/">类库工具篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/IO%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%BA%93/">IO字符串类库</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/" target="_self">
+          <img src="/img/articles/7.jpg" srcset="/img/loading.gif" alt="JSMap-跨页">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/">JSMap-跨页</a>
+
+      <a href="/2020/04/28/JSMap-%E8%B7%A8%E9%A1%B5/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JSMap-跨页
+认识提示:
+
+JavaScript 真正的万物皆为对象
+JavaScript以键值对的方式构造对象
+JS方法封装技巧 —&gt; 方法嵌套, this调用
+
+
+JS Map Code/**
+ * MAP对象，实现MAP功能
+ *
+ * 例子：
+ * var map = new JsMap();
+ *
+ * map.put("key", "value");
+ * var val =</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JSMap-%E8%B7%A8%E9%A1%B5/">JSMap-跨页</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="命令模式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a>
+
+      <a href="/2020/04/28/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>命令模式篇意图将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可撤销的操作。
+命令模式的诞生【产品】：开发小哥，来活啦，咱们需要设计一款遥控器，核心功能就是几个按键，但是可能要控制很多不同品牌的设备，你们构思构思吧~
+【开发】：按键？不存在的，对我来说就是请求罢了，Boss，帮我想一下怎么适配不同的品牌的设备啊？
+【BOSS】：适配设备这个事，仅</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_self">
+          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="JavaScript-回调函数">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript-回调函数</a>
+
+      <a href="/2020/04/28/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JavaScript-回调函数函数也是对象// 可以这样创建函数
+var fn = new Function("arg1", "arg2", "return arg1 * arg2;");
+
+// 6
+fn(2, 3);
+
+
+
+简单解释一下回调函数的使用场景： 你自己打包方法的时候发现用return来返回数据不行，那就用回调函数来接收返回的数据，
+或者觉得这个方法就可以决定下一步该怎么做，就用回调</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript-回调函数</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
       ele.href += '#board';
-    }</script></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","一切都是有可能的，甚至那些不可能的也是&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script></body></html>
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

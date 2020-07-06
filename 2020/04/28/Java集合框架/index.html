@@ -1,4 +1,260 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>Java集合框架 - Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css"><link rel="stylesheet" href="/lib/hint/hint.min.css"><link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:70vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/article.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span><div class="mt-3 post-meta"><i class="iconfont icon-date-fill" aria-hidden="true"></i> <time datetime="2020-04-28 00:25">2020年4月28日 凌晨</time></div><div class="mt-1"><span class="post-meta mr-2"><i class="iconfont icon-chart"></i> 10.1k 字 </span><span class="post-meta mr-2"><i class="iconfont icon-clock-fill"></i> 118 分钟</span></div></div></div></div></div></header><main><div class="container-fluid"><div class="row"><div class="d-none d-lg-block col-lg-2"></div><div class="col-lg-8 nopadding-md"><div class="container nopadding-md" id="board-ctn"><div class="py-5" id="board"><div class="post-content mx-auto" id="post"><article class="markdown-body"><h1 id="Java集合框架"><a href="#Java集合框架" class="headerlink" title="Java集合框架"></a>Java集合框架</h1><h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><h3 id="1-集合框架图"><a href="#1-集合框架图" class="headerlink" title="1.集合框架图"></a>1.集合框架图</h3><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6.png" srcset="/img/loading.gif" alt="集合框架"></p><h3 id="2-Collection"><a href="#2-Collection" class="headerlink" title="2. Collection"></a>2. Collection</h3><blockquote><p>集合的顶层接口，不能被实例化<br>a) 根接口Collection<br> i. 常用子接口<br>  1. List<br>   实现类：ArrayList、Vector、LinkedList<br>  2. Set<br>   实现类：HashSet、TreeSet<br>b) 添加功能<br> i. boolean add(object obj)添加一个元素<br> ii. boolean addAll(Collection c)将集合c的全部元素添加到原集合元素后返回true<br> iii. 添加功能永远返回true<br>c) 删除功能<br> i. void clear();移除所有元素<br> ii. boolean remove(Object o)移除一个元素<br> iii. boolean removeAll（Collection c）移除一个集合的元素，只要有一个被移除就返回true，改变原集合，删除原集合中和c中相同的元素<br> iv. 删除功能只有删除成功后才返回true<br>d) 判断功能<br> i. boolean contain(object o)判断集合中是否包含指定的元素。<br> ii. boolean containsAll(Collection c)判断原集合中是否包含指定集合c的所有元素，有则true，<br> iii. boolean isEmpty()判断集合是否为空<br>e) 获取功能<br> i. Iterator iterator()迭代器，集合的专用方式，实现遍历的功能<br> ii. Object next()获取当前元素，并移动到下一个位置<br> iii. boolean hasNext()判断此位置是否有元素<br> iv. 迭代器遍历实例在下面<br>f) 长度功能<br> i. int size()元素的个数<br> ii. 数组和字符串中都是length()方法获取元素个数，集合中是size()方法<br>  因为object包括集合、字符串、数组，所以其不能直接用length方法。<br>g) 交集功能boolean retainAll(Collection c)<br> 两个集合交集的元素给原集合，并判断原集合是否改变，改变则true，不变则false<br>h) 把集合转换为数组<br> i. Object [] toArray()</p></blockquote><h3 id="3-Map"><a href="#3-Map" class="headerlink" title="3. Map"></a>3. Map</h3><blockquote><ul><li>Java Map接口是Java Collections Framework的成员。但是它不是Collection</li><li>将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。（不同的键对应的值可以相等）</li><li><code>Map</code> 接口提供三种<em>collection 视图</em>，允许以键集、值集或键-值映射关系集的形式查看某个映射的内容。</li><li>Map中某些映射实现可明确保证其自然顺序和定制顺序，如 <code>TreeMap</code> 类；另一些映射实现则不保证任何顺序，如 <code>HashMap</code> 类；还有些类保证添加顺序。</li><li>某些映射实现对可能包含的键和值有所限制。例如，某些实现禁止 null 键和值，另一些则对其键的类型有限制。</li></ul></blockquote><h3 id="4-Collections-工具类常见方法"><a href="#4-Collections-工具类常见方法" class="headerlink" title="4. Collections 工具类常见方法"></a>4. Collections 工具类常见方法</h3><blockquote><p><a href="https://blog.csdn.net/mxsf_lrj/article/details/81514176" target="_blank" rel="noopener">https://blog.csdn.net/mxsf_lrj/article/details/81514176</a></p></blockquote><h3 id="5-Arrays-工具类常见方法"><a href="#5-Arrays-工具类常见方法" class="headerlink" title="5. Arrays 工具类常见方法"></a>5. Arrays 工具类常见方法</h3><blockquote><p><a href="https://www.cnblogs.com/hysum/p/7094232.html" target="_blank" rel="noopener">https://www.cnblogs.com/hysum/p/7094232.html</a></p></blockquote><h2 id="二、面试题"><a href="#二、面试题" class="headerlink" title="二、面试题"></a>二、面试题</h2><h3 id="Java容器都有哪些？"><a href="#Java容器都有哪些？" class="headerlink" title="Java容器都有哪些？"></a>Java容器都有哪些？</h3><blockquote><p>Collections(元素)</p><p>​ List(有序元素)</p><p>​ ArrayList(利用下标访问，访问效率高)</p><p>​ LinkedList(链表式访问，插入删除效率高)</p><p>​ Vector(可自动增长的对象数组，大部分都是同步方法，性能损耗，基本不太使用)</p><p>​ Stack(模拟栈，推荐使用Deque)</p><p>​ Set(无需元素)</p><p>​ HashSet(访问效率较高，不允许重复元素)</p><p>​ SortedSet(有序，不允许重复元素)</p><p>​ TreeSet(红黑树实现，性能平均)</p><p>​ Queue(队列，实现一些复杂操作，接口之间的关联很复杂)</p><p>​ Deque(双向队列接口)</p><p>​ BlockingDeque(接口)</p><p>​ LinkedBlockingDeque(实现类)</p><p>Map(键值对)</p><p>​ HashMap(无序，线程不安全)</p><p>​ LinkedHashMap(迭代次序有序，不像TreeMap维护有序需要代价)</p><p>​ HashTable(线程安全，但建议使用ConcurrentHashMap)</p><p>​ SortedMap</p><p>​ TreeMap(log(n)增删改查，性能平均)</p><p>​ WeakHashMap(具有“弱键”，当key值不再使用会被丢弃，垃圾回收器会进行回收)</p></blockquote><h3 id="Collection-和-Collections-有什么区别？"><a href="#Collection-和-Collections-有什么区别？" class="headerlink" title="Collection 和 Collections 有什么区别？"></a>Collection 和 Collections 有什么区别？</h3><blockquote><p><code>java.util.Collection</code>是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式。</p><p>List，Set，Queue接口都实现Collection接口</p><p>直接实现该接口的类只有AbstractCollection类，该类也只是一个抽象类，提供了对集合类操作的一些基本实现。List和Set的具体实现类基本上都直接或间接地继承了该类。</p><p><code>java.util.Collections</code>是一个包装类。它包含有各种有关集合操作的静态方法（对集合的搜索、排序、线程安全化等），大多数方法都是用来处理线性表的。此类不能实例化，就像一个工具类，服务于Java的Collection框架。</p></blockquote><h3 id="Arrays-sort实现原理和Collection实现原理？"><a href="#Arrays-sort实现原理和Collection实现原理？" class="headerlink" title="Arrays.sort实现原理和Collection实现原理？"></a>Arrays.sort实现原理和Collection实现原理？</h3><blockquote><p>事实上Collections.sort方法底层就是调用的array.sort方法</p><pre><code class="hljs reasonml">public static void sort(Object<span class="hljs-literal">[]</span> a) &#123;
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Java集合框架 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-04-28 00:25">
+      2020年4月28日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      119
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Java集合框架"><a href="#Java集合框架" class="headerlink" title="Java集合框架"></a>Java集合框架</h1><h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><h3 id="1-集合框架图"><a href="#1-集合框架图" class="headerlink" title="1.集合框架图"></a>1.集合框架图</h3><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6.png" srcset="/img/loading.gif" alt="集合框架"></p>
+<h3 id="2-Collection"><a href="#2-Collection" class="headerlink" title="2. Collection"></a>2. Collection</h3><blockquote>
+<p>集合的顶层接口，不能被实例化<br>a)    根接口Collection<br> i.    常用子接口<br>  1.    List<br>   实现类：ArrayList、Vector、LinkedList<br>  2.    Set<br>   实现类：HashSet、TreeSet<br>b)    添加功能<br> i.    boolean add(object obj)添加一个元素<br> ii.    boolean addAll(Collection c)将集合c的全部元素添加到原集合元素后返回true<br> iii.    添加功能永远返回true<br>c)    删除功能<br> i.    void clear();移除所有元素<br> ii.    boolean remove(Object o)移除一个元素<br> iii.    boolean removeAll（Collection c）移除一个集合的元素，只要有一个被移除就返回true，改变原集合，删除原集合中和c中相同的元素<br> iv.    删除功能只有删除成功后才返回true<br>d)    判断功能<br> i.    boolean contain(object o)判断集合中是否包含指定的元素。<br> ii.    boolean containsAll(Collection c)判断原集合中是否包含指定集合c的所有元素，有则true，<br> iii.    boolean isEmpty()判断集合是否为空<br>e)    获取功能<br> i.    Iterator iterator()迭代器，集合的专用方式，实现遍历的功能<br> ii.    Object next()获取当前元素，并移动到下一个位置<br> iii.    boolean hasNext()判断此位置是否有元素<br> iv.    迭代器遍历实例在下面<br>f)    长度功能<br> i.    int size()元素的个数<br> ii.    数组和字符串中都是length()方法获取元素个数，集合中是size()方法<br>  因为object包括集合、字符串、数组，所以其不能直接用length方法。<br>g)    交集功能boolean retainAll(Collection c)<br> 两个集合交集的元素给原集合，并判断原集合是否改变，改变则true，不变则false<br>h)    把集合转换为数组<br> i.    Object [] toArray()</p>
+</blockquote>
+<h3 id="3-Map"><a href="#3-Map" class="headerlink" title="3. Map"></a>3. Map</h3><blockquote>
+<ul>
+<li>Java Map接口是Java Collections Framework的成员。但是它不是Collection</li>
+<li>将键映射到值的对象。一个映射不能包含重复的键；每个键最多只能映射到一个值。（不同的键对应的值可以相等）</li>
+<li><code>Map</code> 接口提供三种<em>collection 视图</em>，允许以键集、值集或键-值映射关系集的形式查看某个映射的内容。</li>
+<li>Map中某些映射实现可明确保证其自然顺序和定制顺序，如 <code>TreeMap</code> 类；另一些映射实现则不保证任何顺序，如 <code>HashMap</code> 类；还有些类保证添加顺序。</li>
+<li>某些映射实现对可能包含的键和值有所限制。例如，某些实现禁止 null 键和值，另一些则对其键的类型有限制。</li>
+</ul>
+</blockquote>
+<h3 id="4-Collections-工具类常见方法"><a href="#4-Collections-工具类常见方法" class="headerlink" title="4. Collections 工具类常见方法"></a>4. Collections 工具类常见方法</h3><blockquote>
+<p><a href="https://blog.csdn.net/mxsf_lrj/article/details/81514176" target="_blank" rel="noopener">https://blog.csdn.net/mxsf_lrj/article/details/81514176</a></p>
+</blockquote>
+<h3 id="5-Arrays-工具类常见方法"><a href="#5-Arrays-工具类常见方法" class="headerlink" title="5. Arrays 工具类常见方法"></a>5. Arrays 工具类常见方法</h3><blockquote>
+<p><a href="https://www.cnblogs.com/hysum/p/7094232.html" target="_blank" rel="noopener">https://www.cnblogs.com/hysum/p/7094232.html</a></p>
+</blockquote>
+<h2 id="二、面试题"><a href="#二、面试题" class="headerlink" title="二、面试题"></a>二、面试题</h2><h3 id="Java容器都有哪些？"><a href="#Java容器都有哪些？" class="headerlink" title="Java容器都有哪些？"></a>Java容器都有哪些？</h3><blockquote>
+<p>Collections(元素)</p>
+<p>​    List(有序元素)</p>
+<p>​        ArrayList(利用下标访问，访问效率高)</p>
+<p>​        LinkedList(链表式访问，插入删除效率高)</p>
+<p>​        Vector(可自动增长的对象数组，大部分都是同步方法，性能损耗，基本不太使用)</p>
+<p>​            Stack(模拟栈，推荐使用Deque)</p>
+<p>​    Set(无需元素)</p>
+<p>​        HashSet(访问效率较高，不允许重复元素)</p>
+<p>​        SortedSet(有序，不允许重复元素)</p>
+<p>​            TreeSet(红黑树实现，性能平均)</p>
+<p>​    Queue(队列，实现一些复杂操作，接口之间的关联很复杂)</p>
+<p>​        Deque(双向队列接口)</p>
+<p>​            BlockingDeque(接口)</p>
+<p>​                LinkedBlockingDeque(实现类)</p>
+<p>Map(键值对)</p>
+<p>​    HashMap(无序，线程不安全)</p>
+<p>​        LinkedHashMap(迭代次序有序，不像TreeMap维护有序需要代价)</p>
+<p>​    HashTable(线程安全，但建议使用ConcurrentHashMap)</p>
+<p>​    SortedMap</p>
+<p>​        TreeMap(log(n)增删改查，性能平均)</p>
+<p>​    WeakHashMap(具有“弱键”，当key值不再使用会被丢弃，垃圾回收器会进行回收)</p>
+</blockquote>
+<h3 id="Collection-和-Collections-有什么区别？"><a href="#Collection-和-Collections-有什么区别？" class="headerlink" title="Collection 和 Collections 有什么区别？"></a>Collection 和 Collections 有什么区别？</h3><blockquote>
+<p><code>java.util.Collection</code>是一个集合接口。它提供了对集合对象进行基本操作的通用接口方法。Collection接口在Java类库中有很多具体的实现。Collection接口的意义是为各种具体的集合提供了最大化的统一操作方式。</p>
+<p>List，Set，Queue接口都实现Collection接口</p>
+<p>直接实现该接口的类只有AbstractCollection类，该类也只是一个抽象类，提供了对集合类操作的一些基本实现。List和Set的具体实现类基本上都直接或间接地继承了该类。</p>
+<p><code>java.util.Collections</code>是一个包装类。它包含有各种有关集合操作的静态方法（对集合的搜索、排序、线程安全化等），大多数方法都是用来处理线性表的。此类不能实例化，就像一个工具类，服务于Java的Collection框架。</p>
+</blockquote>
+<h3 id="Arrays-sort实现原理和Collection实现原理？"><a href="#Arrays-sort实现原理和Collection实现原理？" class="headerlink" title="Arrays.sort实现原理和Collection实现原理？"></a>Arrays.sort实现原理和Collection实现原理？</h3><blockquote>
+<p>事实上Collections.sort方法底层就是调用的array.sort方法</p>
+<pre><code class="hljs reasonml">public static void sort(Object<span class="hljs-literal">[]</span> a) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">LegacyMergeSort</span>.</span></span>userRequested)
     	legacy<span class="hljs-constructor">MergeSort(<span class="hljs-params">a</span>)</span>;
     <span class="hljs-keyword">else</span>
@@ -18,9 +274,35 @@ static void sort(Object<span class="hljs-literal">[]</span> a, <span class="hljs
     	binary<span class="hljs-constructor">Sort(<span class="hljs-params">a</span>, <span class="hljs-params">lo</span>, <span class="hljs-params">hi</span>, <span class="hljs-params">lo</span> + <span class="hljs-params">initRunLen</span>)</span>;
     	return;
     &#125;
-&#125;</code></pre><p>legacyMergeSort(a)：归并排序<br>ComparableTimSort.sort()：Timsort排序<br><strong>备注：</strong><br>Timsort排序是结合了合并排序（merge sort）和插入排序（insertion sort）而得出的排序算法。（参考：<a href="https://blog.csdn.net/yangzhongblog/article/details/8184707" target="_blank" rel="noopener">Timsort原理介绍</a>）</p><p>Timsort的核心过程</p><pre><code class="hljs applescript">TimSort 算法为了减少对升序部分的回溯和对降序部分的性能倒退，将输入按其升序和降序特点进行了分区。排序的输入的单位不是一个个单独的数字，而是一个个的块-分区。其中每一个分区叫一个<span class="hljs-built_in">run</span>。针对这些 <span class="hljs-built_in">run</span> 序列，每次拿一个 <span class="hljs-built_in">run</span> 出来按规则进行合并。每次合并会将两个 <span class="hljs-built_in">run</span>合并成一个 <span class="hljs-built_in">run</span>。合并的结果保存到栈中。合并直到消耗掉所有的 <span class="hljs-built_in">run</span>，这时将栈上剩余的 <span class="hljs-built_in">run</span>合并到只剩一个 <span class="hljs-built_in">run</span> 为止。这时这个仅剩的 <span class="hljs-built_in">run</span> 便是排好序的结果。</code></pre><p>综上述过程，Timsort算法的过程包括</p><p>（1）如何数组长度小于某个值，直接用二分插入排序算法</p><p>（2）找到各个run，并入栈</p><p>（3）按规则合并run</p></blockquote><h3 id="List、Set、Map-之间的区别是什么？"><a href="#List、Set、Map-之间的区别是什么？" class="headerlink" title="List、Set、Map 之间的区别是什么？"></a>List、Set、Map 之间的区别是什么？</h3><blockquote><p>List：有序集合</p><p>Set：不重复集合，LinkedHashSet按照插入排序，SortedSet可排序，HashSet无序</p><p>Map：键值对</p></blockquote><h3 id="说一下-HashSet-的实现原理？"><a href="#说一下-HashSet-的实现原理？" class="headerlink" title="说一下 HashSet 的实现原理？"></a>说一下 HashSet 的实现原理？</h3><blockquote><p>HashSet是基于HashMap实现的，HashSet 底层使用HashMap来保存所有元素，<br>因此HashSet 的实现比较简单，相关HashSet 的操作，基本上都是直接调用底层HashMap的相关方法来完成，HashSet不允许有重复的值，并且元素是无序的。</p></blockquote><h3 id="HashSet是如何保证不重复的？"><a href="#HashSet是如何保证不重复的？" class="headerlink" title="HashSet是如何保证不重复的？"></a>HashSet是如何保证不重复的？</h3><blockquote><p>当你把对象加入<code>HashSet</code>时，HashSet会先计算对象的<code>hashcode</code>值来判断对象加入的位置，同时也会与其他加入的对象的hashcode值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同hashcode值的对象，这时会调用<code>equals（）</code>方法来检查hashcode相等的对象是否真的相同。如果两者相同，HashSet就不会让加入操作成功。</p><p>HashSet底层使用HashMap来保存所有元素</p><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span> </span>&#123;
+&#125;</code></pre>
+
+<p>legacyMergeSort(a)：归并排序<br> ComparableTimSort.sort()：Timsort排序<br> <strong>备注：</strong><br> Timsort排序是结合了合并排序（merge sort）和插入排序（insertion sort）而得出的排序算法。（参考：<a href="https://blog.csdn.net/yangzhongblog/article/details/8184707" target="_blank" rel="noopener">Timsort原理介绍</a>）</p>
+<p>Timsort的核心过程</p>
+<pre><code class="hljs applescript">TimSort 算法为了减少对升序部分的回溯和对降序部分的性能倒退，将输入按其升序和降序特点进行了分区。排序的输入的单位不是一个个单独的数字，而是一个个的块-分区。其中每一个分区叫一个<span class="hljs-built_in">run</span>。针对这些 <span class="hljs-built_in">run</span> 序列，每次拿一个 <span class="hljs-built_in">run</span> 出来按规则进行合并。每次合并会将两个 <span class="hljs-built_in">run</span>合并成一个 <span class="hljs-built_in">run</span>。合并的结果保存到栈中。合并直到消耗掉所有的 <span class="hljs-built_in">run</span>，这时将栈上剩余的 <span class="hljs-built_in">run</span>合并到只剩一个 <span class="hljs-built_in">run</span> 为止。这时这个仅剩的 <span class="hljs-built_in">run</span> 便是排好序的结果。</code></pre>
+
+<p>综上述过程，Timsort算法的过程包括</p>
+<p>（1）如何数组长度小于某个值，直接用二分插入排序算法</p>
+<p>（2）找到各个run，并入栈</p>
+<p>（3）按规则合并run</p>
+</blockquote>
+<h3 id="List、Set、Map-之间的区别是什么？"><a href="#List、Set、Map-之间的区别是什么？" class="headerlink" title="List、Set、Map 之间的区别是什么？"></a>List、Set、Map 之间的区别是什么？</h3><blockquote>
+<p>List：有序集合</p>
+<p>Set：不重复集合，LinkedHashSet按照插入排序，SortedSet可排序，HashSet无序</p>
+<p>Map：键值对</p>
+</blockquote>
+<h3 id="说一下-HashSet-的实现原理？"><a href="#说一下-HashSet-的实现原理？" class="headerlink" title="说一下 HashSet 的实现原理？"></a>说一下 HashSet 的实现原理？</h3><blockquote>
+<p>HashSet是基于HashMap实现的，HashSet 底层使用HashMap来保存所有元素，<br>因此HashSet 的实现比较简单，相关HashSet 的操作，基本上都是直接调用底层HashMap的相关方法来完成，HashSet不允许有重复的值，并且元素是无序的。</p>
+</blockquote>
+<h3 id="HashSet是如何保证不重复的？"><a href="#HashSet是如何保证不重复的？" class="headerlink" title="HashSet是如何保证不重复的？"></a>HashSet是如何保证不重复的？</h3><blockquote>
+<p>当你把对象加入<code>HashSet</code>时，HashSet会先计算对象的<code>hashcode</code>值来判断对象加入的位置，同时也会与其他加入的对象的hashcode值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同hashcode值的对象，这时会调用<code>equals（）</code>方法来检查hashcode相等的对象是否真的相同。如果两者相同，HashSet就不会让加入操作成功。</p>
+<p>HashSet底层使用HashMap来保存所有元素</p>
+<pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span> </span>&#123;
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>.<span class="hljs-built_in">put</span>(e, PRESENT)==null;
-&#125;</code></pre><p>实际上就是以set的值作为key,PRESENT作为占位value放进map中，而map的key又是不能重复的，因此就保证了set的值不重复。</p><p>再来看看map是如何保证key不重复的</p><pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> V put(K key, V <span class="hljs-keyword">value</span>) &#123;
+&#125;</code></pre>
+
+<p>实际上就是以set的值作为key,PRESENT作为占位value放进map中，而map的key又是不能重复的，因此就保证了set的值不重复。</p>
+<p>再来看看map是如何保证key不重复的</p>
+<pre><code class="hljs pgsql"><span class="hljs-built_in">public</span> V put(K key, V <span class="hljs-keyword">value</span>) &#123;
     <span class="hljs-keyword">if</span> (table == EMPTY_TABLE) &#123;
         inflateTable(threshold);
     &#125;
@@ -41,22 +323,146 @@ static void sort(Object<span class="hljs-literal">[]</span> a, <span class="hljs
     modCount++;
     addEntry(hash, key, <span class="hljs-keyword">value</span>, i);
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
-&#125;</code></pre><p>其中最关键的一句</p><pre><code class="hljs lisp">if (<span class="hljs-name">e</span>.hash == hash <span class="hljs-symbol">&amp;&amp;</span> ((<span class="hljs-name">k</span> = e.key) == key || key.equals(<span class="hljs-name">k</span>)))</code></pre><p>调用了对象的hashCode和equals方法进行的判断，所以又得出一个结论：<strong>若要将对象存放到HashSet中并保证对象不重复，应根据实际情况将对象的hashCode方法和equals方法进行重写</strong></p></blockquote><h3 id="说一下-HashMap-的实现原理？"><a href="#说一下-HashMap-的实现原理？" class="headerlink" title="说一下 HashMap 的实现原理？"></a>说一下 HashMap 的实现原理？</h3><blockquote><p><strong>HashMap是基于Hash算法实现的</strong><br>我们通过put（key，value）存储数据，通过get（key）来获取数据。</p><p>当传入key时，HashMap会根据Key.hashCode()计算出Hash值，根据Hash值将value保存在bucket里 。</p><p><strong>当计算出相同的Hash值时，我们称之为Hash冲突</strong>，HashMap 的做法是用链表和红黑树存储相同Hash值的value，当hash冲突的个数比较少时，使用链表存储，否则使用红黑树。</p></blockquote><h3 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h3><blockquote><h5 id="JDK-1-8之前"><a href="#JDK-1-8之前" class="headerlink" title="JDK 1.8之前"></a>JDK 1.8之前</h5><p>JDK1.8 之前 <code>HashMap</code> 底层是 <strong>数组和链表</strong> 结合在一起使用也就是 <strong>链表散列</strong>。<strong>HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过 (n - 1) &amp; hash 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。</strong></p><p><strong>所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。</strong></p><p><strong>JDK 1.8 HashMap 的 hash 方法源码:</strong></p><p>JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变。</p><pre><code class="hljs processing">  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> hash(<span class="hljs-keyword">Object</span> <span class="hljs-built_in">key</span>) &#123;
+&#125;</code></pre>
+
+<p>其中最关键的一句</p>
+<pre><code class="hljs lisp">if (<span class="hljs-name">e</span>.hash == hash <span class="hljs-symbol">&amp;&amp;</span> ((<span class="hljs-name">k</span> = e.key) == key || key.equals(<span class="hljs-name">k</span>)))</code></pre>
+
+<p>调用了对象的hashCode和equals方法进行的判断，所以又得出一个结论：<strong>若要将对象存放到HashSet中并保证对象不重复，应根据实际情况将对象的hashCode方法和equals方法进行重写</strong></p>
+</blockquote>
+<h3 id="说一下-HashMap-的实现原理？"><a href="#说一下-HashMap-的实现原理？" class="headerlink" title="说一下 HashMap 的实现原理？"></a>说一下 HashMap 的实现原理？</h3><blockquote>
+<p><strong>HashMap是基于Hash算法实现的</strong><br>我们通过put（key，value）存储数据，通过get（key）来获取数据。</p>
+<p>当传入key时，HashMap会根据Key.hashCode()计算出Hash值，根据Hash值将value保存在bucket里 。</p>
+<p><strong>当计算出相同的Hash值时，我们称之为Hash冲突</strong>，HashMap 的做法是用链表和红黑树存储相同Hash值的value，当hash冲突的个数比较少时，使用链表存储，否则使用红黑树。</p>
+</blockquote>
+<h3 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h3><blockquote>
+<h5 id="JDK-1-8之前"><a href="#JDK-1-8之前" class="headerlink" title="JDK 1.8之前"></a>JDK 1.8之前</h5><p>JDK1.8 之前 <code>HashMap</code> 底层是 <strong>数组和链表</strong> 结合在一起使用也就是 <strong>链表散列</strong>。<strong>HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过 (n - 1) &amp; hash 判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。</strong></p>
+<p><strong>所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。</strong></p>
+<p><strong>JDK 1.8 HashMap 的 hash 方法源码:</strong></p>
+<p>JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变。</p>
+<pre><code class="hljs processing">  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> hash(<span class="hljs-keyword">Object</span> <span class="hljs-built_in">key</span>) &#123;
     <span class="hljs-built_in">int</span> h;
     <span class="hljs-comment">// key.hashCode()：返回散列值也就是hashcode</span>
     <span class="hljs-comment">// ^ ：按位异或</span>
     <span class="hljs-comment">// &gt;&gt;&gt;:无符号右移，忽略符号位，空位都以0补齐</span>
     <span class="hljs-keyword">return</span> (<span class="hljs-built_in">key</span> == <span class="hljs-keyword">null</span>) ? <span class="hljs-number">0</span> : (h = <span class="hljs-built_in">key</span>.hashCode()) ^ (h &gt;&gt;&gt; <span class="hljs-number">16</span>);
-&#125;</code></pre><p>对比一下 JDK1.7的 HashMap 的 hash 方法源码.</p><pre><code class="hljs angelscript">static <span class="hljs-built_in">int</span> hash(<span class="hljs-built_in">int</span> h) &#123;
+&#125;</code></pre>
+
+<p>对比一下 JDK1.7的 HashMap 的 hash 方法源码.</p>
+<pre><code class="hljs angelscript">static <span class="hljs-built_in">int</span> hash(<span class="hljs-built_in">int</span> h) &#123;
     <span class="hljs-comment">// This function ensures that hashCodes that differ only by</span>
     <span class="hljs-comment">// constant multiples at each bit position have a bounded</span>
     <span class="hljs-comment">// number of collisions (approximately 8 at default load factor).</span>
 
     h ^= (h &gt;&gt;&gt; <span class="hljs-number">20</span>) ^ (h &gt;&gt;&gt; <span class="hljs-number">12</span>);
     <span class="hljs-keyword">return</span> h ^ (h &gt;&gt;&gt; <span class="hljs-number">7</span>) ^ (h &gt;&gt;&gt; <span class="hljs-number">4</span>);
-&#125;</code></pre><p>相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次。</p><p>所谓 <strong>“拉链法”</strong> 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。</p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/jdk1.8%E4%B9%8B%E5%89%8D%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84-HashMap.jpg" srcset="/img/loading.gif" alt="jdk1.8之前的内部结构-HashMap"></p><h5 id="JDK-1-8之后"><a href="#JDK-1-8之后" class="headerlink" title="JDK 1.8之后"></a>JDK 1.8之后</h5><p>相比于之前的版本， JDK1.8之后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/JDK1.8%E4%B9%8B%E5%90%8E%E7%9A%84HashMap%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.jpg" srcset="/img/loading.gif" alt="jdk1.8之后的内部结构-HashMap"></p><p><strong><em>TreeMap、TreeSet以及JDK1.8之后的HashMap底层都用到了红黑树。红黑树就是为了解决二叉查找树的缺陷，因为二叉查找树在某些情况下会退化成一个线性结构。</em></strong></p><p><strong>推荐阅读：</strong></p><ul><li>《Java 8系列之重新认识HashMap》 ：<a href="https://zhuanlan.zhihu.com/p/21673805" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21673805</a></li></ul></blockquote><h3 id="HashMap-和-HashSet区别"><a href="#HashMap-和-HashSet区别" class="headerlink" title="HashMap 和 HashSet区别"></a>HashMap 和 HashSet区别</h3><blockquote><p>如果你看过 <code>HashSet</code> 源码的话就应该知道：HashSet 底层就是基于 HashMap 实现的。（HashSet 的源码非常非常少，因为除了 <code>clone()</code>、<code>writeObject()</code>、<code>readObject()</code>是 HashSet 自己不得不实现之外，其他方法都是直接调用 HashMap 中的方法。</p><table><thead><tr><th>HashMap</th><th>HashSet</th></tr></thead><tbody><tr><td>实现了Map接口</td><td>实现Set接口</td></tr><tr><td>存储键值对</td><td>仅存储对象</td></tr><tr><td>调用 <code>put（）</code>向map中添加元素</td><td>调用 <code>add（）</code>方法向Set中添加元素</td></tr><tr><td>HashMap使用键（Key）计算Hashcode</td><td>HashSet使用成员对象来计算hashcode值，对于两个对象来说hashcode可能相同，所以equals()方法用来判断对象的相等性，</td></tr></tbody></table></blockquote><h3 id="HashMap的扩容过程？"><a href="#HashMap的扩容过程？" class="headerlink" title="HashMap的扩容过程？"></a>HashMap的扩容过程？</h3><blockquote><p><a href="https://www.cnblogs.com/williamjie/p/9358291.html" target="_blank" rel="noopener">https://www.cnblogs.com/williamjie/p/9358291.html</a></p></blockquote><h3 id="HashMap为什么大小是2的幂次？"><a href="#HashMap为什么大小是2的幂次？" class="headerlink" title="HashMap为什么大小是2的幂次？"></a>HashMap为什么大小是2的幂次？</h3><blockquote><p>我们知道HashMap中要找到某个元素，需要根据key的hash值来求得对应数组中的位置。如何计算这个位置就是hash算法。我们也已知HashMap的数据结构是数组和链表的结合，所以我们当然希望这个HashMap里面的元素尽量的分布均匀些，尽量使得每个位置上的元素数量只有一个，那么当我们用hash算法求得这个位置的时候，马上就可以知道对应位置的元素就是我们要的，而不是再去遍历链表。</p><p>所以我们首先想到的就是把hashcode对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的。但是，“模”运算的消耗还是比较大的。Java中这样做：</p><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">indexFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> h, <span class="hljs-keyword">int</span> length)</span> </span>&#123;
+&#125;</code></pre>
+
+<p>相比于 JDK1.8 的 hash 方法 ，JDK 1.7 的 hash 方法的性能会稍差一点点，因为毕竟扰动了 4 次。</p>
+<p>所谓 <strong>“拉链法”</strong> 就是：将链表和数组相结合。也就是说创建一个链表数组，数组中每一格就是一个链表。若遇到哈希冲突，则将冲突的值加到链表中即可。</p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/jdk1.8%E4%B9%8B%E5%89%8D%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84-HashMap.jpg" srcset="/img/loading.gif" alt="jdk1.8之前的内部结构-HashMap"></p>
+<h5 id="JDK-1-8之后"><a href="#JDK-1-8之后" class="headerlink" title="JDK 1.8之后"></a>JDK 1.8之后</h5><p>相比于之前的版本， JDK1.8之后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。</p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/JDK1.8%E4%B9%8B%E5%90%8E%E7%9A%84HashMap%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.jpg" srcset="/img/loading.gif" alt="jdk1.8之后的内部结构-HashMap"></p>
+<p><strong><em>TreeMap、TreeSet以及JDK1.8之后的HashMap底层都用到了红黑树。红黑树就是为了解决二叉查找树的缺陷，因为二叉查找树在某些情况下会退化成一个线性结构。</em></strong></p>
+<p><strong>推荐阅读：</strong></p>
+<ul>
+<li>《Java 8系列之重新认识HashMap》 ：<a href="https://zhuanlan.zhihu.com/p/21673805" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/21673805</a></li>
+</ul>
+</blockquote>
+<h3 id="HashMap-和-HashSet区别"><a href="#HashMap-和-HashSet区别" class="headerlink" title="HashMap 和 HashSet区别"></a>HashMap 和 HashSet区别</h3><blockquote>
+<p>如果你看过 <code>HashSet</code> 源码的话就应该知道：HashSet 底层就是基于 HashMap 实现的。（HashSet 的源码非常非常少，因为除了 <code>clone()</code>、<code>writeObject()</code>、<code>readObject()</code>是 HashSet 自己不得不实现之外，其他方法都是直接调用 HashMap 中的方法。</p>
+<table>
+<thead>
+<tr>
+<th>HashMap</th>
+<th>HashSet</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>实现了Map接口</td>
+<td>实现Set接口</td>
+</tr>
+<tr>
+<td>存储键值对</td>
+<td>仅存储对象</td>
+</tr>
+<tr>
+<td>调用 <code>put（）</code>向map中添加元素</td>
+<td>调用 <code>add（）</code>方法向Set中添加元素</td>
+</tr>
+<tr>
+<td>HashMap使用键（Key）计算Hashcode</td>
+<td>HashSet使用成员对象来计算hashcode值，对于两个对象来说hashcode可能相同，所以equals()方法用来判断对象的相等性，</td>
+</tr>
+</tbody></table>
+</blockquote>
+<h3 id="HashMap的扩容过程？"><a href="#HashMap的扩容过程？" class="headerlink" title="HashMap的扩容过程？"></a>HashMap的扩容过程？</h3><blockquote>
+<p><a href="https://www.cnblogs.com/williamjie/p/9358291.html" target="_blank" rel="noopener">https://www.cnblogs.com/williamjie/p/9358291.html</a></p>
+</blockquote>
+<h3 id="HashMap为什么大小是2的幂次？"><a href="#HashMap为什么大小是2的幂次？" class="headerlink" title="HashMap为什么大小是2的幂次？"></a>HashMap为什么大小是2的幂次？</h3><blockquote>
+<p>我们知道HashMap中要找到某个元素，需要根据key的hash值来求得对应数组中的位置。如何计算这个位置就是hash算法。我们也已知HashMap的数据结构是数组和链表的结合，所以我们当然希望这个HashMap里面的元素尽量的分布均匀些，尽量使得每个位置上的元素数量只有一个，那么当我们用hash算法求得这个位置的时候，马上就可以知道对应位置的元素就是我们要的，而不是再去遍历链表。</p>
+<p>所以我们首先想到的就是把hashcode对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的。但是，“模”运算的消耗还是比较大的。Java中这样做：</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">indexFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> h, <span class="hljs-keyword">int</span> length)</span> </span>&#123;
 	<span class="hljs-keyword">return</span> h &amp; (length<span class="hljs-number">-1</span>);
-&#125;</code></pre><p>首先算得key的hashcode值，然后跟(数组长度-1)做”与”运算。看上去很简单，其实比较有玄机。比如数组的长度是2的4次方。也就是每一次都是拿hashcode &amp; (2^4-1)。</p><p>下图中左边是初始长度为16=&gt; &amp; (1111)，右边是初始化长度为15=&gt;&amp;(1110)。很明显右边运算结果最后一位永远是0，最终0001、0011、0101、1001、1011、0111、1101这几个位置永远都不能存放元素，空间浪费相当大，另一方面，可使用的长度就大大减少，产生碰撞的几率也增加了，查询（需要遍历链表）的效率低下。</p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/mapArrayInitLength.jpg" srcset="/img/loading.gif" alt></p><p>所以说，当数组长度为2的n次幂的时候，不同的key算得的index相同的几率较小，那么数据在数组上分布就比较均匀，也就是说碰撞的几率小，相对的，查询的时候不用遍历某个位置上的链表，这样查询效率也就较高了。</p></blockquote><h3 id="HashMap多线程操作导致死循环问题？"><a href="#HashMap多线程操作导致死循环问题？" class="headerlink" title="HashMap多线程操作导致死循环问题？"></a>HashMap多线程操作导致死循环问题？</h3><blockquote><ul><li>多线程put操作后，get操作导致死循环</li><li>多线程put非null元素后，get操作得到null值</li><li>多线程put操作，导致元素丢失</li></ul><p>问题产生过程详解参看：<a href="https://blog.csdn.net/zhangjunli/article/details/80653283" target="_blank" rel="noopener">https://blog.csdn.net/zhangjunli/article/details/80653283</a></p><p>因为HashMap本身就不支持并发，如果想在并发场景下使用HashMap有两种解决方法：</p><ul><li>使用<code>ConcurrentHashMap</code></li><li>使用<code>Collections.synchronizedMap(Mao&lt;K,V&gt; m)</code>方法把HashMap变成一个线程安全的Map</li></ul></blockquote><h3 id="HashMap-1-7和1-8的区别，说明1-8做了哪些优化，如何优化的？"><a href="#HashMap-1-7和1-8的区别，说明1-8做了哪些优化，如何优化的？" class="headerlink" title="HashMap 1.7和1.8的区别，说明1.8做了哪些优化，如何优化的？"></a>HashMap 1.7和1.8的区别，说明1.8做了哪些优化，如何优化的？</h3><blockquote><p>JDK 1.7</p><p>使用一个Entry数组来存储数据，用key的hashcode取模来决定key会被放到数组里的位置，如果hashcode相同，或者<strong><u>hashcode取模</u></strong>后的结果相同(hash collision)，那么这些key会被定位到<strong><code>Entry</code></strong>数组的同一个格子里，这些key会形成一个链表</p><p>在hashcode特别差的情况下，比方说所有key的hashcode都相同，这个链表可能会很长，那么put/get操作都可能需要遍历这个链表</p><p>也就是说时间复杂度在最差情况下会退化到O(n)</p><p>JDK 1.8</p><p>使用一个Node数组来存储数据，但这个Node可能是链表结构，也可能是红黑树结构</p><p>如果插入的key的hashcode相同，那么这些key也会被定位到<strong><code>Node</code></strong>数组的同一个格子里。</p><p>如果同一个格子里的key不超过8个，使用链表结构存储。</p><p>如果超过了8个，那么会调用<code>treeifyBin</code>函数，将链表转换为红黑树。</p><p>那么即使hashcode完全相同，由于红黑树的特点，查找某个特定元素，也只需要O(log n)的开销，也就是说put/get的操作的时间复杂度最差只有O(log n)</p></blockquote><h3 id="HashMap是线程安全的吗？为什么不是？（画图说明）"><a href="#HashMap是线程安全的吗？为什么不是？（画图说明）" class="headerlink" title="HashMap是线程安全的吗？为什么不是？（画图说明）"></a>HashMap是线程安全的吗？为什么不是？（画图说明）</h3><blockquote><p>由于put()和putVal()代码没有同步，插入一个value的时候会进行判空处理，在多线程的时候，如果正好2个线程都检查到对应位置是空的，都会插进去的话，先插进去的就会被后插进去的节点覆盖，而不是都挂在后面。就会出现数据错误，导致线程不安全。</p><p>自行依文字说明画图</p></blockquote><h3 id="哪些集合类是线程安全的？"><a href="#哪些集合类是线程安全的？" class="headerlink" title="哪些集合类是线程安全的？"></a>哪些集合类是线程安全的？</h3><blockquote><ul><li>Vector 线程安全；</li><li>HashTable 线程安全；</li><li>StringBuffer 线程安全；</li></ul></blockquote><h3 id="如何决定使用-HashMap-还是-TreeMap？"><a href="#如何决定使用-HashMap-还是-TreeMap？" class="headerlink" title="如何决定使用 HashMap 还是 TreeMap？"></a>如何决定使用 HashMap 还是 TreeMap？</h3><blockquote><p>TreeMap&lt;K,V&gt;的Key值是要求实现java.lang.Comparable，所以迭代的时候TreeMap默认是按照Key值升序排列的；TreeMap的实现也是基于红黑树结构。<br>而HashMap&lt;K,V&gt;的Key值实现散列hashCode()，分布是散列的均匀的，不支持排序，数据结构主要是桶（数组），链表或红黑树。<br>所以，查询的时候使用HashMap，增加、快速创建的时候使用TreeMap。</p></blockquote><h3 id="Hashtable的原理？"><a href="#Hashtable的原理？" class="headerlink" title="Hashtable的原理？"></a>Hashtable的原理？</h3><blockquote><p><a href="http://www.imooc.com/article/details/id/23015" target="_blank" rel="noopener">http://www.imooc.com/article/details/id/23015</a></p></blockquote><h3 id="HashMap和Hashtable区别，HashMap的key类型？"><a href="#HashMap和Hashtable区别，HashMap的key类型？" class="headerlink" title="HashMap和Hashtable区别，HashMap的key类型？"></a>HashMap和Hashtable区别，HashMap的key类型？</h3><blockquote><ol><li><strong>线程是否安全：</strong> HashMap 是非线程安全的，HashTable 是线程安全的；HashTable 内部的方法基本都经过<code>synchronized</code> 修饰。（如果你要保证线程安全的话就使用 ConcurrentHashMap 吧！）；</li><li><strong>效率：</strong> 因为线程安全的问题，HashMap 要比 HashTable 效率高一点。另外，HashTable 基本被淘汰，不要在代码中使用它；</li><li><strong>对Null key 和Null value的支持：</strong> HashMap 中，null 可以作为键，这样的键只有一个，可以有一个或多个键所对应的值为 null。但是在 HashTable 中 put 进的键值只要有一个 null，直接抛出 <code>NullPointerException</code>。</li><li><strong>初始容量大小和每次扩充容量大小的不同 ：</strong> ①创建时如果不指定容量初始值，Hashtable 默认的初始大小为11，之后每次扩充，容量变为原来的2n+1。HashMap 默认的初始化大小为16。之后每次扩充，容量变为原来的2倍。②创建时如果给定了容量初始值，那么 Hashtable 会直接使用你给定的大小，而 HashMap 会将其扩充为2的幂次方大小（HashMap 中的<code>tableSizeFor()</code>方法保证，下面给出了源代码）。也就是说 HashMap 总是使用2的幂作为哈希表的大小,后面会介绍到为什么是2的幂次方。</li><li><strong>底层数据结构：</strong> JDK1.8 以后的 HashMap 在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。Hashtable 没有这样的机制。</li></ol><p><strong>HashMap 中带有初始容量的构造函数：</strong></p><pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)</span> </span>&#123;
+&#125;</code></pre>
+
+<p>首先算得key的hashcode值，然后跟(数组长度-1)做”与”运算。看上去很简单，其实比较有玄机。比如数组的长度是2的4次方。也就是每一次都是拿hashcode &amp; (2^4-1)。</p>
+<p>下图中左边是初始长度为16=&gt; &amp; (1111)，右边是初始化长度为15=&gt;&amp;(1110)。很明显右边运算结果最后一位永远是0，最终0001、0011、0101、1001、1011、0111、1101这几个位置永远都不能存放元素，空间浪费相当大，另一方面，可使用的长度就大大减少，产生碰撞的几率也增加了，查询（需要遍历链表）的效率低下。</p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/mapArrayInitLength.jpg" srcset="/img/loading.gif" alt></p>
+<p>所以说，当数组长度为2的n次幂的时候，不同的key算得的index相同的几率较小，那么数据在数组上分布就比较均匀，也就是说碰撞的几率小，相对的，查询的时候不用遍历某个位置上的链表，这样查询效率也就较高了。</p>
+</blockquote>
+<h3 id="HashMap多线程操作导致死循环问题？"><a href="#HashMap多线程操作导致死循环问题？" class="headerlink" title="HashMap多线程操作导致死循环问题？"></a>HashMap多线程操作导致死循环问题？</h3><blockquote>
+<ul>
+<li>多线程put操作后，get操作导致死循环</li>
+<li>多线程put非null元素后，get操作得到null值</li>
+<li>多线程put操作，导致元素丢失</li>
+</ul>
+<p>问题产生过程详解参看：<a href="https://blog.csdn.net/zhangjunli/article/details/80653283" target="_blank" rel="noopener">https://blog.csdn.net/zhangjunli/article/details/80653283</a></p>
+<p>因为HashMap本身就不支持并发，如果想在并发场景下使用HashMap有两种解决方法：</p>
+<ul>
+<li>使用<code>ConcurrentHashMap</code></li>
+<li>使用<code>Collections.synchronizedMap(Mao&lt;K,V&gt; m)</code>方法把HashMap变成一个线程安全的Map</li>
+</ul>
+</blockquote>
+<h3 id="HashMap-1-7和1-8的区别，说明1-8做了哪些优化，如何优化的？"><a href="#HashMap-1-7和1-8的区别，说明1-8做了哪些优化，如何优化的？" class="headerlink" title="HashMap 1.7和1.8的区别，说明1.8做了哪些优化，如何优化的？"></a>HashMap 1.7和1.8的区别，说明1.8做了哪些优化，如何优化的？</h3><blockquote>
+<p>JDK 1.7</p>
+<p>使用一个Entry数组来存储数据，用key的hashcode取模来决定key会被放到数组里的位置，如果hashcode相同，或者<strong><u>hashcode取模</u></strong>后的结果相同(hash collision)，那么这些key会被定位到<strong><code>Entry</code></strong>数组的同一个格子里，这些key会形成一个链表</p>
+<p>在hashcode特别差的情况下，比方说所有key的hashcode都相同，这个链表可能会很长，那么put/get操作都可能需要遍历这个链表</p>
+<p>也就是说时间复杂度在最差情况下会退化到O(n)</p>
+<p>JDK 1.8</p>
+<p>使用一个Node数组来存储数据，但这个Node可能是链表结构，也可能是红黑树结构</p>
+<p>如果插入的key的hashcode相同，那么这些key也会被定位到<strong><code>Node</code></strong>数组的同一个格子里。</p>
+<p>如果同一个格子里的key不超过8个，使用链表结构存储。</p>
+<p>如果超过了8个，那么会调用<code>treeifyBin</code>函数，将链表转换为红黑树。</p>
+<p>那么即使hashcode完全相同，由于红黑树的特点，查找某个特定元素，也只需要O(log n)的开销，也就是说put/get的操作的时间复杂度最差只有O(log n)</p>
+</blockquote>
+<h3 id="HashMap是线程安全的吗？为什么不是？（画图说明）"><a href="#HashMap是线程安全的吗？为什么不是？（画图说明）" class="headerlink" title="HashMap是线程安全的吗？为什么不是？（画图说明）"></a>HashMap是线程安全的吗？为什么不是？（画图说明）</h3><blockquote>
+<p>由于put()和putVal()代码没有同步，插入一个value的时候会进行判空处理，在多线程的时候，如果正好2个线程都检查到对应位置是空的，都会插进去的话，先插进去的就会被后插进去的节点覆盖，而不是都挂在后面。就会出现数据错误，导致线程不安全。</p>
+<p>自行依文字说明画图</p>
+</blockquote>
+<h3 id="哪些集合类是线程安全的？"><a href="#哪些集合类是线程安全的？" class="headerlink" title="哪些集合类是线程安全的？"></a>哪些集合类是线程安全的？</h3><blockquote>
+<ul>
+<li>Vector 线程安全；</li>
+<li>HashTable 线程安全；</li>
+<li>StringBuffer 线程安全；</li>
+</ul>
+</blockquote>
+<h3 id="如何决定使用-HashMap-还是-TreeMap？"><a href="#如何决定使用-HashMap-还是-TreeMap？" class="headerlink" title="如何决定使用 HashMap 还是 TreeMap？"></a>如何决定使用 HashMap 还是 TreeMap？</h3><blockquote>
+<p>TreeMap&lt;K,V&gt;的Key值是要求实现java.lang.Comparable，所以迭代的时候TreeMap默认是按照Key值升序排列的；TreeMap的实现也是基于红黑树结构。<br>而HashMap&lt;K,V&gt;的Key值实现散列hashCode()，分布是散列的均匀的，不支持排序，数据结构主要是桶（数组），链表或红黑树。<br>所以，查询的时候使用HashMap，增加、快速创建的时候使用TreeMap。</p>
+</blockquote>
+<h3 id="Hashtable的原理？"><a href="#Hashtable的原理？" class="headerlink" title="Hashtable的原理？"></a>Hashtable的原理？</h3><blockquote>
+<p><a href="http://www.imooc.com/article/details/id/23015" target="_blank" rel="noopener">http://www.imooc.com/article/details/id/23015</a></p>
+</blockquote>
+<h3 id="HashMap和Hashtable区别，HashMap的key类型？"><a href="#HashMap和Hashtable区别，HashMap的key类型？" class="headerlink" title="HashMap和Hashtable区别，HashMap的key类型？"></a>HashMap和Hashtable区别，HashMap的key类型？</h3><blockquote>
+<ol>
+<li><strong>线程是否安全：</strong> HashMap 是非线程安全的，HashTable 是线程安全的；HashTable 内部的方法基本都经过<code>synchronized</code> 修饰。（如果你要保证线程安全的话就使用 ConcurrentHashMap 吧！）；</li>
+<li><strong>效率：</strong> 因为线程安全的问题，HashMap 要比 HashTable 效率高一点。另外，HashTable 基本被淘汰，不要在代码中使用它；</li>
+<li><strong>对Null key 和Null value的支持：</strong> HashMap 中，null 可以作为键，这样的键只有一个，可以有一个或多个键所对应的值为 null。但是在 HashTable 中 put 进的键值只要有一个 null，直接抛出 <code>NullPointerException</code>。</li>
+<li><strong>初始容量大小和每次扩充容量大小的不同 ：</strong> ①创建时如果不指定容量初始值，Hashtable 默认的初始大小为11，之后每次扩充，容量变为原来的2n+1。HashMap 默认的初始化大小为16。之后每次扩充，容量变为原来的2倍。②创建时如果给定了容量初始值，那么 Hashtable 会直接使用你给定的大小，而 HashMap 会将其扩充为2的幂次方大小（HashMap 中的<code>tableSizeFor()</code>方法保证，下面给出了源代码）。也就是说 HashMap 总是使用2的幂作为哈希表的大小,后面会介绍到为什么是2的幂次方。</li>
+<li><strong>底层数据结构：</strong> JDK1.8 以后的 HashMap 在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为8）时，将链表转化为红黑树，以减少搜索时间。Hashtable 没有这样的机制。</li>
+</ol>
+<p><strong>HashMap 中带有初始容量的构造函数：</strong></p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity, <span class="hljs-keyword">float</span> loadFactor)</span> </span>&#123;
     <span class="hljs-keyword">if</span> (initialCapacity &lt; <span class="hljs-number">0</span>)
         <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Illegal initial capacity: "</span> +
                                            initialCapacity);
@@ -70,7 +476,10 @@ static void sort(Object<span class="hljs-literal">[]</span> a, <span class="hljs
 &#125;
  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HashMap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity)</span> </span>&#123;
     <span class="hljs-keyword">this</span>(initialCapacity, DEFAULT_LOAD_FACTOR);
-&#125;</code></pre><p>下面这个方法保证了 HashMap 总是使用2的幂作为哈希表的大小。</p><pre><code class="hljs excel">/**
+&#125;</code></pre>
+
+<p>下面这个方法保证了 HashMap 总是使用2的幂作为哈希表的大小。</p>
+<pre><code class="hljs excel">/**
  * Returns a <span class="hljs-built_in">power</span> of two size for the given target capacity.
  */
 static final <span class="hljs-built_in">int</span> tableSizeFor(<span class="hljs-built_in">int</span> cap) &#123;
@@ -81,15 +490,148 @@ static final <span class="hljs-built_in">int</span> tableSizeFor(<span class="hl
     <span class="hljs-built_in">n</span> |= <span class="hljs-built_in">n</span> &gt;&gt;&gt; <span class="hljs-number">8</span>;
     <span class="hljs-built_in">n</span> |= <span class="hljs-built_in">n</span> &gt;&gt;&gt; <span class="hljs-number">16</span>;
     return (<span class="hljs-built_in">n</span> &lt; <span class="hljs-number">0</span>) ? <span class="hljs-number">1</span> <span class="hljs-symbol">:</span> (<span class="hljs-built_in">n</span> &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY <span class="hljs-symbol">:</span> <span class="hljs-built_in">n</span> + <span class="hljs-number">1</span>;
-&#125;</code></pre></blockquote><h3 id="Hashtable和ConcurrentHashMap区别？"><a href="#Hashtable和ConcurrentHashMap区别？" class="headerlink" title="Hashtable和ConcurrentHashMap区别？"></a>Hashtable和ConcurrentHashMap区别？</h3><blockquote><p>ConcurrentHashMap 和 Hashtable 的区别主要体现在实现线程安全的方式上不同。</p><ul><li><strong>底层数据结构：</strong> JDK 1.7的 ConcurrentHashMap 底层采用 <strong>分段的数组+链表</strong> 实现，JDK 1.8 采用的数据结构跟HashMap 1.8的结构一样，数组+链表/红黑二叉树。Hashtable 和 JDK 1.8 之前的 HashMap 的底层数据结构类似都是采用 <strong>数组+链表</strong> 的形式，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的；</li><li><strong>实现线程安全的方式（重要）：</strong> ① <strong>在JDK 1.7的时候，ConcurrentHashMap（分段锁）</strong> 对整个桶数组进行了分割分段(Segment)，每一把锁只锁容器其中一部分数据，多线程访问容器里不同数据段的数据，就不会存在锁竞争，提高并发访问率。 <strong>到了 JDK 1.8 的时候已经摒弃了Segment的概念，而是直接用 Node 数组+链表+红黑树的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。（JDK 1.6以后 对 synchronized锁做了很多优化）</strong> 整个看起来就像是优化过且线程安全的 HashMap，虽然在JDK 1.8中还能看到 Segment 的数据结构，但是已经简化了属性，只是为了兼容旧版本；② <strong>Hashtable(同一把锁)</strong> :使用 synchronized 来保证线程安全，效率非常低下。当一个线程访问同步方法时，其他线程也访问同步方法，可能会进入阻塞或轮询状态，如使用 put 添加元素，另一个线程不能使用 put 添加元素，也不能使用 get，竞争会越来越激烈效率越低。</li></ul><p><strong>两者的对比图：</strong></p><p>图片来源：<a href="http://www.cnblogs.com/chengxiao/p/6842045.html" target="_blank" rel="noopener">http://www.cnblogs.com/chengxiao/p/6842045.html</a></p><p><strong>HashTable:</strong></p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/HashTable%E5%85%A8%E8%A1%A8%E9%94%81.png" srcset="/img/loading.gif" alt="HashTable全表锁"></p><p><strong>JDK 1.7的ConcurrentHashMap：</strong></p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ConcurrentHashMap%E5%88%86%E6%AE%B5%E9%94%81.jpg" srcset="/img/loading.gif" alt="JDK1.7的ConcurrentHashMap"></p><p><strong>JDK 1.8的ConcurrentHashMap（TreeBin: 红黑二叉树节点 Node: 链表节点）：</strong></p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/JDK1.8-ConcurrentHashMap-Structure.jpg" srcset="/img/loading.gif" alt="JDK1.8的ConcurrentHashMap"></p></blockquote><h3 id="ConcurrentHashMap线程安全的具体实现方式-底层具体实现？"><a href="#ConcurrentHashMap线程安全的具体实现方式-底层具体实现？" class="headerlink" title="ConcurrentHashMap线程安全的具体实现方式/底层具体实现？"></a>ConcurrentHashMap线程安全的具体实现方式/底层具体实现？</h3><blockquote><h5 id="JDK-1-7（上面有示意图）"><a href="#JDK-1-7（上面有示意图）" class="headerlink" title="JDK 1.7（上面有示意图）"></a>JDK 1.7（上面有示意图）</h5><p>首先将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。</p><p><strong>ConcurrentHashMap 是由 Segment 数组结构和 HashEntry 数组结构组成</strong>。</p><p>Segment 实现了 ReentrantLock,所以 Segment 是一种可重入锁，扮演锁的角色。HashEntry 用于存储键值对数据。</p><pre><code class="hljs scala">static <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Segment&lt;K</span>,<span class="hljs-title">V&gt;</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ReentrantLock</span> <span class="hljs-title">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;
-&#125;</code></pre><p>一个 ConcurrentHashMap 里包含一个 Segment 数组。Segment 的结构和HashMap类似，是一种数组和链表结构，一个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个链表结构的元素，每个 Segment 守护着一个HashEntry数组里的元素，当对 HashEntry 数组的数据进行修改时，必须首先获得对应的 Segment的锁。</p><h5 id="JDK-1-8-（上面有示意图）"><a href="#JDK-1-8-（上面有示意图）" class="headerlink" title="JDK 1.8 （上面有示意图）"></a>JDK 1.8 （上面有示意图）</h5><p>ConcurrentHashMap取消了Segment分段锁，采用CAS和synchronized来保证并发安全。数据结构跟HashMap1.8的结构类似，数组+链表/红黑二叉树。Java 8在链表长度超过一定阈值（8）时将链表（寻址时间复杂度为O(N)）转换为红黑树（寻址时间复杂度为O(log(N))）</p><p>synchronized只锁定当前链表或红黑二叉树的首节点，这样只要hash不冲突，就不会产生并发，效率又提升N倍。</p></blockquote><h3 id="构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK-7如何处理？"><a href="#构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK-7如何处理？" class="headerlink" title="构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK 7如何处理？"></a>构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK 7如何处理？</h3><blockquote><p>攻击原理：</p><p>当客户端发送一个请求到服务器，如果该请求中带有参数，服务器端会将参数名-参数值作为key-value保存在HashMap中。如果有人恶意构造请求，在请求中加入大量相同hash值的String参数名（key），那么在服务器端用于存储这些key-value对的HashMap会被强行退化成链表，如图：</p><p>如果数据量足够大，那么在查找，插入时会占用大量CPU，达到拒绝服务攻击的目的。</p><p>怎么处理：</p><p>限制POST和GET请求的参数个数<br>限制POST请求的请求体大小<br>Web Application FireWall（WAF）</p><p>JDK7如何处理：</p><p>HashMap会动态的使用一个专门TreeMap实现来替换掉它。</p></blockquote><h3 id="Hash冲突的解决办法？"><a href="#Hash冲突的解决办法？" class="headerlink" title="Hash冲突的解决办法？"></a>Hash冲突的解决办法？</h3><blockquote><p><a href="https://blog.csdn.net/yu849893679/article/details/82142265" target="_blank" rel="noopener">https://blog.csdn.net/yu849893679/article/details/82142265</a></p></blockquote><h3 id="LinkedHashMap的应用？"><a href="#LinkedHashMap的应用？" class="headerlink" title="LinkedHashMap的应用？"></a>LinkedHashMap的应用？</h3><blockquote><p><a href="https://www.jianshu.com/p/8f4f58b4b8ab" target="_blank" rel="noopener">https://www.jianshu.com/p/8f4f58b4b8ab</a></p></blockquote><h3 id="ArrayList扩容机制？"><a href="#ArrayList扩容机制？" class="headerlink" title="ArrayList扩容机制？"></a>ArrayList扩容机制？</h3><blockquote><p>详见笔主的这篇文章:<a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/ArrayList-Grow.md" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/ArrayList-Grow.md</a></p><h4 id="ArrayList-和-LinkedList-的区别是什么？"><a href="#ArrayList-和-LinkedList-的区别是什么？" class="headerlink" title="ArrayList 和 LinkedList 的区别是什么？"></a>ArrayList 和 LinkedList 的区别是什么？</h4><ul><li><strong>1. 是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</li><li><strong>2. 底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong>Object 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6之前为循环链表，JDK 1.7取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</li><li><strong>3. 插入和删除是否受元素位置的影响：</strong> ① <strong>ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。</strong> 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 ② <strong>LinkedList 采用链表存储，所以对于add(E e)方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O（1），如果是要在指定位置i插入和删除元素的话（(add(int index, E element)） 时间复杂度应为o(n))因为需要新创立一个新的链表，复制前i-1个元素并在第i位加入新的元素，最后附上n-i个元素。</strong></li><li><strong>4. 是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</li><li><strong>5. 内存空间占用：</strong> ArrayList的空 间浪费主要体现在在list列表的结尾会预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗比ArrayList更多的空间（因为要存放直接后继和直接前驱以及数据）。</li></ul><h5 id="补充内容-RandomAccess接口"><a href="#补充内容-RandomAccess接口" class="headerlink" title="补充内容:RandomAccess接口"></a><strong>补充内容:RandomAccess接口</strong></h5><pre><code class="hljs routeros">public<span class="hljs-built_in"> interface </span>RandomAccess &#123;
-&#125;</code></pre><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p><p>在 <code>binarySearch（</code>）方法中，它要判断传入的list 是否 <code>RamdomAccess</code> 的实例，如果是，调用<code>indexedBinarySearch（）</code>方法，如果不是，那么调用<code>iteratorBinarySearch（）</code>方法</p><pre><code class="hljs reasonml">public static &lt;T&gt;
+&#125;</code></pre>
+
+</blockquote>
+<h3 id="Hashtable和ConcurrentHashMap区别？"><a href="#Hashtable和ConcurrentHashMap区别？" class="headerlink" title="Hashtable和ConcurrentHashMap区别？"></a>Hashtable和ConcurrentHashMap区别？</h3><blockquote>
+<p>ConcurrentHashMap 和 Hashtable 的区别主要体现在实现线程安全的方式上不同。</p>
+<ul>
+<li><strong>底层数据结构：</strong> JDK 1.7的 ConcurrentHashMap 底层采用 <strong>分段的数组+链表</strong> 实现，JDK 1.8 采用的数据结构跟HashMap 1.8的结构一样，数组+链表/红黑二叉树。Hashtable 和 JDK 1.8 之前的 HashMap 的底层数据结构类似都是采用 <strong>数组+链表</strong> 的形式，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的；</li>
+<li><strong>实现线程安全的方式（重要）：</strong> ① <strong>在JDK 1.7的时候，ConcurrentHashMap（分段锁）</strong> 对整个桶数组进行了分割分段(Segment)，每一把锁只锁容器其中一部分数据，多线程访问容器里不同数据段的数据，就不会存在锁竞争，提高并发访问率。 <strong>到了 JDK 1.8 的时候已经摒弃了Segment的概念，而是直接用 Node 数组+链表+红黑树的数据结构来实现，并发控制使用 synchronized 和 CAS 来操作。（JDK 1.6以后 对 synchronized锁做了很多优化）</strong> 整个看起来就像是优化过且线程安全的 HashMap，虽然在JDK 1.8中还能看到 Segment 的数据结构，但是已经简化了属性，只是为了兼容旧版本；② <strong>Hashtable(同一把锁)</strong> :使用 synchronized 来保证线程安全，效率非常低下。当一个线程访问同步方法时，其他线程也访问同步方法，可能会进入阻塞或轮询状态，如使用 put 添加元素，另一个线程不能使用 put 添加元素，也不能使用 get，竞争会越来越激烈效率越低。</li>
+</ul>
+<p><strong>两者的对比图：</strong></p>
+<p>图片来源：<a href="http://www.cnblogs.com/chengxiao/p/6842045.html" target="_blank" rel="noopener">http://www.cnblogs.com/chengxiao/p/6842045.html</a></p>
+<p><strong>HashTable:</strong></p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/HashTable%E5%85%A8%E8%A1%A8%E9%94%81.png" srcset="/img/loading.gif" alt="HashTable全表锁"></p>
+<p><strong>JDK 1.7的ConcurrentHashMap：</strong></p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/ConcurrentHashMap%E5%88%86%E6%AE%B5%E9%94%81.jpg" srcset="/img/loading.gif" alt="JDK1.7的ConcurrentHashMap"></p>
+<p><strong>JDK 1.8的ConcurrentHashMap（TreeBin: 红黑二叉树节点 Node: 链表节点）：</strong></p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/JDK1.8-ConcurrentHashMap-Structure.jpg" srcset="/img/loading.gif" alt="JDK1.8的ConcurrentHashMap"></p>
+</blockquote>
+<h3 id="ConcurrentHashMap线程安全的具体实现方式-底层具体实现？"><a href="#ConcurrentHashMap线程安全的具体实现方式-底层具体实现？" class="headerlink" title="ConcurrentHashMap线程安全的具体实现方式/底层具体实现？"></a>ConcurrentHashMap线程安全的具体实现方式/底层具体实现？</h3><blockquote>
+<h5 id="JDK-1-7（上面有示意图）"><a href="#JDK-1-7（上面有示意图）" class="headerlink" title="JDK 1.7（上面有示意图）"></a>JDK 1.7（上面有示意图）</h5><p>首先将数据分为一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据时，其他段的数据也能被其他线程访问。</p>
+<p><strong>ConcurrentHashMap 是由 Segment 数组结构和 HashEntry 数组结构组成</strong>。</p>
+<p>Segment 实现了 ReentrantLock,所以 Segment 是一种可重入锁，扮演锁的角色。HashEntry 用于存储键值对数据。</p>
+<pre><code class="hljs scala">static <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Segment&lt;K</span>,<span class="hljs-title">V&gt;</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">ReentrantLock</span> <span class="hljs-title">implements</span> <span class="hljs-title">Serializable</span> </span>&#123;
+&#125;</code></pre>
+
+<p>一个 ConcurrentHashMap 里包含一个 Segment 数组。Segment 的结构和HashMap类似，是一种数组和链表结构，一个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个链表结构的元素，每个 Segment 守护着一个HashEntry数组里的元素，当对 HashEntry 数组的数据进行修改时，必须首先获得对应的 Segment的锁。</p>
+<h5 id="JDK-1-8-（上面有示意图）"><a href="#JDK-1-8-（上面有示意图）" class="headerlink" title="JDK 1.8 （上面有示意图）"></a>JDK 1.8 （上面有示意图）</h5><p>ConcurrentHashMap取消了Segment分段锁，采用CAS和synchronized来保证并发安全。数据结构跟HashMap1.8的结构类似，数组+链表/红黑二叉树。Java 8在链表长度超过一定阈值（8）时将链表（寻址时间复杂度为O(N)）转换为红黑树（寻址时间复杂度为O(log(N))）</p>
+<p>synchronized只锁定当前链表或红黑二叉树的首节点，这样只要hash不冲突，就不会产生并发，效率又提升N倍。</p>
+</blockquote>
+<h3 id="构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK-7如何处理？"><a href="#构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK-7如何处理？" class="headerlink" title="构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK 7如何处理？"></a>构造相同hash的字符串进行攻击，这种情况应该怎么处理？JDK 7如何处理？</h3><blockquote>
+<p>攻击原理：</p>
+<p>当客户端发送一个请求到服务器，如果该请求中带有参数，服务器端会将参数名-参数值作为key-value保存在HashMap中。如果有人恶意构造请求，在请求中加入大量相同hash值的String参数名（key），那么在服务器端用于存储这些key-value对的HashMap会被强行退化成链表，如图： </p>
+<p>如果数据量足够大，那么在查找，插入时会占用大量CPU，达到拒绝服务攻击的目的。</p>
+<p>怎么处理：</p>
+<p>限制POST和GET请求的参数个数<br>限制POST请求的请求体大小<br>Web Application FireWall（WAF）</p>
+<p>JDK7如何处理：</p>
+<p>HashMap会动态的使用一个专门TreeMap实现来替换掉它。</p>
+</blockquote>
+<h3 id="Hash冲突的解决办法？"><a href="#Hash冲突的解决办法？" class="headerlink" title="Hash冲突的解决办法？"></a>Hash冲突的解决办法？</h3><blockquote>
+<p><a href="https://blog.csdn.net/yu849893679/article/details/82142265" target="_blank" rel="noopener">https://blog.csdn.net/yu849893679/article/details/82142265</a></p>
+</blockquote>
+<h3 id="LinkedHashMap的应用？"><a href="#LinkedHashMap的应用？" class="headerlink" title="LinkedHashMap的应用？"></a>LinkedHashMap的应用？</h3><blockquote>
+<p><a href="https://www.jianshu.com/p/8f4f58b4b8ab" target="_blank" rel="noopener">https://www.jianshu.com/p/8f4f58b4b8ab</a></p>
+</blockquote>
+<h3 id="ArrayList扩容机制？"><a href="#ArrayList扩容机制？" class="headerlink" title="ArrayList扩容机制？"></a>ArrayList扩容机制？</h3><blockquote>
+<p>详见笔主的这篇文章:<a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/ArrayList-Grow.md" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/collection/ArrayList-Grow.md</a></p>
+<h4 id="ArrayList-和-LinkedList-的区别是什么？"><a href="#ArrayList-和-LinkedList-的区别是什么？" class="headerlink" title="ArrayList 和 LinkedList 的区别是什么？"></a>ArrayList 和 LinkedList 的区别是什么？</h4><ul>
+<li><strong>1. 是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</li>
+<li><strong>2. 底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong>Object 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6之前为循环链表，JDK 1.7取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</li>
+<li><strong>3. 插入和删除是否受元素位置的影响：</strong> ① <strong>ArrayList 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。</strong> 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 ② <strong>LinkedList 采用链表存储，所以对于add(E e)方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O（1），如果是要在指定位置i插入和删除元素的话（(add(int index, E element)） 时间复杂度应为o(n))因为需要新创立一个新的链表，复制前i-1个元素并在第i位加入新的元素，最后附上n-i个元素。</strong></li>
+<li><strong>4. 是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</li>
+<li><strong>5. 内存空间占用：</strong> ArrayList的空 间浪费主要体现在在list列表的结尾会预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗比ArrayList更多的空间（因为要存放直接后继和直接前驱以及数据）。</li>
+</ul>
+<h5 id="补充内容-RandomAccess接口"><a href="#补充内容-RandomAccess接口" class="headerlink" title="补充内容:RandomAccess接口"></a><strong>补充内容:RandomAccess接口</strong></h5><pre><code class="hljs routeros">public<span class="hljs-built_in"> interface </span>RandomAccess &#123;
+&#125;</code></pre>
+
+<p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
+<p>在 <code>binarySearch（</code>）方法中，它要判断传入的list 是否 <code>RamdomAccess</code> 的实例，如果是，调用<code>indexedBinarySearch（）</code>方法，如果不是，那么调用<code>iteratorBinarySearch（）</code>方法</p>
+<pre><code class="hljs reasonml">public static &lt;T&gt;
 <span class="hljs-built_in">int</span> binary<span class="hljs-constructor">Search(List&lt;? <span class="hljs-params">extends</span> Comparable&lt;? <span class="hljs-params">super</span> T&gt;&gt; <span class="hljs-params">list</span>, T <span class="hljs-params">key</span>)</span> &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-built_in">list</span> instanceof RandomAccess<span class="hljs-operator"> || </span><span class="hljs-built_in">list</span>.size<span class="hljs-literal">()</span>&lt;BINARYSEARCH_THRESHOLD)
         return <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collections</span>.</span></span>indexed<span class="hljs-constructor">BinarySearch(<span class="hljs-params">list</span>, <span class="hljs-params">key</span>)</span>;
     <span class="hljs-keyword">else</span>
         return <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collections</span>.</span></span>iterator<span class="hljs-constructor">BinarySearch(<span class="hljs-params">list</span>, <span class="hljs-params">key</span>)</span>;
-&#125;</code></pre><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O（1），所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O（n），所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p><p><strong>下面再总结一下 list 的遍历方式选择：</strong></p><ul><li>实现了 <code>RandomAccess</code> 接口的list，优先选择普通 for 循环 ，其次 foreach,</li><li>未实现 <code>RandomAccess</code>接口的list，优先选择iterator遍历（foreach遍历底层也是通过iterator实现的,），大size的数据，千万不要使用普通for循环</li></ul><h5 id="补充内容-双向链表和双向循环链表"><a href="#补充内容-双向链表和双向循环链表" class="headerlink" title="补充内容:双向链表和双向循环链表"></a>补充内容:双向链表和双向循环链表</h5><p><strong>双向链表：</strong> 包含两个指针，一个prev指向前一个节点，一个next指向后一个节点。</p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" alt="双向链表"></p><p><strong>双向循环链表：</strong> 最后一个节点的 next 指向head，而 head 的prev指向最后一个节点，构成一个环。</p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" alt="双向循环链表"></p></blockquote><h3 id="ArrayList-和-Vector-的区别是什么？为什么要用ArrayList取代Vector呢？"><a href="#ArrayList-和-Vector-的区别是什么？为什么要用ArrayList取代Vector呢？" class="headerlink" title="ArrayList 和 Vector 的区别是什么？为什么要用ArrayList取代Vector呢？"></a>ArrayList 和 Vector 的区别是什么？为什么要用ArrayList取代Vector呢？</h3><blockquote><p><code>Vector</code>类的所有方法都是同步的。可以由两个线程安全地访问一个Vector对象、但是一个线程访问Vector的话代码要在同步操作上耗费大量的时间。</p><p><code>Arraylist</code>不是同步的，所以在不需要保证线程安全时建议使用ArrayList。</p></blockquote><h3 id="ArrayList-与-LinkedList-区别？"><a href="#ArrayList-与-LinkedList-区别？" class="headerlink" title="ArrayList 与 LinkedList 区别？"></a>ArrayList 与 LinkedList 区别？</h3><blockquote><ul><li><strong>1. 是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</li><li><strong>2. 底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK 1.6之前为循环链表，JDK 1.7取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</li><li><strong>3. 插入和删除是否受元素位置的影响：</strong> ① <strong><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。</strong> 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 ② <strong><code>LinkedList</code> 采用链表存储，所以对于<code>add(E e)</code>方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O（1），如果是要在指定位置<code>i</code>插入和删除元素的话（<code>(add(int index, E element)</code>） 时间复杂度近似为<code>o(n))</code>因为需要先移动到指定位置再插入。</strong></li><li><strong>4. 是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</li><li><strong>5. 内存空间占用：</strong> ArrayList的空 间浪费主要体现在在list列表的结尾会预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗比ArrayList更多的空间（因为要存放直接后继和直接前驱以及数据）。</li></ul></blockquote><h3 id="Array-和-ArrayList-有何区别？如何实现数组和-List-之间的转换？"><a href="#Array-和-ArrayList-有何区别？如何实现数组和-List-之间的转换？" class="headerlink" title="Array 和 ArrayList 有何区别？如何实现数组和 List 之间的转换？"></a>Array 和 ArrayList 有何区别？如何实现数组和 List 之间的转换？</h3><blockquote><p>Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。<br>Array大小是固定的，ArrayList的大小是动态变化的。<br>ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。<br>对于基本类型数据，集合使用自动装箱来减少编码工作量。但是，当处理固定大小的基本数据类型的时候，这种方式相对比较慢。</p><p>ArrayList可以算是Array的加强版，（对array有所取舍的加强）。</p><p>另附分类比较：</p><p><strong>存储内容比较：</strong></p><ul><li>​ Array数组可以包含基本类型和对象类型，</li><li>​ ArrayList却只能包含对象类型。</li></ul><p>​ 但是需要注意的是：Array数组在存放的时候一定是同种类型的元素。ArrayList就不一定了，因为ArrayList可以存储Object。</p><p><strong>空间大小比较：</strong></p><ul><li>​ 它的空间大小是固定的，空间不够时也不能再次申请，所以需要事前确定合适的空间大小。</li><li>​ ArrayList的空间是动态增长的，如果空间不够，它会创建一个空间比原空间大约0.5倍的新数组，然后将所有元素复制到新数组中，接着抛弃旧数组。而且，每次添加新的元素的时候都会检查内部数组的空间是否足够。（比较麻烦的地方）。</li></ul><p>​ 　　<strong>附上 arraylist 扩充机制：newCapacity=oldCapacity+(oldCapacity&gt;&gt;1)（注： &gt;&gt;1:右移1位，相当于除以2，例如10&gt;&gt;1 得到的就是5）但由于源码里（不再分析，这里简要略过）传过来的 minCapcatiy 的值是size+1，能够实现grow方法调用就肯定是 (size+1 ) &gt; elementData.length 的情况，所以size就是初始最大容量或上一次扩容后达到的最大容量，所以才会进行扩容。因此，扩容后的大小应该是原来的1.5倍+1</strong></p><p>​ <strong>方法上的比较：</strong><br>​ ArrayList作为Array的增强版，当然是在方法上比Array更多样化，比如添加全部addAll()、删除全部removeAll()、返回迭代器iterator()等。</p><p><strong>适用场景：</strong><br>如果想要保存一些在整个程序运行期间都会存在而且不变的数据，我们可以将它们放进一个全局数组里，但是如果我们单纯只是想要以数组的形式保存数据，而不对数据进行增加等操作，只是方便我们进行查找的话，那么，我们就选择ArrayList。而且还有一个地方是必须知道的，就是如果我们需要对元素进行频繁的移动或删除，或者是处理的是超大量的数据，那么，使用ArrayList就真的不是一个好的选择，因为它的效率很低，使用数组进行这样的动作就很麻烦，那么，我们可以考虑选择LinkedList。</p></blockquote><h3 id="在-Queue-中-poll-和-remove-有什么区别？"><a href="#在-Queue-中-poll-和-remove-有什么区别？" class="headerlink" title="在 Queue 中 poll()和 remove()有什么区别？"></a>在 Queue 中 poll()和 remove()有什么区别？</h3><blockquote><p><a href="https://blog.csdn.net/qq_41026809/article/details/90647569" target="_blank" rel="noopener">https://blog.csdn.net/qq_41026809/article/details/90647569</a></p><p>poll()和remove()都将<strong>移除</strong>并且返回对头，但是在poll()在队列为空时返回null，而remove()会抛出NoSuchElementException异常。</p></blockquote><h3 id="迭代器-Iterator-是什么？"><a href="#迭代器-Iterator-是什么？" class="headerlink" title="迭代器 Iterator 是什么？"></a>迭代器 Iterator 是什么？</h3><blockquote><p>迭代器是一种设计模式，它是一个对象，它可以遍历并选择序列中的对象，而开发人员不需要了解该序列的底层结构。迭代器通常被称为“轻量级”对象，因为创建它的代价小。</p><p>Java中的Iterator功能比较简单，并且只能单向移动：</p><p>(1) 使用方法iterator()要求容器返回一个Iterator。第一次调用Iterator的next()方法时，它返回序列的第一个元素。注意：iterator()方法是java.lang.Iterable接口,被Collection继承。</p><p>(2) 使用next()获得序列中的下一个元素。</p><p>(3) 使用hasNext()检查序列中是否还有元素。</p><p>(4) 使用remove()将迭代器新返回的元素删除。Iterator是Java迭代器最简单的实现，为List设计的ListIterator具有更多的功能，它可以从两个方向遍历List，也可以从List中插入和删除元素。</p></blockquote><h3 id="Iterator-怎么使用？有什么特点？"><a href="#Iterator-怎么使用？有什么特点？" class="headerlink" title="Iterator 怎么使用？有什么特点？"></a>Iterator 怎么使用？有什么特点？</h3><blockquote><p><a href="https://blog.csdn.net/meism5/article/details/89917376" target="_blank" rel="noopener">https://blog.csdn.net/meism5/article/details/89917376</a></p></blockquote><h3 id="Iterator-和-ListIterator有什么区别？"><a href="#Iterator-和-ListIterator有什么区别？" class="headerlink" title="Iterator 和 ListIterator有什么区别？"></a>Iterator 和 ListIterator有什么区别？</h3><blockquote><p>Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List。<br>Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向。<br>ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/733131_1470636931013_13A06D025548C29F6AAFF3CB2EE0CCCF.png" srcset="/img/loading.gif" alt="img"></p><p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/733131_1470636870149_A99B8AC1B2797AE567C4F897B8902D94.png" srcset="/img/loading.gif" alt="img"></p><p>我们在使用List,Set的时候，为了实现对其数据的遍历，我们经常使用到了Iterator(迭代器)。使用迭代器，你不需要干涉其遍历的过程，只需要每次取出一个你想要的数据进行处理就可以了。</p><p>但是在使用的时候也是有不同的。List和Set都有iterator()来取得其迭代器。对List来说，你也可以通过listIterator()取得其迭代器，两种迭代器在有些时候是不能通用的，Iterator和ListIterator主要区别在以下方面：</p><ol><li><p>ListIterator有add()方法，可以向List中添加对象，而Iterator不能</p></li><li><p>ListIterator和Iterator都有hasNext()和next()方法，可以实现顺序向后遍历，但是ListIterator有hasPrevious()和previous()方法，可以实现逆向（顺序向前）遍历。Iterator就不可以。</p></li><li><p>ListIterator可以定位当前的索引位置，nextIndex()和previousIndex()可以实现。Iterator没有此功能。</p></li><li><p>都可实现删除对象，但是ListIterator可以实现对象的修改，set()方法可以实现。Iierator仅能遍历，不能修改。</p></li></ol><p>因为ListIterator的这些功能，可以实现对LinkedList等List数据结构的操作。其实，数组对象也可以用迭代器来实现。</p><pre><code class="hljs basic"><span class="hljs-symbol">1 </span>import java.util.LinkedList;
+&#125;</code></pre>
+
+<p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O（1），所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O（n），所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+<p><strong>下面再总结一下 list 的遍历方式选择：</strong></p>
+<ul>
+<li>实现了 <code>RandomAccess</code> 接口的list，优先选择普通 for 循环 ，其次 foreach,</li>
+<li>未实现 <code>RandomAccess</code>接口的list，优先选择iterator遍历（foreach遍历底层也是通过iterator实现的,），大size的数据，千万不要使用普通for循环</li>
+</ul>
+<h5 id="补充内容-双向链表和双向循环链表"><a href="#补充内容-双向链表和双向循环链表" class="headerlink" title="补充内容:双向链表和双向循环链表"></a>补充内容:双向链表和双向循环链表</h5><p><strong>双向链表：</strong> 包含两个指针，一个prev指向前一个节点，一个next指向后一个节点。</p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" alt="双向链表"></p>
+<p><strong>双向循环链表：</strong> 最后一个节点的 next 指向head，而 head 的prev指向最后一个节点，构成一个环。</p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.png" srcset="/img/loading.gif" alt="双向循环链表"></p>
+</blockquote>
+<h3 id="ArrayList-和-Vector-的区别是什么？为什么要用ArrayList取代Vector呢？"><a href="#ArrayList-和-Vector-的区别是什么？为什么要用ArrayList取代Vector呢？" class="headerlink" title="ArrayList 和 Vector 的区别是什么？为什么要用ArrayList取代Vector呢？"></a>ArrayList 和 Vector 的区别是什么？为什么要用ArrayList取代Vector呢？</h3><blockquote>
+<p><code>Vector</code>类的所有方法都是同步的。可以由两个线程安全地访问一个Vector对象、但是一个线程访问Vector的话代码要在同步操作上耗费大量的时间。</p>
+<p><code>Arraylist</code>不是同步的，所以在不需要保证线程安全时建议使用ArrayList。</p>
+</blockquote>
+<h3 id="ArrayList-与-LinkedList-区别？"><a href="#ArrayList-与-LinkedList-区别？" class="headerlink" title="ArrayList 与 LinkedList 区别？"></a>ArrayList 与 LinkedList 区别？</h3><blockquote>
+<ul>
+<li><strong>1. 是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</li>
+<li><strong>2. 底层数据结构：</strong> <code>Arraylist</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK 1.6之前为循环链表，JDK 1.7取消了循环。注意双向链表和双向循环链表的区别，下面有介绍到！）</li>
+<li><strong>3. 插入和删除是否受元素位置的影响：</strong> ① <strong><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。</strong> 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。 ② <strong><code>LinkedList</code> 采用链表存储，所以对于<code>add(E e)</code>方法的插入，删除元素时间复杂度不受元素位置的影响，近似 O（1），如果是要在指定位置<code>i</code>插入和删除元素的话（<code>(add(int index, E element)</code>） 时间复杂度近似为<code>o(n))</code>因为需要先移动到指定位置再插入。</strong></li>
+<li><strong>4. 是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code> 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</li>
+<li><strong>5. 内存空间占用：</strong> ArrayList的空 间浪费主要体现在在list列表的结尾会预留一定的容量空间，而LinkedList的空间花费则体现在它的每一个元素都需要消耗比ArrayList更多的空间（因为要存放直接后继和直接前驱以及数据）。</li>
+</ul>
+</blockquote>
+<h3 id="Array-和-ArrayList-有何区别？如何实现数组和-List-之间的转换？"><a href="#Array-和-ArrayList-有何区别？如何实现数组和-List-之间的转换？" class="headerlink" title="Array 和 ArrayList 有何区别？如何实现数组和 List 之间的转换？"></a>Array 和 ArrayList 有何区别？如何实现数组和 List 之间的转换？</h3><blockquote>
+<p>Array可以包含基本类型和对象类型，ArrayList只能包含对象类型。<br>Array大小是固定的，ArrayList的大小是动态变化的。<br>ArrayList提供了更多的方法和特性，比如：addAll()，removeAll()，iterator()等等。<br>对于基本类型数据，集合使用自动装箱来减少编码工作量。但是，当处理固定大小的基本数据类型的时候，这种方式相对比较慢。</p>
+<p>ArrayList可以算是Array的加强版，（对array有所取舍的加强）。   </p>
+<p>另附分类比较：</p>
+<p><strong>存储内容比较：</strong></p>
+<ul>
+<li>​     Array数组可以包含基本类型和对象类型，        </li>
+<li>​     ArrayList却只能包含对象类型。      </li>
+</ul>
+<p>​      但是需要注意的是：Array数组在存放的时候一定是同种类型的元素。ArrayList就不一定了，因为ArrayList可以存储Object。</p>
+<p><strong>空间大小比较：</strong></p>
+<ul>
+<li>​          它的空间大小是固定的，空间不够时也不能再次申请，所以需要事前确定合适的空间大小。        </li>
+<li>​          ArrayList的空间是动态增长的，如果空间不够，它会创建一个空间比原空间大约0.5倍的新数组，然后将所有元素复制到新数组中，接着抛弃旧数组。而且，每次添加新的元素的时候都会检查内部数组的空间是否足够。（比较麻烦的地方）。      </li>
+</ul>
+<p>​        　　<strong>附上 arraylist 扩充机制：newCapacity=oldCapacity+(oldCapacity&gt;&gt;1)（注： &gt;&gt;1:右移1位，相当于除以2，例如10&gt;&gt;1 得到的就是5）但由于源码里（不再分析，这里简要略过）传过来的 minCapcatiy 的值是size+1，能够实现grow方法调用就肯定是 (size+1 ) &gt; elementData.length 的情况，所以size就是初始最大容量或上一次扩容后达到的最大容量，所以才会进行扩容。因此，扩容后的大小应该是原来的1.5倍+1</strong></p>
+<p>​        <strong>方法上的比较：</strong><br>​        ArrayList作为Array的增强版，当然是在方法上比Array更多样化，比如添加全部addAll()、删除全部removeAll()、返回迭代器iterator()等。   </p>
+<p> <strong>适用场景：</strong><br>        如果想要保存一些在整个程序运行期间都会存在而且不变的数据，我们可以将它们放进一个全局数组里，但是如果我们单纯只是想要以数组的形式保存数据，而不对数据进行增加等操作，只是方便我们进行查找的话，那么，我们就选择ArrayList。而且还有一个地方是必须知道的，就是如果我们需要对元素进行频繁的移动或删除，或者是处理的是超大量的数据，那么，使用ArrayList就真的不是一个好的选择，因为它的效率很低，使用数组进行这样的动作就很麻烦，那么，我们可以考虑选择LinkedList。</p>
+</blockquote>
+<h3 id="在-Queue-中-poll-和-remove-有什么区别？"><a href="#在-Queue-中-poll-和-remove-有什么区别？" class="headerlink" title="在 Queue 中 poll()和 remove()有什么区别？"></a>在 Queue 中 poll()和 remove()有什么区别？</h3><blockquote>
+<p><a href="https://blog.csdn.net/qq_41026809/article/details/90647569" target="_blank" rel="noopener">https://blog.csdn.net/qq_41026809/article/details/90647569</a></p>
+<p>poll()和remove()都将<strong>移除</strong>并且返回对头，但是在poll()在队列为空时返回null，而remove()会抛出NoSuchElementException异常。</p>
+</blockquote>
+<h3 id="迭代器-Iterator-是什么？"><a href="#迭代器-Iterator-是什么？" class="headerlink" title="迭代器 Iterator 是什么？"></a>迭代器 Iterator 是什么？</h3><blockquote>
+<p>迭代器是一种设计模式，它是一个对象，它可以遍历并选择序列中的对象，而开发人员不需要了解该序列的底层结构。迭代器通常被称为“轻量级”对象，因为创建它的代价小。</p>
+<p>Java中的Iterator功能比较简单，并且只能单向移动：</p>
+<p>(1) 使用方法iterator()要求容器返回一个Iterator。第一次调用Iterator的next()方法时，它返回序列的第一个元素。注意：iterator()方法是java.lang.Iterable接口,被Collection继承。</p>
+<p>(2) 使用next()获得序列中的下一个元素。</p>
+<p>(3) 使用hasNext()检查序列中是否还有元素。</p>
+<p>(4) 使用remove()将迭代器新返回的元素删除。Iterator是Java迭代器最简单的实现，为List设计的ListIterator具有更多的功能，它可以从两个方向遍历List，也可以从List中插入和删除元素。</p>
+</blockquote>
+<h3 id="Iterator-怎么使用？有什么特点？"><a href="#Iterator-怎么使用？有什么特点？" class="headerlink" title="Iterator 怎么使用？有什么特点？"></a>Iterator 怎么使用？有什么特点？</h3><blockquote>
+<p><a href="https://blog.csdn.net/meism5/article/details/89917376" target="_blank" rel="noopener">https://blog.csdn.net/meism5/article/details/89917376</a></p>
+</blockquote>
+<h3 id="Iterator-和-ListIterator有什么区别？"><a href="#Iterator-和-ListIterator有什么区别？" class="headerlink" title="Iterator 和 ListIterator有什么区别？"></a>Iterator 和 ListIterator有什么区别？</h3><blockquote>
+<p>Iterator可用来遍历Set和List集合，但是ListIterator只能用来遍历List。<br>Iterator对集合只能是前向遍历，ListIterator既可以前向也可以后向。<br>ListIterator实现了Iterator接口，并包含其他的功能，比如：增加元素，替换元素，获取前一个和后一个元素的索引，等等。</p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/733131_1470636931013_13A06D025548C29F6AAFF3CB2EE0CCCF.png" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/733131_1470636870149_A99B8AC1B2797AE567C4F897B8902D94.png" srcset="/img/loading.gif" alt="img"></p>
+<p>我们在使用List,Set的时候，为了实现对其数据的遍历，我们经常使用到了Iterator(迭代器)。使用迭代器，你不需要干涉其遍历的过程，只需要每次取出一个你想要的数据进行处理就可以了。</p>
+<p>但是在使用的时候也是有不同的。List和Set都有iterator()来取得其迭代器。对List来说，你也可以通过listIterator()取得其迭代器，两种迭代器在有些时候是不能通用的，Iterator和ListIterator主要区别在以下方面：</p>
+<ol>
+<li><p>ListIterator有add()方法，可以向List中添加对象，而Iterator不能</p>
+</li>
+<li><p>ListIterator和Iterator都有hasNext()和next()方法，可以实现顺序向后遍历，但是ListIterator有hasPrevious()和previous()方法，可以实现逆向（顺序向前）遍历。Iterator就不可以。</p>
+</li>
+<li><p>ListIterator可以定位当前的索引位置，nextIndex()和previousIndex()可以实现。Iterator没有此功能。</p>
+</li>
+<li><p>都可实现删除对象，但是ListIterator可以实现对象的修改，set()方法可以实现。Iierator仅能遍历，不能修改。</p>
+</li>
+</ol>
+<p>因为ListIterator的这些功能，可以实现对LinkedList等List数据结构的操作。其实，数组对象也可以用迭代器来实现。</p>
+<pre><code class="hljs basic"><span class="hljs-symbol">1 </span>import java.util.LinkedList;
 <span class="hljs-symbol">2 </span>import java.util.<span class="hljs-keyword">List</span>;
 <span class="hljs-symbol">3 </span>import java.util.ListIterator;
 <span class="hljs-symbol">4 </span>public class TestListIterator
@@ -136,7 +678,267 @@ static final <span class="hljs-built_in">int</span> tableSizeFor(<span class="hl
 <span class="hljs-symbol">45 </span>  <span class="hljs-keyword">list</span>.add(<span class="hljs-string">"元素三"</span>);
 <span class="hljs-symbol">46 </span>  <span class="hljs-keyword">list</span>.add(<span class="hljs-string">"元素四"</span>);
 <span class="hljs-symbol">47 </span> &#125;
-<span class="hljs-symbol">48 </span>&#125;</code></pre><p>Iterator模式是用于遍历集合类的标准访问方法。它可以把访问逻辑从不同类型的集合类中抽象出来，从而避免向客户端暴露集合的内部结构。</p><p>例如，如果没有使用Iterator，遍历一个数组的方法是使用索引：<br>for(int i=0; i&lt;array.size(); i++) { … get(i) … }</p><p>客户端都必须事先知道集合的内部结构，访问代码和集合本身是紧耦合，无法将访问逻辑从集合类和客户端代码中分离出来，每一种集合对应一种遍历方法，客户端代码无法复用。更恐怖的是，如果以后需要把ArrayList更换为LinkedList，则原来的客户端代码必须全部重写。为解决以上问题，Iterator模式总是用同一种逻辑来遍历集合：</p><p>​ for(Iterator it = c.iterater(); it.hasNext(); ) { … }</p><p>奥秘在于客户端自身不维护遍历集合的”指针”，所有的内部状态（如当前元素位置，是否有下一个元素）都由Iterator来维护，而这个Iterator由集合类通过工厂方法生成，因此，它知道如何遍历整个集合。</p><p>客户端从不直接和集合类打交道，它总是控制Iterator，向它发送”向前”，”向后”，”取当前元素”的命令，就可以间接遍历整个集合。</p></blockquote><h3 id="怎么确保一个集合不能被修改？"><a href="#怎么确保一个集合不能被修改？" class="headerlink" title="怎么确保一个集合不能被修改？"></a>怎么确保一个集合不能被修改？</h3><blockquote><p>我们很容易想到用final关键字进行修饰，我们都知道</p><p>final关键字可以修饰类，方法，成员变量，final修饰的类不能被继承，final修饰的方法不能被重写，final修饰的成员变量必须初始化值，如果这个成员变量是基本数据类型，表示这个变量的值是不可改变的，如果说这个成员变量是引用类型，则表示这个引用的地址值是不能改变的，但是这个引用所指向的对象里面的内容还是可以改变的<br>。</p><p>那么，我们怎么确保一个集合不能被修改？首先我们要清楚，集合（map,set,list…）都是引用类型，所以我们如果用final修饰的话，集合里面的内容还是可以修改的。</p><p>我们可以做一个实验：</p><p>可以看到：我们用final关键字定义了一个map集合，这时候我们往集合里面传值，第一个键值对1,1；我们再修改后，可以把键为1的值改为100，说明我们是可以修改map集合的值的。</p><p>那我们应该怎么做才能确保集合不被修改呢？<br>我们可以采用Collections包下的unmodifiableMap方法，通过这个方法返回的map,是不可以修改的。他会报 java.lang.UnsupportedOperationException错。</p><p>同理：Collections包也提供了对list和set集合的方法。<br>Collections.unmodifiableList(List)<br>Collections.unmodifiableSet(Set)</p></blockquote><h3 id="如何选用集合"><a href="#如何选用集合" class="headerlink" title="如何选用集合"></a>如何选用集合</h3><blockquote><p>主要根据集合的特点来选用，比如我们需要根据键值获取到元素值时就选用Map接口下的集合，需要排序时选择TreeMap,不需要排序时就选择HashMap,需要保证线程安全就选用ConcurrentHashMap.当我们只需要存放元素值时，就选择实现Collection接口的集合，需要保证元素唯一时选择实现Set接口的集合比如TreeSet或HashSet，不需要就选择实现List接口的比如ArrayList或LinkedList，然后再根据实现这些接口的集合的特点来选用。</p></blockquote></article><hr><div><div class="post-metas mb-3"><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a class="hover-with-bg" href="/categories/Java%E9%9B%86%E5%90%88%E7%AF%87/">Java集合篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a class="hover-with-bg" href="/tags/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a></div></div><p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p><div class="post-prevnext row"><div class="post-prev col-6"><a href="/2020/04/28/%E7%AE%97%E6%B3%95%E7%AF%87/"><i class="iconfont icon-arrowleft"></i> <span class="hidden-mobile">算法篇</span> <span class="visible-mobile">上一篇</span></a></div><div class="post-next col-6"><a href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/"><span class="hidden-mobile">RocketMQ-消息队列篇</span> <span class="visible-mobile">下一篇</span> <i class="iconfont icon-arrowright"></i></a></div></div></div><div class="comments" id="comments"><div id="vcomments"></div><script type="text/javascript">function loadValine(){addScript("https://cdn.staticfile.org/valine/1.4.14/Valine.min.js",function(){new Valine({el:"#vcomments",app_id:"6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",app_key:"oc2dzMKP9uJXsnOOhIxAr94f",placeholder:"说点什么吧~",path:window.location.pathname,avatar:"retro",meta:["nick","mail","link"],pageSize:"10",lang:"zh-CN",highlight:!0,recordIP:!1,serverURLs:""})})}createObserver(loadValine,"vcomments")</script><noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments powered by Valine.</a></noscript></div></div></div></div></div><div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn"><div id="toc"><p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p><div id="tocbot"></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js"></script><script>$(document).ready(function(){var t=$("#board-ctn").offset().top;tocbot.init({tocSelector:"#tocbot",contentSelector:"article.markdown-body",headingSelector:"h1,h2,h3,h4,h5,h6",linkClass:"tocbot-link",activeLinkClass:"tocbot-active-link",listClass:"tocbot-list",isCollapsedClass:"tocbot-is-collapsed",collapsibleClass:"tocbot-is-collapsible",collapseDepth:6,scrollSmooth:!0,headingsOffset:-t}),0<$(".toc-list-item").length&&$("#toc").css("visibility","visible")})</script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","Java集合框架&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js"></script><script>anchors.options = {
+<span class="hljs-symbol">48 </span>&#125;</code></pre>
+
+<p>Iterator模式是用于遍历集合类的标准访问方法。它可以把访问逻辑从不同类型的集合类中抽象出来，从而避免向客户端暴露集合的内部结构。</p>
+<p>例如，如果没有使用Iterator，遍历一个数组的方法是使用索引：<br> for(int i=0; i&lt;array.size(); i++) { … get(i) … } </p>
+<p>客户端都必须事先知道集合的内部结构，访问代码和集合本身是紧耦合，无法将访问逻辑从集合类和客户端代码中分离出来，每一种集合对应一种遍历方法，客户端代码无法复用。更恐怖的是，如果以后需要把ArrayList更换为LinkedList，则原来的客户端代码必须全部重写。为解决以上问题，Iterator模式总是用同一种逻辑来遍历集合：</p>
+<p>​     for(Iterator it = c.iterater(); it.hasNext(); ) { … }</p>
+<p>奥秘在于客户端自身不维护遍历集合的”指针”，所有的内部状态（如当前元素位置，是否有下一个元素）都由Iterator来维护，而这个Iterator由集合类通过工厂方法生成，因此，它知道如何遍历整个集合。</p>
+<p>客户端从不直接和集合类打交道，它总是控制Iterator，向它发送”向前”，”向后”，”取当前元素”的命令，就可以间接遍历整个集合。</p>
+</blockquote>
+<h3 id="怎么确保一个集合不能被修改？"><a href="#怎么确保一个集合不能被修改？" class="headerlink" title="怎么确保一个集合不能被修改？"></a>怎么确保一个集合不能被修改？</h3><blockquote>
+<p>我们很容易想到用final关键字进行修饰，我们都知道</p>
+<p>final关键字可以修饰类，方法，成员变量，final修饰的类不能被继承，final修饰的方法不能被重写，final修饰的成员变量必须初始化值，如果这个成员变量是基本数据类型，表示这个变量的值是不可改变的，如果说这个成员变量是引用类型，则表示这个引用的地址值是不能改变的，但是这个引用所指向的对象里面的内容还是可以改变的<br>。</p>
+<p>那么，我们怎么确保一个集合不能被修改？首先我们要清楚，集合（map,set,list…）都是引用类型，所以我们如果用final修饰的话，集合里面的内容还是可以修改的。</p>
+<p>我们可以做一个实验：</p>
+<p>可以看到：我们用final关键字定义了一个map集合，这时候我们往集合里面传值，第一个键值对1,1；我们再修改后，可以把键为1的值改为100，说明我们是可以修改map集合的值的。</p>
+<p>那我们应该怎么做才能确保集合不被修改呢？<br>我们可以采用Collections包下的unmodifiableMap方法，通过这个方法返回的map,是不可以修改的。他会报 java.lang.UnsupportedOperationException错。</p>
+<p>同理：Collections包也提供了对list和set集合的方法。<br>Collections.unmodifiableList(List)<br>Collections.unmodifiableSet(Set)</p>
+</blockquote>
+<h3 id="如何选用集合"><a href="#如何选用集合" class="headerlink" title="如何选用集合"></a>如何选用集合</h3><blockquote>
+<p>主要根据集合的特点来选用，比如我们需要根据键值获取到元素值时就选用Map接口下的集合，需要排序时选择TreeMap,不需要排序时就选择HashMap,需要保证线程安全就选用ConcurrentHashMap.当我们只需要存放元素值时，就选择实现Collection接口的集合，需要保证元素唯一时选择实现Set接口的集合比如TreeSet或HashSet，不需要就选择实现List接口的比如ArrayList或LinkedList，然后再根据实现这些接口的集合的特点来选用。</p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E9%9B%86%E5%90%88%E7%AF%87/">Java集合篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/28/%E7%AE%97%E6%B3%95%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/">
+                        <span class="hidden-mobile">RocketMQ-消息队列篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Java集合框架&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
       placement: "right",
       visible: "hover",
       
@@ -146,4 +948,62 @@ static final <span class="hljs-built_in">int</span> tableSizeFor(<span class="hl
     for (item of el) {
       res.push(".markdown-body > " + item)
     }
-    anchors.add(res.join(", "))</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script><script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js"></script><link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css"><script>$("#post img:not(.no-zoom img, img[no-zoom]), img[zoom]").each(function(){var t=document.createElement("a");$(t).attr("data-fancybox","images"),$(t).attr("href",$(this).attr("src")),$(this).wrap(t)})</script><script src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js"></script><script>window.mermaid&&mermaid.initialize({theme:"default"})</script></body></html>
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

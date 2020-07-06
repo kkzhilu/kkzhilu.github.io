@@ -1,3 +1,683 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png"><link rel="icon" type="image/png" href="/img/favicon.png"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no"><meta http-equiv="x-ua-compatible" content="ie=edge"><meta name="theme-color" content="#2f4154"><meta name="description" content="一切都是有可能的，甚至那些不可能的也是."><meta name="author" content="Kerwin"><meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;"><title>Kerwin&#39;s Blog</title><link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css"><link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css"><link rel="stylesheet" href="/css/main.css"><script src="/js/utils.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><header style="height:100vh"><nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"><div class="container"><a class="navbar-brand" href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a> <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><div class="animated-icon"><span></span><span></span><span></span></div></button><div class="collapse navbar-collapse" id="navbarSupportedContent"><ul class="navbar-nav ml-auto text-center"><li class="nav-item"><a class="nav-link" href="/"><i class="iconfont icon-home-fill"></i> 首页</a></li><li class="nav-item"><a class="nav-link" href="/archives/"><i class="iconfont icon-archive-fill"></i> 归档</a></li><li class="nav-item"><a class="nav-link" href="/categories/"><i class="iconfont icon-category-fill"></i> 分类</a></li><li class="nav-item"><a class="nav-link" href="/tags/"><i class="iconfont icon-tags-fill"></i> 标签</a></li><li class="nav-item"><a class="nav-link" href="/about/"><i class="iconfont icon-user-fill"></i> 关于</a></li><li class="nav-item" id="search-btn"><a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a></li></ul></div></div></nav><div class="view intro-2" id="background" parallax="true" style="background:url(/img/index.jpg) no-repeat center center;background-size:cover"><div class="full-bg-img"><div class="mask flex-center" style="background-color:rgba(0,0,0,.3)"><div class="container text-center white-text fadeInUp"><span class="h2" id="subtitle"></span></div><div class="scroll-down-bar"><i class="iconfont icon-arrowdown"></i></div></div></div></div></header><main><div class="container nopadding-md"><div class="py-5" id="board" style="margin-top:0"><div class="container"><div class="row"><div class="col-12 col-md-10 m-auto"><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" target="_self"><img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="Java集合框架"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a> <a href="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" class="index-excerpt"><div>Java集合框架一、基本概念1.集合框架图2. Collection集合的顶层接口，不能被实例化a) 根接口Collection i. 常用子接口  1. List   实现类：ArrayList、Vector、LinkedList  2. Set   实现类：HashSet、TreeSetb) 添加功能 i. boolean add(object obj)添加一个元素 ii. boolean a</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/Java%E9%9B%86%E5%90%88%E7%AF%87/">Java集合篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/" target="_self"><img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="RocketMQ-消息队列篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/">RocketMQ-消息队列篇</a> <a href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/" class="index-excerpt"><div>RocketMQ-消息队列篇Windows安装部署下载地址：[https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.5.2/rocketmq-all-4.5.2-bin-release.zip]选择‘Binary’进行下载解压已下载工程配置新增系统变量ROCKETMQ_HOME -&gt; F:\RocketMQ\rocketmq-4.5.2J</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E4%B8%BB%E6%B5%81%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%E7%AF%87/">主流技术组件篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/">RocketMQ-消息队列篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Redis%E7%AF%87/" target="_self"><img src="/img/articles/14.jpg" srcset="/img/loading.gif" alt="Redis篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Redis%E7%AF%87/">Redis篇</a> <a href="/2020/04/28/Redis%E7%AF%87/" class="index-excerpt"><div>Redis篇Windows Redis安装链接: https://pan.baidu.com/s/1MJnzX_qRuNXJI09euzkPGA 提取码: 2c6w 复制这段内容后打开百度网盘手机App，操作更方便哦无脑下一步即可使用出现错误：creating server tcp listening socket 127.0.0.1:6379: bind No error解决方案：redis-c</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E4%B8%BB%E6%B5%81%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%E7%AF%87/">主流技术组件篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Redis%E7%AF%87/">Redis篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/" target="_self"><img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="数据结构篇"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/">数据结构篇</a> <a href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/" class="index-excerpt"><div>数据结构一、线性表概念：线性表是最常用且最简单的一种数据结构，它是n个数据元素的有限序列实现线性表的方式一般有两种，一种是使用数组存储线性表的元素，即用一组连续的存储单元依次存储线性表的数据元素另一种是使用链表存储线性表的元素，即用一组任意的存储单元存储线性表的数据元素（存储单元可以是连续的，也可以是不连续的）1.1 数组概念：数组是一种大小固定的数据结构，对线性表的所有操作都可以通过数组来实现虽</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95%E7%AF%87/">数据结构及算法篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/">数据结构篇</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/" target="_self"><img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="Java框架相关"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/">Java框架相关</a> <a href="/2020/04/28/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/" class="index-excerpt"><div>Java框架相关一、知识点前言在 Spring 中，那些组成应用程序的主体及由 Spring IOC 容器所管理的对象，被称之为 bean。简单地讲，bean 就是由 IOC 容器初始化、装配及管理的对象，除此之外，bean 就与应用程序中的其他对象没有什么区别了。而 bean 的定义以及 bean 相互间的依赖关系将通过配置元数据来描述。Spring中的bean默认都是单例的，这些单例Bean在</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/Java%E6%A1%86%E6%9E%B6%E7%AF%87/">Java框架篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/">Java框架相关</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self"><img src="/img/articles/3.jpg" srcset="/img/loading.gif" alt="Java并发编程"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">Java并发编程</a> <a href="/2020/04/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="index-excerpt"><div>Java并发编程一、基本概念1.线程状态转换2. Java实现多线程的方式及三种方式的区别实现多线程的方式​ –继承Thread类，重写run函数​ –实现Runnable接口​ –实现Callable接口三种方式的区别​ –实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相同程序代码的线程去处理同一资源的情况。</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87/">Java并发编程篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">Java并发编程</a></div></div></div></div><div class="row mx-auto index-card"><div class="col-12 col-md-4 m-auto index-img"><a href="/2020/04/28/Java%E5%9F%BA%E7%A1%80/" target="_self"><img src="/img/articles/4.jpg" srcset="/img/loading.gif" alt="Java基础"></a></div><div class="col-12 col-md-8 mx-auto index-info"><a class="index-header" href="/2020/04/28/Java%E5%9F%BA%E7%A1%80/">Java基础</a> <a href="/2020/04/28/Java%E5%9F%BA%E7%A1%80/" class="index-excerpt"><div>Java基础一、基本概念1.反射、注解、泛型反射什么是反射　　反射 (Reflection) 是 Java 程序开发语言的特征之一，它允许运行中的 Java 程序获取自身的信息，并且可以操作类或对象的内部属性。通过 Class 获取 class 信息称之为反射（Reflection）　　简而言之，通过反射，我们可以在运行时获得程序或程序集中每一个类型的成员和成员的信息。　　程序中一般的对象的类型都</div></a><div class="index-btm post-metas"><div class="post-meta mr-3"><i class="iconfont icon-date"></i>&nbsp;2020-04-28</div><div class="post-meta mr-3"><i class="iconfont icon-category"></i> <a href="/categories/Java%E5%9F%BA%E7%A1%80%E7%AF%87/">Java基础篇</a></div><div class="post-meta"><i class="iconfont icon-tags"></i> <a href="/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a></div></div></div></div><nav aria-label="navigation"><span class="pagination" id="pagination"><a class="extend prev" rel="prev" href="/page/8/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span></span></nav><script>for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" target="_self">
+          <img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="Java集合框架">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a>
+
+      <a href="/2020/04/28/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Java集合框架一、基本概念1.集合框架图
+2. Collection
+集合的顶层接口，不能被实例化a)    根接口Collection i.    常用子接口  1.    List   实现类：ArrayList、Vector、LinkedList  2.    Set   实现类：HashSet、TreeSetb)    添加功能 i.    boolean add(object obj)</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E9%9B%86%E5%90%88%E7%AF%87/">Java集合篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">Java集合框架</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/" target="_self">
+          <img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="RocketMQ-消息队列篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/">RocketMQ-消息队列篇</a>
+
+      <a href="/2020/04/28/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>RocketMQ-消息队列篇Windows安装部署下载地址：[https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.5.2/rocketmq-all-4.5.2-bin-release.zip]
+选择‘Binary’进行下载
+解压已下载工程
+配置
+新增系统变量ROCKETMQ_HOME  -&gt;  F:\RocketMQ\rocketmq-</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E4%B8%BB%E6%B5%81%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%E7%AF%87/">主流技术组件篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/">RocketMQ-消息队列篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Redis%E7%AF%87/" target="_self">
+          <img src="/img/articles/14.jpg" srcset="/img/loading.gif" alt="Redis篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Redis%E7%AF%87/">Redis篇</a>
+
+      <a href="/2020/04/28/Redis%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Redis篇Windows Redis安装链接: https://pan.baidu.com/s/1MJnzX_qRuNXJI09euzkPGA 提取码: 2c6w 复制这段内容后打开百度网盘手机App，操作更方便哦
+无脑下一步即可
+使用出现错误：
+creating server tcp listening socket 127.0.0.1:6379: bind No error
+解决方案：
+
+r</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E4%B8%BB%E6%B5%81%E6%8A%80%E6%9C%AF%E7%BB%84%E4%BB%B6%E7%AF%87/">主流技术组件篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Redis%E7%AF%87/">Redis篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/" target="_self">
+          <img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="数据结构篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/">数据结构篇</a>
+
+      <a href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>数据结构一、线性表
+概念：线性表是最常用且最简单的一种数据结构，它是n个数据元素的有限序列
+实现线性表的方式一般有两种，一种是使用数组存储线性表的元素，即用一组连续的存储单元依次存储线性表的数据元素
+另一种是使用链表存储线性表的元素，即用一组任意的存储单元存储线性表的数据元素（存储单元可以是连续的，也可以是不连续的）
+
+1.1 数组
+概念：数组是一种大小固定的数据结构，对线性表的所有操作都可以通过</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95%E7%AF%87/">数据结构及算法篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/">数据结构篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/" target="_self">
+          <img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="Java框架相关">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/">Java框架相关</a>
+
+      <a href="/2020/04/28/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Java框架相关一、知识点前言
+在 Spring 中，那些组成应用程序的主体及由 Spring IOC 容器所管理的对象，被称之为 bean。简单地讲，bean 就是由 IOC 容器初始化、装配及管理的对象，除此之外，bean 就与应用程序中的其他对象没有什么区别了。而 bean 的定义以及 bean 相互间的依赖关系将通过配置元数据来描述。
+Spring中的bean默认都是单例的，这些单例Bea</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E6%A1%86%E6%9E%B6%E7%AF%87/">Java框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java%E6%A1%86%E6%9E%B6%E7%9B%B8%E5%85%B3/">Java框架相关</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" target="_self">
+          <img src="/img/articles/3.jpg" srcset="/img/loading.gif" alt="Java并发编程">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">Java并发编程</a>
+
+      <a href="/2020/04/28/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Java并发编程一、基本概念1.线程状态转换
+2. Java实现多线程的方式及三种方式的区别
+实现多线程的方式
+​    –继承Thread类，重写run函数
+​    –实现Runnable接口
+​    –实现Callable接口
+三种方式的区别
+​    –实现Runnable接口可以避免Java单继承特性而带来的局限；增强程序的健壮性，代码能够被多个线程共享，代码与数据是独立的；适合多个相</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E7%AF%87/">Java并发编程篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/">Java并发编程</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/04/28/Java%E5%9F%BA%E7%A1%80/" target="_self">
+          <img src="/img/articles/4.jpg" srcset="/img/loading.gif" alt="Java基础">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2020/04/28/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+
+      <a href="/2020/04/28/Java%E5%9F%BA%E7%A1%80/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Java基础一、基本概念1.反射、注解、泛型反射
+什么是反射　　反射 (Reflection) 是 Java 程序开发语言的特征之一，它允许运行中的 Java 程序获取自身的信息，并且可以操作类或对象的内部属性。通过 Class 获取 class 信息称之为反射（Reflection）
+　　简而言之，通过反射，我们可以在运行时获得程序或程序集中每一个类型的成员和成员的信息。
+　　程序中一般的对象的</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-04-28
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E5%9F%BA%E7%A1%80%E7%AF%87/">Java基础篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java%E5%9F%BA%E7%A1%80/">Java基础</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/8/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
       ele.href += '#board';
-    }</script></div></div></div></div></div></main><a id="scroll-top-button" href="#" role="button"><i class="iconfont icon-arrowup" aria-hidden="true"></i></a><div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable modal-lg" role="document"><div class="modal-content"><div class="modal-header text-center"><h4 class="modal-title w-100 font-weight-bold">搜索</h4><button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div><div class="modal-body mx-3"><div class="md-form mb-5"><input type="text" id="local-search-input" class="form-control validate"> <label data-error="x" data-success="v" for="local-search-input">关键词</label></div><div class="list-group" id="local-search-result"></div></div></div></div></div><footer class="mt-5"><div class="text-center py-3"><div><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a></div><div class="beian"><a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">鄂ICP备18012070号</a></div></div></footer><script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script><script src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script><script src="/js/debouncer.js"></script><script src="/js/main.js"></script><script src="/js/lazyload.js"></script><script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js"></script><script src="/js/clipboard-use.js"></script><script src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js"></script><script>var typed=new Typed("#subtitle",{strings:["  ","一切都是有可能的，甚至那些不可能的也是&nbsp;"],cursorChar:"_",typeSpeed:70,loop:!1});typed.stop(),$(document).ready(function(){$(".typed-cursor").addClass("h2"),typed.start()})</script><script src="/js/local-search.js"></script><script>var path="/local-search.xml",inputArea=document.querySelector("#local-search-input");inputArea.onclick=function(){searchFunc(path,"local-search-input","local-search-result"),this.onclick=null}</script></body></html>
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
