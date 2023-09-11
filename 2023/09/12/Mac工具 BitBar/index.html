@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Mac工具 BitBar - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <blockquote>
+<p>借助 BitBar，我们可以自己在 Mac 上做出实用的菜单栏插件小工具。</p>
+</blockquote>
+<p>提到生存在 macOS 菜单栏里面的小工具，我们就不得不提到 <a href="https://sspai.com/post/41089" target="_blank" rel="noopener">iStat Menu</a> 这一应用。强调「系统监控」的 iStat Menu，其华丽的外表之下真正的工作原理是：<strong>每隔一段时间，执行一个程序，获取监控对象的各项数据，并将结果展示给我们看。</strong>查看本机 CPU、内存等使用率，检测上传、下载速度等就是这一原理，查看天气、日程、月相、待办事项等同样也是这一原理。</p>
+<p>![](Mac工具 BitBar/15806642732044.jpg)拥有丰富监控项目与样式的 macOS 菜单栏小工具界标杆：iStat Menu</p>
+<p>既然都是「执行程序、获取数据」，那我们能不能直接不借助于付费的 iStat Menu，用开源的解决方案来实现自己的 macOS 菜单栏小工具呢？当然可以，BitBar 正是为此而生。开源免费的 BitBar，是专门为 macOS 菜单栏准备，能够将任何脚本、程序、代码的运行结果输出到菜单栏上面的应用。几乎不需要任何动手能力，我们就能够用 BitBar 大致复刻 iStat Menu 的功能。虽然可能做不到同样精致的界面，但单就功能上的实现，BitBar 还是值得尝试的。</p>
+<h2 id="安装运行"><a href="#安装运行" class="headerlink" title="安装运行"></a>安装运行</h2><p>BitBar 开源在 <a href="https://github.com/matryer/bitbar" target="_blank" rel="noopener">GitHub - matryer/bitbar</a>，我们可以直接到其 <a href="https://github.com/matryer/bitbar/releases" target="_blank" rel="noopener">Release 页面</a> 下载安装 macOS 版本的 BitBar。使用 Homebrew 的同学当然可以用下面的命令安装 BitBar：</p>
+<pre><code class="hljs mipsasm"><span class="hljs-keyword">brew </span>cask <span class="hljs-keyword">install </span><span class="hljs-keyword">bitbar</span></code></pre>
+
+<p>安装成功之后，我们首次运行 BitBar 时，BitBar 会要求我们指定一个「插件目录」，这里我们需要记住这一目录的位置，之后会频繁用到。在正式开始安装插件、编写脚本之前，我们先来聊聊 BitBar 在华丽的外观背后，是如何具体运作的。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>纵观 BitBar 的工作原理，我们可以发现：实际上 BitBar 就是一个为监控系统执行的程序提供一个方便的输出环境。前面提到的 BitBar 的「插件」安装目录（文件夹），其实际上就是所有 BitBar 需要执行的程序的本体所在。在实际工作中，BitBar 正是从这一目录下寻找可执行的程序，定时执行相应的程序，并根据程序输出将结果显示在我们 macOS 的菜单栏之中。</p>
+<p>![](Mac工具 BitBar/15806642732112.png)BitBar 底层工作原理</p>
+<p>我们用一个简单的例子来解释这一相对抽象的过程 —— <strong>显示当前系统日期</strong>。</p>
+<p>日期在 macOS 上可以用简单的命令 <code>date</code> 来获取，打开终端（<code>Terminal.app</code>），输入 <code>date</code> 并回车，即可得到当前的系统时间、星期、日期、时区等等信息。这里，命令 <code>date</code> 就是我们「系统监控」的程序本体，其类似 <code>Mon Feb 3 00:54:14 CST 2020</code> 的输出即为我们 BitBar 接收的脚本输出，最终 BitBar 即会将这一结果显示于 macOS 菜单栏上面，作为查看日期的「小工具」。</p>
+<p>![](Mac工具 BitBar/15806642732124.jpg)使用命令 date 获取当前系统日期</p>
+<p>当然，一个命令远远不够，我们需要将命令放在一个文件中，定义其运行方法，从而告诉 BitBar：每隔一段时间，用「这个方法」执行「这个文件」，就可以得到当前系统日期啦。我们在刚刚给 BitBar 指定的「插件」安装目录下创建一个名称为 date.1s.sh 的文件。这里，识别文件名就是 BitBar 设置程序运行方式的第一步。文件名中：</p>
+<ul>
+<li><code>date</code> 即为文件的宽泛名称，程序的标识符</li>
+<li><code>1s</code> 表示每隔 1s 执行一次本程序</li>
+<li><code>sh</code> 为文件后缀，这里表示此程序为一个 Shell 脚本程序，可以用 Bash 来运行</li>
+</ul>
+<p>各个项目之间用 <code>.</code> 拼接起来，成为一个以 <code>{文件名}.{执行频率}.{扩展名}</code> 为格式的完整文件名。我们打开这一文件，向其中填写如下的内容：</p>
+<pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span>
+date</code></pre>
+
+<p>之后，如果我们保存文件，并重新加载 BitBar，那么不出意外我们就可以看到 BitBar 的一个菜单栏项目开始生效：日期、星期、时间正确显示并每隔 1s 刷新一次。</p>
+<p>![](Mac工具 BitBar/15806642732132.gif)BitBar 每秒执行一次命令获取当前时间</p>
+<p>我们看一下刚刚输入文件的内容：文件分为两行，第一行 <code>#!/bin/bash</code> 在程序界被称为 <a href="https://zh.wikipedia.org/wiki/Shebang" target="_blank" rel="noopener">Shebang</a> —— 表示程序执行方式，这里即为用 <code>/bin/bash &lt;文件名称&gt;</code> 的命令执行程序；第二行 <code>date</code> 即为执行程序输出结果的「命令」—— 获取当前日期，就在这里我们会获取到当前系统时间的输出，并将结果传递给 BitBar 显示于菜单栏上。我们的第一个最为简单的 BitBar 小插件就算完成啦。✌️</p>
+<p>当然，BitBar 可实现的功能比上面这一例子要多得多，我们不仅可以简单绘制用户界面、提供自定义执行脚本、实现网络请求，还可以直接下载安装其他用户编写完好的 BitBar 插件。BitBar 的插件库非常丰富，我们直接访问其 <a href="https://getbitbar.com/" target="_blank" rel="noopener">官方网站</a>，在侧边栏即可选择不同的插件分类，我们找到选好的插件，点击 <code>+ Add to BitBar</code> 即可直接安装到我们本机的 BitBar，之后经过一些调整（比如安装插件的依赖、填写必要的 API 参数等），我们刷新 BitBar 即可直接使用相应的插件。</p>
+<p>![](Mac工具 BitBar/15807157397459.png)在 BitBar 官网下载安装插件</p>
+<h2 id="用插件全面监控系统，还有更多功能"><a href="#用插件全面监控系统，还有更多功能" class="headerlink" title="用插件全面监控系统，还有更多功能"></a>用插件全面监控系统，还有更多功能</h2><p>除了实现类似 iStat Menu 的系统监控功能，BitBar 还有像汇率换算、查看任务等许多实用插件。接下来就介绍几款好用的插件给你。</p>
+<h3 id="武汉疫情监控"><a href="#武汉疫情监控" class="headerlink" title="武汉疫情监控"></a>武汉疫情监控</h3><p>在今年武汉新型肺炎爆发后，有国内开发者通过新浪接口提供的国家卫健委统计的全国数据，开发了 BitBar 的疫情监控插件。插件默认会显示国内患病人数最多五个省份的数据，数据每十秒刷新一次，你也可以根据需求自行修改刷新时间等参数。</p>
+<p>你可以在插件的 <a href="https://github.com/Anthonyeef/wuhan-virus-bitbar-plugin/blob/master/README.md" target="_blank" rel="noopener">GitHub 页面</a> 查看更多细节，并下载插件。</p>
+<p>![](Mac工具 BitBar/907acead2c5c286bf291d7def059f958.jpg)</p>
+<h3 id="检测上传、下载速度"><a href="#检测上传、下载速度" class="headerlink" title="检测上传、下载速度"></a>检测上传、下载速度</h3><p>最基本也最简单的系统监控就是对网络速度、带宽的监测。BitBar 插件库中与网络相关的插件有很多，我们可以前往 <a href="https://getbitbar.com/plugins/Network" target="_blank" rel="noopener">BitBar Plugins | Network</a> 查看。这里我选择使用 <a href="https://getbitbar.com/plugins/Network/bandwidth.1s.sh" target="_blank" rel="noopener">Bandwidth by Ant Cosentino</a>，一个 Shell 脚本实现的网速监控。我们不需要进行特殊的改动，直接安装即可。</p>
+<p>![](Mac工具 BitBar/15807157397472.jpg)监控上传、下载速度</p>
+<p>重新加载脚本之后，我们就可以看到 macOS 菜单栏上显示了我们的上传、下载网速状况，同时，点击菜单项，我们也可以看到本机各个网络端口的具体带宽。</p>
+<h3 id="监控-CPU-使用率"><a href="#监控-CPU-使用率" class="headerlink" title="监控 CPU 使用率"></a>监控 CPU 使用率</h3><p>监控系统信息怎么可能少了 CPU 使用率的监控，我们可以使用 <a href="https://getbitbar.com/plugins/System/mtop.5s.sh" target="_blank" rel="noopener">CPU Usage Graph</a> 来在菜单栏实现一个监视 CPU 使用率，并显示为小图表的工具。这一插件也不需要过多配置，直接安装即可。</p>
+<p>![](Mac工具 BitBar/15807157397480.jpg)使用 CPU Usage Graph 检测当前系统 CPU 使用率</p>
+<p>另外，这一脚本还可以实现监控当前使用 CPU 最多的五个进程，方便我们掌控当前消耗 CPU 最多的软件，好能快速打开 Activity Monitor，及时杀掉资源消耗过高的程序。</p>
+<h3 id="监控电池电量、使用循环"><a href="#监控电池电量、使用循环" class="headerlink" title="监控电池电量、使用循环"></a>监控电池电量、使用循环</h3><p>我们 macOS 原有的「电池」显示控件只有电量百分比、能耗等的显示，用 BitBar 我们还可以直接将电池的「循环次数」进行显示，并用不同的颜色表示电池的使用状况。</p>
+<p>![](Mac工具 BitBar/15807157397488.png)Colorful Battery Indicator：用不同的颜色显示电池信息</p>
+<p>这里我们选择 <a href="https://getbitbar.com/plugins/System/ColorfulBatteryLevel.5s.sh" target="_blank" rel="noopener">Colorful Battery Indicator</a> 这一插件，直接安装即可。运行插件之后，我们可以看到 BitBar 控件成功加载，可以直接显示电池的电量与循环次数等信息，比 macOS 原生电量控件的功能多出不少。</p>
+<p>![](Mac工具 BitBar/15807157397498.jpg)不仅能显示电池电量，还可以估算剩余时间、显示循环次数</p>
+<h3 id="监测天气信息"><a href="#监测天气信息" class="headerlink" title="监测天气信息"></a>监测天气信息</h3><p>最后，我们来实现相对复杂的天气监控。BitBar 插件库的<a href="https://getbitbar.com/plugins/Weather" target="_blank" rel="noopener">天气分类</a>非常丰富，不仅拥有普通天气、温度的插件，还能直接检测 AQI 等空气指标。我选择使用 <a href="https://getbitbar.com/plugins/Weather/DarkSky/weather.15m.py" target="_blank" rel="noopener">Weather by Daniel Seripap</a>，点击安装即可。这一脚本用 Python 编写，请求的是国外知名天气信息 Dark Sky 的 API。另外，脚本也使用了 OpenCage 的全球经纬度 API，辅助我们将地理位置与经度纬度进行转换。为了让脚本更方便运行，我们需要：</p>
+<ul>
+<li>去 Dark Sky 申请一个私有 API Key：前往 <a href="https://darksky.net/dev" target="_blank" rel="noopener">Dark Sky API</a>，点击 Try for free 注册账号，并按照说明申请 API Key，之后我们复制 Dark Sky 为我们生成的 Secret Key 留作备用。为了方便称呼，我们用 <code>{DARK_SKY_API_KEY}</code> 代指这一 API Key</li>
+</ul>
+<p>![](Mac工具 BitBar/15807157397525.png)在 Dark Sky 申请 API Key</p>
+<ul>
+<li>去 OpenCage 申请一个私有 API Key：前往 <a href="https://opencagedata.com/" target="_blank" rel="noopener">OpenCage API</a>，按照步骤注册账户并进入 Dashboard，没有问题的话下方 API Key 处即为我们需要的密钥。我们同样复制这一 API Key 留作备用。为了方便称呼，我们用 <code>{GEO_API_KEY}</code> 代指这一 API Key</li>
+</ul>
+<p>![](Mac工具 BitBar/15807203601222.png)在 OpenCage 申请一个私有 API Key</p>
+<p>接下来，我们进入 BitBar 插件目录，打开 <code>weather.15m.py</code>，按照下面的步骤依次将相应的内容进行修改，让脚本使用我们自己的 API Key 进行数据请求：</p>
+<p>![](Mac工具 BitBar/15807203601234.png)修改脚本的 API Key，替换使用我们自己的秘钥进行请求</p>
+<ul>
+<li>将 <code>api_key</code> 一行后面单引号里面的内容替换为我们 Dark Sky 的 API Key：<code>{DARK_SKY_API_KEY}</code></li>
+<li>将 <code>geo_api_key</code> 一行后面单引号里的内容替换为我们 OpenCage 的 API Key：<code>{GEO_API_KEY}</code></li>
+<li>将下方 <code>units</code> 后面单引号里添加 <code>si</code>：表示我们使用「公制单位」（也就是摄氏度）</li>
+</ul>
+<p>这样设置下来我们就应该可以直接运行脚本了。另外，如果使用之后发现脚本定位速度慢，或者因为是根据 IP 进行地理位置确定导致位置不准确，我们也可以直接手动定义目标城市与其经纬度。脚本文件中定义地理位置的内容位于：</p>
+<ul>
+<li><code>manual_city</code>：城市名称</li>
+<li><code>manual_latlng</code>：城市所在经纬度</li>
+</ul>
+<p>我们可以访问 <a href="https://opencagedata.com/demo" target="_blank" rel="noopener">OpenCage Demo</a> 网站，在下方点击定位获取当前所在位置的经纬度与城市名称，按照上方注释给出的格式依次填写即可。之后，我们重新加载 BitBar，不出意外的话我们就可以正确查看当地天气情况了。</p>
+<p>![](Mac工具 BitBar/15807203601243.jpg)</p>
+<h3 id="Currency-Rates：货币汇率"><a href="#Currency-Rates：货币汇率" class="headerlink" title="Currency Rates：货币汇率"></a>Currency Rates：货币汇率</h3><p><a href="https://getbitbar.com/plugins/Finance/currency-rates.1h.py" target="_blank" rel="noopener">Currency Rates</a> 采用 Python 编写，它可以实时查询货币汇率，然后通过 BitBar 显示在菜单栏中。</p>
+<p>![](Mac工具 BitBar/8594952abd65a815326d7285a9acc6d4.png)</p>
+<p>不过需要注意的是，Currency Rates 的汇率规则是 1 美元兑各币种的汇率，而且默认在菜单栏显示的汇率是 1 美元 USD 兑印度卢比 INR。当然修改成人民币也很简单。我们只要使用「文本编辑」打开插件代码，把 <code>if nValue1 == &quot;INR&quot;</code> 修改为 <code>if nValue1 == &quot;CNY&quot;</code> 即可。</p>
+<p>如果你觉得 Currency Rates 显示了太多无关紧要的其他币种，可以试试 <a href="https://getbitbar.com/plugins/Finance/currency-tracker.1h.py" target="_blank" rel="noopener">Currency Tracker</a>，它只显示一种货币的兑换汇率。</p>
+<h3 id="Death-Timer：距死亡还剩多少天"><a href="#Death-Timer：距死亡还剩多少天" class="headerlink" title="Death Timer：距死亡还剩多少天"></a>Death Timer：距死亡还剩多少天</h3><p>很多应用都可以帮你预计死亡还剩多少天，<a href="https://getbitbar.com/plugins/Lifestyle/deathTimer.5m.py" target="_blank" rel="noopener">Death Timer</a> 把它带到了 Mac 菜单栏上，不过要使用它，还是得先修改下它的代码。</p>
+<p>用「文本编辑」打开插件代码，修改 <code>death = datetime(2081, 5,31, 12, 0, 0)</code>和 <code>birth = datetime(1994, 5,31, 12, 0, 0)</code> 中修改你的预测死亡时间和出生时间，之后刷新即可 。如果你不知道预计的死亡时间，开发者建议你去 <a href="https://www.blueprintincome.com/tools/life-expectancy-calculator-how-long-will-i-live/results?id=eyJnZW5kZXIiOiJNQUxFIiwicmFjZSI6Ik9USEVSIiwiaGVpZ2h0IjoxLjc3LCJjdXJyZW50X2FnZSI6MjgsIndlaWdodCI6NjIsImVkdWNhdGlvbiI6IkNPTExFR0VfR1JBRCIsIm1hcml0YWxfc3RhdHVzIjoiTkVWRVJfTUFSUklFRCIsImluY29tZSI6IjQwTUlOVVMiLCJpbmNvbWVTdGF0dXMiOiJXT1JLSU5HIiwiZXhlcmNpc2UiOiJfM19UT180X1BFUl9XRUVLIiwiaGVhbHRoIjoiR09PRCIsImRpYWJldGVzIjpmYWxzZSwiYWxjb2hvbCI6Il9MVF8yX1BFUl9XRUVLIiwic21va2luZyI6Ik5PTl9TTU9LRVIiLCJ1c191bml0cyI6ZmFsc2UsIm9wdEluIjpmYWxzZSwic21va2luZ1N0YXR1cyI6Ik5FVkVSX1NNT0tFRCIsInNtb2tpbmdRdWl0IjpudWxsLCJzbW9raW5nQW1vdW50IjpudWxsLCJoZWlnaHRfdHlwZSI6Ik1FVFJJQyIsIndlaWdodF90eXBlIjoiTUVUUklDIn0&lc_r=n" target="_blank" rel="noopener">这个网站</a> 看看。</p>
+<p>![](Mac工具 BitBar/d98c461973511bd9aa0cf4bdf4045191.png)</p>
+<p>另一个插件 <a href="https://getbitbar.com/plugins/Lifestyle/life-percentage.12h.rb" target="_blank" rel="noopener">Life Percentage</a> 和 Death Timer，它显示的是人生百分比。<a href="https://getbitbar.com/plugins/Lifestyle/time_on_earth.10m.rb" target="_blank" rel="noopener">Your time on earth</a> 显示的是你出生多少天了，也比较类似。</p>
+<h3 id="Moon-Phase：显示月相"><a href="#Moon-Phase：显示月相" class="headerlink" title="Moon Phase：显示月相"></a>Moon Phase：显示月相</h3><p><a href="https://getbitbar.com/plugins/Lifestyle/moon-phase.1h.js" target="_blank" rel="noopener">显示月相</a> 对于一般人来说可能没有什么用，但是它的月相是用 Emoji 显示的，可以给死板的菜单栏增添一些乐趣。</p>
+<p>![](Mac工具 BitBar/83aefe129ad1f1a413ebbdf61e7889fc.png)</p>
+<p>另一个 <a href="https://getbitbar.com/plugins/Tutorial/emoji.sh" target="_blank" rel="noopener">Show emoji</a> 插件更粗暴，它会直接在菜单栏随机显示三个 Emoji。</p>
+<h3 id="Smile：适用于-Slack-的-Emoji-代码"><a href="#Smile：适用于-Slack-的-Emoji-代码" class="headerlink" title="Smile：适用于 Slack 的 Emoji 代码"></a>Smile：适用于 Slack 的 Emoji 代码</h3><p><a href="https://getbitbar.com/plugins/Lifestyle/smile.12h.sh" target="_blank" rel="noopener">Smile</a> 不是在菜单栏显示微笑表情，它的作用有点特殊。我们知道在 Slack 或者 Github 上输入 Emoji 只能点选。Smile 的作用是把 Emoji 图标自动转换为代码，并且拷贝到剪贴板，在 Slack 或 GitHub 里粘贴就行了。</p>
+<p>![](Mac工具 BitBar/73d52180ef1ad77b4f14b9693270c468.png)</p>
+<h3 id="Things-3-Today：在菜单栏显示-Things-任务"><a href="#Things-3-Today：在菜单栏显示-Things-任务" class="headerlink" title="Things 3 Today：在菜单栏显示 Things 任务"></a>Things 3 Today：在菜单栏显示 Things 任务</h3><p>如果你在用 Things，<a href="https://getbitbar.com/plugins/Lifestyle/Things/thingstoday.6s.sh" target="_blank" rel="noopener">Things 3 Today</a> 可以在菜单栏显示你今天的任务。它还能直接创建任务、清空废纸篓等等。不过这个插件对中文系统不太支持，你可以把下面代码中的<code>Today</code> 改为 <code>今天</code>：</p>
+<pre><code class="hljs applescript"><span class="hljs-keyword">with</span> n <span class="hljs-keyword">from</span> <span class="hljs-number">1</span> <span class="hljs-keyword">to</span> <span class="hljs-built_in">count</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">to</span> dos <span class="hljs-keyword">of</span> <span class="hljs-built_in">list</span> <span class="hljs-string">"Today"</span>
+	<span class="hljs-keyword">set</span> toDo <span class="hljs-keyword">to</span> <span class="hljs-built_in">item</span> n <span class="hljs-keyword">of</span> <span class="hljs-keyword">to</span> dos <span class="hljs-keyword">of</span> <span class="hljs-built_in">list</span> <span class="hljs-string">"Today"</span></code></pre>
+
+<p>![](Mac工具 BitBar/6527b30cf753483e2e413f3ffec89045.png)</p>
+<p>和 Things 有关的插件还有 <a href="https://getbitbar.com/plugins/Lifestyle/Things/thingsdoingnow.10s.sh" target="_blank" rel="noopener">Things Doing Now</a> 和 <a href="https://getbitbar.com/plugins/Lifestyle/Things/thingsinbox.6s.sh" target="_blank" rel="noopener">Things - View Inbox</a>。</p>
+<h3 id="iTunes-Now-Playing：正在播放"><a href="#iTunes-Now-Playing：正在播放" class="headerlink" title="iTunes Now Playing：正在播放"></a>iTunes Now Playing：正在播放</h3><p><a href="https://getbitbar.com/plugins/Music/itunes.10s.sh" target="_blank" rel="noopener">iTunes Now Playing</a> 可以抓取 iTunes 目前正在播放的音乐，在菜单栏显示歌曲名和艺人，点击还能进行切歌和暂停操作，还能显示专辑封面，视觉上比较不错。不过这个插件对中文系统不友好，中文系统用户需要把代码中的 <code>iTunes</code> 改为 <code>音乐</code> 才行。</p>
+<p>![](Mac工具 BitBar/aafc6d6f665427cade842ff23e1117fd.png)</p>
+<p>BitBar 中还有 <a href="https://getbitbar.com/plugins/Music/spotify.10s.sh" target="_blank" rel="noopener">Spotify Now Playing</a> 用来显示 Spotify 的正在播放歌曲。还有其他的操控 iTunes 和 Spotify 播放控制的插件，不再列举。</p>
+<h3 id="Battery-Dot：显示-Mac、键盘和触控板的电量"><a href="#Battery-Dot：显示-Mac、键盘和触控板的电量" class="headerlink" title="Battery Dot：显示 Mac、键盘和触控板的电量"></a>Battery Dot：显示 Mac、键盘和触控板的电量</h3><p><a href="https://getbitbar.com/plugins/System/Battery/battery-dot.1h.swift" target="_blank" rel="noopener">Battery Dot</a> 可以在菜单栏显示 MacBook、Apple 的键盘和触控板的电量。显示 Mac 的电量不足为奇，但是能显示键盘和触控板就很方便了。工作的时候键盘和触控板没电那种抓狂的感觉令人印象深刻，有 Battery Dot 应该会好很多。</p>
+<p>![](Mac工具 BitBar/c86df48a662bbaea8771a4b6a813c535.png)</p>
+<h3 id="Date-Picker：提供多种格式的日期样式"><a href="#Date-Picker：提供多种格式的日期样式" class="headerlink" title="Date Picker：提供多种格式的日期样式"></a>Date Picker：提供多种格式的日期样式</h3><p>办公写文件时，经常需要在落款处留日期，每次手动输入会比较麻烦。<a href="https://getbitbar.com/plugins/Time/date-picker.1m.sh" target="_blank" rel="noopener">Date Picker</a> 在菜单栏显示了多种样式的日期格式，点击就能拷贝到剪贴板，在写作时就能复制了，非常方便。不过它的默认格式是 2020-02-03，没有包含中文「年月日」的样式。 </p>
+<p>![](Mac工具 BitBar/56be0bf00a487c1c117da5ecbaf4207e.png)</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>BitBar 的设计理念实际上非常易懂，这一简单的工作原理为我们提供了一种开源免费的解决方案，让我们能够更有效地利用 macOS 菜单栏来做一些有用、有趣的事情。BitBar 支持运行的程序非常丰富，Bash、Python、Lua、Ruby、JavaScript 等等都有支持。理论上，只要你在 Mac 上面能够运行的脚本，BitBar 就能将其输出显示于 macOS 菜单栏上面。</p>
+<p>BitBar 脚本库的生态同样丰富，不仅提供了上面介绍的各项参数的监控功能，还有比如<a href="https://getbitbar.com/plugins/Music" target="_blank" rel="noopener">控制音乐播放</a>、<a href="https://getbitbar.com/plugins/Finance" target="_blank" rel="noopener">查看货币价格涨幅</a>、<a href="https://getbitbar.com/plugins/Science" target="_blank" rel="noopener">订阅 Nasa 每日一图</a> 等等各种有趣的小工具。当然，BitBar 使用时还是出现一些问题，比如我发现各个插件之间的相对位置事实上不太好维持，每次重新加载都会凌乱，只能手动给脚本名称前面添加编号来解决。不过，BitBar 的功能还是相当丰富，可以实现以 iStat Menu 为代表的「系统监控」软件所提供的大部分功能，希望丰富自己 macOS 菜单栏功能的同学一定不要错过。</p>
+<p>你可以在 <a href="https://getbitbar.com/" target="_blank" rel="noopener">这里</a> 下载 BitBar。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BE%E5%A4%87%E7%AF%87/">设备篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Mac%E5%B7%A5%E5%85%B7-BitBar/">Mac工具 BitBar</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/Kerwin&#39;s%20Library/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Kerwin's Library</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/MyBatis%E7%AF%87/">
+                        <span class="hidden-mobile">MyBatis篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Mac工具 BitBar&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

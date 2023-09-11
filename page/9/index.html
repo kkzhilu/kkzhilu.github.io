@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/" target="_self">
+          <img src="/img/articles/11.jpg" srcset="/img/loading.gif" alt="6.824（三）GFS">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">6.824（三）GFS</a>
+
+      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/" class="index-excerpt">
+        
+        
+          
+        
+        <div>GFS
+
+分布式存储系统为什么很难
+为了性能 -》需要分片
+为了解决错误 -》需要容错
+为了容错，需要复制 -》为了复制，需要解决一致性
+为了一致性 -》 性能降低
+
+因此分布式系统的构建，其中的难点就是一个死循环，而如何打破这种死循环，就需要平衡各方面的因素，以及设计更好的数据格式来处理相应的问题，比如用日志而非数据库存储状态提高效率，比如追求弱一致性而非强一致性
+
+
+GFS架构
+
+架构图
+
+每</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/6-824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">6.824（三）GFS</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/PhantomJS%E7%AF%87/" target="_self">
+          <img src="/img/articles/20.jpg" srcset="/img/loading.gif" alt="PhantomJS篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/PhantomJS%E7%AF%87/">PhantomJS篇</a>
+
+      <a href="/2023/09/12/PhantomJS%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>PhantomJS 篇PhantomJS 组件常用在爬虫领域，但是它也有其非常灵活的一面，即用作截取网页长图，或者将网页内容存储为PDF
+PhantomJS 下载地址
+API文档库
+Windows使用下载完成后，直接解压即可直接进行使用，同时调用PhantomJS.exe时需要配合JS一同使用，以转出PNG图片或者PDF为例
+
+&#96;&#96;&#96;javascript
+&#x2F;&#x</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/">工具篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PhantomJS%E7%AF%87/">PhantomJS篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E9%99%90%E6%B5%81%E7%AF%87/" target="_self">
+          <img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="限流篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E9%99%90%E6%B5%81%E7%AF%87/">限流篇</a>
+
+      <a href="/2023/09/12/%E9%99%90%E6%B5%81%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>请求限流开发高并发系统时，有三把利器用来保护系统：缓存、降级和限流
+通过限流，我们可以很好地控制系统的qps，从而达到保护系统的目的。
+计数算法（不常用）// 模拟的伪代码
+public static void main(String[] args) throws InterruptedException &#123;
+    AtomicLong atomicLong = new AtomicL</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%99%90%E6%B5%81%E7%AF%87/">限流篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" target="_self">
+          <img src="/img/articles/3.jpg" srcset="/img/loading.gif" alt="跨域问题">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
+
+      <a href="/2023/09/12/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" class="index-excerpt">
+        
+        
+          
+        
+        <div>前端交互篇 - 跨域SpringBoot - Cors解决跨域问题 - 本地请求其他域名时cookie无法传输SpringBoot 利用Cors解决跨域问题
+
+1.依赖
+&lt;dependency&gt;
+	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+	&lt;artifactId&gt;spring-boot-starter-</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_self">
+          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="Lambda初次使用很慢？从JIT到类加载再到实现原理">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Lambda初次使用很慢？从JIT到类加载再到实现原理</a>
+
+      <a href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Lambda初次使用很慢？从JIT到类加载再到实现原理问题回顾描述的话不多说，直接上图：
+
+看到输出结果了吗？为什么第一次和第二次的时间相差如此之多？咱们一起琢磨琢磨，也可以先去看看结论再回过头看分析
+
+注：并非仅第二次快，而是除了第一次，之后的每一次都很快
+
+给与猜想
+是否和操作系统预热有关？
+是否和JIT（即时编译）有关？
+是否和ClassLoader类加载有关？
+是否和Lambda有关，并非</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Lambda初次使用很慢？从JIT到类加载再到实现原理</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Kerwin's%20Open%20Source/" target="_self">
+          <img src="/img/articles/15.jpg" srcset="/img/loading.gif" alt="Kerwin&#39;s Open Source">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Kerwin's%20Open%20Source/">Kerwin&#39;s Open Source</a>
+
+      <a href="/2023/09/12/Kerwin's%20Open%20Source/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Kerwin’s Open SourceOpen Source08.23 会议纪要本项目核心的目标：
+
+作为国内国外的开源项目桥梁，把好的国外项目翻译引进，把好的国内项目翻译并推出
+促进国内的开源氛围，做开源社区
+
+梳理本周进度及下周进度，注意点：
+
+优弧负责项目入选标准，以及人员招募，翻译项目流程机制
+小蝴蝶负责开源计划和翻译计划的奖励机制等
+小帅，xmanlin，尤毅 负责标签分类细节等
+老王</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%BC%80%E6%BA%90%E7%AF%87/">开源篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Kerwin-s-Open-Source/">Kerwin's Open Source</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_self">
+          <img src="/img/articles/21.jpg" srcset="/img/loading.gif" alt="GitHub无法访问解决办法">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GitHub无法访问解决办法</a>
+
+      <a href="/2023/09/12/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>GitHub无法访问解决办法核心解析域名与IP映射，但前提一定要找准！
+GitHub原始项目https://github.com/521xueweihan/GitHub520
+核心办法自我实践知乎链接：https://zhuanlan.zhihu.com/p/158938544
+官方域名映射地址查询：https://github.com.ipaddress.com/
+
+刷新DNS解析
+ipconf</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GitHub无法访问解决办法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Docker%E7%AF%87/" target="_self">
+          <img src="/img/articles/16.jpg" srcset="/img/loading.gif" alt="Docker篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Docker%E7%AF%87/">Docker篇</a>
+
+      <a href="/2023/09/12/Docker%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Docker篇CentOS 安装Docker - 菜鸟教程安装须知:
+1.Docker支持以下的CentOS版本：
+CentOS 7 (64-bit)
+CentOS 6.5 (64-bit) 或更高的版本
+
+2.Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。
+通过 uname -r 命令查看你当前的内核版</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/">中间件篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docker%E7%AF%87/">Docker篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Spring-xsd/" target="_self">
+          <img src="/img/articles/17.jpg" srcset="/img/loading.gif" alt="Spring-xsd">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Spring-xsd/">Spring-xsd</a>
+
+      <a href="/2023/09/12/Spring-xsd/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Spring XSD篇错误描述有时候你会发现过去一直启动正常的系统，某天启动时会报出形如下面的错误： 
+org.xml.sax.SAXParseException: schema_reference.4: Failed to read schema document 'http://www.springframework.org/schema/beans/spring-beans-2.0.xsd'</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spring-xsd/">Spring-xsd</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Git-IDEA-%E6%8A%80%E5%B7%A7/" target="_self">
+          <img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="Git-IDEA-技巧">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Git-IDEA-%E6%8A%80%E5%B7%A7/">Git-IDEA-技巧</a>
+
+      <a href="/2023/09/12/Git-IDEA-%E6%8A%80%E5%B7%A7/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Git-IDEA-技巧GitHub高级搜索仓库名搜索in:name spring boot
+
+
+
+Stars | forks 搜索# 注意 stars:&gt;3000 中间要连起来,不要有空格
+in:name spring boot stars:&gt;3000
+
+                 ...forks:&gt;1000
+
+
+
+ReadMe搜索in:readme spring boo</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Git-IDEA-%E6%8A%80%E5%B7%A7/">Git-IDEA-技巧</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/8/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

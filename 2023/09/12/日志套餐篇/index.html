@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>日志套餐篇 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      83
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="日志套餐篇-log4j2-logback全量套餐"><a href="#日志套餐篇-log4j2-logback全量套餐" class="headerlink" title="日志套餐篇 - log4j2 logback全量套餐"></a>日志套餐篇 - log4j2 logback全量套餐</h1><blockquote>
+<p>前情提要：</p>
+<p>Log4j  Log4j2  logback是当下主流的日志框架</p>
+<p>slf4j则是新一代的日志框架接口，logback直接实现了slf4j接口，另外logback是SpringBoot最新的默认日志框架</p>
+<p>综合来看性能上依然推荐：log4j2（拥有logback全部特性）</p>
+</blockquote>
+<p><strong>注：</strong>鉴于log4j已经跟不上时代的要求，因此不做特别的介绍，其实log4j的配置，完全可以在log4j2上使用</p>
+<h2 id="普通工程-建议集成log4j2"><a href="#普通工程-建议集成log4j2" class="headerlink" title="普通工程 - 建议集成log4j2"></a>普通工程 - 建议集成log4j2</h2><p>普通工程即：普通的java项目, 如个人的代码Demo或者准备打成jar使用的，推荐使用log4j2</p>
+<p>必要依赖如下：</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- log4j2 必要依赖 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.12.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- log4j2 必要依赖 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-core<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.12.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- slf4j核心包 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.7.25<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- log4j-异步日志依赖 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.lmax<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>disruptor<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.4.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!--用于与slf4j保持桥接--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.logging.log4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>log4j-slf4j-impl<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.12.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+
+
+<p>配置如下：</p>
+<blockquote>
+<p>Maven项目只需要在resource里面加入log4j2.xml配置文件即可</p>
+</blockquote>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-comment">&lt;!--日志级别以及优先级排序: OFF &gt; FATAL &gt; ERROR &gt; WARN &gt; INFO &gt; DEBUG &gt; TRACE &gt; ALL --&gt;</span>
+<span class="hljs-comment">&lt;!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出--&gt;</span>
+<span class="hljs-comment">&lt;!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">"WARN"</span> <span class="hljs-attr">monitorInterval</span>=<span class="hljs-string">"30"</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--全局属性--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Properties</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"APP_NAME"</span>&gt;</span>kerwinTools<span class="hljs-tag">&lt;/<span class="hljs-name">Property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"LOG_FILE_PATH"</span>&gt;</span>/log/$&#123;APP_NAME&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">Property</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"PATTERN_FORMAT"</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; %-5level [%t] %class&#123;36&#125; (%L) %M - %msg%xEx%n<span class="hljs-tag">&lt;/<span class="hljs-name">Property</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Properties</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">Appenders</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--输出到控制台--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Console</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Console"</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"SYSTEM_OUT"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">"$&#123;PATTERN_FORMAT&#125;"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Console</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- INFO_LOG --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"INFO_LOG"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_FILE_PATH&#125;/info.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/info.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Filters</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ThresholdFilter</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"warn"</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">"DENY"</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">"NEUTRAL"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ThresholdFilter</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"info"</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">"ACCEPT"</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">"DENY"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Filters</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>$&#123;PATTERN_FORMAT&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">PatternLayout</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_FILE_PATH&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"info.log_*"</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- DEBUG_LOG --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"DEBUG_LOG"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_FILE_PATH&#125;/debug.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/debug.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Filters</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ThresholdFilter</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"error"</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">"DENY"</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">"NEUTRAL"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">ThresholdFilter</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"debug"</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">"ACCEPT"</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">"DENY"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Filters</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>$&#123;PATTERN_FORMAT&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">PatternLayout</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_FILE_PATH&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"debug.log_*"</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- ERROR_LOG --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"ERROR_LOG"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_FILE_PATH&#125;/error.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/error.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">ThresholdFilter</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"error"</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">"ACCEPT"</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">"DENY"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>$&#123;PATTERN_FORMAT&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">PatternLayout</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_FILE_PATH&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"error.log_*"</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Appenders</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">Loggers</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- LOG everything at DEBUG level includeLocation 处理日志所在行号 --&gt;</span>
+        <span class="hljs-comment">&lt;!-- Root 同步日志 AsyncRoot 异步日志 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AsyncRoot</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"DEBUG"</span> <span class="hljs-attr">includeLocation</span>=<span class="hljs-string">"true"</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- Console 日志, 注释即不打印到控制台 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"Console"</span>/&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"INFO_LOG"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"DEBUG_LOG"</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"ERROR_LOG"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">AsyncRoot</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Loggers</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Configuration</span>&gt;</span></code></pre>
+
+<p><strong>注：</strong>日志打印的位置我并没用做特别的约束，所以它会在项目所存储的盘符自动建立${APP_NAME} 文件夹</p>
+<p>效果如图所示：</p>
+<p><img src="/2023/09/12/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/1565711360530.png" srcset="/img/loading.gif" alt="1565711360530"></p>
+<h2 id="如何验证Lo4j2开启异步日志"><a href="#如何验证Lo4j2开启异步日志" class="headerlink" title="如何验证Lo4j2开启异步日志"></a>如何验证Lo4j2开启异步日志</h2><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Configuration</span> <span class="hljs-attr">status</span>=<span class="hljs-string">"WARN"</span> <span class="hljs-attr">monitorInterval</span>=<span class="hljs-string">"30"</span>&gt;</span></code></pre>
+
+<blockquote>
+<p>注意Lo4j2的<code>Configuration</code>设置中<code>status=&quot;WARN&quot;</code>, 设置为 <code>TRACE</code>，即可让log4j打印内部日志，即可判断日志的细节</p>
+</blockquote>
+<h2 id="SpringBoot项目-个人练习建议集成logback"><a href="#SpringBoot项目-个人练习建议集成logback" class="headerlink" title="SpringBoot项目  - 个人练习建议集成logback"></a>SpringBoot项目  - 个人练习建议集成logback</h2><pre><code class="hljs java"><span class="hljs-comment">// 由于springboot默认支持logbak  因此无需任何依赖即可使用,当然需要一些默认的必备依赖 如 web等...</span></code></pre>
+
+
+
+<p>application配置如下：</p>
+<pre><code class="hljs properties"><span class="hljs-comment"># 约束mybis-dao级别为dao层</span>
+<span class="hljs-meta">logging.level.com.cat.dao</span>=<span class="hljs-string">DEBUG</span>
+<span class="hljs-meta">logging.config</span>=<span class="hljs-string">classpath:logback-spring.xml</span>
+
+<span class="hljs-comment"># 文件输出位置即文件夹名称</span>
+<span class="hljs-meta">logging.file</span>=<span class="hljs-string">/log/volcat-server</span></code></pre>
+
+
+
+<p>配置文件如下：</p>
+<pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="hljs-comment">&lt;!-- 日志级别从低到高分为TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR &lt; FATAL，如果设置为WARN，则低于WARN的信息都不会输出 --&gt;</span>
+<span class="hljs-comment">&lt;!-- scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true --&gt;</span>
+<span class="hljs-comment">&lt;!-- scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 --&gt;</span>
+<span class="hljs-comment">&lt;!-- de<span class="hljs-doctag">bug:</span>当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>  <span class="hljs-attr">scan</span>=<span class="hljs-string">"true"</span> <span class="hljs-attr">scanPeriod</span>=<span class="hljs-string">"10 seconds"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">contextName</span>&gt;</span>logback<span class="hljs-tag">&lt;/<span class="hljs-name">contextName</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- 命名为logback-spring 可以读取spring中的配置信息, 以下即为读取spring的日志输出地址 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">springProperty</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">"context"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"log.path"</span> <span class="hljs-attr">source</span>=<span class="hljs-string">"logging.file"</span>/&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- 在当前文件中约束配置地址 --&gt;</span>
+    <span class="hljs-comment">&lt;!--&lt;property name="log.path" value="/log/demo_test_nginx" /&gt;--&gt;</span>
+
+    <span class="hljs-comment">&lt;!--</span>
+<span class="hljs-comment">       &lt;logger&gt;用来设置某一个包或者具体的某一个类的日志打印级别、</span>
+<span class="hljs-comment">       以及指定&lt;appender&gt;。&lt;logger&gt;仅有一个name属性，</span>
+<span class="hljs-comment">       一个可选的level和一个可选的addtivity属性。</span>
+<span class="hljs-comment">       name:用来指定受此logger约束的某一个包或者具体的某一个类。</span>
+<span class="hljs-comment">       level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，</span>
+<span class="hljs-comment">             还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。</span>
+<span class="hljs-comment">             如果未设置此属性，那么当前logger将会继承上级的级别。</span>
+<span class="hljs-comment">       addtivity:是否向上级logger传递打印信息。默认是true</span>
+<span class="hljs-comment">   --&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- 彩色日志 --&gt;</span>
+    <span class="hljs-comment">&lt;!-- 彩色日志依赖的渲染类 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">conversionRule</span> <span class="hljs-attr">conversionWord</span>=<span class="hljs-string">"clr"</span> <span class="hljs-attr">converterClass</span>=<span class="hljs-string">"org.springframework.boot.logging.logback.ColorConverter"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">conversionRule</span> <span class="hljs-attr">conversionWord</span>=<span class="hljs-string">"wex"</span> <span class="hljs-attr">converterClass</span>=<span class="hljs-string">"org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">conversionRule</span> <span class="hljs-attr">conversionWord</span>=<span class="hljs-string">"wEx"</span> <span class="hljs-attr">converterClass</span>=<span class="hljs-string">"org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"</span> /&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- 彩色日志格式 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CONSOLE_LOG_PATTERN"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"$&#123;CONSOLE_LOG_PATTERN:-%clr(%d&#123;yyyy-MM-dd HH:mm:ss&#125;)&#123;faint&#125; %clr($&#123;LOG_LEVEL_PATTERN:-%5p&#125;) %clr($&#123;PID:- &#125;)&#123;magenta&#125; %clr(---)&#123;faint&#125; %clr([%15.15t])&#123;faint&#125; %clr(%-40.40logger&#123;39&#125; %line)&#123;cyan&#125; %clr(:) %m%n$&#123;LOG_EXCEPTION_CONVERSION_WORD:-%wEx&#125;&#125;"</span>/&gt;</span>
+
+    <span class="hljs-comment">&lt;!--输出到控制台--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">appender</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"CONSOLE"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.ConsoleAppender"</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--此日志appender是为开发使用，配置为DEBUG级别, 控制台输出的日志级别是大于或等于此级别的日志信息--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">filter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.classic.filter.ThresholdFilter"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">level</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">level</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">encoder</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Pattern</span>&gt;</span>$&#123;CONSOLE_LOG_PATTERN&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">Pattern</span>&gt;</span>
+            <span class="hljs-comment">&lt;!-- 设置字符集 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">charset</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">charset</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">encoder</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">appender</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--输出到文件--&gt;</span>
+    <span class="hljs-comment">&lt;!-- 时间滚动输出 level为 DEBUG 日志 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">appender</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"DEBUG_FILE"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 正在记录的日志文件的路径及文件名 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>$&#123;log.path&#125;/debug.log<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--日志文件输出格式--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">encoder</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">charset</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">charset</span>&gt;</span> <span class="hljs-comment">&lt;!-- 设置字符集 --&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">encoder</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">rollingPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span>
+            <span class="hljs-comment">&lt;!-- 日志归档 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/debug/debug-%d&#123;yyyy-MM-dd&#125;.%i.log<span class="hljs-tag">&lt;/<span class="hljs-name">fileNamePattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">maxFileSize</span>&gt;</span>100MB<span class="hljs-tag">&lt;/<span class="hljs-name">maxFileSize</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--日志文件保留天数--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">maxHistory</span>&gt;</span>15<span class="hljs-tag">&lt;/<span class="hljs-name">maxHistory</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">rollingPolicy</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 此日志文件只记录debug级别的 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">filter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">level</span>&gt;</span>debug<span class="hljs-tag">&lt;/<span class="hljs-name">level</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMatch</span>&gt;</span>ACCEPT<span class="hljs-tag">&lt;/<span class="hljs-name">onMatch</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMismatch</span>&gt;</span>DENY<span class="hljs-tag">&lt;/<span class="hljs-name">onMismatch</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">appender</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- 时间滚动输出 level为 INFO 日志 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">appender</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"INFO_FILE"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 正在记录的日志文件的路径及文件名 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>$&#123;log.path&#125;/info.log<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--日志文件输出格式--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">encoder</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">charset</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">charset</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">encoder</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">rollingPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span>
+            <span class="hljs-comment">&lt;!-- 每天日志归档路径以及格式 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/info/info-%d&#123;yyyy-MM-dd&#125;.%i.log<span class="hljs-tag">&lt;/<span class="hljs-name">fileNamePattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">maxFileSize</span>&gt;</span>100MB<span class="hljs-tag">&lt;/<span class="hljs-name">maxFileSize</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--日志文件保留天数--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">maxHistory</span>&gt;</span>15<span class="hljs-tag">&lt;/<span class="hljs-name">maxHistory</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">rollingPolicy</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 此日志文件只记录info级别的 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">filter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">level</span>&gt;</span>info<span class="hljs-tag">&lt;/<span class="hljs-name">level</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMatch</span>&gt;</span>ACCEPT<span class="hljs-tag">&lt;/<span class="hljs-name">onMatch</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMismatch</span>&gt;</span>DENY<span class="hljs-tag">&lt;/<span class="hljs-name">onMismatch</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">appender</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- 时间滚动输出 level为 WARN 日志 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">appender</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"WARN_FILE"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 正在记录的日志文件的路径及文件名 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>$&#123;log.path&#125;/warn.log<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--日志文件输出格式--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">encoder</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">charset</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">charset</span>&gt;</span> <span class="hljs-comment">&lt;!-- 此处设置字符集 --&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">encoder</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">rollingPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/warn/warn-%d&#123;yyyy-MM-dd&#125;.%i.log<span class="hljs-tag">&lt;/<span class="hljs-name">fileNamePattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">maxFileSize</span>&gt;</span>100MB<span class="hljs-tag">&lt;/<span class="hljs-name">maxFileSize</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--日志文件保留天数--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">maxHistory</span>&gt;</span>15<span class="hljs-tag">&lt;/<span class="hljs-name">maxHistory</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">rollingPolicy</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 此日志文件只记录warn级别的 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">filter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">level</span>&gt;</span>warn<span class="hljs-tag">&lt;/<span class="hljs-name">level</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMatch</span>&gt;</span>ACCEPT<span class="hljs-tag">&lt;/<span class="hljs-name">onMatch</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMismatch</span>&gt;</span>DENY<span class="hljs-tag">&lt;/<span class="hljs-name">onMismatch</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">appender</span>&gt;</span>
+
+
+    <span class="hljs-comment">&lt;!-- 时间滚动输出 level为 ERROR 日志 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">appender</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"ERROR_FILE"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.RollingFileAppender"</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 正在记录的日志文件的路径及文件名 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>$&#123;log.path&#125;/error.log<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--日志文件输出格式--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">encoder</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">pattern</span>&gt;</span>%d&#123;yyyy-MM-dd HH:mm:ss.SSS&#125; [%thread] %-5level %logger&#123;50&#125; - %msg%n<span class="hljs-tag">&lt;/<span class="hljs-name">pattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">charset</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">charset</span>&gt;</span> <span class="hljs-comment">&lt;!-- 此处设置字符集 --&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">encoder</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 日志记录器的滚动策略，按日期，按大小记录 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">rollingPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.TimeBasedRollingPolicy"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileNamePattern</span>&gt;</span>$&#123;log.path&#125;/error/error-%d&#123;yyyy-MM-dd&#125;.%i.log<span class="hljs-tag">&lt;/<span class="hljs-name">fileNamePattern</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">maxFileSize</span>&gt;</span>100MB<span class="hljs-tag">&lt;/<span class="hljs-name">maxFileSize</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">timeBasedFileNamingAndTriggeringPolicy</span>&gt;</span>
+            <span class="hljs-comment">&lt;!--日志文件保留天数--&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">maxHistory</span>&gt;</span>15<span class="hljs-tag">&lt;/<span class="hljs-name">maxHistory</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">rollingPolicy</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 此日志文件只记录ERROR级别的 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">filter</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"ch.qos.logback.classic.filter.LevelFilter"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">level</span>&gt;</span>ERROR<span class="hljs-tag">&lt;/<span class="hljs-name">level</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMatch</span>&gt;</span>ACCEPT<span class="hljs-tag">&lt;/<span class="hljs-name">onMatch</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">onMismatch</span>&gt;</span>DENY<span class="hljs-tag">&lt;/<span class="hljs-name">onMismatch</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">filter</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">appender</span>&gt;</span>
+
+    <span class="hljs-comment">&lt;!--</span>
+<span class="hljs-comment">        root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性</span>
+<span class="hljs-comment">        level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，</span>
+<span class="hljs-comment">        不能设置为INHERITED或者同义词NULL。默认是DEBUG</span>
+<span class="hljs-comment">        可以包含零个或多个元素，标识这个appender将会添加到这个logger。</span>
+<span class="hljs-comment">    --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">root</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"info"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">appender-ref</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"CONSOLE"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">appender-ref</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"DEBUG_FILE"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">appender-ref</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"INFO_FILE"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">appender-ref</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"WARN_FILE"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">appender-ref</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"ERROR_FILE"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span></code></pre>
+
+
+
+<h2 id="SpringBoot项目-集成log4j2"><a href="#SpringBoot项目-集成log4j2" class="headerlink" title="SpringBoot项目  - 集成log4j2"></a>SpringBoot项目  - 集成log4j2</h2><p>必备依赖  - 既然是SpringBoot项目,那用官方的starter是最好的，版本什么的都不用管</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">exclusions</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- 去除logback日志依赖 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">exclusion</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">exclusion</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exclusions</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 导入log4j2-starter --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-log4j2<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- log4j2 异步打印必要依赖 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.lmax<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>disruptor<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.3.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+
+
+<p>applications配置</p>
+<pre><code class="hljs ini"><span class="hljs-comment"># mybatis-dao相关的操作为DEBUG级别, 数据库日志会打印到debug文件中</span>
+<span class="hljs-attr">logging.level.com.cat.dao</span>=DEBUG
+<span class="hljs-attr">logging.config</span>=classpath:log4j2.xml</code></pre>
+
+<p>配置文件 - 沿用上面的配置文件即可，必要情况可以修改打印的日志级别，如</p>
+<pre><code class="hljs xml">.....
+<span class="hljs-tag">&lt;<span class="hljs-name">Loggers</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--过滤掉spring和mybatis的一些无用的DEBUG信息--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"org.springframework"</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"INFO"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"org.mybatis"</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"INFO"</span>/&gt;</span>
+
+    <span class="hljs-comment">&lt;!-- LOG everything at INFO level --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Root</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"INFO"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"Console"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"INFO_LOG"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"DEBUG_LOG"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"ERROR_LOG"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Root</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Loggers</span>&gt;</span></code></pre>
+
+
+
+<h2 id="SpringBoot-log4j2-企业级方案"><a href="#SpringBoot-log4j2-企业级方案" class="headerlink" title="SpringBoot - log4j2 企业级方案"></a>SpringBoot - log4j2 企业级方案</h2><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>  
+<span class="hljs-tag">&lt;<span class="hljs-name">Configuration</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span>  
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"LOG_HOME"</span>&gt;</span>/log/volcat-server<span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span>   
+    <span class="hljs-tag">&lt;<span class="hljs-name">Appenders</span>&gt;</span>  
+        <span class="hljs-comment">&lt;!-- 輸出到監視器 --&gt;</span>  
+        <span class="hljs-tag">&lt;<span class="hljs-name">Console</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"Console"</span> <span class="hljs-attr">target</span>=<span class="hljs-string">"SYSTEM_OUT"</span>&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">"%date&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%thread][%level] - %msg%n"</span> /&gt;</span>  
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Console</span>&gt;</span>
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"error.log"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/error.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/error.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">"%date&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%thread][%level] - %msg%n"</span> /&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>  
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>  
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+         	<span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>  
+        		<span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>  
+                     <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"error.log_*"</span> /&gt;</span>  
+                     <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>  
+            	<span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>  
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>            
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"debug.log"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/debug.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/debug.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">"%date&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%thread][%level] - %msg%n"</span> /&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>  
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>  
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+         	<span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>  
+        		<span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>  
+                     <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"debug.log_*"</span> /&gt;</span>  
+                     <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>  
+            	<span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>  
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>            
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"message.log"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/message.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/message.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">"%date&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%thread][%level] - %msg%n"</span> /&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>  
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>  
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+         	<span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>  
+        		<span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>  
+                     <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"message.log_*"</span> /&gt;</span>  
+                     <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>  
+            	<span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>  
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>            
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">RollingFile</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"access.log"</span> <span class="hljs-attr">fileName</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/access.log"</span> <span class="hljs-attr">filePattern</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;/access.log_%d&#123;yyyy-MM-dd&#125;.log"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">PatternLayout</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">"%date&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; [%thread][%level] - %msg%n"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Policies</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">TimeBasedTriggeringPolicy</span> <span class="hljs-attr">interval</span>=<span class="hljs-string">"1"</span> <span class="hljs-attr">modulate</span>=<span class="hljs-string">"true"</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">Policies</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">Delete</span> <span class="hljs-attr">basePath</span>=<span class="hljs-string">"$&#123;LOG_HOME&#125;"</span> <span class="hljs-attr">maxDepth</span>=<span class="hljs-string">"1"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfFileName</span> <span class="hljs-attr">glob</span>=<span class="hljs-string">"access.log_*"</span> /&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">IfLastModified</span> <span class="hljs-attr">age</span>=<span class="hljs-string">"5d"</span> /&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">Delete</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">DefaultRolloverStrategy</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">RollingFile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Appenders</span>&gt;</span>  
+    <span class="hljs-tag">&lt;<span class="hljs-name">Loggers</span>&gt;</span>  
+        <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sys.error"</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"ERROR"</span>&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"error.log"</span> /&gt;</span>  
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sys.debug"</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"DEBUG"</span>&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"debug.log"</span> /&gt;</span>  
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sys.message"</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"INFO"</span>&gt;</span>  
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"message.log"</span> /&gt;</span>  
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sys.access"</span> <span class="hljs-attr">level</span>=<span class="hljs-string">"INFO"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">"access.log"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Loggers</span>&gt;</span>  
+<span class="hljs-tag">&lt;/<span class="hljs-name">Configuration</span>&gt;</span></code></pre>
+
+
+
+<p><strong>Logit工具类</strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">package</span> com.mine.log;
+
+<span class="hljs-keyword">import</span> org.slf4j.Logger;
+<span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Logit</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger DEBUG_LOG = LoggerFactory.getLogger(<span class="hljs-string">"sys.debug"</span>);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger WARN_LOG = LoggerFactory.getLogger(<span class="hljs-string">"sys.warn"</span>);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger MESSAGE_LOG = LoggerFactory.getLogger(<span class="hljs-string">"sys.message"</span>);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger ACCESS_LOG = LoggerFactory.getLogger(<span class="hljs-string">"sys.access"</span>);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger ERROR_LOG = LoggerFactory.getLogger(<span class="hljs-string">"sys.error"</span>);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger DB_LOG = LoggerFactory.getLogger(<span class="hljs-string">"db.sql"</span>);
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Logit</span><span class="hljs-params">()</span> </span>&#123;&#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">accessLog</span><span class="hljs-params">(String log)</span> </span>&#123;
+        ACCESS_LOG.info(log);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">messageLog</span><span class="hljs-params">(String log)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        MESSAGE_LOG.info(sb.toString());
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">messageLog</span><span class="hljs-params">(String log, String loglevel)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        <span class="hljs-keyword">if</span> (<span class="hljs-string">"debug"</span>.equalsIgnoreCase(loglevel)) &#123;
+            MESSAGE_LOG.debug(log);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"info"</span>.equalsIgnoreCase(loglevel)) &#123;
+            MESSAGE_LOG.info(log);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"warn"</span>.equalsIgnoreCase(loglevel)) &#123;
+            MESSAGE_LOG.warn(log);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"error"</span>.equalsIgnoreCase(loglevel)) &#123;
+            MESSAGE_LOG.error(log);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            MESSAGE_LOG.info(log);
+        &#125;
+
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">debugLog</span><span class="hljs-params">(String log)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        debugPlog(sb.toString(), <span class="hljs-string">"debug"</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">debugLog</span><span class="hljs-params">(String log, String loglevel)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        debugPlog(sb.toString(), loglevel);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">debugPlog</span><span class="hljs-params">(String log, String loglevel)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (<span class="hljs-string">"debug"</span>.equalsIgnoreCase(loglevel)) &#123;
+            DEBUG_LOG.debug(log);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"info"</span>.equalsIgnoreCase(loglevel)) &#123;
+            DEBUG_LOG.info(log);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"warn"</span>.equalsIgnoreCase(loglevel)) &#123;
+            DEBUG_LOG.warn(log);
+        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"error"</span>.equalsIgnoreCase(loglevel)) &#123;
+            DEBUG_LOG.error(log);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            DEBUG_LOG.debug(log);
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">warnLog</span><span class="hljs-params">(String log)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        WARN_LOG.error(sb.toString());
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">errorLog</span><span class="hljs-params">(String log)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        errorPLog(sb.toString(), (Throwable)<span class="hljs-keyword">null</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">errorLog</span><span class="hljs-params">(String log, Throwable throwable)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        errorPLog(sb.toString(), throwable);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dbLog</span><span class="hljs-params">(String log, Object... objects)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        <span class="hljs-keyword">if</span> (objects != <span class="hljs-keyword">null</span> &amp;&amp; objects.length &gt; <span class="hljs-number">0</span>) &#123;
+            sb.append(<span class="hljs-string">"; parameter["</span>);
+            Object[] var4 = objects;
+            <span class="hljs-keyword">int</span> var5 = objects.length;
+
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> var6 = <span class="hljs-number">0</span>; var6 &lt; var5; ++var6) &#123;
+                Object obj = var4[var6];
+                sb.append(obj);
+                sb.append(<span class="hljs-string">","</span>);
+            &#125;
+
+            sb.delete(sb.length() - <span class="hljs-number">1</span>, sb.length());
+            sb.append(<span class="hljs-string">"]"</span>);
+        &#125;
+
+        DB_LOG.debug(sb.toString());
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">errorPLog</span><span class="hljs-params">(String log, Throwable throwable)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (throwable == <span class="hljs-keyword">null</span>) &#123;
+            ERROR_LOG.error(log);
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            ERROR_LOG.error(log, throwable);
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">log</span><span class="hljs-params">(String name, String log)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        logByName(name, sb.toString(), <span class="hljs-string">"debug"</span>, (Throwable)<span class="hljs-keyword">null</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">log</span><span class="hljs-params">(String name, String log, String loglevel)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        logByName(name, sb.toString(), loglevel, (Throwable)<span class="hljs-keyword">null</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">log</span><span class="hljs-params">(String name, String log, String loglevel, Throwable throwable)</span> </span>&#123;
+        StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+        StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+        sb.append(<span class="hljs-string">"."</span>);
+        sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+        sb.append(<span class="hljs-string">"---"</span>);
+        sb.append(log);
+        logByName(name, sb.toString(), loglevel, throwable);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">logByName</span><span class="hljs-params">(String name, String log, String loglevel, Throwable throwable)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (name != <span class="hljs-keyword">null</span>) &#123;
+            StackTraceElement[] stacks = (<span class="hljs-keyword">new</span> Throwable()).getStackTrace();
+            StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(stacks[<span class="hljs-number">1</span>].getClassName());
+            sb.append(<span class="hljs-string">"."</span>);
+            sb.append(stacks[<span class="hljs-number">1</span>].getMethodName());
+            sb.append(<span class="hljs-string">"---"</span>);
+            sb.append(log);
+            Logger logger = LoggerFactory.getLogger(name);
+            <span class="hljs-keyword">try</span> &#123;
+                <span class="hljs-keyword">if</span> (throwable == <span class="hljs-keyword">null</span>) &#123;
+                    <span class="hljs-keyword">if</span> (<span class="hljs-string">"debug"</span>.equalsIgnoreCase(loglevel)) &#123;
+                        logger.debug(log);
+                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"info"</span>.equalsIgnoreCase(loglevel)) &#123;
+                        logger.info(log);
+                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"warn"</span>.equalsIgnoreCase(loglevel)) &#123;
+                        logger.warn(log);
+                    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"error"</span>.equalsIgnoreCase(loglevel)) &#123;
+                        logger.error(log);
+                    &#125; <span class="hljs-keyword">else</span> &#123;
+                        logger.debug(log);
+                    &#125;
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"debug"</span>.equalsIgnoreCase(loglevel)) &#123;
+                    logger.debug(log, throwable);
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"info"</span>.equalsIgnoreCase(loglevel)) &#123;
+                    logger.info(log, throwable);
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"warn"</span>.equalsIgnoreCase(loglevel)) &#123;
+                    logger.warn(log, throwable);
+                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">"error"</span>.equalsIgnoreCase(loglevel)) &#123;
+                    logger.error(log, throwable);
+                &#125; <span class="hljs-keyword">else</span> &#123;
+                    logger.debug(log, throwable);
+                &#125;
+            &#125; <span class="hljs-keyword">catch</span> (Exception var8) &#123;
+                ;
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>使用说明 : </p>
+<pre><code class="hljs java"><span class="hljs-comment">// 由于该方案配置的Logger 为 sys.error...等开头，因此  直接使用loger的方式会在控制台输出，但不会被记录到日志文件之中,有且仅有通过Logit打印的日志才会被记录到文件中，此方案减少了每个类都创建loger的尴尬，非常方便</span>
+Logit.errorLog(<span class="hljs-string">"在线用户插入失败"</span> + <span class="hljs-string">" parms: "</span> + userOnline, <span class="hljs-keyword">new</span> Throwable(e));</code></pre>
+
+
+
+<p>GITHUB链接：<a href="https://github.com/kkzhilu/volcat-server" target="_blank" rel="noopener">https://github.com/kkzhilu/volcat-server</a> (不同分支即对应不同日志框架)</p>
+<p>项目暂时为私有, 如果需要参考请联系我</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E7%AF%87/">Java篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/">日志套餐篇</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/Nginx%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Nginx篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">
+                        <span class="hidden-mobile">Java语法糖之泛型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "日志套餐篇&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

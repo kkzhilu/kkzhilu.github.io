@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E7%AC%AC4%E7%AB%A0%20%20Schema%20%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/" target="_self">
+          <img src="/img/articles/3.jpg" srcset="/img/loading.gif" alt="第4章  Schema 与数据类型优化">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E7%AC%AC4%E7%AB%A0%20%20Schema%20%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/">第4章  Schema 与数据类型优化</a>
+
+      <a href="/2023/09/12/%E7%AC%AC4%E7%AB%A0%20%20Schema%20%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/" class="index-excerpt">
+        
+        
+          
+        
+        <div>第4章  Schema 与数据类型优化
+本文为《高性能Mysql 第三版》第四章读书笔记，Mysql版本为5.5
+
+选择优化的数据类型
+- 更小的通常更好 - 速度更快，占用更少
+- 简单就好 - 简单数据类型占用更少的CPU周期，例如整型的比字符串操作代价更低
+- 尽量避免NULL - 查询包含NULL的列，对Mysql来说更难优化，因为会使得索引，索引统计和值比较更为复杂
+
+
+
+### 整数类</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%AC4%E7%AB%A0-Schema-%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/">第4章  Schema 与数据类型优化</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E7%AC%AC11%E7%AB%A0%20%20%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84MySQL/" target="_self">
+          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="第11章  可扩展的MySQL">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E7%AC%AC11%E7%AB%A0%20%20%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84MySQL/">第11章  可扩展的MySQL</a>
+
+      <a href="/2023/09/12/%E7%AC%AC11%E7%AB%A0%20%20%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84MySQL/" class="index-excerpt">
+        
+        
+          
+        
+        <div>第11章  可扩展的MySQL
+本文为《高性能Mysql 第三版》第十一章读书笔记，Mysql版本为5.5
+
+什么是可扩展性能定义为响应时间
+系统容量表示在一定的时间内完成的工作量，系统的最大吞吐量 不是容量，如达到最大吞吐量，性能会下降，因此系统的真实容量定义为在可接受的性能的情况下能够达到的吞吐量，容量可以简单的认为是处理负载的能力
+
+数据量
+用户量
+用户活跃度
+相关数据集的大小
+
+正式的可扩</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AC%AC11%E7%AB%A0-%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84MySQL/">第11章  可扩展的MySQL</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="策略模式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
+
+      <a href="/2023/09/12/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>策略模式篇普遍定义定义个一个算法族， 各个算法的实现可以相互替换， 算法的实现和具体的算法使用场景隔离
+策略模式的进化【产品】：我需要一堆鸭子，红色的，绿色的，黑色的，还要会飞！还要会叫！
+【开发】：明白，秒秒钟搞定，N种鸭子只要继承了我的Duck类然后重写，就搞定一切！
+public abstract class Duck &#123;
+    
+    // 颜色属性
+    String c</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E7%BC%96%E7%A8%8B%E6%B8%B8%E6%88%8F/" target="_self">
+          <img src="/img/articles/3.jpg" srcset="/img/loading.gif" alt="编程游戏">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E7%BC%96%E7%A8%8B%E6%B8%B8%E6%88%8F/">编程游戏</a>
+
+      <a href="/2023/09/12/%E7%BC%96%E7%A8%8B%E6%B8%B8%E6%88%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>这个游戏太难了
+作者：码农翻身 - 大刘
+微信公众号：码农翻身
+
+第一关：入门怀着好奇和希望开始，去Google、知乎、QQ群或者朋友那里问了一圈，选定了一个方向，开始学习某编程语言以及相关框架。有过犹豫和彷徨，但最终还是咬牙坚持了下来。刚入门掌握的信息比较少，认识不足。容易被忽悠，喜欢与人进行口水战，捍卫自己付出努力的东西：XXX大法好，XXX语言是垃圾， XXX框架是垃圾，XXX IDE是垃圾</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%E7%AF%87/">程序人生篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E6%B8%B8%E6%88%8F/">编程游戏</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4-shell/" target="_self">
+          <img src="/img/articles/11.jpg" srcset="/img/loading.gif" alt="自动化运维-shell">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4-shell/">自动化运维-shell</a>
+
+      <a href="/2023/09/12/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4-shell/" class="index-excerpt">
+        
+        
+          
+        
+        <div>自动化运维 - shell命令
+文件请见：/相关文件/monitor.sh
+
+#!/bin/bash
+#这里可替换为你自己的执行程序以及日志目录，其他代码无需更改
+APP_NAME=juejin-news-1.0.0-SNAPSHOT.jar
+PROPERTIES_PATH=application.properties
+
+#使用说明，用来提示输入参数
+usage() &#123;
+    echo</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/">操作系统篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4-shell/">自动化运维-shell</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="装饰器模式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">装饰器模式</a>
+
+      <a href="/2023/09/12/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>装饰器模式篇意图动态地给一个对象添加一些额外的职责，就增加功能来说，Decorator模式相比生成子类更为灵活
+别名：包装器Wrapper
+装饰器模式的诞生有时我们希望给某个对象而不是整个类添加一些功能，例如：一个图形用户界面工具箱允许你对任意一个用户界面组件添加一些特性，例如边框。
+使用继承机制是添加功能的一种有效途径，但这种方法不够灵活，因为边框的选择是静态的，用户不能控制对组件加边框的方式和</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">装饰器模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="适配器模式和外观模式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">适配器模式和外观模式</a>
+
+      <a href="/2023/09/12/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>适配器模式意图将一个类的接口转换成客户希望的另外一个接口，adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作
+别名：Wrapper包装器
+适配器模式的诞生【产品】：开发小哥，记得我们第一版的需求吗？
+【开发】：什么玩意？
+【产品】：我们第一版是不是造了很多鸭子啊，现在需要造一点火鸡，但是客户很奇葩，他们要让鸭子拥有火鸡一样的能力，怎么办？
+【开发】：把鸭子当火鸡写？
+【产品</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">适配器模式和外观模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="CV程序员的一次进步">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/">CV程序员的一次进步</a>
+
+      <a href="/2023/09/12/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/" class="index-excerpt">
+        
+        
+          
+        
+        <div>CV程序员的一次进步
+原文链接：掘金
+
+一、调整顺序，让程序更高效假设业务需求是这样：会员，第一次登陆时，需要发一条感谢短信。如果没有经过思考，代码直接这样写了
+if(isUserVip &amp;&amp; isFirstLogin)&#123;
+    sendMsg();
+&#125;
+复制代码
+
+假设总共有5个请求，isUserVip通过的有3个请求，isFirstLogin通过的有1个请</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%E7%AF%87/">程序人生篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/">CV程序员的一次进步</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="SQL优化与诊断">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">SQL优化与诊断</a>
+
+      <a href="/2023/09/12/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SQL优化与诊断Explain诊断Explain各参数的含义如下：
+| 列名     | 说明                                                     ||  |  || id           | 执行编号，标识select所属的行。如果在语句中没有子查询或关联查询，只有唯一的select，每行都将显示1.否则，内层的select语句一般会顺序编</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">SQL优化与诊断</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Mac/" target="_self">
+          <img src="/img/articles/4.jpg" srcset="/img/loading.gif" alt="Mac">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Mac/">Mac</a>
+
+      <a href="/2023/09/12/Mac/" class="index-excerpt">
+        
+        
+          
+        
+        <div>软连接Mac 或者 Linux 中可以通过软连接的方式做一些操作，类比：Windows中的快捷方式
+通过命令的方式用Sublime打开文件
+open -a Sublime\ Text files/demo.html
+
+
+
+另外， sublime 提供命令行的工具叫subs，路径位于
+/Applications/Sublime\ Text.app/Contents/SharedSupport/bin</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%BE%E5%A4%87%E7%AF%87/">设备篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mac/">Mac</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>PhantomJS篇 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="PhantomJS-篇"><a href="#PhantomJS-篇" class="headerlink" title="PhantomJS 篇"></a>PhantomJS 篇</h1><p>PhantomJS 组件常用在爬虫领域，但是它也有其非常灵活的一面，即用作截取网页长图，或者将网页内容存储为PDF</p>
+<h2 id="PhantomJS-下载"><a href="#PhantomJS-下载" class="headerlink" title="PhantomJS 下载"></a>PhantomJS 下载</h2><p><a href="https://phantomjs.org/download.html" target="_blank" rel="noopener">地址</a></p>
+<p><a href="https://phantomjs.org/api/webpage/" target="_blank" rel="noopener">API文档库</a></p>
+<h2 id="Windows使用"><a href="#Windows使用" class="headerlink" title="Windows使用"></a>Windows使用</h2><p>下载完成后，直接解压即可直接进行使用，同时调用PhantomJS.exe时需要配合JS一同使用，以转出PNG图片或者PDF为例</p>
+<pre><code class="hljs JS文件```">
+&#96;&#96;&#96;javascript
+&#x2F;&#x2F; JS -&gt; 可直接运行生成PDF或者PNG   HTML转PDF需求解决方案：HTML -&gt; PNG -&gt; PDF或者HTML -&gt; PDF
+var page &#x3D; require(&#39;webpage&#39;).create(),
+    system &#x3D; require(&#39;system&#39;),
+    address, output, size;
+if (system.args.length &lt; 3 || system.args.length &gt; 5) &#123;
+    console.log(&#39;Usage: rasterize.js URL filename&#39;);
+    phantom.exit(1);
+&#125; else &#123;
+	&#x2F;&#x2F; 目标地址
+    address &#x3D; system.args[1];
+	
+	&#x2F;&#x2F; 输出地址
+    output  &#x3D; system.args[2];
+	
+	&#x2F;&#x2F; 尺寸 1200*7000
+	size    &#x3D; system.args[3].split(&#39;*&#39;);
+    console.log(page.settings.userAgent );
+	page.settings.loadImages &#x3D; true;
+    page.paperSize &#x3D; &#123;width: size[0], height: size[1], orientation: &#39;portrait&#39;, border: &#39;0.5cm&#39; &#125;;
+    console.log(&quot;open page now&quot;);
+    page.open(address, function (status) &#123;
+        console.log(status);
+        &#x2F;&#x2F; 预留一定的渲染时间
+        window.setTimeout(function () &#123;
+            page.render(output);
+            page.close();
+            console.log(&#39;Render ok&#39;);
+            phantom.exit();
+        &#125;, 3000);
+    &#125;);
+&#125;;</code></pre>
+
+
+
+<pre><code class="hljs 命令如下```">
+&#96;&#96;&#96;shell
+F:\browsers\phantomjs-2.1.1-windows\bin&gt;
+phantomjs.exe html2pdf.js &quot;参数一:URL&quot; &quot;参数二:输出文件地址可以为xxx.png或者xxx.pdf&quot; &quot;尺寸如:1200*6500&quot;</code></pre>
+
+<blockquote>
+<p>命令参数根据JS文件调整即可  输出文件为 .pdf 即输出PDF文件，为.png即输出截图图片</p>
+<p>与此同时JS文件中的尺寸大小可以直接调整为如A4纸等等</p>
+</blockquote>
+<h2 id="JS文件Tips"><a href="#JS文件Tips" class="headerlink" title="JS文件Tips"></a>JS文件Tips</h2><pre><code class="hljs javascript"><span class="hljs-comment">// 如果想要强行对PDF内容进行分页，对需要分页的内容增加以下样式即可</span>
+.pdf-page &#123;
+	page-<span class="hljs-keyword">break</span>-before: always;
+	page-<span class="hljs-keyword">break</span>-after: always;
+	page-<span class="hljs-keyword">break</span>-inside: avoid;
+&#125;</code></pre>
+
+
+
+<h2 id="Linux环境使用"><a href="#Linux环境使用" class="headerlink" title="Linux环境使用"></a>Linux环境使用</h2><p>PhantomJS 安装步骤：</p>
+<ul>
+<li>下载安装包并解压</li>
+<li>安装依赖软件： yum -y install wget fontconfig</li>
+<li>设置环境变量：ln -s /目标地址/bin   /usr/bin/</li>
+<li>phantomjs -v 检测是否安装成功</li>
+<li>安装中文字体：<br>centos中执行 ：yum install bitmap-fonts bitmap-fonts-cjk<br>ubuntu中执行：sudo apt-get install ttf-wqy-zenhei              #文泉驿-正黑 （全平台兼容字体）</li>
+</ul>
+<p>其余使用方式同windows一致，通过 phantomjs xxx.js 参数一 参数二….</p>
+<p>值得注意的是：Linux的PDF渲染效果不如Windows,Mac好</p>
+<h2 id="PNG图片转PDF代码技巧"><a href="#PNG图片转PDF代码技巧" class="headerlink" title="PNG图片转PDF代码技巧"></a>PNG图片转PDF代码技巧</h2><blockquote>
+<p>可以直接将PNG图片完美塞入到PDF中，缺点即不可直接复制文字</p>
+</blockquote>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 生成PDF --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.itextpdf<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>itextpdf<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.5.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PDFUtils</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">imgToPdf</span> <span class="hljs-params">(String imgUrl, String pdfUrl)</span> <span class="hljs-keyword">throws</span> IOException, DocumentException </span>&#123;
+        Document doc = <span class="hljs-keyword">new</span> Document(PageSize.A4, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
+        PdfWriter.getInstance(doc, <span class="hljs-keyword">new</span> FileOutputStream(pdfUrl));
+        doc.open();
+
+        <span class="hljs-comment">// Img</span>
+        Image png = Image.getInstance(imgUrl);
+        png.setAlignment(Image.MIDDLE);
+        doc.setPageSize(<span class="hljs-keyword">new</span> Rectangle(png.getPlainWidth(), png.getPlainHeight() + <span class="hljs-number">300F</span>));
+        doc.newPage();
+        doc.add(png);
+        doc.close();
+    &#125;
+&#125;</code></pre>
+
+
+
+<h2 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h2><p>在使用Ubuntu服务器作为截图以及渲染PDF介质时，会遇到很坑的中文乱码问题，一般解决办法是下载安装文泉驿宋体，但是经过</p>
+<p>测试，在苹果手机，电脑等依然会是乱码，因此针对ubuntu服务器，可以使用文泉驿正黑字体解决乱码问题：</p>
+<pre><code class="hljs shell">sudo apt-get install ttf-wqy-zenhei      #文泉驿-正黑 （全平台兼容字体）</code></pre>
+
+
+
+<p>Ubuntu如果需要安装其他字体，参考步骤：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 安装字体管理工具</span>
+sudo apt-get install font-manager
+
+<span class="hljs-meta">#</span><span class="bash"> 查看现有字体（可查看到字体安装位置）</span>
+fc-list</code></pre>
+
+
+
+<p>安装字体：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 安装字体</span>
+
+<span class="hljs-meta">#</span><span class="bash"> 方式一：</span>
+<span class="hljs-meta">#</span><span class="bash"> 在/usr/share/fonts目录下，新建如 chinese文件夹，将需要的tff文件复制进文件夹，如微软雅黑等</span>
+<span class="hljs-meta">#</span><span class="bash"> 然后执行如下命令：</span>
+mkfontscale
+mkfontdir
+fc-cache -fv （刷新字体缓存）
+
+<span class="hljs-meta">#</span><span class="bash"> 方式二，通过软件安装：</span>
+sudo apt-get install ttf-wqy-microhei   #文泉驿-微米黑
+sudo apt-get install ttf-wqy-zenhei     #文泉驿-正黑 （全平台兼容字体）
+sudo apt-get install xfonts-wqy         #文泉驿-点阵宋体
+
+<span class="hljs-meta">#</span><span class="bash"> 注意通过软件安装的方式，其实也是在/usr/share/fonts目录下新建了文件夹并移入了tff字体，因此卸载逻辑和下面一致</span></code></pre>
+
+
+
+<p>卸载字体：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 卸载字体的方式非常简单，例如我们新建了chinese目录，只需要 rm -rf ....chinese（包含字体的目录）</span>
+<span class="hljs-meta">#</span><span class="bash"> 再刷新字体缓存即可</span>
+rm -rf /usr/share/fonts/demo
+fc-cache -fv</code></pre>
+
+
+
+
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/">工具篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PhantomJS%E7%AF%87/">PhantomJS篇</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">6.824（三）GFS</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E9%99%90%E6%B5%81%E7%AF%87/">
+                        <span class="hidden-mobile">限流篇</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "PhantomJS篇&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

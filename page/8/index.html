@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="6.824（一）初识分布式">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/">6.824（一）初识分布式</a>
+
+      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>初始分布式前言本系列是源于「码农翻身」所属知识星球发起的读书活动，由大佬 @我的UDP不丢包 推荐而来，这次的读书活动有一些另类，我们抛弃了传统的书籍，开始攻略最高学府的研究生顶级课程 &lt;6.824&gt;，该课程是很多年前的蠕虫病毒发明者Robert Morris大佬授课，归属于麻省理工大学，授课方式主要是：视频 + Lab实验（Go语言） + 论文，全程英语，难度较大。
+分布式系统的判断</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/6-824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/">6.824（一）初识分布式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/" target="_self">
+          <img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="多线程并发基础">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/">多线程并发基础</a>
+
+      <a href="/2023/09/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/" class="index-excerpt">
+        
+        
+          
+        
+        <div>多线程并发基础什么是进程和线程
+CPU核心数和线程数的关系（核心数和逻辑处理器 1：2）
+CPU时间片轮转机制（RR调度）
+并行和并发（时间单位）
+线程数量的限制（系统限制   栈空间，文件描述符，句柄）
+多线程处理任务时一定比单线程快吗
+Java代码运行时涉及到的模块
+//Java 虚拟机线程系统的管理接口
+ThreadMXBean threadMXBean = ManagementFactor</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AF%87/">多线程并发篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/">多线程并发基础</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/" target="_self">
+          <img src="/img/articles/4.jpg" srcset="/img/loading.gif" alt="手写一个本地缓存">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/">手写一个本地缓存</a>
+
+      <a href="/2023/09/12/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/" class="index-excerpt">
+        
+        
+          
+        
+        <div>基于ConcurrentHashMap的本地缓存在系统中，有些数据，数据量小，但是访问十分频繁（例如国家标准行政区域数据），针对这种场景，需要将数据搞到应用的本地缓存中，以提升系统的访问效率，减少无谓的数据库访问（数据库访问占用数据库连接，同时网络消耗比较大），但是有一点需要注意，就是缓存的占用空间以及缓存的失效策略
+博文：https://www.jianshu.com/p/4194483127f</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/">手写一个本地缓存</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/" target="_self">
+          <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="CSS网站变灰代码">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/">CSS网站变灰代码</a>
+
+      <a href="/2023/09/12/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/" class="index-excerpt">
+        
+        
+          
+        
+        <div>清明悼念CSS2020年4月4日，举国悼念，所有网站均变成灰色的CSS代码，如下：
+.gray &#123;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filte</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/">CSS网站变灰代码</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" target="_self">
+          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="Ajax前后端交互">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/">Ajax前后端交互</a>
+
+      <a href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Ajax前后端交互注意：使用@RequestBody注解时需要注意，获取的实体类，或者集合，Map并不是真正的对象，hashmap或者Array等，而是linkehashMap等结构所以真正使用的时候注意进行转换，如：/*
+ * 注：(List&lt;MbtiAnswer&gt;) map.get("list") 转化得到的是LinkHashMap,而不是真正的集合
+ * 因此需要把list数组转</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/">Ajax前后端交互</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Docsify%E7%AF%87/" target="_self">
+          <img src="/img/articles/23.jpg" srcset="/img/loading.gif" alt="Docsify篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Docsify%E7%AF%87/">Docsify篇</a>
+
+      <a href="/2023/09/12/Docsify%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Docsifydocsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo 的地方是它不会生成将 .md 转成 .html 文件，所有转换工作都是在运行时进行。
+这将非常实用，如果只是需要快速的搭建一个小型的文档网站，或者不想因为生成的一堆 .html 文件“污染” commit 记录，只需要创建一个 index.html 就可以开始写文档而且直接部署在 GitHub Pages</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/">工具篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Docsify%E7%AF%87/">Docsify篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/MarkDown%E7%94%BB%E5%9B%BE%E7%AF%87/" target="_self">
+          <img src="/img/articles/21.jpg" srcset="/img/loading.gif" alt="MarkDown画图篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/MarkDown%E7%94%BB%E5%9B%BE%E7%AF%87/">MarkDown画图篇</a>
+
+      <a href="/2023/09/12/MarkDown%E7%94%BB%E5%9B%BE%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>MarkDown画图技巧横向流程图源码格式graph LR
+A[方形] --&gt;B(圆角)
+  B --&gt; C&#123;条件a&#125;
+  C --&gt;|a&#x3D;1| D[结果1]
+  C --&gt;|a&#x3D;2| E[结果2]
+  C --&gt;|a&#x3D;3| B
+  F[横向流程图]
+
+
+
+竖向流程图源码格式graph TD
+A[方形] --&gt;B</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%B7%A5%E5%85%B7%E7%AF%87/">工具篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MarkDown%E7%94%BB%E5%9B%BE%E7%AF%87/">MarkDown画图篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/MybatisCodeHelper%E7%AF%87/" target="_self">
+          <img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="MybatisCodeHelper篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/MybatisCodeHelper%E7%AF%87/">MybatisCodeHelper篇</a>
+
+      <a href="/2023/09/12/MybatisCodeHelper%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>MybatisCodeHelper什么是MybatisCodeHelper
+MyBatis-Plugin插件的功能简介如下.  
+
+提供Mapper接口与配置文件中对应SQL的导航.
+
+编辑XML文件时自动补全.
+
+根据Mapper接口, 使用快捷键生成xml文件及SQL标签.
+
+ResultMap中的property支持自动补全，支持级联(属性A.属性B.属性C).
+
+快捷键生成@Param注解</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/IDEA%E6%8F%92%E4%BB%B6/">IDEA插件</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/MybatisCodeHelper%E7%AF%87/">MybatisCodeHelper篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/" target="_self">
+          <img src="/img/articles/10.jpg" srcset="/img/loading.gif" alt="6.824（二）RPC and Threads">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/">6.824（二）RPC and Threads</a>
+
+      <a href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/" class="index-excerpt">
+        
+        
+          
+        
+        <div>RPC and ThreadsWhy Use Go?
+good support for threads  （对于线程的良好支持）
+convenient RPC（方便的RPC调用包）
+type safe（类型安全）
+garbage-collected (no use after freeing problems)（拥有垃圾回收机制，不需要考虑内存释放的问题）
+threads + GC is part</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/6-824%EF%BC%88%E4%BA%8C%EF%BC%89RPC-and-Threads/">6.824（二）RPC and Threads</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" target="_self">
+          <img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="FastJson使用记录">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">FastJson使用记录</a>
+
+      <a href="/2023/09/12/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>FastJson getBytes
+在使用FastJson过程中出现了
+Exception in thread "main" com.alibaba.fastjson.JSONException: can not cast to int, value : [-119,80,78,71,13]
+
+异常，现来分析其报错原因
+
+getBytes 异常// ImgUtilApp 具备 byte[] 变量
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">FastJson使用记录</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/7/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/9/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

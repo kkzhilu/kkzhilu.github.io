@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>状态模式 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="状态模式篇"><a href="#状态模式篇" class="headerlink" title="状态模式篇"></a>状态模式篇</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>允许一个对象在其内部状态改变时改变它的行为</p>
+<p>说人话：<font color="red">允许对象在改变自身状态时候，更改绑定的特定方法</font></p>
+<h2 id="状态模式的诞生"><a href="#状态模式的诞生" class="headerlink" title="状态模式的诞生"></a>状态模式的诞生</h2><p>【<font color="orange">产品</font>】：Hello，开发小哥，我们需要开发一款 <code>娃娃机</code> ，你可以提前想想怎么设计它啦。</p>
+<p>【<font color="blue">开发</font>】：娃娃机？我想想奥，它需要投币，用户移动，确认抓取，结束这几个动作，好像很好做欸，用一个变量维护它当前的阶段，然后写四个 if 语句就好啦。</p>
+<p>【<font color="red">BOSS</font>】：你准备用一个主方法，四个子方法配合 if 语句外加一个状态变量去做吗？</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 伪代码</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handle</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (flag == A) &#123;
+        a();
+    &#125;
+
+    <span class="hljs-keyword">if</span> (flag == B) &#123;
+        b();
+    &#125;
+&#125;</code></pre>
+
+<p>【<font color="blue">开发</font>】：对啊，老大，你真是我肚子里的蛔虫！</p>
+<p>【<font color="red">BOSS</font>】：蛔你个头，这样做<font color="red">  大错特错！ </font>，你难道想对 <font color="red">投币口，按钮，摇杆都绑定同一个方法吗？</font></p>
+<p>【<font color="blue">开发</font>】：对哦，它们应该是<font color="red"> 不同的方法，同时暴露给用户，我再思考思考 </font></p>
+<p><img src="/2023/09/12/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/image-20200617004054501.png" srcset="/img/loading.gif" alt="image-20200617004054501"></p>
+<h2 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h2><p><strong><em>定义状态接口，同时封装变化，利用default关键字封装默认方法</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">State</span> </span>&#123;
+
+    <span class="hljs-comment">/** 投币 **/</span>
+    <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title">giveMoney</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"无法投币"</span>);
+    &#125;
+
+    <span class="hljs-comment">/** 移动滑杆 **/</span>
+    <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title">move</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"无法移动滑杆"</span>);
+    &#125;
+
+    <span class="hljs-comment">/** 抓取 **/</span>
+    <span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title">grab</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"无法抓取"</span>);
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">changeState</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+
+
+<p><strong><em>投币状态  状态的其中之一</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MoneyState</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">State</span></span>&#123;
+
+    Context context;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MoneyState</span><span class="hljs-params">(Context context)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.context = context;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">giveMoney</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"已投币!"</span>);
+        changeState();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">changeState</span><span class="hljs-params">()</span> </span>&#123;
+        context.setExecute(<span class="hljs-keyword">new</span> MoveState(context));
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>为了尽量减少代码，只展示了其中一种状态，我们可以看到在 <font color="blue">MoneyState</font> 状态类执行所属的业务方法时，更改了上下文持有的状态类，这就产生了  <font color="red">状态的变更</font> ，同时上下文更加清晰，即：<font color="red">我只用考虑我下一个状态是什么</font></p>
+<p><font color="red">状态模式的设计思路：</font></p>
+<ul>
+<li>Context  上下文环境，持有状态</li>
+<li>State   状态顶层接口</li>
+<li>ConcreteState   具体的状态</li>
+</ul>
+<p>简单来说，</p>
+<ol>
+<li>必须清晰的认识到共有多少种不同的状态，并通过接口定义其核心方法，封装变化</li>
+<li>状态类持有 <font color="blue">Context</font> 上下文，在核心方法处理后更改其状态</li>
+</ol>
+<blockquote>
+<p>如果看着有点模棱两可，建议看完本文后，访问专题设计模式开源项目，里面有具体的代码示例，链接在最下面</p>
+</blockquote>
+<h2 id="状态模式的关键"><a href="#状态模式的关键" class="headerlink" title="状态模式的关键"></a>状态模式的关键</h2><ul>
+<li>明确所有可能发生的状态，及其转换关系</li>
+<li>明确状态模式中的各个状态是有可能同时暴露给用户的</li>
+</ul>
+<blockquote>
+<p>就好像娃娃机运作的多种状态，<font color="red">  投币，移动摇杆，按下确认按钮等等可能不按先后顺序触发</font></p>
+</blockquote>
+<h2 id="整一个-“流程”-模式"><a href="#整一个-“流程”-模式" class="headerlink" title="整一个 “流程” 模式"></a>整一个 “流程” 模式</h2><h3 id="每个状态的方法名都一样会如何？"><a href="#每个状态的方法名都一样会如何？" class="headerlink" title="每个状态的方法名都一样会如何？"></a>每个状态的方法名都一样会如何？</h3><p>上文中我们大概知道了状态模式的特点，把状态封装成类，在调用状态-核心方法时候更改其状态本身，<font color="red">此时考虑的多种状态方法名可能各不相同，假设我们都起一样的名字会如何？</font></p>
+<p>我们会首先遇到一个问题，我们无法得知它需要调用几次方法（因为可能有重复性 A - B 的情况），但如果无限循环，在适当的地方控制其结束点，和是否继续执行的标识，好像就可以解决了。</p>
+<h3 id="来一个流程案例"><a href="#来一个流程案例" class="headerlink" title="来一个流程案例"></a>来一个流程案例</h3><p><img src="/2023/09/12/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/image-20200617001746490.png" srcset="/img/loading.gif" alt="image-20200617001746490"></p>
+<p>简单描述下即：开始处理订单</p>
+<ul>
+<li>正常则进入成功状态，入库，结束执行</li>
+<li>失败则进入失败状态，检测是否重新执行，扭转状态为处理订单</li>
+</ul>
+<h3 id="上代码"><a href="#上代码" class="headerlink" title="上代码"></a>上代码</h3><p><strong><em>Context 上下文</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Context</span> </span>&#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 最大执行次数</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer FAIL_NUM = <span class="hljs-number">3</span>;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 失败次数</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> failNum;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 是否继续执行的标识</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> isAbandon;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 当前状态</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">private</span> StateInterface stateInterface;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Context</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.stateInterface = <span class="hljs-keyword">new</span> HandleOrder();
+        <span class="hljs-keyword">this</span>.failNum = <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">this</span>.isAbandon = <span class="hljs-keyword">false</span>;
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 处理方法</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handle</span> <span class="hljs-params">()</span> </span>&#123;
+        stateInterface.doAction(<span class="hljs-keyword">this</span>);
+    &#125;
+    
+    <span class="hljs-comment">// 省略无用代码...</span>
+&#125;</code></pre>
+
+
+
+<p><strong><em>处理订单状态</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HandleOrder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">StateInterface</span> </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAction</span><span class="hljs-params">(Context context)</span> </span>&#123;
+        printCurrentState();
+
+        <span class="hljs-comment">// do somethings</span>
+        <span class="hljs-keyword">int</span> num = (<span class="hljs-keyword">int</span>) (Math.random() * <span class="hljs-number">11</span>);
+        <span class="hljs-keyword">if</span> (num &gt;= <span class="hljs-number">8</span>) &#123;
+            System.out.println(<span class="hljs-string">"处理订单完成, 进入成功状态..."</span>);
+            context.setStateInterface(<span class="hljs-keyword">new</span> SuccessOrder());
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            System.out.println(<span class="hljs-string">"处理订单失败, 进入失败状态..."</span>);
+            context.setStateInterface(<span class="hljs-keyword">new</span> FailOrder());
+        &#125;
+
+        CodeUtils.spilt();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> StateEnums <span class="hljs-title">getCurrentState</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> StateEnums.HANDLE_ORDER;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><strong><em>客户端调用方法</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">// 模拟从队列中取任务按流程循环执行</span>
+        Context context = <span class="hljs-keyword">new</span> Context();
+        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>) &#123;
+
+            <span class="hljs-comment">// 校验是否为废弃 | 已完成任务</span>
+            <span class="hljs-keyword">if</span> (context.isAbandon()) &#123;
+                System.out.println(<span class="hljs-string">"此条任务不再执行... "</span>);
+                <span class="hljs-keyword">break</span>;
+            &#125;
+            
+            context.handle();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>测试结果输出：</p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> 当前状态：订单处理</span>
+<span class="hljs-meta">#</span><span class="bash"> 处理订单失败, 进入失败状态...</span>
+<span class="hljs-meta">#</span><span class="bash"> </span>
+
+<span class="hljs-meta">#</span><span class="bash"> 当前状态：处理订单失败</span>
+<span class="hljs-meta">#</span><span class="bash"> 订单处理失败... 当前执行次数: 1</span>
+<span class="hljs-meta">#</span><span class="bash"> </span>
+
+<span class="hljs-meta">#</span><span class="bash"> 当前状态：订单处理</span>
+<span class="hljs-meta">#</span><span class="bash"> 处理订单失败, 进入失败状态...</span>
+<span class="hljs-meta">#</span><span class="bash"> </span>
+
+<span class="hljs-meta">#</span><span class="bash"> 当前状态：处理订单失败</span>
+<span class="hljs-meta">#</span><span class="bash"> 订单处理失败... 当前执行次数: 2</span>
+<span class="hljs-meta">#</span><span class="bash"> </span>
+
+<span class="hljs-meta">#</span><span class="bash"> 当前状态：订单处理</span>
+<span class="hljs-meta">#</span><span class="bash"> 处理订单完成, 进入成功状态...</span>
+<span class="hljs-meta">#</span><span class="bash"> </span>
+
+<span class="hljs-meta">#</span><span class="bash"> 当前状态：处理订单成功</span>
+<span class="hljs-meta">#</span><span class="bash"> 订单处理完成 -&gt; 进入入库逻辑...</span>
+<span class="hljs-meta">#</span><span class="bash"> 入库处理完成</span>
+<span class="hljs-meta">#</span><span class="bash"> </span>
+
+<span class="hljs-meta">#</span><span class="bash"> 此条任务不再执行...</span></code></pre>
+
+<blockquote>
+<p>如果看着有点模棱两可，建议看完本文后，访问专题设计模式开源项目，里面有具体的代码示例，链接在最下面</p>
+</blockquote>
+<h3 id="“流程”-模式适用的场景"><a href="#“流程”-模式适用的场景" class="headerlink" title="“流程” 模式适用的场景"></a>“流程” 模式适用的场景</h3><p>在这样的设计中，与其说是状态的变更，不如说是 “流程” 的变更更为贴切，因此它可以作为诸多后台任务的解决方案，尤其是面临很多业务流程场景时，可以极大的提高代码的可维护性： <font color="red">我只用考虑和我有关的 “流程”</font></p>
+<h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><ul>
+<li>封装变化：在父级接口中提供 default 方法，子类实现其对应的状态方法即可</li>
+<li>多用组合，少用继承：状态模式经常和策略模式做对比，它们都是利用组合而非继承增强其变化和能力</li>
+</ul>
+<h2 id="什么场景适合使用状态模式"><a href="#什么场景适合使用状态模式" class="headerlink" title="什么场景适合使用状态模式"></a>什么场景适合使用状态模式</h2><ul>
+<li>一个对象的行为取决于它的状态，并且它必须在运行时刻根据状态改变其行为</li>
+<li>一个操作中含有庞大的多分支条件语句，且这些分支依赖于该对象的状态</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><strong>附上GOF一书中对于状态模式的UML图：</strong></p>
+<p><img src="/2023/09/12/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/image-20200617003230665.png" srcset="/img/loading.gif" alt="image-20200617003230665"></p>
+<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<ul>
+<li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
+<li>提供了友好的阅读指导</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/172284a1c8caf324?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif" alt></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">状态模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">模板方法模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/">
+                        <span class="hidden-mobile">第1章  Mysql架构与历史</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "状态模式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

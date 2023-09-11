@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>观察者模式 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="观察者模式篇"><a href="#观察者模式篇" class="headerlink" title="观察者模式篇"></a>观察者模式篇</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>定义对象间的一种一对多的依赖关系,当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新</p>
+<p><font color="red">别名：</font>发布-订阅模式</p>
+<h2 id="观察者模式的诞生"><a href="#观察者模式的诞生" class="headerlink" title="观察者模式的诞生"></a>观察者模式的诞生</h2><p>将一个系统分割成一系列相互协作的类有一个常见的副作用：需要维护相关对象间的致性，我们不希望为了维持一致性而使各类紧密耦合，因为这样降低了它们的可重用性。</p>
+<p>说人话就是：</p>
+<p>【<font color="orange">产品</font>】：开发小哥，我需要你设计一个天气预报显示大屏，气象站会给你发送数据，你需要把它展示到大屏里，OK吗？</p>
+<p>【<font color="blue">开发</font>】：OJBK！秒秒钟搞定一切！代码立马出来！</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getTemperature</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 从气象站获取发送过来的温度数据</span>
+    <span class="hljs-comment">// getData();</span>
+    
+    
+    <span class="hljs-comment">// ................................</span>
+    <span class="hljs-comment">// 显示到大屏里面去</span>
+    <span class="hljs-comment">// showDataToScreen();</span>
+    <span class="hljs-comment">// ................................</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getMisture</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 从气象站获取发送过来的湿度数据</span>
+    <span class="hljs-comment">// getData();</span>
+    
+    
+    <span class="hljs-comment">// ................................</span>
+    <span class="hljs-comment">// 显示到大屏里面去</span>
+    <span class="hljs-comment">// showDataToScreen();</span>
+    <span class="hljs-comment">// ................................</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">getAirindex</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-comment">// 从气象站获取发送过来的空气指数数据</span>
+    <span class="hljs-comment">// getData();</span>
+    
+    
+    <span class="hljs-comment">// ................................</span>
+    <span class="hljs-comment">// 显示到大屏里面去</span>
+    <span class="hljs-comment">// showDataToScreen();</span>
+    <span class="hljs-comment">// ................................</span>
+&#125;</code></pre>
+
+
+
+<p>【<font color="red">BOSS</font>】：磕大头！宁是准备每获取一次数据就把代码CV一遍吗？你不累吗？</p>
+<p>【<font color="blue">开发</font>】：老大，我一点都不累！就是复制粘贴一下呀！</p>
+<p>【<font color="red">BOSS</font>】：如果我现在不需要同步更新天气指数呢？删代码吗？</p>
+<p>【<font color="blue">开发</font>】：对啊！一秒钟就能删掉！( •̀ ω •́ )✧</p>
+<p>【<font color="red">BOSS</font>】：重写😃</p>
+<p><img src="/2023/09/12/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/972352-07e55e231b95023f.webp" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h2><p>于是乎，我们开启了关于设计模式的经典书籍阅读之旅</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 观察主题接口</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Observable</span></span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addObserver</span><span class="hljs-params">(Observer observer)</span></span>;     <span class="hljs-comment">// 添加观察者</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeObserver</span><span class="hljs-params">(Observer observer)</span></span>;  <span class="hljs-comment">// 移除观察者</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyObservers</span><span class="hljs-params">(WeatherData data)</span></span>;  <span class="hljs-comment">// 通知所有观察者</span>
+&#125;
+
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 观察者</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Observer</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(WeatherData data)</span></span>;
+&#125;
+
+
+<span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 天气主题</span>
+<span class="hljs-comment"> *</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Weather</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Observable</span> </span>&#123;
+    <span class="hljs-keyword">private</span> List&lt;Observer&gt; observers = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addObserver</span><span class="hljs-params">(Observer observer)</span> </span>&#123;
+        observers.add(observer);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">removeObserver</span><span class="hljs-params">(Observer observer)</span> </span>&#123;
+        observers.remove(observer);
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">notifyObservers</span><span class="hljs-params">(WeatherData data)</span> </span>&#123;
+        <span class="hljs-keyword">for</span> (Observer observer : observers)
+            observer.update(data);
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><font color="red">观察者模式的设计思路：</font></p>
+<ul>
+<li>Subject 目标（容器）提供注册和删除观察者的接口以及更新接口</li>
+<li>Observer（观察者）为那些在目标发生改变时需获得通知的对象定义一个更新接口</li>
+<li>ConcreteSubject（具体目标）状态发生改变时，向各个观察者发出通知</li>
+<li>ConcreteObserver（具体观察者）实现Observer的更新接口</li>
+</ul>
+<p>简单来说，</p>
+<ol>
+<li>我们需要一个接口来定义注册，删除和更新接口</li>
+<li>然后由具体的目标（类）实现该接口，并且在类中创建一个容器，存储需要被通知的对象</li>
+<li>需要被通知的对象，需要实现Observer接口中的update更新方法</li>
+<li>将观察者对象注册进容器中，当具体目标更新时，调用所有容器类对象的update方法</li>
+</ol>
+<blockquote>
+<p>如果看着有点模棱两可，就看完本文后，访问专题设计模式开源项目，里面有具体的代码示例，链接在最下面</p>
+</blockquote>
+<h2 id="JDK中的观察者模式"><a href="#JDK中的观察者模式" class="headerlink" title="JDK中的观察者模式"></a>JDK中的观察者模式</h2><p>JDK中已经对观察者模式有具体的实现，代码非常简单，如下所示：</p>
+<p>具体目标：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ObservableApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Observable</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">long</span> curr;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ObservableApp</span><span class="hljs-params">(<span class="hljs-keyword">long</span> curr)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.curr = curr;
+    &#125;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-keyword">long</span> newStr)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.curr = newStr;
+        
+        <span class="hljs-comment">// 更改状态，发送通知</span>
+        setChanged();
+        notifyObservers(newStr);
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setChanged</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">super</span>.setChanged();
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>具体观察者：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ObserverA</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Observer</span> </span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(Observable o, Object arg)</span> </span>&#123;
+        System.out.println(MessageFormat.format(<span class="hljs-string">"ObserverA -&gt; &#123;0&#125; changed, Begin to Work. agr is:&#123;1&#125;"</span>, o.getClass().getSimpleName(), arg));
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>Main方法：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
+        ObservableApp app = <span class="hljs-keyword">new</span> ObservableApp(System.currentTimeMillis());
+        System.out.println(app.getCurr());
+        app.addObserver(<span class="hljs-keyword">new</span> ObserverA());
+        app.addObserver(<span class="hljs-keyword">new</span> ObserverB());
+
+        Thread.sleep(<span class="hljs-number">1000</span>);
+        
+        <span class="hljs-keyword">long</span> curr = System.currentTimeMillis();
+        app.change(curr);
+        System.out.println(app.getCurr());
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 输出如下：</span>
+<span class="hljs-comment">// 1589688733464</span>
+<span class="hljs-comment">// ObserverB -&gt; ObservableApp changed, Begin to Work. agr is:1,589,688,734,469</span>
+<span class="hljs-comment">// ObserverA -&gt; ObservableApp changed, Begin to Work. agr is:1,589,688,734,469</span>
+<span class="hljs-comment">// 1589688734469</span></code></pre>
+
+
+
+<h3 id="推模式"><a href="#推模式" class="headerlink" title="推模式"></a>推模式</h3><p>通知发给观察者，通知携带参数，这就是推，对应JDK方法中的：notifyObservers(Object arg) </p>
+<h3 id="拉模式"><a href="#拉模式" class="headerlink" title="拉模式"></a>拉模式</h3><p>通知发给观察者，通知不携带参数，需要观察者自己去主动调用get方法获取数据，这就是拉</p>
+<p>对应JDK方法中的：notifyObservers()，仅告知观察者数据发生了变化，至于数据的详情需要观察者主动到主题中pull数据</p>
+<p>拉模型强调的是目标不知道它的观察者,而推模型假定目标知道一些观察者的需要的信息。推模型可能使得观察者相对难以复用，因为目标对观察者的假定可能并不总是正确的。另一方面。拉模型可能效率较差，因为观察者对象需在没有目标对象帮助的情况下确定什么改变了。</p>
+<h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><ol>
+<li><strong>封装变化</strong><ul>
+<li>在观察者模式中会经常改变的是主题的状态，以及观察者的数目和类型</li>
+<li>我们可以改变依赖于主题状态的对象，但是不必改变主题本身，这便是提前规划</li>
+</ul>
+</li>
+<li><strong>针对接口编程</strong><ul>
+<li>主题和观察者都使用了接口</li>
+<li>观察者利用主题的接口向主题注册</li>
+<li>主题利用观察者接口通知观察者，可以使两者之间正常交互，同时又具有松耦合的特性</li>
+</ul>
+</li>
+<li><strong>多使用组合</strong><ul>
+<li>观察者模式利用组合将许多观察者组合进主题中</li>
+<li>它们之间的关系并不是通过继承得到，而是在运行时动态改变</li>
+</ul>
+</li>
+</ol>
+<h2 id="什么场景适合使用"><a href="#什么场景适合使用" class="headerlink" title="什么场景适合使用"></a>什么场景适合使用</h2><p>当对象间存在一对多关系时，则使用观察者模式（Observer Pattern），比如，当一个对象被修改时，则会自动通知它的依赖对象。观察者模式属于行为型模式</p>
+<h2 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h2><ul>
+<li>比如微信公众号中的订阅关注，订阅后，公众号发布文章会实时分发给各个账号</li>
+<li>又如，我们使用Keep跑步时，如果你跑的足够激情，它会提示你，<font color="red">恭喜你，你已经打破了五公里的最好记录！</font>这样的语音提醒一定是触发式，而不是实时去检测吧？（实时检测没有意义，浪费性能）这里就可以利用观察者模式进行设计和解耦</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><strong>附上GOF一书中对于观察者模式的UML图：</strong></p>
+<p><img src="/2023/09/12/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/image-20200517141746282.png" srcset="/img/loading.gif" alt="image-20200517141746282"></p>
+<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<ul>
+<li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
+<li>提供了友好的阅读指导</li>
+</ul>
+<p><img src="/2023/09/12/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png" srcset="/img/loading.gif" alt></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">设计模式总篇：剖析七大原则</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">迭代器和组合模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "观察者模式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

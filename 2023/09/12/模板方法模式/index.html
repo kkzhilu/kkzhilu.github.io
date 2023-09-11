@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>模板方法模式 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="模板方法模式篇"><a href="#模板方法模式篇" class="headerlink" title="模板方法模式篇"></a>模板方法模式篇</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>定义一个操作中的算法的骨架，将一些步骤延迟到子类中。 Template Method使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤</p>
+<h2 id="模板方法模式的诞生"><a href="#模板方法模式的诞生" class="headerlink" title="模板方法模式的诞生"></a>模板方法模式的诞生</h2><p>模板方法模式为我们提供了一种代码复用的重要技巧，它定义了算法的步骤，把这些步骤的实现延迟到子类</p>
+<p>说人话就是：</p>
+<p>【<font color="orange">产品</font>】：开发小哥，你会做饭吗？</p>
+<p>【<font color="blue">开发</font>】：不会啊，怎么了？难道你要做给我吃？</p>
+<p>【<font color="orange">产品</font>】：你想太多了，我就准备教你做一道炒包菜~，用你们写代码思路，我也来试试写写伪代码</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cookie</span><span class="hljs-params">()</span></span>&#123;
+    <span class="hljs-comment">// 第一步：倒油</span>
+    <span class="hljs-keyword">this</span>.pourOil();
+    <span class="hljs-comment">// 第二步：热油</span>
+    <span class="hljs-keyword">this</span>.HeatOil();
+    <span class="hljs-comment">// 第三步：倒入包菜</span>
+    <span class="hljs-keyword">this</span>.pourVegetable();
+    <span class="hljs-comment">// 第四步：倒入调味料</span>
+    <span class="hljs-keyword">this</span>.pourSauce();
+    <span class="hljs-comment">// 第五步：翻炒</span>
+    <span class="hljs-keyword">this</span>.fry();
+&#125;</code></pre>
+
+<p>【<font color="blue">开发</font>】：我懂了，小姐姐，你要不来我家？我给你做一道炒蒜蓉~</p>
+<p>【<font color="orange">产品</font>】：？？？你不是说你不会做饭吗？</p>
+<p><img src="/2023/09/12/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/image-20200608234717306.png" srcset="/img/loading.gif" alt="image-20200608234717306"></p>
+<p>【<font color="blue">开发</font>】：你不是写出来步骤了嘛，我已经会了，嘿嘿嘿~</p>
+<blockquote>
+<p>你要是还没会，那咱们就一起看看核心代码吧~<br>你如果会了，那直接跳到SSO实战吧~</p>
+</blockquote>
+<h2 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h2><p><strong><em>抽象类</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TemplateClass</span> </span>&#123;
+
+	<span class="hljs-comment">/***</span>
+<span class="hljs-comment">	 * 模板方法，用来控制炒菜的流程 （炒菜的流程是一样的-复用）</span>
+<span class="hljs-comment">	 * 可根据需求申明为final，防止子类覆盖这个方法，导致流程的执行顺序</span>
+<span class="hljs-comment">	 */</span>
+	<span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cookProcess</span><span class="hljs-params">()</span> </span>&#123;
+
+		<span class="hljs-comment">// 第一步：倒油</span>
+		<span class="hljs-keyword">this</span>.pourOil();
+
+		<span class="hljs-comment">// 第二步：热油</span>
+		<span class="hljs-keyword">this</span>.heatOil();
+
+		<span class="hljs-comment">// 第三步：倒蔬菜</span>
+		<span class="hljs-keyword">this</span>.pourVegetable();
+
+		<span class="hljs-comment">// 配合钩子函数, 确定是否需要倒调味料</span>
+		<span class="hljs-keyword">if</span> (needSauce()) &#123;
+			<span class="hljs-keyword">this</span>.pourSauce();
+		&#125;
+
+		<span class="hljs-comment">// 第五步：翻炒</span>
+		<span class="hljs-keyword">this</span>.fry();
+	&#125;
+
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pourOil</span><span class="hljs-params">()</span> </span>&#123;
+		System.out.println(<span class="hljs-string">"倒油"</span>);
+	&#125;
+
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">heatOil</span><span class="hljs-params">()</span> </span>&#123;
+		System.out.println(<span class="hljs-string">"热油"</span>);
+	&#125;
+
+	<span class="hljs-comment">/***</span>
+<span class="hljs-comment">	 * 需要变化的部分就定义为抽象</span>
+<span class="hljs-comment">	 */</span>
+	<span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pourVegetable</span><span class="hljs-params">()</span></span>;
+	<span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pourSauce</span><span class="hljs-params">()</span></span>;
+
+	<span class="hljs-comment">/***</span>
+<span class="hljs-comment">	 * 钩子函数, 影响方法调用逻辑</span>
+<span class="hljs-comment">	 */</span>
+	<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">needSauce</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+	&#125;
+
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fry</span><span class="hljs-params">()</span> </span>&#123;
+		System.out.println(<span class="hljs-string">"炒啊炒啊炒到熟啊"</span>);
+	&#125;
+&#125;</code></pre>
+
+
+
+<p><strong><em>子类实现</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SuanRong</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TemplateClass</span> </span>&#123;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">needSauce</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pourVegetable</span><span class="hljs-params">()</span> </span>&#123;
+		System.out.println(<span class="hljs-string">"下锅的蔬菜是菜心"</span>);
+	&#125;
+
+	<span class="hljs-meta">@Override</span>
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">pourSauce</span><span class="hljs-params">()</span> </span>&#123;
+		System.out.println(<span class="hljs-string">"下锅的酱料是蒜蓉"</span>);
+	&#125;
+&#125;</code></pre>
+
+<p><font color="red">模板方法模式的设计思路：</font></p>
+<ul>
+<li>AbstractClass（抽象类）抽象基类，定义抽象方法，方法调用顺序等等</li>
+<li>ConcreteClass（实现类）继承抽象基类，实现预先定义的方法</li>
+</ul>
+<p>简单来说，</p>
+<ol>
+<li>我们需要一个抽象类或者接口（Java8之后接口也可以提供具体的方法），定义需要实现的方法和方法执行逻辑</li>
+<li>根据业务情况继承抽象类或接口，实现特定方法，使多种情况互相隔离</li>
+<li>配合如策略或其他的方式合理的构建需要的实现类即可</li>
+</ol>
+<blockquote>
+<p>如果看着有点模棱两可，建议看完本文后，访问专题设计模式开源项目，里面有具体的代码示例，链接在最下面</p>
+</blockquote>
+<h2 id="模板的力量：5分钟一个SSO"><a href="#模板的力量：5分钟一个SSO" class="headerlink" title="模板的力量：5分钟一个SSO"></a>模板的力量：5分钟一个SSO</h2><p>要说到用模板方法模式去使用SSO时，咱们先需要知道<font color="blue">什么是SSO</font>（知道的同学直接略过啦~）</p>
+<h3 id="SSO"><a href="#SSO" class="headerlink" title="SSO"></a>SSO</h3><p>SSO即<font color="blue">单点登录</font>，即<strong>在多个系统中，用户只需一次登录，各个系统即可感知该用户已经登录</strong></p>
+<h3 id="用户鉴权的几种常见方式"><a href="#用户鉴权的几种常见方式" class="headerlink" title="用户鉴权的几种常见方式"></a>用户鉴权的几种常见方式</h3><p>本文主要还是侧重设计模式的实战，所以就简单说几句，常见方式如：</p>
+<ul>
+<li>oauth 2.0</li>
+<li>cookie</li>
+<li>………..</li>
+</ul>
+<h3 id="第一个SSO"><a href="#第一个SSO" class="headerlink" title="第一个SSO"></a>第一个SSO</h3><p>我们在编写第一个SSO的时候，还是有那么一点费劲的，需要考虑各种流程，细节等等</p>
+<p><font color="blue">（这里指的是我们集成其他公司的鉴权系统）</font></p>
+<p>我所在的公司客户技术水平五花八门，技术栈也是五花八门，所以不是标准的oauth2.0结构，大致抽象出以下核心环节，如：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SSOContextAnalysis</span> </span>&#123;
+
+    <span class="hljs-comment">/** 跳转登录*/</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">toLogin</span><span class="hljs-params">(SSOConfig ssoConfig, HttpServletResponse httpServletResponse)</span></span>;
+
+    <span class="hljs-comment">/** 获取token */</span>
+    <span class="hljs-function">Object <span class="hljs-title">getToken</span><span class="hljs-params">(SSOConfig ssoConfig, HttpServletRequest httpServletRequest)</span></span>;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 获取用户信息</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> ssoConfig 配置</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 用户信息加密串</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">String <span class="hljs-title">getUserInfo</span><span class="hljs-params">(SSOConfig ssoConfig, Object arg)</span></span>;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 解析sso context</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">String <span class="hljs-title">getAccount</span><span class="hljs-params">(SSOConfig ssoConfig, Object userInfo)</span></span>;
+
+    <span class="hljs-comment">/** 进行退出 */</span>
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">tologout</span><span class="hljs-params">(SSOConfig ssoConfig, UserOnline userOnline, HttpServletResponse httpServletResponse)</span></span>;
+&#125;</code></pre>
+
+
+
+<p><strong><em>龙图SSO Demo</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LongTuSSOHandle</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">SSOContextAnalysis</span></span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">toLogin</span><span class="hljs-params">(SSOConfig ssoConfig)</span> </span>&#123;
+        <span class="hljs-comment">// 跳转SSO鉴权地址, 配置回调地址</span>
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getToken</span><span class="hljs-params">(SSOConfig ssoConfig)</span> </span>&#123;
+        <span class="hljs-comment">// 根据客户的加密算法等获取Token信息</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getUserInfo</span><span class="hljs-params">(SSOConfig ssoConfig, Object arg)</span> </span>&#123;
+        <span class="hljs-comment">// 组装报文, 发起用户请求, 获取用户数据</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getAccount</span><span class="hljs-params">(SSOConfig ssoConfig, Object userInfo)</span> </span>&#123;
+        <span class="hljs-comment">// 基于用户数据, 获取本平台用户数据, 完成SSO流程</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">tologout</span><span class="hljs-params">(SSOConfig ssoConfig)</span> </span>&#123;
+        <span class="hljs-comment">// 根据退出地址进行退出操作等等</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    &#125;
+&#125;</code></pre>
+
+<p><font color="red">我们在编写业务代码的时候，完全依赖于顶层抽象类，彼时再动态的更改具体的实现类即可</font></p>
+<h3 id="如何动态指定实现类"><a href="#如何动态指定实现类" class="headerlink" title="如何动态指定实现类"></a>如何动态指定实现类</h3><p>动态指定实现类的最好方式无非这么几种，大家可以根据需求选择：</p>
+<ul>
+<li>配置文件 + 反射构建实现类</li>
+<li>配置文件 + 预先加载所有实现类，根据配置动态选择</li>
+<li>数据库配置 + 反射（可以使用CGLIB代理）</li>
+<li>数据库配置 + 预先加载所有实现类，根据配置动态选择</li>
+</ul>
+<h3 id="第二个SSO要多久？"><a href="#第二个SSO要多久？" class="headerlink" title="第二个SSO要多久？"></a>第二个SSO要多久？</h3><p>当我们使用模板方法模式，对整个SSO的流程已经梳理完成之后，第二个SSO只需要实现相应接口，然后根据客户的要求构建不同的加密协议，同时改一下配置即可，反正我只花了5分钟~</p>
+<p><img src="/2023/09/12/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/image-20200609003245682.png" srcset="/img/loading.gif" alt="image-20200609003245682"></p>
+<h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><ol>
+<li><strong>封装变化</strong><ul>
+<li>在抽象基类中，我们可以有已经实现的方法供子类调用</li>
+<li>在抽象基类中，对于必然不同的方法逻辑，定义为抽象的，供子类自行实现</li>
+</ul>
+</li>
+<li><strong>好莱坞原则</strong><ul>
+<li>别找我，我会找你   指的是底层代码（具体的实现类）不依赖于高层代码，我们在本次的SSO实战中也体现了，直接依赖接口，实现类只是作为真正的执行者而已</li>
+</ul>
+</li>
+</ol>
+<h2 id="什么场景适合使用"><a href="#什么场景适合使用" class="headerlink" title="什么场景适合使用"></a>什么场景适合使用</h2><ul>
+<li>一次性实现一个算法不变的部分，并将可变的行为留给子类来实现</li>
+<li>各子类中公共的行为应该被提取出来并集中到一个公共父类中以避免代码重复</li>
+<li>控制子类扩展（文中提到的钩子方法，控制方法的执行与否）</li>
+</ul>
+<h2 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h2><p>比如我们使用的所有APP，在进行支付的时候大多都可以选择支付宝或者微信支付，其实整个支付步骤中，只有具体支付的步骤是分为多种情况（微信，支付宝，银行卡等）剩下的订单推送，数据扭转等很有可能是一样的，此时我们就可以使用模板方法模式来约束行为，同时减少重复代码</p>
+<p><font color="blue">PS：此种情况也可能使用策略模式处理，需要视情况而定</font></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><strong>附上GOF一书中对于模板方法模式的UML图：</strong></p>
+<p><img src="/2023/09/12/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/image-20200609004140373.png" srcset="/img/loading.gif" alt="image-20200609004140373"></p>
+<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<ul>
+<li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
+<li>提供了友好的阅读指导</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/172284a1c8caf324?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif" alt></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">模板方法模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">手写简易MyBatis</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">状态模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "模板方法模式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

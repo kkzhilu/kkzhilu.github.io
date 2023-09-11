@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/JRebel%E7%AF%87/" target="_self">
+          <img src="/img/articles/19.jpg" srcset="/img/loading.gif" alt="JRebel篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/JRebel%E7%AF%87/">JRebel篇</a>
+
+      <a href="/2023/09/12/JRebel%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JRebel篇JRebel是一个非常厉害的热部署工具，可以大大的减少项目的重启次数，极大的节约开发者们的时间
+IDEA插件：搜索JRebel for IntelliJ
+破解方法
+步骤1:生成一个GUID：在线生成GUID地址
+步骤2: 根据反向代理服务器地址拼接激活地址
+
+服务器地址： https://jrebel.qekang.com/{GUID}
+PS：如果失效刷新GUID替换就可以！
+
+步骤</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/IDEA%E6%8F%92%E4%BB%B6/">IDEA插件</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JRebel%E7%AF%87/">JRebel篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Java%20Bugs/" target="_self">
+          <img src="/img/articles/19.jpg" srcset="/img/loading.gif" alt="Java Bugs">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Java%20Bugs/">Java Bugs</a>
+
+      <a href="/2023/09/12/Java%20Bugs/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Java BugsIDEA IO异常：java.io.IOException: Could not find resource// IDEA的Maven是不会编译src的java目录的xml文件，所以在Mybatis的配置文件中找不到xml文件
+
+// 正确做法：凡是配置类文件都应该符合maven约束放到resource下，但是如果碰到傻逼项目真这么放了：
+
+// pom -&gt; 启用src下</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java-Bugs/">Java Bugs</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/volatile%E5%92%8Csynchronized/" target="_self">
+          <img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="volatile和synchronized">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/volatile%E5%92%8Csynchronized/">volatile和synchronized</a>
+
+      <a href="/2023/09/12/volatile%E5%92%8Csynchronized/" class="index-excerpt">
+        
+        
+          
+        
+        <div>volatile关键字volatile关键字是在一般面试中经常问到的一个点，大家对它的回答莫过于两点：
+
+保证内存可见性
+防止指令重排
+
+那为了更有底气，那咱们就来深入看看吧
+JMM内存模型咱们在聊volatile关键字的时候，首先需要了解JMM内存模型，它本身是一种抽象的概念并不真实存在，草图如下：
+
+JMM内存模型规定了线程的工作机理：即所有的共享变量都存储在主内存，如果线程需要使用，则拿到主</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E7%AF%87/">多线程并发篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/volatile%E5%92%8Csynchronized/">volatile和synchronized</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Vue%E5%88%9D%E8%AF%86/" target="_self">
+          <img src="/img/articles/4.jpg" srcset="/img/loading.gif" alt="Vue初识">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Vue%E5%88%9D%E8%AF%86/">Vue初识</a>
+
+      <a href="/2023/09/12/Vue%E5%88%9D%E8%AF%86/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Vue初始本地构建Vue环境
+安装Node.js 并配置完成
+
+
+配置方式：https://blog.csdn.net/tjj3027/article/details/84751321 
+​                     https://www.cnblogs.com/fighxp/p/7411608.html 
+卸载，安装，设置数据源，配置环境变量，配置全局存储目录（node.js，F</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Vue%E5%88%9D%E8%AF%86/">Vue初识</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/JSMap-%E8%B7%A8%E9%A1%B5/" target="_self">
+          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="JSMap-跨页">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/JSMap-%E8%B7%A8%E9%A1%B5/">JSMap-跨页</a>
+
+      <a href="/2023/09/12/JSMap-%E8%B7%A8%E9%A1%B5/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JSMap-跨页
+认识提示:
+
+JavaScript 真正的万物皆为对象
+JavaScript以键值对的方式构造对象
+JS方法封装技巧 —&gt; 方法嵌套, this调用
+
+
+JS Map Code/**
+ * MAP对象，实现MAP功能
+ *
+ * 例子：
+ * var map = new JsMap();
+ *
+ * map.put("key", "value");
+ * var val =</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JSMap-%E8%B7%A8%E9%A1%B5/">JSMap-跨页</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/" target="_self">
+          <img src="/img/articles/6.jpg" srcset="/img/loading.gif" alt="JavaScript定时器及回调用法">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">JavaScript定时器及回调用法</a>
+
+      <a href="/2023/09/12/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JavaScript定时器及回调用法循环定时任务// 假设现在有这样一个需求：我需要请求一个接口，根据返回结果判断需不需要重复请求，直到达到某一条件为止,停止请求执行某操作
+&lt;script type="text/javascript"&gt;
+    var timer;
+    var index = 0;
+    function tim()&#123;
+        timer = </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">JavaScript定时器及回调用法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_self">
+          <img src="/img/articles/7.jpg" srcset="/img/loading.gif" alt="JavaScript-回调函数">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript-回调函数</a>
+
+      <a href="/2023/09/12/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="index-excerpt">
+        
+        
+          
+        
+        <div>JavaScript-回调函数函数也是对象// 可以这样创建函数
+var fn = new Function("arg1", "arg2", "return arg1 * arg2;");
+
+// 6
+fn(2, 3);
+
+
+
+简单解释一下回调函数的使用场景： 你自己打包方法的时候发现用return来返回数据不行，那就用回调函数来接收返回的数据，
+或者觉得这个方法就可以决定下一步该怎么做，就用回调</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript-回调函数</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Java%E8%BF%9C%E7%A8%8BDeBug%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+          <img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="Java远程DeBug解决方案">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Java%E8%BF%9C%E7%A8%8BDeBug%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java远程DeBug解决方案</a>
+
+      <a href="/2023/09/12/Java%E8%BF%9C%E7%A8%8BDeBug%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Java远程DEBUG解决方案原理JPDA（Java Platform Debugger Architecture）是Sun公司开发的 java平台调试体系，它主要有三个层次组成，即 Java 虚拟机工具接口（JVMTI），Java 调试线协议（JDWP）以及 Java 调试接口（JDI）
+JVMTI（JVMDI）: jdk1.4 之前称为JVMDI，之后改为了JVMTI，它是虚拟机的本地接口，其</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java%E8%BF%9C%E7%A8%8BDeBug%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Java远程DeBug解决方案</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/HuTool%E7%AF%87/" target="_self">
+          <img src="/img/articles/17.jpg" srcset="/img/loading.gif" alt="HuTool篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/HuTool%E7%AF%87/">HuTool篇</a>
+
+      <a href="/2023/09/12/HuTool%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>HuToolHutool是一个小而全的Java工具类库，通过静态方法封装，降低相关API的学习成本，提高工作效率，使Java拥有函数式语言般的优雅，让Java语言也可以“甜甜的”。
+Hutool中的工具方法来自于每个用户的精雕细琢，它涵盖了Java开发底层代码中的方方面面，它既是大型项目开发中解决小问题的利器，也是小型项目中的效率担当；
+Hutool是项目中“util”包友好的替代，它节省了开发人</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%B1%BB%E5%BA%93%E5%B7%A5%E5%85%B7%E5%8C%85/">类库工具包</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/HuTool%E7%AF%87/">HuTool篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_self">
+          <img src="/img/articles/23.jpg" srcset="/img/loading.gif" alt="GiHub下载过慢解决办法">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GiHub下载过慢解决办法</a>
+
+      <a href="/2023/09/12/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="index-excerpt">
+        
+        
+          
+        
+        <div>GiHub下载过慢解决办法方案一传统的由Gitee复制镜像、从Gitee拉取
+方案二切换网络连接为手机移动网络，可以显著提速
+方案三切换IP映射（效果较差）
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GiHub下载过慢解决办法</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/6/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

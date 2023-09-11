@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/index.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" target="_self">
+          <img src="/img/articles/14.jpg" srcset="/img/loading.gif" alt="SpringBoot配置多数据源">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a>
+
+      <a href="/2023/09/12/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SpringBoot配置多数据源核心技术点​        在Spring 2.x 中引入了AbstractRoutingDataSource, 该类充当了DataSource的路由中介, 能有在运行时, 根据某种key值来动态切换到真正的DataSource上。
+​        Spring动态配置多数据源，即在大型应用中对数据进行切分，并且采用多个数据库实例进行管理，这样可以有效提高系统的水</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/%E8%8F%9C%E9%B8%9F%E5%8F%98%E5%A4%A7%E9%B8%9F%E7%9A%84%E6%84%9F%E6%82%9F/" target="_self">
+          <img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="菜鸟变大鸟的感悟">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/%E8%8F%9C%E9%B8%9F%E5%8F%98%E5%A4%A7%E9%B8%9F%E7%9A%84%E6%84%9F%E6%82%9F/">菜鸟变大鸟的感悟</a>
+
+      <a href="/2023/09/12/%E8%8F%9C%E9%B8%9F%E5%8F%98%E5%A4%A7%E9%B8%9F%E7%9A%84%E6%84%9F%E6%82%9F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>菜鸟变大鸟的感悟
+作者: 程顺鹏
+
+我们当初更多放在了技术的运用上了，这些技术虽然在我们工作后并没有用上多少，但是为我们的简历增加了一份亮点，也扩大了我们的视野。想想当初写个bean转化json，费了劲还不好用，后来才知道有现成的这种工具，这就是视野小了啊。当自己能运用的技术逐渐变多时，解决问题的方案也会更多，也更优秀。一些原理层次的知识虽然不能直接产生价值，却在潜移默化地影响着自己的工作。试想一</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%E7%AF%87/">程序人生篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E8%8F%9C%E9%B8%9F%E5%8F%98%E5%A4%A7%E9%B8%9F%E7%9A%84%E6%84%9F%E6%82%9F/">菜鸟变大鸟的感悟</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="Linux常用命令">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Linux常用命令</a>
+
+      <a href="/2023/09/12/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Linux 常用命令Nginx相关命令本机Mac# 判断配置文件是否有问题
+sudo nginx -t 
+
+# 修改配置后重新加载生效
+sudo nginx -s  reload
+
+# 启动
+sudo nginx
+
+# 快速停止nginx
+sudo nginx -s stop  
+
+# 完整有序的停止nginx/优雅关闭（先服务完已打开的连接）
+sudo nginx -s quit
+
+
+
+Mac </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/">操作系统篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Linux常用命令</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Linux-YUM%20%E5%AE%89%E8%A3%85Mysql/" target="_self">
+          <img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="Linux-YUM 安装Mysql">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Linux-YUM%20%E5%AE%89%E8%A3%85Mysql/">Linux-YUM 安装Mysql</a>
+
+      <a href="/2023/09/12/Linux-YUM%20%E5%AE%89%E8%A3%85Mysql/" class="index-excerpt">
+        
+        
+          
+        
+        <div>阿里云Linux安装mysql，修改密码，远程连接博文：https://www.cnblogs.com/dianqijiaodengdai/p/7731562.html
+1.安装yum包
+进入mysql官网 https://dev.mysql.com/downloads/file/?id=470281
+获取mysql57-community-release-el7-11.noarch.rpm 下载</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%AF%87/">操作系统篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Linux-YUM-%E5%AE%89%E8%A3%85Mysql/">Linux-YUM 安装Mysql</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Mac%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" target="_self">
+          <img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="Mac环境搭建">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Mac%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Mac环境搭建</a>
+
+      <a href="/2023/09/12/Mac%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="index-excerpt">
+        
+        
+          
+        
+        <div>配置篇长按删除系统偏好设置 - 键盘 - 将【按键重复】及【重复前延迟】设置到最高即可
+Windows 键盘映射系统偏好设置 - 键盘 - 修饰 - 调整映射为：
+Option - Command
+Command - Option
+默认浏览器系统偏好设置 - 通用 - 默认网页浏览器
+鼠标滚轮方向系统偏好设置 - 鼠标 - 滚动方向
+启动台大小defaults write com.apple.do</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%BE%E5%A4%87%E7%AF%87/">设备篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mac%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">Mac环境搭建</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Mybatis-Plus%E7%AF%87/" target="_self">
+          <img src="/img/articles/18.jpg" srcset="/img/loading.gif" alt="Mybatis-Plus篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Mybatis-Plus%E7%AF%87/">Mybatis-Plus篇</a>
+
+      <a href="/2023/09/12/Mybatis-Plus%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Mybatis-Plus篇特性
+无侵入：只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑； 
+损耗小：启动即会自动注入基本 CURD，性能基本无损耗，直接面向对象操作； 
+强大的 CRUD 操作：内置通用 Mapper、通用 Service，仅仅通过少量配置即可实现单表大部分 CRUD 操作，更有强大的条件构造器，满足各类使用需求；
+支持 Lambda 形式调用：通过 Lambda 表达</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mybatis-Plus%E7%AF%87/">Mybatis-Plus篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Mysql%E6%8A%80%E5%B7%A7%E5%8F%8A%E9%9D%A2%E8%AF%95%E7%AF%87/" target="_self">
+          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="Mysql技巧及面试篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Mysql%E6%8A%80%E5%B7%A7%E5%8F%8A%E9%9D%A2%E8%AF%95%E7%AF%87/">Mysql技巧及面试篇</a>
+
+      <a href="/2023/09/12/Mysql%E6%8A%80%E5%B7%A7%E5%8F%8A%E9%9D%A2%E8%AF%95%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>MySQL技巧及面试篇MySQL技巧篇如何记录慢SQL配置项：slow_query_log
+可以使用show variables like ‘slov_query_log’查看是否开启，如果状态值为OFF，可以使用set GLOBAL slow_query_log = on来开启，它会在datadir下产生一个xxx-slow.log的文件。
+设置临界时间
+配置项：long_query_time
+</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mysql%E6%8A%80%E5%B7%A7%E5%8F%8A%E9%9D%A2%E8%AF%95%E7%AF%87/">Mysql技巧及面试篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Ping%E4%B8%8ETelnet/" target="_self">
+          <img src="/img/articles/7.jpg" srcset="/img/loading.gif" alt="Ping与Telnet">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Ping%E4%B8%8ETelnet/">Ping与Telnet</a>
+
+      <a href="/2023/09/12/Ping%E4%B8%8ETelnet/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Ping和Telnet的妙用ping  realtest.api.pro.testin.cn   ----&gt; 
+原理知识：
+由A主机发出 ping xxxx(域名或IP 称为主机B) 如果是域名则先进行DNS解析获取其IP地址，由主机A通过 -&gt; Ping命令会构建一个固定格式的ICMP请求数据包，由ICMP协议将目标IP和数据包一起交给IP协议，IP协议会把本机地址作为源地址，目标i</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BD%91%E7%BB%9C%E7%AF%87/">网络篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Ping%E4%B8%8ETelnet/">Ping与Telnet</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/" target="_self">
+          <img src="/img/articles/16.jpg" srcset="/img/loading.gif" alt="SpringBoot-自定义starter">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">SpringBoot-自定义starter</a>
+
+      <a href="/2023/09/12/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Spring Boot Starter简介Starter是Spring Boot中的一个非常重要的概念，Starter相当于模块，它能将模块所需的依赖整合起来并对模块内的Bean根据环境（ 条件）进行自动配置。使用者只需要依赖相应功能的Starter，无需做过多的配置和依赖，Spring Boot就能自动扫描并加载相应的模块。
+例如在Maven的依赖中加入spring-boot-starter-w</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">SpringBoot-自定义starter</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/SpringBoot%E7%AF%87/" target="_self">
+          <img src="/img/articles/15.jpg" srcset="/img/loading.gif" alt="SpringBoot篇">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/SpringBoot%E7%AF%87/">SpringBoot篇</a>
+
+      <a href="/2023/09/12/SpringBoot%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>SpringBoot篇问题41. 谈谈你对 Spring Boot 的理解？
+
+42. Spring Boot 的优势是什么？为什么要使用 Spring Boot？
+
+43. Spring Boot 的配置文件有几种格式？区别是什么？
+
+44. 谈谈你知道的 Spring Boot 核心注解。
+
+45. 如何自动开启 Spring Boot 各个组件？
+
+46. Spring Boot 中 sta</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SpringBoot%E7%AF%87/">SpringBoot篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

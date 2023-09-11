@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>手写简易MyBatis - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-12 00:31">
+      2023年9月12日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="手写简易的Mybatis"><a href="#手写简易的Mybatis" class="headerlink" title="手写简易的Mybatis"></a>手写简易的Mybatis</h1><p>此篇文章用来记录今天花个五个小时写出来的简易版mybatis，主要实现了基于注解方式的增删查改，目前支持List，Object类型的查找，参数都是基于Map集合的，可以先看一下接口：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">StudentInterface</span> </span>&#123;
+
+    <span class="hljs-meta">@Select</span>(value = <span class="hljs-string">" select * from student where age &gt; #&#123;age&#125;"</span>)
+    <span class="hljs-function">List&lt;StudentMeBatis&gt; <span class="hljs-title">getList</span><span class="hljs-params">(Map&lt;String, Object&gt; map)</span></span>;
+
+    <span class="hljs-meta">@Select</span>(value = <span class="hljs-string">" select * from student where age = #&#123;age&#125;"</span>)
+    <span class="hljs-function">StudentMeBatis <span class="hljs-title">get</span><span class="hljs-params">(Map&lt;String, Object&gt; map)</span></span>;
+
+    <span class="hljs-meta">@Insert</span>(value = <span class="hljs-string">" insert into student values (#&#123;age&#125;, #&#123;name&#125;, #&#123;year&#125;)"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">insert</span> <span class="hljs-params">(Map&lt;String, Object&gt; map)</span></span>;
+
+    <span class="hljs-meta">@Delete</span>(value = <span class="hljs-string">" delete from student where name = #&#123;name&#125; "</span>)
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">delete</span> <span class="hljs-params">(Map&lt;String, Object&gt; map)</span></span>;
+
+    <span class="hljs-meta">@Update</span>(value = <span class="hljs-string">" update student set age = #&#123;age&#125;, year = #&#123;year&#125; where name = #&#123;name&#125; "</span>)
+    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">update</span> <span class="hljs-params">(Map&lt;String, Object&gt; map)</span></span>;
+&#125;</code></pre>
+
+
+
+<p>测试效果：</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
+
+    StudentInterface studentInterface = MapperProxyUtil.newProxyInstance(StudentInterface<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+    Map&lt;String, Object&gt; params = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+    params.put(<span class="hljs-string">"age"</span>,  <span class="hljs-number">15</span>);
+    params.put(<span class="hljs-string">"name"</span>, <span class="hljs-number">15</span>);
+    params.put(<span class="hljs-string">"year"</span>, <span class="hljs-number">1996</span>);
+    System.out.println(studentInterface.getList(params));
+    System.out.println(studentInterface.insert(params));
+
+    Map&lt;String, Object&gt; selectParams = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+    selectParams.put(<span class="hljs-string">"age"</span>,  <span class="hljs-number">1</span>);
+    System.out.println(studentInterface.get(selectParams));
+&#125;
+
+
+响应数据：
+<span class="hljs-number">2020</span>-<span class="hljs-number">01</span>-<span class="hljs-number">09</span> <span class="hljs-number">15</span>:<span class="hljs-number">02</span>:<span class="hljs-number">28.286</span> INFO  [main] mebatis.execute.SqlRunner (<span class="hljs-number">105</span>) select - SQL Execute successful, sql is:  select * from student where age &gt; ?, params is: [<span class="hljs-number">15</span>]
+[StudentMeBatis(age=<span class="hljs-number">24</span>, name=李四, year=<span class="hljs-number">1995</span>), StudentMeBatis(age=<span class="hljs-number">22</span>, name=王五, year=<span class="hljs-number">1994</span>)]
+<span class="hljs-keyword">true</span>
+<span class="hljs-number">2020</span>-<span class="hljs-number">01</span>-<span class="hljs-number">09</span> <span class="hljs-number">15</span>:<span class="hljs-number">02</span>:<span class="hljs-number">28.376</span> INFO  [main] mebatis.execute.SqlRunner (<span class="hljs-number">122</span>) baseMethod - SQL Execute successful, sql is:  <span class="hljs-function">insert into student <span class="hljs-title">values</span> <span class="hljs-params">(?, ?, ?)</span>, params is: [15, 15, 1996], result is: <span class="hljs-keyword">true</span></span>
+<span class="hljs-function">2020-01-09 15:02:28.377 INFO  [main] mebatis.execute.<span class="hljs-title">SqlRunner</span> <span class="hljs-params">(<span class="hljs-number">105</span>)</span> select - SQL Execute successful, sql is:  select * from student where age </span>= ?, params is: [<span class="hljs-number">1</span>]
+StudentMeBatis(age=<span class="hljs-number">1</span>, name=<span class="hljs-number">1</span>, year=<span class="hljs-number">1</span>)</code></pre>
+
+
+
+<blockquote>
+<p>必要知识储备：</p>
+<ol>
+<li>基于Java的Mysql应用 -&gt; JDBC</li>
+<li>JDK 动态代理技术</li>
+<li>Java 自定义注解的使用</li>
+<li>Java 正则表达式</li>
+<li>Java 反射相关知识</li>
+<li>FastJson</li>
+</ol>
+</blockquote>
+<p>先来梳理结构，如果我们想做一个类似mybatis，基于注解实现的增删查改，需要有哪些步骤呢？</p>
+<p>第一步：肯定需要增删查改四个注解</p>
+<p>第二步：接口是没有方法体，无法执行的，我们怎么让它可以执行呢？动态代理技术，即第二步的核心就是让接口可以被代理</p>
+<p>第三步：接口代理之后，可以拿到一个个方法的注解，拿到里面的value 和 方法参数，但是如何把参数和sql合起来呢，毕竟什么#{name} 什么的，sql是不认的，因此我们需要根据sql字符串（包含特殊字符），和方法的参数进行解析构建最终的执行语句</p>
+<p>第四步：语句拿到了，参数拿到了，也可以执行了，怎么确定返回结果呢？这时候需要对方法的返回值做一个处理，拿到方法的返回结果，根据其返回值动态的构建到底是什么类型的返回结果，通过JDBC和FastJson去处理类型</p>
+<p>第五步：万事俱备，只欠东风，构建最终的执行单元，去执行即可，到了这一步基本就是水到渠成（其实到第三步的时候所有思路就已经很清晰了）</p>
+<h2 id="第一步：构建注解"><a href="#第一步：构建注解" class="headerlink" title="第一步：构建注解"></a>第一步：构建注解</h2><pre><code class="hljs java"><span class="hljs-meta">@Documented</span>
+<span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)
+<span class="hljs-meta">@Target</span>(ElementType.METHOD)
+<span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Select &#123;
+    <span class="hljs-comment">// sql</span>
+    <span class="hljs-function">String <span class="hljs-title">value</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+
+
+<h2 id="第二步：代理接口"><a href="#第二步：代理接口" class="headerlink" title="第二步：代理接口"></a>第二步：代理接口</h2><pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * ******************************</span>
+<span class="hljs-comment"> * author：      柯贤铭</span>
+<span class="hljs-comment"> * createTime:   2019/8/28 10:31</span>
+<span class="hljs-comment"> * description:  MapperProxyUtil 核心代理类</span>
+<span class="hljs-comment"> * version:      V1.0</span>
+<span class="hljs-comment"> * ******************************</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MapperProxyUtil</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 代理指定的接口</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> tClass 接口class</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> &lt;T&gt;    接口类型</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>  &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">newProxyInstance</span><span class="hljs-params">(Class&lt;T&gt; tClass)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> (T) Proxy.newProxyInstance(tClass.getClassLoader(), <span class="hljs-keyword">new</span> Class[]&#123;tClass&#125;, <span class="hljs-keyword">new</span> MapperProxyUtil());
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+
+        <span class="hljs-comment">// 获取CRUD方法对应的基本SQL及参数,返回结果           (初始化版本)</span>
+        MappedStatement detail = MappedStatement.parseAnotationMsg(method, args);
+
+        <span class="hljs-comment">// sql 解析,参数替换等 -&gt; SQL | PARAMS | RESULT_TYPE (可运行版本)</span>
+        SqlFactoryUtil.Runner sqlRunner = SqlFactoryUtil.executeRunner(detail);
+
+        <span class="hljs-comment">// 返回执行结果</span>
+        <span class="hljs-keyword">return</span> SqlRunner.execute(sqlRunner);
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 调用</span>
+StudentInterface studentInterface = MapperProxyUtil.newProxyInstance(StudentInterface<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;</code></pre>
+
+
+
+<h2 id="第三步：解析原始SQL及参数"><a href="#第三步：解析原始SQL及参数" class="headerlink" title="第三步：解析原始SQL及参数"></a>第三步：解析原始SQL及参数</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SqlFactoryUtil</span> </span>&#123;
+
+    <span class="hljs-comment">// 组装最终执行单元 -&gt; SQL | PARAMS | RESULT_TYPE</span>
+    <span class="hljs-comment">//******************************************************</span>
+    <span class="hljs-comment">// SQL         -&gt;  "SQL";</span>
+    <span class="hljs-comment">// PARAMS      -&gt;  "PARAMS";</span>
+    <span class="hljs-comment">// RESULT_TYPE -&gt;  "RESULT_TYPE";</span>
+    <span class="hljs-comment">//******************************************************</span>
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 生成执行单元</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Runner <span class="hljs-title">executeRunner</span> <span class="hljs-params">(MappedStatement mappedStatement)</span> <span class="hljs-keyword">throws</span> MapperExeception </span>&#123;
+        <span class="hljs-keyword">if</span> (mappedStatement == <span class="hljs-keyword">null</span> || StringUtils.isBlank(mappedStatement.getSql()) || mappedStatement.getMap() == <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">throw</span> MapperExeception.errorSql(<span class="hljs-string">" -&gt; "</span> + mappedStatement);
+        &#125;
+
+        <span class="hljs-comment">// 参数集合</span>
+        List&lt;Object&gt; params = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+
+        <span class="hljs-comment">// 转换参数 - 获取值</span>
+        Pattern p = compile(<span class="hljs-string">"#\\&#123;.+?&#125;"</span>);
+        Matcher m = p.matcher(mappedStatement.getSql());
+        <span class="hljs-keyword">while</span>(m.find())&#123;
+            String key = m.group();
+            key = key.replaceAll(<span class="hljs-string">"#\\&#123;"</span>, <span class="hljs-string">""</span>);
+            key = key.replaceAll(<span class="hljs-string">"&#125;"</span>, <span class="hljs-string">""</span>);
+
+            <span class="hljs-keyword">if</span> (!mappedStatement.getMap().containsKey(key)) &#123;
+                <span class="hljs-keyword">throw</span> MapperExeception.errorParams(<span class="hljs-string">"do not have key -&gt; "</span> + key);
+            &#125;
+
+            <span class="hljs-comment">// 添加参数</span>
+            params.add(mappedStatement.getMap().get(key));
+        &#125;
+
+        <span class="hljs-comment">// 执行sql</span>
+        String finalSQL = m.replaceAll(<span class="hljs-string">"?"</span>);
+
+        <span class="hljs-comment">// 返回 runner</span>
+        Runner result = <span class="hljs-keyword">new</span> Runner();
+        result.setSql(finalSQL);
+        result.setParams(params);
+        result.setResultType(mappedStatement.getResultType());
+        <span class="hljs-keyword">return</span> result;
+    &#125;
+
+    <span class="hljs-meta">@Data</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Runner</span> </span>&#123;
+        <span class="hljs-comment">// 执行sql</span>
+        <span class="hljs-keyword">private</span> String       sql;
+
+        <span class="hljs-comment">// 参数</span>
+        <span class="hljs-keyword">private</span> List&lt;Object&gt; params;
+
+        <span class="hljs-comment">// 返回参数</span>
+        <span class="hljs-keyword">private</span> Type         resultType;
+    &#125;
+&#125;</code></pre>
+
+<h2 id="第四步：执行JDBC"><a href="#第四步：执行JDBC" class="headerlink" title="第四步：执行JDBC"></a>第四步：执行JDBC</h2><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title">execute</span><span class="hljs-params">(SqlFactoryUtil.Runner runner)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;
+    <span class="hljs-comment">// 返回值类型</span>
+    Type resultType = runner.getResultType();
+
+    <span class="hljs-comment">// 返回值类型为 boolean</span>
+    <span class="hljs-keyword">if</span> (resultType.getTypeName().toLowerCase().equals(BOOLEAN)) &#123;
+        <span class="hljs-keyword">return</span> baseMethod(runner.getSql(), runner.getParams());
+    &#125;
+
+    <span class="hljs-comment">// 查询类型需要特殊处理</span>
+    ResultSet resultSet = select(runner.getSql(), runner.getParams());
+
+    <span class="hljs-comment">// 返回值</span>
+    Class type = getResultType(resultType);
+
+    <span class="hljs-comment">// 集合返回值</span>
+    List listHandle = listHandle(resultSet, type);
+
+    <span class="hljs-keyword">if</span> (resultType.getTypeName().contains(<span class="hljs-string">"java.util.List"</span>)) &#123;
+        <span class="hljs-keyword">return</span> listHandle;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">return</span> listHandle.get(<span class="hljs-number">0</span>);
+    &#125;
+&#125;</code></pre>
+
+
+
+<h2 id="第五步：根据返回值类型构建最终结果"><a href="#第五步：根据返回值类型构建最终结果" class="headerlink" title="第五步：根据返回值类型构建最终结果"></a>第五步：根据返回值类型构建最终结果</h2><pre><code class="hljs java"><span class="hljs-comment">/***</span>
+<span class="hljs-comment"> * List 类型handle</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> resultSet     resultSet</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> resultType    返回值类型</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@return</span>              List</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> SQLException SQLException</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> List <span class="hljs-title">listHandle</span> <span class="hljs-params">(ResultSet resultSet, Class resultType)</span> <span class="hljs-keyword">throws</span> SQLException </span>&#123;
+
+    <span class="hljs-comment">// 返回结果</span>
+    List result = <span class="hljs-keyword">new</span> ArrayList();
+
+    ResultSetMetaData metaData = resultSet.getMetaData();
+    <span class="hljs-keyword">int</span> columnCount = metaData.getColumnCount();
+    String[] columnNames = <span class="hljs-keyword">new</span> String[columnCount];
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; columnCount; i++) &#123;
+        columnNames[i] = metaData.getColumnName(i + <span class="hljs-number">1</span>);
+    &#125;
+    <span class="hljs-keyword">while</span> (resultSet.next()) &#123;
+        JSONObject object = <span class="hljs-keyword">new</span> JSONObject();
+        <span class="hljs-keyword">for</span> (String columnName : columnNames) &#123;
+            Object columnValue = resultSet.getObject(columnName);
+            object.put(columnName, columnValue);
+        &#125;
+
+        result.add(object.toJavaObject(resultType));
+    &#125;
+    <span class="hljs-keyword">return</span> result;
+&#125;</code></pre>
+
+
+
+<blockquote>
+<p>总结：以上代码都是按照此思路截取的一部分，其实按照思路来，自己攻略到第二步，第三步，慢慢的就都摸清了，关键就是如何让接口被代理，剩下的都是水到渠成，遇到一个问题解决一个问题即可.</p>
+<p>全部代码可见GitHub： <a href="https://github.com/kkzhilu/KerwinTools" target="_blank" rel="noopener">https://github.com/kkzhilu/KerwinTools</a><br>mebatis包下内容</p>
+</blockquote>
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ul>
+<li>FastJson  Api ：public <T> T toJavaObject(Class<T> clazz)</T></T></li>
+<li>Final 关键字：性能的略微提高，更重要的是可以表明参数的意义，设计内涵</li>
+<li>JDK动态代理的两个好基友</li>
+</ul>
+<blockquote>
+<p>InvocationHandler接口 ,  Proxy.newProxyInstance</p>
+<pre><code class="hljs java"><span class="hljs-comment">/**</span>
+<span class="hljs-comment"> * 代理指定的接口</span>
+<span class="hljs-comment"> * param tClass 接口class</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> &lt;T&gt;    接口类型</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>  &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">newProxyInstance</span><span class="hljs-params">(Class&lt;T&gt; tClass)</span> </span>&#123;
+    <span class="hljs-keyword">return</span> (T) Proxy.newProxyInstance(tClass.getClassLoader(), <span class="hljs-keyword">new</span> Class[]&#123;tClass&#125;, InvocationHandler);
+&#125;</code></pre></blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">手写简易MyBatis</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E6%82%84%E5%92%AA%E5%92%AA%E6%8F%90%E9%AB%98%E5%9B%A2%E9%98%9F%E5%B9%B8%E7%A6%8F%E6%84%9F%20&amp;%20Surprise%EF%BC%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">悄咪咪提高团队幸福感 & Surprise！</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/12/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">模板方法模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "手写简易MyBatis&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
