@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>VPN - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-08 23:58">
+      2023年2月8日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      617 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="翻墙与VPN"><a href="#翻墙与VPN" class="headerlink" title="翻墙与VPN"></a>翻墙与VPN</h1><h2 id="SSR"><a href="#SSR" class="headerlink" title="SSR"></a>SSR</h2><p>账号：<a href="mailto:806857264@qq.com">806857264@qq.com</a></p>
+<p>密码：kxmmyyy317</p>
+<p>网站：<a href="https://paoluz.link/user" target="_blank" rel="noopener">https://paoluz.link/user</a></p>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><p>网站：<a href="https://paoluz.link/user" target="_blank" rel="noopener">https://paoluz.link/user</a></p>
+<p>预先充值</p>
+<p><img src="/2023/02/08/VPN/image-20210903112510558.png" srcset="/img/loading.gif" alt="image-20210903112510558"></p>
+<h2 id="购买套餐"><a href="#购买套餐" class="headerlink" title="购买套餐"></a>购买套餐</h2><p><img src="/2023/02/08/VPN/image-20210903112626175.png" srcset="/img/loading.gif" alt="image-20210903112626175"></p>
+<h2 id="接入使用"><a href="#接入使用" class="headerlink" title="接入使用"></a>接入使用</h2><blockquote>
+<p>选择性接入软件，根据介绍文档使用即可</p>
+</blockquote>
+<p><img src="/2023/02/08/VPN/image-20210903112654886.png" srcset="/img/loading.gif" alt="image-20210903112654886"></p>
+<h2 id="Windows接入"><a href="#Windows接入" class="headerlink" title="Windows接入"></a>Windows接入</h2><p>Clash 操作指南：<a href="https://www.kancloud.cn/carol/note/1879682#0x02__clash_for_windows__13" target="_blank" rel="noopener">https://www.kancloud.cn/carol/note/1879682#0x02__clash_for_windows__13</a></p>
+<p>Clash 汉化版下载地址：<a href="http://www.32r.com/soft/96150.html?continueFlag=0bd571975ad206e07980d8cf6d8f8a03" target="_blank" rel="noopener">http://www.32r.com/soft/96150.html?continueFlag=0bd571975ad206e07980d8cf6d8f8a03</a></p>
+<h2 id="Mac-ClashX使用教程"><a href="#Mac-ClashX使用教程" class="headerlink" title="Mac ClashX使用教程"></a>Mac ClashX使用教程</h2><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>配置-托管功能-设置相关配置，如图所示（基于软件选择订阅方式即可，例如Clash）：</p>
+<p>地址案例：<a href="https://api.bianyuan.xyz/sub?target=clash&amp;udp=true&amp;new_name=true&amp;url=https://rss.paoluz.xyz/link/oZK2jE9vR2LGRqAT?sub=2&amp;insert=false&amp;config=https%3A%2F%2Fraw.githubusercontent.com%2FHynoR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_NoAuto.ini&amp;exclude=GAME&amp;emoji=true&amp;filename=Paoluz_Clash4SS">https://api.bianyuan.xyz/sub?target=clash&amp;udp=true&amp;new_name=true&amp;url=https://rss.paoluz.xyz/link/oZK2jE9vR2LGRqAT?sub=2&amp;insert=false&amp;config=https%3A%2F%2Fraw.githubusercontent.com%2FHynoR%2FACL4SSR%2Fmaster%2FClash%2Fconfig%2FACL4SSR_Online_NoAuto.ini&amp;exclude=GAME&amp;emoji=true&amp;filename=Paoluz_Clash4SS</a></p>
+<p><img src="/2023/02/08/VPN/image-20211122171023528.png" srcset="/img/loading.gif" alt="image-20211122171023528"></p>
+<h3 id="选择节点"><a href="#选择节点" class="headerlink" title="选择节点"></a>选择节点</h3><p>选择绿色的可用节点即可</p>
+<p><img src="/2023/02/08/VPN/image-20211122171149104.png" srcset="/img/loading.gif" alt="image-20211122171149104"></p>
+<h3 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h3><p>注意上面提到的两个功能：</p>
+<ul>
+<li>设置为系统代理 =》 即将代理整个电脑的所有网络出口（但部分系统由于权限问题可能不可用，比如Mac M系列）</li>
+<li>复制终端代理命令 =》 终端命令是在当前Shell窗口生效，非常好用，可以在例如Git拉取时使用</li>
+</ul>
+<h2 id="更安全精准的方式：Google-插件"><a href="#更安全精准的方式：Google-插件" class="headerlink" title="更安全精准的方式：Google 插件"></a>更安全精准的方式：Google 插件</h2><p>Google插件：<a href="chrome-extension://padekgcemlokbadohgkifijomclgjgif/options.html#!/about">SwitchyOmega</a></p>
+<p>具体解释如下：</p>
+<h3 id="proxy"><a href="#proxy" class="headerlink" title="proxy"></a>proxy</h3><p>配置基本的代理能力，例如ClashX代理的端口为7890，如下所示：</p>
+<p><img src="/2023/02/08/VPN/image-20211122171929869.png" srcset="/img/loading.gif" alt="image-20211122171929869"></p>
+<h3 id="autoSwitch"><a href="#autoSwitch" class="headerlink" title="autoSwitch"></a>autoSwitch</h3><p>选择性启用是否代理，可以更精确的控制流量，也更安全，如下所示</p>
+<p>原理：基于域名匹配或正则触发，触发后使用情景模式（即proxy模式）</p>
+<p><img src="/2023/02/08/VPN/image-20211122172031030.png" srcset="/img/loading.gif" alt="image-20211122172031030"></p>
+<h3 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h3><ul>
+<li>全机器自动同步</li>
+</ul>
+<p><img src="/2023/02/08/VPN/image-20211122172130603.png" srcset="/img/loading.gif" alt="image-20211122172130603"></p>
+<ul>
+<li><p>日常使用</p>
+<p>日常可以持续开启ClashX（不会耗费流量），Omega插件可以稳定至系统代理方式，当需要使用的可以选择 proxy（全网站代理），autoSwitch（根据自身规则代理）</p>
+</li>
+</ul>
+<p><img src="/2023/02/08/VPN/image-20211122172153917.png" srcset="/img/loading.gif" alt="image-20211122172153917"></p>
+<h2 id="其他平台"><a href="#其他平台" class="headerlink" title="其他平台"></a>其他平台</h2><p>地址：<a href="https://xn--4gq62f52gdss.com/#/registe" target="_blank" rel="noopener">https://xn--4gq62f52gdss.com/#/registe</a></p>
+<p>地址（和耳朵）：<a href="https://sockboom.bar/auth/register?affid=390907" target="_blank" rel="noopener">https://sockboom.bar/auth/register?affid=390907</a></p>
+<p>地址（程越）：<a href="https://www.elkcloud.top/auth/register?code=kYrX" target="_blank" rel="noopener">https://www.elkcloud.top/auth/register?code=kYrX</a></p>
+<h2 id="同一局域网如何连接"><a href="#同一局域网如何连接" class="headerlink" title="同一局域网如何连接"></a>同一局域网如何连接</h2><ol>
+<li><p>打开Clash的<code>Allow Lan</code></p>
+</li>
+<li><p>通过 ipconig 获取使用VPN电脑的IP地址，同时查看 Clash 打开的端口号</p>
+</li>
+<li><p>手机或其它设备先连接上同一局域网，进入手机 <strong>WiFi</strong> 的详细设置界面，把选项 <strong>代理</strong> 从 <strong>无</strong> 改成 <strong>手动</strong> ，选项 <strong>主机名</strong> 设置为 <code>IP地址</code>，选项 <strong>代理服务器端口</strong> 改为 <code>端口</code>，确认即可</p>
+</li>
+<li><p>其他电脑可以使用 <a href="chrome-extension://padekgcemlokbadohgkifijomclgjgif/options.html#!/about">SwitchyOmega</a> 直接连接目标电脑的 IP + 端口即可</p>
+<p><img src="/2023/02/08/VPN/image-20230224000711989.png" srcset="/img/loading.gif" alt="image-20230224000711989"></p>
+</li>
+</ol>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BD%91%E7%BB%9C%E7%AF%87/">网络篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/VPN/">VPN</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/02/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Linux常用命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+                        <span class="hidden-mobile">GitHub无法访问解决办法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "VPN&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

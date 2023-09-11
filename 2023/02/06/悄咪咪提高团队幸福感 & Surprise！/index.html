@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>悄咪咪提高团队幸福感 &amp; Surprise！ - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文的灵感是在几个月以前工作不忙（摸鱼）时想到的，老是自己一个人往前冲冲冲也没啥意思，需要想一点办法，来提高团队的效率，提高团队的幸福感（效率起来了，单位时间内代码写的更多，那不就幸福啦 😜），经过几个月的摸索，总结出了几个小点，如果大家有更好的方式，欢迎一起讨论~</p>
+<br>
+
+<h2 id="永久解决不知道是什么版本"><a href="#永久解决不知道是什么版本" class="headerlink" title="永久解决不知道是什么版本"></a>永久解决不知道是什么版本</h2><p>我司的产品主要分为Saas端和私有平台，分别部署在公网和客户的私有环境，先来说说私有环境的问题：<code>不知道真正部署的项目版本</code>，说来很可笑，运维同学在部署的时候肯定是记录过各个客户的代码版本的，但也就是这么可笑，有时候就是会弄错，可能是由于升级流程不够完善，或者工作失误等等，总之，想个办法解决。</p>
+<br>
+
+<p>人靠不住，但还有代码。<code>Git</code>已经成为代码管理的事实标准，这就不多说了，即然人管理不好版本，那还是从<code>Git</code>本身入手吧，悄咪咪的给所有项目依赖（<code>POM.XML</code>）增加一个插件：</p>
+<pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- Git Version插件 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>pl.project13.maven<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>git-commit-id-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>get-the-git-infos<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">phase</span>&gt;</span>initialize<span class="hljs-tag">&lt;/<span class="hljs-name">phase</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>revision<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dotGitDirectory</span>&gt;</span>$&#123;project.basedir&#125;/.git<span class="hljs-tag">&lt;/<span class="hljs-name">dotGitDirectory</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">verbose</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">verbose</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">dateFormat</span>&gt;</span>yyyy-MM-dd HH:mm:ss<span class="hljs-tag">&lt;/<span class="hljs-name">dateFormat</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">prefix</span>&gt;</span>git<span class="hljs-tag">&lt;/<span class="hljs-name">prefix</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">generateGitPropertiesFile</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">generateGitPropertiesFile</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">generateGitPropertiesFilename</span>&gt;</span>$&#123;project.build.outputDirectory&#125;/$&#123;project.name&#125;.build.json<span class="hljs-tag">&lt;/<span class="hljs-name">generateGitPropertiesFilename</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">format</span>&gt;</span>json<span class="hljs-tag">&lt;/<span class="hljs-name">format</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">gitDescribe</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">skip</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">skip</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">always</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">always</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">dirty</span>&gt;</span>-dirty<span class="hljs-tag">&lt;/<span class="hljs-name">dirty</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">gitDescribe</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span></code></pre>
+
+
+
+<p>插件将会在每次构建时生成一个版本相关文件，内容如下：</p>
+<pre><code class="hljs json">&#123;
+  <span class="hljs-attr">"git.branch"</span> : <span class="hljs-string">"master"</span>,
+  <span class="hljs-attr">"git.build.host"</span> : <span class="hljs-string">"Kerwin"</span>,
+  <span class="hljs-attr">"git.build.time"</span> : <span class="hljs-string">"2020-08-12 23:24:59"</span>,
+  <span class="hljs-attr">"git.build.user.email"</span> : <span class="hljs-string">"34807944+kkzhilu@users.noreply.github.com"</span>,
+  <span class="hljs-attr">"git.build.user.name"</span> : <span class="hljs-string">"kkzhilu"</span>,
+  <span class="hljs-attr">"git.build.version"</span> : <span class="hljs-string">"1.0.0-SNAPSHOT"</span>,
+  <span class="hljs-attr">"git.closest.tag.commit.count"</span> : <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"git.closest.tag.name"</span> : <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"git.commit.id"</span> : <span class="hljs-string">"4981afb5dfeee6f835dcf9a7a135083d8e973090"</span>,
+  <span class="hljs-attr">"git.commit.id.abbrev"</span> : <span class="hljs-string">"4981afb"</span>,
+  <span class="hljs-attr">"git.commit.id.describe"</span> : <span class="hljs-string">"4981afb"</span>,
+  <span class="hljs-attr">"git.commit.id.describe-short"</span> : <span class="hljs-string">"4981afb"</span>,
+  <span class="hljs-attr">"git.commit.message.full"</span> : <span class="hljs-string">"Commit git-version"</span>,
+  <span class="hljs-attr">"git.commit.message.short"</span> : <span class="hljs-string">"Commit git-version"</span>,
+  <span class="hljs-attr">"git.commit.time"</span> : <span class="hljs-string">"2020-08-04 18:18:47"</span>,
+  <span class="hljs-attr">"git.commit.user.email"</span> : <span class="hljs-string">"34807944+kkzhilu@users.noreply.github.com"</span>,
+  <span class="hljs-attr">"git.commit.user.name"</span> : <span class="hljs-string">"kexianming"</span>,
+  <span class="hljs-attr">"git.dirty"</span> : <span class="hljs-string">"false"</span>,
+  <span class="hljs-attr">"git.local.branch.ahead"</span> : <span class="hljs-string">"0"</span>,
+  <span class="hljs-attr">"git.local.branch.behind"</span> : <span class="hljs-string">"0"</span>,
+  <span class="hljs-attr">"git.remote.origin.url"</span> : <span class="hljs-string">"https://github.com/kkzhilu/KerwinBoots.git"</span>,
+  <span class="hljs-attr">"git.tags"</span> : <span class="hljs-string">""</span>,
+  <span class="hljs-attr">"git.total.commit.count"</span> : <span class="hljs-string">"9"</span>
+&#125;</code></pre>
+
+
+
+<p>插件名字叫：<code>git-commit-id-plugin</code>，至于细节使用就自己去搜索啦，它可以实现的效果即在每次打包时生成相应的Git相关信息，这样无论运维同学是否把代码升错，我们都可以知道<code>代码到底是什么版本</code></p>
+<p>以后终于听不到同事之间因为代码版本扯皮的事情了🤪</p>
+<br>
+
+<h2 id="永久解决没打日志怎么办的问题"><a href="#永久解决没打日志怎么办的问题" class="headerlink" title="永久解决没打日志怎么办的问题"></a>永久解决没打日志怎么办的问题</h2><p>回到刚刚说的Saas端生产环境，由于各种原因，我们团队经常需要维护不是自己写的项目，很多时候一些细节逻辑完全摸不着头脑，而且没有日志，最要命的是在测试环境还不复现，肿么办？</p>
+<br>
+
+<p>以前的解决方案是各种喊人，然后硬看代码寻找上下文，尽可能的找到蛛丝马迹，总之效率非常感人，处理的慢了就是一个事故，全员挨批评，咋办呢？我就一直在寻找这种问题的解决办法，终于我发现了一个神器：<code>Arthas</code></p>
+<br>
+
+<p>用过这个工具的人就知道它有多强大，阿里出品，官方文档链接：<a href="https://arthas.gitee.io/commands.html" target="_blank" rel="noopener">https://arthas.gitee.io/commands.html</a></p>
+<p>我们可以通过其提供的部分命令，如：<code>tt</code>，<strong>获取方法执行数据的时空隧道，它可以记录下指定方法每次调用的入参和返回信息</strong>，想想它的帮助有多大，<code>记录每一个方法的入参和出参</code>，如果真遇上没日志的情况，知道这些信息其实配合代码就可以很快定位问题了，所以，听过没用过的朋友，都去试试吧，真的很无敌。</p>
+<p>下次同事有难时，你就用这个工具去帮他，他说不定会请你吃顿饭🍗</p>
+<br>
+
+<h2 id="永久解决哪里耗时这么长的问题"><a href="#永久解决哪里耗时这么长的问题" class="headerlink" title="永久解决哪里耗时这么长的问题"></a>永久解决哪里耗时这么长的问题</h2><p>这个问题是由于之前同事重写了一块业务逻辑，结果线上展现层耗时大概30s，oh，天哪！在测试环境明明是一瞬间的，咋办？</p>
+<p>造成这种问题的原因，肯定是SQL写的不好，或者业务处理哪里做了很多不必要的动作（我们没有灰度测试），但是生产环境又不能随便动，也不能断点调试，从日志也只能看到耗时很长，但是慢在哪里不知道。</p>
+<br>
+
+<p>当一个方法里面经过了N个内部方法后，你不知道到底是哪一个导致这么长的耗时，当无法复现的时候怎么办呢？其实还是利用上面的那个工具<code>Arthas</code>，还是一样的命令<code>tt</code>，它不仅可以记录入参和出参信息，<strong>还可以记录每一个方法的耗时</strong>，多么的强大。</p>
+<br>
+
+<p>所以我是为了再次提醒，这些功能只是<code>Arthas</code>的一点皮毛，咱们要学会合理使用开源工具</p>
+<br>
+
+<h2 id="注释无法表达流程图效果的解决方案"><a href="#注释无法表达流程图效果的解决方案" class="headerlink" title="注释无法表达流程图效果的解决方案"></a>注释无法表达流程图效果的解决方案</h2><p>注释是文字，难以表达如流程图一般的效果，所以该怎么办呢？我找到了两种解决方案，目前在项目中使用效果非常之好，第一种是利用<code>ASCII注释工具</code>，该工具的地址：<a href="http://asciiflow.com/" target="_blank" rel="noopener">http://asciiflow.com/</a></p>
+<p>效果如下：</p>
+<p>![image-20200813002015129](悄咪咪提高团队幸福感 &amp; Surprise！/image-20200813002015129.png)</p>
+<p>注释如下：</p>
+<pre><code class="hljs bash">+-+
+|                               |
+|  +-+  |
+|  |                         |  |
+|  |           Demo          |  |
+|  |                         |  |
+|  |                         |  |
+|  +++  |
+|               |               |
+|               |               |
+|               |               |
+|               |               |
+|               |               |
+|               |               |
+|               |               |
+|               |               |
+|               |               |
+|               +&gt; False  |
+|               |               |
+|               |               |
+|    True   &lt;---+               |
+|                               |
++-+</code></pre>
+
+<p>这玩意画出来的图是可以直接复制成文本的，控制好尺寸就可以解决大部分情况，也可以想象之前网上有一些很奇葩的注释是不是就是用这个工具或者同样的原理画出来的，附上一副之前文章缺的一张图：</p>
+<p><strong>上亿数据怎么玩深度分页？兼容MySQL + ES + MongoDB：</strong><a href="https://juejin.im/post/6850037275456339975" target="_blank" rel="noopener">https://juejin.im/post/6850037275456339975</a></p>
+<p>这篇文章写完的时候，我自己方案的图还没画好，所以很多朋友问我用id实现不了什么的，这次就顺便展示一下我的方案</p>
+<p>![](悄咪咪提高团队幸福感 &amp; Surprise！/image-20200723163317073.png)</p>
+<p>解决方案之二，利用<code>MarkDown</code>的原生画图功能，我不知道要发布文章的平台支不支持，所以用截图来代替了（<code>Typora支持</code>）</p>
+<p>![image-20200813002527878](悄咪咪提高团队幸福感 &amp; Surprise！/image-20200813002527878.png)</p>
+<p>不知道的同学搜一下，<code>MarkDown</code>绘图语法，拿一个适合的改就好了，没必要专门去学，放到代码里看看效果：</p>
+<p>![image-20200813002708209](悄咪咪提高团队幸福感 &amp; Surprise！/image-20200813002708209.png)</p>
+<p>有一个小<code>Tips</code>，使用IDEA的时候，<strong>利用鼠标滚动键可以按块复制，这样一来可以直接复制到指定的注释内容</strong>，然后把它复制到任何一个正常的<code>MarkDown</code>工具里，就可以展示流程图了，简直不要太完美，想测试的朋友可以复制以下代码去一些工具里试试，需要设置代码种类为：<code>mermaid</code></p>
+<pre><code class="hljs bash">sequenceDiagram
+   Note over Boot: 启动类
+   Note over PDFThread: 线程类
+   Note over PDFWorker: 执行类
+ 	Boot-&gt;&gt;PDFThread: Boot类启动线程
+   PDFThread-&gt;&gt;PDFWorker: 线程类调用真正工作Worker
+   loop 队列处理
+       PDFThread-&gt;PDFThread: 考虑成功与失败情况处理方案
+   end
+   
+   PDFWorker--&gt;&gt;PDFThread: Worker响应执行结果
+Note right of PDFWorker: 注意参数校验 &lt;br/&gt;文件格式校验</code></pre>
+
+<p>你未来的同事维护代码的时候会爱上你，如果是女生，可能还会嫁给你🧡</p>
+<p>幻想有一天你老大跑过来问你，你这写的注释都是些什么玩意，然后你一复制一粘贴，一张图就出来了！下次涨薪会没有你？</p>
+<p>（反正我涨了，还不少😎）</p>
+<br>
+
+<p>PS：我考虑写一个支持直接复制然后渲染成流程图的<code>IDEA插件</code>，如果有现成的请联系我，就省的我去写了，嘿嘿✌</p>
+<br>
+
+<h2 id="垃圾SQL的解决方案"><a href="#垃圾SQL的解决方案" class="headerlink" title="垃圾SQL的解决方案"></a>垃圾SQL的解决方案</h2><p>我们公司没有专门的<code>DBA</code>，所以<code>SQL</code>语句的质量只掌握在开发和开发组长的手上，有时候事情多，或者不细心，或者模块不是很重要就容易粗心，到了生产环境出大问题，针对这种情况的解决方案依然是寻找工具，比如，我盯上了<code>小米</code>的<code>Soar</code></p>
+<p>项目地址：<a href="https://github.com/XiaoMi/soar" target="_blank" rel="noopener">https://github.com/XiaoMi/soar</a></p>
+<p>官方的介绍：</p>
+<ul>
+<li>跨平台支持</li>
+<li>目前只支持 MySQL 语法族协议的 SQL 优化</li>
+<li>支持基于启发式算法的语句优化</li>
+<li>支持复杂查询的多列索引优化（UPDATE、INSERT、DELETE、SELECT）</li>
+</ul>
+<p>贴个图片展示一下效果：</p>
+<p>![](悄咪咪提高团队幸福感 &amp; Surprise！/Soar-Web效果图.jpg)</p>
+<p>这款工具可以进行对<code>SQL</code>进行打分，同时提供一些建议，它的能力上限我们还没有摸索出来，但是下限还是可以肯定的，因此之后只需要关注<code>索引</code>是否正确使用，其他的就交给这个工具吧，低于90分，就改！</p>
+<p>PS：这个开源项目推荐使用<code>docker</code>安装，简单粗暴无脑省时间，命令如下：</p>
+<pre><code class="hljs bash"><span class="hljs-comment"># 安装镜像</span>
+docker pull becivells/soar-web
+
+<span class="hljs-comment"># 运行</span>
+docker run -d --name Soar-web -p 5077:5077 becivells/soar-web</code></pre>
+
+<p>想着有个工具会检查SQL质量了，是不是写的时候也认真多啦，幸福感提示满满，哈哈~😁</p>
+<br>
+
+<h2 id="懒得写文档的解决方案"><a href="#懒得写文档的解决方案" class="headerlink" title="懒得写文档的解决方案"></a>懒得写文档的解决方案</h2><p>方案设计的文档不可能由工具去写，但是简单的数据库字段映射，或者接口文档总不需要开发去写吧？也是一样摸索摸索，找到了几个不太适合但是靠边的开源项目，如：</p>
+<p><strong>apidoc：</strong><a href="https://github.com/apidoc/apidoc" target="_blank" rel="noopener">https://github.com/apidoc/apidoc</a></p>
+<blockquote>
+<p>RESTful web API Documentation Generator.</p>
+</blockquote>
+<p><strong>JApiDocs：</strong><a href="https://github.com/YeDaxia/JApiDocs" target="_blank" rel="noopener">https://github.com/YeDaxia/JApiDocs</a></p>
+<blockquote>
+<p>A magical api documentation generator without annotation for springboot.</p>
+</blockquote>
+<p><strong>APIAuto：</strong><a href="https://github.com/TommyLemon/APIAuto" target="_blank" rel="noopener">https://github.com/TommyLemon/APIAuto</a></p>
+<blockquote>
+<p>机器学习测试、自动生成代码、自动静态检查、自动生成文档与注释等，做最先进的接口管理工具</p>
+</blockquote>
+<p>因为每个项目的情况不同，但是我又不想做大的改动，所以只能说是靠边，不能百分百适合，但有了这些开源项目，我就可以改写其中的代码，让它适应当前项目的注释方案等等，总是，能节省相当一部分的编写文档的时间</p>
+<br>
+
+<h2 id="重复性代码的解决方案"><a href="#重复性代码的解决方案" class="headerlink" title="重复性代码的解决方案"></a>重复性代码的解决方案</h2><p>这个的确是个大坑，谁让咱们是CRUD程序员呢，经常需要写重复性相当高，但是又有一点不同的代码，这里我的解决方案是利用模板 + 更合适的工具解决，如果只是数据库操作层重复代码多，我们完全可以利用<code>mybatis-plus</code>工具减少重复代码，又或者写出<code>公共的操作层</code>减少重复代码。</p>
+<br>
+
+<p>当用工具完不成的时候，我就会用上模板了，比如直接我写过一个简单的开源项目：</p>
+<p><strong>好像很厉害的生成器！一秒钟搞定一个项目：</strong><a href="https://juejin.im/post/6844904148417118215" target="_blank" rel="noopener">https://juejin.im/post/6844904148417118215</a></p>
+<p>核心思路和要求如下：</p>
+<ul>
+<li>基于数据库获取原始数据</li>
+<li>基于模板 + 原始数据生成可运行的SpringBoot项目，支持界面 + 基本增删改查</li>
+<li>提供拓展式接口，可以实现不修改代码生成全新的文件</li>
+</ul>
+<br>
+
+<p>那利用这种思路，其实完全可以写一套更开放的代码生成模板，比如根据传递的<code>JSON</code>报文去解析数据，根据传递的<code>模板</code>去生成数据，这样的话又可以解决相当大一部分的重复工具，你，值得拥有。</p>
+<p>PS：同理，其实数据库字段映射文档也可以用这种方式，只需要一秒钟，简直不要太舒服🤷‍♂️</p>
+<br>
+
+<h2 id="重复性的操作用脚本代码"><a href="#重复性的操作用脚本代码" class="headerlink" title="重复性的操作用脚本代码"></a>重复性的操作用脚本代码</h2><p>这个其实大家都有意识，但是有时候就是感觉可能用的不多，真要用起来的时候又没功夫去写脚本，比如进入一个<code>docker</code>容器，如果用命令行的话，至少要经历两步代码，十几秒的时间，如果写一个脚本呢，以后进入容器只需要一秒钟，所以我给团队写了不少这种脚本，其实我一开始也不会，反正就复制来一个改一改就行，如下是进入<code>docker容器</code>的</p>
+<pre><code class="hljs bash"><span class="hljs-comment">#使用说明，用来提示输入参数</span>
+<span class="hljs-function"><span class="hljs-title">usage</span></span>() &#123;
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"Usage: sh 执行脚本.sh [rpcapp|tomcat|nginx|mysql]"</span>
+    <span class="hljs-built_in">exit</span> 1
+&#125;
+
+<span class="hljs-function"><span class="hljs-title">rpcapp</span></span>()&#123;
+  DOCKER_ID=$(docker ps | grep <span class="hljs-string">"rpcapp"</span> | awk <span class="hljs-string">'&#123;print $1&#125;'</span>)
+  docker <span class="hljs-built_in">exec</span> -it <span class="hljs-variable">$DOCKER_ID</span> bash
+&#125;
+
+<span class="hljs-function"><span class="hljs-title">tomcat</span></span>()&#123;
+  DOCKER_ID=$(docker ps | grep <span class="hljs-string">"tomcat"</span> | awk <span class="hljs-string">'&#123;print $1&#125;'</span>)
+  docker <span class="hljs-built_in">exec</span> -it <span class="hljs-variable">$DOCKER_ID</span> bash
+&#125;
+
+<span class="hljs-function"><span class="hljs-title">nginx</span></span>()&#123;
+  DOCKER_ID=$(docker ps | grep <span class="hljs-string">"nginx"</span> | awk <span class="hljs-string">'&#123;print $1&#125;'</span>)
+  docker <span class="hljs-built_in">exec</span> -it <span class="hljs-variable">$DOCKER_ID</span> bash
+&#125;
+
+<span class="hljs-function"><span class="hljs-title">mysql</span></span>()&#123;
+  DOCKER_ID=$(docker ps | grep <span class="hljs-string">"mysql"</span> | awk <span class="hljs-string">'&#123;print $1&#125;'</span>)
+  docker <span class="hljs-built_in">exec</span> -it <span class="hljs-variable">$DOCKER_ID</span> bash
+&#125;
+
+<span class="hljs-comment">#根据输入参数，选择执行对应方法，不输入则执行使用说明</span>
+<span class="hljs-keyword">case</span> <span class="hljs-string">"<span class="hljs-variable">$1</span>"</span> <span class="hljs-keyword">in</span>
+  <span class="hljs-string">"rpcapp"</span>)
+    rpcapp
+    ;;
+  <span class="hljs-string">"tomcat"</span>)
+    tomcat
+    ;;
+  <span class="hljs-string">"nginx"</span>)
+    nginx
+    ;;
+  <span class="hljs-string">"mysql"</span>)
+    mysql
+    ;;
+  *)
+    usage
+    ;;
+<span class="hljs-keyword">esac</span></code></pre>
+
+<br>
+
+<p>从网上找了找，又找到一个开源项目用以记录常用的脚本</p>
+<p><strong>useful-scripts：</strong><a href="https://github.com/oldratlee/useful-scripts" target="_blank" rel="noopener">https://github.com/oldratlee/useful-scripts</a></p>
+<p>![image-20200813003842859](悄咪咪提高团队幸福感 &amp; Surprise！/image-20200813003842859.png)</p>
+<p>能自动的就不要每次都手写啦，节约时间去摸鱼不快乐吗👏</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>这可是我这么久以来总结的时间管理神器，节省的时间拿去摸鱼学习，循环促进效率和能力，形成良性正反馈</p>
+<p>这还不值得<code>来个赞</code>👍👍👍吗？嘿嘿~</p>
+<blockquote>
+<p>另外可以搜索公众号「<strong>是Kerwin啊</strong>」，一起进步！</p>
+<p>也可以查看<a href="https://github.com/kkzhilu" target="_blank" rel="noopener">Kerwin的GitHub主页</a>，关注一个小白程序员的进步，这货最近在折腾Go~</p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87%E7%AF%87/">杂文篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%82%84%E5%92%AA%E5%92%AA%E6%8F%90%E9%AB%98%E5%9B%A2%E9%98%9F%E5%B9%B8%E7%A6%8F%E6%84%9F-Surprise%EF%BC%81/">悄咪咪提高团队幸福感 & Surprise！</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E5%BB%BA%E9%80%A0%E8%80%85&amp;%E8%B4%A3%E4%BB%BB%E9%93%BE&amp;%E5%A4%87%E5%BF%98%E5%BD%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">建造者&责任链&备忘录</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93MyBatis/">
+                        <span class="hidden-mobile">手写简易MyBatis</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "悄咪咪提高团队幸福感 & Surprise！&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

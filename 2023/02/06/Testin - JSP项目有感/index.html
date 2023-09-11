@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Testin - JSP项目有感 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Testin-JSP项目有感"><a href="#Testin-JSP项目有感" class="headerlink" title="Testin - JSP项目有感"></a>Testin - JSP项目有感</h1><p>最近被分配到Web自动化测试的项目开发任务，由于时间紧张，因此为求迅速，节约前端成本，把部分的前端开发任务挪给后端，通过JSP这种老掉牙的技术去做，但是在真正的制作当中，有很多以往没有想到，或者没有规范话的好经验值得我去深思和回顾，大致内容如下：</p>
+<h2 id="公共分页展示JS"><a href="#公共分页展示JS" class="headerlink" title="公共分页展示JS"></a>公共分页展示JS</h2><p>真正的官网或者Web项目中，分页随处可见，且复杂的工程分页要求也比较麻烦，比如默认如何显示，比如还需要显示条数，查询窗口等等，代码非常复杂，但这往往具有通用性，回想实习时候，第一次真正做企业级开发，什么东西都自己写，根本没有意识到，这种代码是完全可以重用的，现在想来懊悔不已，给个例子如下：</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 全文请见: Testin-JSP项目有感</span>
+&lt;c:<span class="hljs-keyword">if</span> test=<span class="hljs-string">"$&#123;pager.totalCount gt 0&#125;"</span>&gt;
+    &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"pagination-panel"</span>&gt;
+        &lt;c:choose&gt;
+            &lt;c:when test=<span class="hljs-string">"$&#123;pager.startPageNo == 1&#125;"</span>&gt;
+                &lt;c:<span class="hljs-keyword">if</span> test=<span class="hljs-string">"$&#123;pager.totalCount &lt;= pager.pageSize&#125;"</span>&gt;
+                    &lt;span&gt;&lt;fmt:message key='common.page_txt1'/&gt;1-$&#123;pager.totalCount&#125;&lt;fmt:message key='common.page_txt2'/&gt;&lt;fmt:message key='common.page_txt3'/&gt;$&#123;pager.totalCount&#125;&lt;fmt:message key='common.page_txt4'/&gt;&lt;/span&gt;
+                &lt;/c:if&gt;
+                &lt;c:<span class="hljs-keyword">if</span> test=<span class="hljs-string">"$&#123;pager.totalCount &gt; pager.pageSize&#125;"</span>&gt;
+                    &lt;span&gt;&lt;fmt:message key='common.page_txt1'/&gt;1-$&#123;pager.pageSize&#125;&lt;fmt:message key='common.page_txt2'/&gt;&lt;fmt:message key='common.page_txt3'/&gt;$&#123;pager.totalCount&#125;&lt;fmt:message key='common.page_txt4'/&gt;&lt;/span&gt;
+                &lt;/c:if&gt;
+            &lt;/c:when&gt;
+            &lt;c:when test=<span class="hljs-string">"$&#123;pager.startPageNo == pager.totalPageCount&#125;"</span>&gt;
+                &lt;span&gt;&lt;fmt:message key='common.page_txt1'/&gt;$&#123;(pager.startPageNo-1)*pager.pageSize + 1&#125;-$&#123;pager.totalCount&#125;&lt;fmt:message key='common.page_txt2'/&gt;&lt;fmt:message key='common.page_txt3'/&gt;$&#123;pager.totalCount&#125;&lt;fmt:message key='common.page_txt4'/&gt;&lt;/span&gt;
+            &lt;/c:when&gt;
+            &lt;c:otherwise&gt;
+                &lt;span&gt;&lt;fmt:message key='common.page_txt1'/&gt;$&#123;(pager.startPageNo-1)*pager.pageSize + 1&#125;-$&#123;pager.startPageNo*pager.pageSize&#125;&lt;fmt:message key='common.page_txt2'/&gt;&lt;fmt:message key='common.page_txt3'/&gt;$&#123;pager.totalCount&#125;&lt;fmt:message key='common.page_txt4'/&gt;&lt;/span&gt;
+            &lt;/c:otherwise&gt;
+        &lt;/c:choose&gt;
+        &lt;c:<span class="hljs-keyword">if</span> test=<span class="hljs-string">"$&#123;sessionScope.deploy_target eq 'PRIVATE CLOUDS' and isScriptSelectPage eq 1&#125;"</span>&gt;
+		&lt;span style=<span class="hljs-string">"margin-left: 5px;"</span>&gt;
+		&lt;fmt:message key=<span class="hljs-string">'common.page_txt5'</span>/&gt;</code></pre>
+
+<p>我们做过MVC开发的都知道可以给model增加属性，因此，重要属性名称一致，参数名保证一致，即可完全做到高效的重用，做后端开发的伙伴都知道工具类的重要性，但是经常会忽略，其实前端也有工具类的说法，至少我在学习期间几乎没有意识到这种问题，因为毕竟前端的需求针对性较强一些，也不复杂，但真正的面向对象的思考，是一个开发者应该一直坚持的事情。</p>
+<h2 id="装饰模式-核心界面为其装饰头，尾，菜单的效果"><a href="#装饰模式-核心界面为其装饰头，尾，菜单的效果" class="headerlink" title="装饰模式 - 核心界面为其装饰头，尾，菜单的效果"></a>装饰模式 - 核心界面为其装饰头，尾，菜单的效果</h2><p>我们去看阿里云或者其他实用型官网项目，如果有复杂的头，尾，左侧导航等界面，难道我们都得在界面中去实现吗？在学习jsp的时候，有import这个说法，可以把界面引入到本界面来，实现上述的效果，但是总觉得每次写一堆代码怪怪的，而且头部，尾部，菜单还得分开引用，比较麻烦。那么可以考虑配置装饰的方式，通过配置给界面主动添加如头部，尾部，菜单的界面</p>
+<pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">sitemesh</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- 指明满足“/json/”的页面，将被排除，不被装饰 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/json/*"</span> <span class="hljs-attr">exclue</span>=<span class="hljs-string">"true"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/ajax/*"</span> <span class="hljs-attr">exclue</span>=<span class="hljs-string">"true"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/login*"</span> <span class="hljs-attr">exclue</span>=<span class="hljs-string">"true"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/*/ajax/*"</span> <span class="hljs-attr">exclue</span>=<span class="hljs-string">"true"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mapping</span> <span class="hljs-attr">path</span>=<span class="hljs-string">"/*/*/ajax/*"</span> <span class="hljs-attr">exclue</span>=<span class="hljs-string">"true"</span>/&gt;</span>
+    ....................................
+<span class="hljs-tag">&lt;/<span class="hljs-name">sitemesh</span>&gt;</span></code></pre>
+
+
+
+<h2 id="合理的界面分层"><a href="#合理的界面分层" class="headerlink" title="合理的界面分层"></a>合理的界面分层</h2><p>刚开始做开发，没人教，或者有人教的时候，总是喜欢这么做，把所有东西堆到一个界面里去，然后传递参数到后端，后端把数据获取到，添加到model里，再展示到前端，顺便通过jquery把请求的界面节点的数据部分拿出来，再替换当前界面里的内容，以此完成一个完美的 “Ajax界面刷新的效果”，但是这么做有不好的地方</p>
+<ol>
+<li>想要这么做，在ajax请求时必须对返回的界面转化为jquery对象，然后通过find或者其他方法把数据节点位置找到再替换当前的内容，这里存在两个问题，一个是低版本的jq转换H5界面时候一直报错（换成高版本就OK）另外数据节点的寻找需要进行DOM的解析，会耗时</li>
+<li>把参数什么的刷到后台，然后又从后台转到前台来，有点多此一举</li>
+</ol>
+<p>如果这么做呢？<br>查询条件界面 （留一个数据Div填充）- 数据界面（直接被Div包含，去掉多余的样式，body，html等无用的东西）</p>
+<p>然后通过默认函数加载数据，通过分页跳转界面再加载数据等等…  完美解决了上面的需求，同时有以下的好处：</p>
+<ul>
+<li>界面分开后，代码会更加清晰。哪个部分干什么事一目了然</li>
+<li>参数只用往后传，不用再往前传，完全解决了各种莫名其妙的回显问题</li>
+<li>效率更高（由于不用再解析返回的界面了，直接通过jquery append到指定节点位置即可）</li>
+</ul>
+<h2 id="MVC-mapping-占位符的妙用"><a href="#MVC-mapping-占位符的妙用" class="headerlink" title="MVC mapping * 占位符的妙用"></a>MVC mapping * 占位符的妙用</h2><p>在MVC开发中，总有这样的需求前端三个界面不同，但是功能类似，此时映射三个mapping，到底写三个还是写一个然后把想法抽取？当然不可能写三个，但是写一个想法抽取的话，在语义上不明确，而且增加了额外的方法，让类变得更加复杂了，比较麻烦，那为何不利用 <code>*</code>去站位匹配呢？</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 此时匹配 list-任意内容 -&gt; 如 list-ajax  list-jsp等等</span>
+<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/list-*"</span>)</code></pre>
+
+<p>这样做的好处，可以把代码减少的最少，同时语义稍微明确一点，再来看一个更加方便的用处把</p>
+<p>在初期学习界面，写的界面比较简单，总会用到各种各样的不包含太多逻辑的index界面，或者包含非常简单的基本数据而已，但是利用MVC设计的话，需要映射mapping，怎么做可以让代码更加简洁而且通用呢？</p>
+<pre><code class="hljs java"><span class="hljs-meta">@Controller</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BaseController</span> </span>&#123;
+    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">"/path/*"</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">jumpPath</span> <span class="hljs-params">(HttpServletRequest request)</span> </span>&#123;
+        String path = request.getServletPath();
+        <span class="hljs-comment">// 截取path/ 之后的具体路径  如 finalPath</span>
+        String finalPath = path.sub........
+        <span class="hljs-keyword">return</span> finalPath;
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 前端页面</span>
+href = <span class="hljs-string">"/path/task-list"</span>
+href = <span class="hljs-string">"/path/monkey-list"</span>
+href = <span class="hljs-string">"/path/money-list"</span>
+此时不再需要给每一个不需要什么逻辑的界面单独写一个controller去映射界面，是不是方便了很多？</code></pre>
+
+
+
+<h2 id="一行代码，10个BUG"><a href="#一行代码，10个BUG" class="headerlink" title="一行代码，10个BUG"></a>一行代码，10个BUG</h2><p>真正开始工作之后才知道，什么jsp。ssm都是老掉牙的东西，整个编程的风气如今都是高并发，高可用诸如此类的，但是有天看到一句笑话，一位程序员说，<strong><em>天天尼玛高并发，高可用，一行代码，10个BUG，玩NM的高并发</em></strong>，如此粗俗的话一下子击中了我，后来我渐渐发现，原来我也是整天想着高并发高可用，完全没有意识到真正基础的重要性，最近做一个大批量文件导入的模块，涉及文件上传，用户操作配置，文件解析，文件导入等几个步骤，刷刷刷，代码写完，自测没毛病，交给测试了，后来一堆隐患问题就来了，直接掠过过程说问题：</p>
+<ol>
+<li>耗时操作的部分按钮没有加上限制，即点击后仍然处于可操作状态 -&gt; 非常致命</li>
+<li>代码设计上，想到哪里写到哪里，功能最后都实现了，但是总的来说不完美，虽然不擅长JS。但这也不应该是借口，比如弹窗，按钮等等的重置效果，成功或者失败的响应效果，就应该封装好，统一调用等等</li>
+</ol>
+<p>总结：做一个事情不难，想真正做好一件事情，难</p>
+<blockquote>
+<p>一切都是有可能的，甚至那些不可能的也是.</p>
+</blockquote>
+<p>实习加工作10个月了，突然回顾之前的知识，觉得太浅显，但是仍然从如此浅显的内容中提炼出了以前并没有意识到的技巧或者更好的设计方式等等，因此记录了此篇感触，用以醒悟自身，不要自傲。</p>
+<p>​                                                                                                                                                                                             2019年 8月26日 Kerwin</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%E7%AF%87/">程序人生篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Testin-JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">Testin - JSP项目有感</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/SpringMVC%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringMVC篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E3%80%8C%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E3%80%8D%E5%A6%82%E4%BD%95%E5%86%99%E6%9C%80%E5%B0%91%E7%9A%84%E4%BB%A3%E7%A0%81/">
+                        <span class="hidden-mobile">「奇淫技巧」如何写最少的代码</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Testin - JSP项目有感&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

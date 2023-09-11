@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>工厂模式 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="工厂模式篇"><a href="#工厂模式篇" class="headerlink" title="工厂模式篇"></a>工厂模式篇</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在设计模式中关于工厂模式有一点特殊，就标准意义而言我们一般提到的工厂模式一般包括三种：</p>
+<ul>
+<li>简单工厂</li>
+<li>工厂方法模式</li>
+<li>抽象工厂模式</li>
+</ul>
+<blockquote>
+<p><strong><em>其实简单工厂不属于设计模式，由于它的使用场景还是比较多的，因此本篇将会一起介绍一下~</em></strong></p>
+</blockquote>
+<h2 id="工厂模式意图"><a href="#工厂模式意图" class="headerlink" title="工厂模式意图"></a>工厂模式意图</h2><p>工厂模式属于对象创建型模式，无论是上述三种的哪一种都是为了同一个设计原则即<font color="red">依赖抽象，不要依赖具体</font></p>
+<p>简单来说就是把<font color="blue">复杂对象创建（初始化）的细节</font>或者<font color="blue">依赖关系经常可能发生变化的细节</font>交给一个第三方类（工厂类），避免在业务逻辑中书写不必要的内容</p>
+<h2 id="简单工厂模式的简单写法"><a href="#简单工厂模式的简单写法" class="headerlink" title="简单工厂模式的简单写法"></a>简单工厂模式的简单写法</h2><p>简单工厂在实际应用中非常的频繁，假设我们现在需要生产Intel和AMD相关的产品，来看看代码</p>
+<h3 id="静态方法无脑IF-Switch"><a href="#静态方法无脑IF-Switch" class="headerlink" title="静态方法无脑IF | Switch"></a>静态方法无脑IF | Switch</h3><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleFactory</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> AbstractCPU <span class="hljs-title">createCpu</span> <span class="hljs-params">(String type)</span> </span>&#123;
+        <span class="hljs-keyword">switch</span> (type) &#123;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">"INTEL"</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IntelCpu();
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AMDCpu();
+        &#125;
+
+       <span class="hljs-comment">/* if ("INTEL".equals(type)) &#123;</span>
+<span class="hljs-comment">            return new IntelCpu();</span>
+<span class="hljs-comment">        &#125; else if ("AMD".equals(type))&#123;</span>
+<span class="hljs-comment">            return new AMDCpu();</span>
+<span class="hljs-comment">        &#125;</span>
+<span class="hljs-comment">        return null;*/</span>
+    &#125;
+&#125;</code></pre>
+
+<blockquote>
+<p><strong><em>此种方式适合非常单一的场景，快速构建工厂代码，不用过多的思考</em></strong></p>
+</blockquote>
+<p>值得注意的是静态方法和普通方法的区别，静态工厂让它不具备继承性，在某些场合可能导致无法扩展的问题，在代码优化层面可以配合枚举，Map等方式继续让代码变得更清爽一些</p>
+<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><h3 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h3><p>定义一个用于创建对象的接口，让子类决定实例化哪一个类，Factory Mehod使一个类的实例化延迟到其子类</p>
+<h3 id="工厂方法模式的诞生"><a href="#工厂方法模式的诞生" class="headerlink" title="工厂方法模式的诞生"></a>工厂方法模式的诞生</h3><p>工厂方法用来处理对象的创建，并将这样的行为封装在子类中，这样，客户程序中关于超类的代码就和子类对象创建代码解耦了。</p>
+<p>咱们还是一样，说说人话：</p>
+<p>【<font color="orange">产品</font>】：最近我们有<font color="red">英特尔和AMD的CPU</font>产品订购方案，您看能不能实现一下相关的代码？</p>
+<p>【<font color="red">BOSS</font>】：它们的装配啊，生产啊等等的<font color="red">细节一样</font>吗？</p>
+<p>【<font color="orange">产品</font>】：嗯嗯，细节流程都是一样的！</p>
+<p>【<font color="red">BOSS</font>】：那个谁，小柯啊，工厂方法模式懂吗，去做吧，给你半天时间，好好设计设计。</p>
+<p><img src="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20200524105721242.png" srcset="/img/loading.gif" alt="image-20200524105721242"></p>
+<p>【<font color="blue">开发</font>】：好的！（内心OS：我不会啊！！！）</p>
+<h3 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h3><p>不会的话，只能看书学习啦~</p>
+<p><strong>父级接口</strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Factory</span> </span>&#123;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 产品订购方案</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractCPU <span class="hljs-title">orderCpu</span> <span class="hljs-params">()</span> </span>&#123;
+        AbstractCPU cpu = generateCpu();
+        cpu.show();
+        cpu.prepare();
+        cpu.box();
+
+        <span class="hljs-comment">// 假设有相同的业务处理逻辑...</span>
+        <span class="hljs-keyword">return</span> cpu;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">abstract</span> AbstractCPU <span class="hljs-title">generateCpu</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+
+
+<p><strong>具体实现</strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntelCpuFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Factory</span> </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractCPU <span class="hljs-title">generateCpu</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IntelCpu();
+    &#125;
+&#125;
+
+<span class="hljs-comment">// ****************************************************************</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AMDCpuFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Factory</span> </span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractCPU <span class="hljs-title">generateCpu</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AMDCpu();
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><font color="red">工厂方法模式的设计思路</font>：</p>
+<ul>
+<li>Product（Document） 定义工厂方法所创建对象的接口</li>
+<li>ConcreteProduct（MyDocument）实现Product接口</li>
+<li>Creator（Factory）声明工厂方法</li>
+<li>ConcreteCreator（MyFactory）具体的工厂类</li>
+</ul>
+<h3 id="什么场景适用"><a href="#什么场景适用" class="headerlink" title="什么场景适用"></a>什么场景适用</h3><p>在下列情况下可以使用 Factory Method模式：</p>
+<ul>
+<li>当一个类不知道它所必须创建的对象的类的时候</li>
+<li>当一个类希望由它的子类来指定它所创建的对象的时候</li>
+<li>当类将创建对象的职责委托给多个子类中的某一个，并且你希望控制哪一个子类实现的时候</li>
+</ul>
+<h3 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h3><p>例如在工厂生产电池时，对于电池的保管，订货，输送的方式可能完全一致，但是仅型号不一致，因此分别交给A流水线，B流水线进行生产，但是后续的其他流程又是重合的</p>
+<h3 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h3><p><img src="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20200524112807802.png" srcset="/img/loading.gif" alt="image-20200524112807802"></p>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><h3 id="意图-1"><a href="#意图-1" class="headerlink" title="意图"></a>意图</h3><p>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类</p>
+<h3 id="抽象工厂模式的诞生"><a href="#抽象工厂模式的诞生" class="headerlink" title="抽象工厂模式的诞生"></a>抽象工厂模式的诞生</h3><p>PS：故事内容承接工厂方法模式的诞生~</p>
+<p>【<font color="orange">产品</font>】：我…  我好像搞错需求了…</p>
+<p>【<font color="red">BOSS</font>】：什么意思？？？</p>
+<p>【<font color="orange">产品</font>】：咱们的订单不是仅仅只生成CPU产品，而是要生成<font color="red">英特尔还有AMD的全系列产品…</font></p>
+<p><img src="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20200524113603606.png" srcset="/img/loading.gif" alt="image-20200524113603606"></p>
+<p>【<font color="red">BOSS</font>】：你你你你…   之前的功夫都白费了啊！</p>
+<p>【<font color="orange">产品</font>】：不就是生产东西嘛，反正都是生产，我不管，你要给我实现！</p>
+<p>【<font color="red">BOSS</font>】：小柯，委屈你了。</p>
+<p>【<font color="blue">开发</font>】：好吧，那我能问一个问题吗？<font color="red">未来是不是还有可能要生产华为的，联想的？</font></p>
+<p>【<font color="orange">产品</font>】：对！很有可能！如果我们生意做大了！</p>
+<h3 id="HeadFirst-核心代码-1"><a href="#HeadFirst-核心代码-1" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h3><p>抽象工厂模式着重点在<font color="red">产品族</font>上，开始撸代码吧~</p>
+<p><strong>父级抽象类</strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractFactory</span> </span>&#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 创建CPU对象</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> CPU对象</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> AbstractCPU <span class="hljs-title">createCpu</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 创建主板对象</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span> 主板对象</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> AbstractMotherboard <span class="hljs-title">createMainboard</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+
+
+<p><strong>子类实现</strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntelFactory</span> <span class="hljs-keyword">extends</span>  <span class="hljs-title">AbstractFactory</span></span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractCPU <span class="hljs-title">createCpu</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IntelCpu();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractMotherboard <span class="hljs-title">createMainboard</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> IntelMotherboard();
+    &#125;
+&#125;
+
+<span class="hljs-comment">// *************************************************************</span>
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AMDFactory</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractFactory</span></span>&#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractCPU <span class="hljs-title">createCpu</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AMDCpu();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> AbstractMotherboard <span class="hljs-title">createMainboard</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> AMDMotherboard();
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><font color="red">抽象工厂模式的设计思路</font>：</p>
+<ul>
+<li>AbstractProduct    为一类产品对象声明一个接口</li>
+<li>ConcreteProduct   具体对象</li>
+<li>AbstractFactory     声明一个创建抽象产品对象的接口</li>
+<li>ConcreteFactory   具体的产品族工厂</li>
+</ul>
+<p><font color="red">思路示意图</font>：</p>
+<p><img src="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20191223174111618.png" srcset="/img/loading.gif" alt="image-20191223174111618"></p>
+<h3 id="工厂方法是不是潜伏在抽象工厂中？"><a href="#工厂方法是不是潜伏在抽象工厂中？" class="headerlink" title="工厂方法是不是潜伏在抽象工厂中？"></a>工厂方法是不是潜伏在抽象工厂中？</h3><p>没错，抽象工厂的方法经常以工厂方法的方式实现，因为抽象工厂的任务通常是定义一个负责创建一组产品的接口，在这个接口内的每个方法都负责创建一个具体的产品，<strong><em>而这种某一个具体的产品的实质就是工厂方法模式的实践</em></strong></p>
+<h3 id="什么场景适用-1"><a href="#什么场景适用-1" class="headerlink" title="什么场景适用"></a>什么场景适用</h3><p>在以下情况可以使用 Abstract Factory 模式：</p>
+<ul>
+<li>系统要独立于它的产品的创建、组合和表示时</li>
+<li>系统要由多个产品系列中的一个来配置时</li>
+<li>当你要强调一系列相关的产品对象的设计以便进行联合使用时</li>
+<li>当你提供一个产品类库，而只想显示它们的接口而不是实现时</li>
+</ul>
+<h3 id="Code-生活中的实际应用-1"><a href="#Code-生活中的实际应用-1" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h3><p>比如上述的情况，观察代码我们可以发现我们其实是把一个产品族进行了封装，如果这个时候要引入华为系列产品，我们完全不用动任何代码，只需要增加一个类即可，非常符合开闭原则</p>
+<h3 id="UML图-1"><a href="#UML图-1" class="headerlink" title="UML图"></a>UML图</h3><p><img src="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/image-20200524114955227.png" srcset="/img/loading.gif" alt="image-20200524114955227"></p>
+<h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><p><strong>依赖抽象，而不是依赖具体</strong></p>
+<ul>
+<li>无论是简单工厂还是工厂方法，亦或是抽象工厂，都是强调解耦，依赖抽象，不依赖具体</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>相同点：</strong></p>
+<ul>
+<li>所有的工厂都是用来封装对象的创建</li>
+<li>简单工厂，虽然不是真正的设计模式，但仍不失为一个简单的方法，可以进行解耦</li>
+<li>所有工厂模式都通过减少应用程序和具体类之间的依赖促进松耦合</li>
+<li>依赖倒置原则，指导我们避免依赖具体类型，而要尽量依赖抽象</li>
+<li>工厂是很有威力的技巧，帮助我们针对抽象编程，而不是具体类编程</li>
+</ul>
+<p><strong>工厂方法：</strong></p>
+<ul>
+<li>工厂方法利用继承：把对象的创建委托给子类，子类实现工厂方法来创建对象</li>
+<li>工厂方法允许类将实例化延迟到子类实现</li>
+</ul>
+<p><strong>抽象工厂：</strong></p>
+<ul>
+<li>抽象工厂使用对象组合：对象的创建被实现在工厂接口所暴露出来的方法中</li>
+<li>抽象工厂创建相关的<font color="red">对象家族</font>，而不需要依赖它们的具体类</li>
+</ul>
+<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<ul>
+<li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
+<li>提供了友好的阅读指导</li>
+</ul>
+<p><img src="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png" srcset="/img/loading.gif" alt></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">工厂模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">商品治理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E5%BB%BA%E9%80%A0%E8%80%85&amp;%E8%B4%A3%E4%BB%BB%E9%93%BE&amp;%E5%A4%87%E5%BF%98%E5%BD%95/">
+                        <span class="hidden-mobile">建造者&责任链&备忘录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "工厂模式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

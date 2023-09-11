@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>商品治理 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="京东到家商品治理体系的建设"><a href="#京东到家商品治理体系的建设" class="headerlink" title="京东到家商品治理体系的建设"></a>京东到家商品治理体系的建设</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>京东到家作为一个即时零售的电商平台，在提供1小时送达极致服务的同时也力求将万千好物送到消费者的手中。为了不断提高平台露出商品的价值，提高用户的满意度，我们设计并投入使用了京东到家商品治理系统，其主要职责是对商品新建、修改、呈现的全链路流程进行干预及核验，旨在<code>发现</code>并<code>解决</code>商品信息中如：敏感词、虚假宣传、错误信息等不符合平台规范和质量要求的问题，保证商品与实物的匹配度，信息的正确性等。</p>
+<h2 id="系统架构介绍"><a href="#系统架构介绍" class="headerlink" title="系统架构介绍"></a>系统架构介绍</h2><p>京东到家各业务线采用的是标准化的微服务架构设计，各个系统在迭代过程中只用按需申请对应的组件即可，下图为治理系统所用到的技术组件：</p>
+<ul>
+<li>消息中间件：使用京东的MQ中间件，实现业务解耦。</li>
+<li>存储：Redis集群、MySQL集群等。</li>
+<li>Worker：基于TBSchedule分布式调度引擎框架构建的服务，进行定时任务的执行和分发。</li>
+<li>服务监控：采用统一监控与告警服务平台，可以达到秒级监控、多方位监控、服务告警、全链路追踪等能力。</li>
+<li>服务间调用：使用京东的JSF平台，实现服务间注册、服务间调用，服务治理等能力，支持请求超时自动阻断。</li>
+<li>日志服务：日志采集与查询服务。</li>
+</ul>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220518072116799.png" srcset="/img/loading.gif" alt="image-20220518072116799"></p>
+<h2 id="早期的治理系统"><a href="#早期的治理系统" class="headerlink" title="早期的治理系统"></a>早期的治理系统</h2><p>治理系统的第一个需求与大多数业务系统类似，是基于数据的增删改查，构建一套敏感词管理模块，同时为商品主系统提供敏感词的校验能力。</p>
+<p>它的第二个需求是为运营同学提供一个核验结果的报表，其主要逻辑是通过上传Excel，内部解析完成后调用接口得到相应的数据结果，基于MySQL进行存储，然后提供查询及展示的能力，以便运营使用。</p>
+<p>但由于缺乏设计和长远的思考，因此当时的治理系统与商品主系统耦合严重，图示如下：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220518064404134.png" srcset="/img/loading.gif" alt="image-20220518064404134"></p>
+<p>而随着平台对商品信息合规性的要求越来越严格，针对商品分类、毛重、图片等等诸多的治理需求也就接踵而来。但在上图的设计之中，我们不难发现，治理系统是以具体的业务来构建对外接口的，那随着业务需求的不断增加，两个系统之间交互的接口个数也会出现暴涨，这是我们不希望看到的。</p>
+<p>另外，治理的最终目的是期望商品上的问题能够得到<code>解决</code>，而不仅仅只是<code>发现</code>，因此将问题暴露给运营或者商家，是势在必行的，但当下存在两个问题：</p>
+<ol>
+<li><p><strong>商品系统在自身的主流程中强依赖治理的核验能力，且随着业务的增加，依赖会越来越多。</strong></p>
+</li>
+<li><p><strong>商品系统只能将前置拦截的核验结果告知商家，业务覆盖面不全。</strong></p>
+</li>
+</ol>
+<p>再加上有诸多问题是属于弱合规性（不需要强制拦截但又需要解决），<strong>因此我们决定将商品治理业务的核心由商品系统转为治理系统</strong>。</p>
+<p>为了实现高效率的商品治理，我们对治理系统的设计要求和定位作出了一点变更，提出了两项基本原则：</p>
+<ul>
+<li><code>治理系统需要完成整个治理业务的闭环，作为商品问题发现及解决的总入口和总出口</code></li>
+<li><code>治理系统需要具备高拓展性，当增加特定化治理需求时能够迅速响应</code></li>
+</ul>
+<h2 id="业务架构升级"><a href="#业务架构升级" class="headerlink" title="业务架构升级"></a>业务架构升级</h2><h3 id="抽象思维显神威"><a href="#抽象思维显神威" class="headerlink" title="抽象思维显神威"></a>抽象思维显神威</h3><p>在理清治理系统的业务架构升级思路之后，我们首先需要确定的一个问题就是：<strong>治理系统最基础的原子能力是什么？</strong></p>
+<p>以各个主系统为例，商品系统最基础的原子能力即：商品的创建、修改和提供查询能力、库存系统最基础的原子能力即：商品库存信息的维护及查询能力。根据治理业务的发展规划，我们也基本确定出治理系统的原子能力，即：<strong>发现商品存在的合规问题，并向外提供查询和辅助解决的能力</strong>。</p>
+<p>对于<code>合规问题</code>的定义，我们做出了如下解释，即：<code>不符合电商平台商品展示规范的如敏感词、虚假渲传等问题。</code></p>
+<p>例如商品名称中包含敏感词，会映射为敏感词问题，另外需要说明的是：在编码阶段中，一种可量化的具体规则可以确定对应的一种合规问题，且同一个商品可能同时存在多个不同的合规问题。</p>
+<p>目前到家治理系统所涉猎的合规问题主要有：</p>
+<table>
+<thead>
+<tr>
+<th>合规问题大类</th>
+<th>对外描述</th>
+<th>问题细节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>商品毛重问题</td>
+<td>商品毛重不准确</td>
+<td>商品毛重与实际商品不符、商品毛重超过最大运力限制等</td>
+</tr>
+<tr>
+<td>商品信息不正确</td>
+<td>商品信息不正确，请检查具体内容</td>
+<td>商品名称包含敏感词、商品分类与实际商品不符、虚假宣传等</td>
+</tr>
+<tr>
+<td>商家商品经营范围问题</td>
+<td>当前售卖商品超出商家经营范围</td>
+<td>当前售卖商品超出商家经营范围等</td>
+</tr>
+<tr>
+<td>图片信息问题</td>
+<td>商品图片信息存在问题</td>
+<td>商品无主图、商品主图为默认图、商品主图为黑底图等</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>未来计划</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>商品价格问题</code></td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td><code>商品画像问题</code></td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td><code>...</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>为了方便理解，我们可以将每一种<strong>合规问题看作是一种策略</strong>，而针对策略的顶层接口又定义了四个核心方法：</p>
+<ul>
+<li>映射关联的枚举：每一个问题都需要关联具体的问题原因</li>
+<li>问题关联的字段：每一个问题都需要关联具体的影响字段或被影响字段</li>
+<li>自定义过滤能力：根据业务特点，减少无用处理</li>
+<li>核验方法：根据业务规则实现的具体核验逻辑</li>
+</ul>
+<p>具体的实现逻辑如下图所示：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220520113616054.png" srcset="/img/loading.gif" alt="image-20220520113616054"></p>
+<p>下图为<strong>商品毛重信息填写错误</strong>问题处理前后的展示结果：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220516144949447.png" srcset="/img/loading.gif" alt="image-20220516144949447"></p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220516144715540.png" srcset="/img/loading.gif" alt="image-20220516144715540"></p>
+<p>毛重问题有其对应的关联枚举及文案映射，即：商品毛重不准确（问题类型），推荐毛重为 XXX（文案映射），所关联的字段为：商品重量及商品名称，再配合一定的过滤逻辑及核验算法，那么毛重问题的抽象实体也就完成了，以此类推，我们后续在增加新的治理问题时，采用类似的方式即可。</p>
+<p>如果是对设计模式涉猎较多的读者应该已经判断出来，这种设计方案其实就是策略模式及模板方法模式的变种罢了，在编码阶段也肯定少不了工厂的使用，在编码层面整体的变化如下图所示：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220518082356305.png" srcset="/img/loading.gif" alt="image-20220518082356305"></p>
+<p>上述方案落地之后，产研侧对于治理业务的后续发展达成了基本共识，同时需求的实现也变得简单起来，我们不用再关注其他系统的逻辑，而是着眼于具体合规问题的业务规则实现上。</p>
+<p>业务方和产品可以更好的通过数据分析来确定未来的治理重点和需求规划，研发人员也以优雅的方式解决了系统间耦合、业务代码重复的问题。</p>
+<h3 id="难点问题巧手破"><a href="#难点问题巧手破" class="headerlink" title="难点问题巧手破"></a>难点问题巧手破</h3><p>初步定义好治理系统的业务架构设计后，在后续迭代的过程中，我们遇到了两个较为棘手的问题，一个是业务问题，一个是技术问题。</p>
+<h4 id="业务问题"><a href="#业务问题" class="headerlink" title="业务问题"></a>业务问题</h4><p>业务方要求APP展示的商品主图不能与默认图（例如空白图、品牌商标图等不能体现商品信息的图片）一致，然而商品图片的核验逻辑一直由图片核验系统承接。</p>
+<p>这就引起了一个问题：<strong>治理系统是否需要集成图片核验逻辑，如果不集成，那又该如何将其图片违规问题纳入至治理体系中？</strong></p>
+<p>如果是经验丰富的开发者一定会提出使用MQ的方式由图片核验系统发送核验结果至治理系统，来解决这个问题。实际上我们也是这么做的，只不过做的更彻底一些。</p>
+<p>在设计模式当中，我们通常会将一系列类似业务整合成一个公共接口向外提供能力，我们将它称之为：门面模式或者外观模式。</p>
+<p>对于上述的类似问题，我们找到了公共的处理思路，即：<code>将治理系统作为门面，其他系统作为组件，各系统都可以主动的向治理系统提供需要治理的内容</code>。</p>
+<p>该方案确定之后，各种令人头痛的业务场景也就变得简单起来，而且此举还扩大了治理系统的边界，例如商品无图合规问题，商品差评率高的问题，只需要对应系统将相关数据/结果以MQ的形式发送至治理系统，然后由治理系统为其绑定具体的合规问题即可。</p>
+<p>在编码层面我们采用的是最简单的MQ解耦的方式实现，示意图如下：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220518084104202.png" srcset="/img/loading.gif" alt="image-20220518084104202"></p>
+<h4 id="技术问题"><a href="#技术问题" class="headerlink" title="技术问题"></a>技术问题</h4><p>在治理迭代的过程中，有一系列的需求是针对平台商品的图片进行治理，以破损图逻辑为例。</p>
+<p>在最开始的处理逻辑中，大家查询资料整合信息，发现平台偶尔出现的破损图是由于图片在下载过程中未下载完整后流中断，触发上传引起的。因此在第一版的逻辑中，我们查阅资料作出了如下逻辑判断：当图片下载完成触发上传前，对比请求体中的<code>ContentLength</code>与实际图片字节大小，问题初步解决。</p>
+<p>但是过了不久问题再次爆发，此时我们发现事情没有那么简单。</p>
+<p>由于到家平台对接众多的商家系统，各个系统的图片服务器与后台逻辑不一，导致我们无法对所有图片都使用文件大小比对的方式，因此我们重新调研并实现了针对破损图的核验能力。</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/0.png" srcset="/img/loading.gif" alt="img"></p>
+<p>即通过下载后的图片内容进行处理和分析，利用算法与目标问题的业务特征来进行识别，至此，问题基本解决。</p>
+<p>同时，基于该思路我们也衍生出针对<strong>黑底图</strong>、<strong>默认图</strong>的处理方式，在图片问题的治理上更进一步。</p>
+<h3 id="治理触达终落地"><a href="#治理触达终落地" class="headerlink" title="治理触达终落地"></a>治理触达终落地</h3><p>基于上述的方案和设计，治理系统在<code>问题发现</code>的流程上已经趋于完善，接下来，产品提出了新的要求，即：<code>部分问题实现自动治理及问题触达商家</code>。</p>
+<p>笔者在之前了解机器学习方面的知识时，注意到这样一个特点，在机器学习中，模型可以分为两种：判别模型和生成模型。忽略掉其具体含义，吸收其设计思想，我们也可以将治理系统分为两个阶段，即：<code>发现</code>和<code>解决</code>。</p>
+<p>上述的业务抽象以及技术问题、业务问题都是在用以<code>发现</code>问题，当我们将<code>解决</code>问题的目标纳入到整个治理体系时，只需要对现有结构进行一定程度的拓展即可满足。</p>
+<p>仍然以商品毛重信息填写错误问题举例，我们只需要在上文的抽象中增加两个待实现方法：</p>
+<ul>
+<li>是否需要自动处理：毛重问题需要自动处理</li>
+<li>自动处理的具体实现规则：当实际毛重大于某一阈值时，将商品系统下架处理（依托于商品对外接口能力）</li>
+</ul>
+<p>在核验结果入库前，根据具体的实现逻辑以及数据反馈结果来判断需要人工处理还是系统处理即可。</p>
+<p>而对于触达需求，其实现就更简单了，因为我们在最初就定义好了治理业务沟通的基本要素是一个个具体的治理问题，我们只需要将存储好的数据以接口亦或是MQ的形式露出即可。</p>
+<p>至此，整个治理体系从编码层面也就建设完成，其核心逻辑在三个环节：</p>
+<ol>
+<li>商品变动MQ/其他系统治理内容通知触发具体合规问题核验。</li>
+<li>针对核验结果进行判断：人工处理或系统自动处理（处理的能力需借助于商品对外接口）。</li>
+<li>核验结果对外露出。</li>
+</ol>
+<p>下图为治理系统当前整体业务结构图：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220516163306748.png" srcset="/img/loading.gif" alt="image-20220516163306748"></p>
+<h2 id="治理业务全景图"><a href="#治理业务全景图" class="headerlink" title="治理业务全景图"></a>治理业务全景图</h2><p>从治理平台业务架构升级至今，已经稳定运行9个多月，在业务发展过程当中，已经累计治理平台商品480W+，构建出了8种识别能力，3种处理方式及两种触达方式。同时立足于商品、标品系统为商品的快速建品、基础信息建设、治理审核等保驾护航，下图为到家治理全景图：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220516181111121.png" srcset="/img/loading.gif" alt="image-20220516181111121"></p>
+<h2 id="未来规划"><a href="#未来规划" class="headerlink" title="未来规划"></a>未来规划</h2><p>目前的治理体系是围绕商品系统的主环节来设计和搭建的，其影响范围较窄，我们完全可以将商品治理的成果运用于商品体系之外的其他系统。</p>
+<p>例如下图中的各个业务场景：</p>
+<p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220321091329235.png" srcset="/img/loading.gif" alt="image-20220321091329235"></p>
+<p>以搜索推荐为例，我们可以为各个合规问题制定相应的扣减分数，搜索侧在构建数据时将当前商品的合规分数纳入至自身体系中，在满足搜索条件后按分值大小进行排序。</p>
+<p>另外，也有很多用算法无法识别的问题需要纳入至治理体系中，例如：商品差评率高、退货率高等等。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>随着业务的不断发展，对于商品信息的质量要求也会越来越高，到家治理系统还需要和各个上下游系统一起联动，提供更精细化的商品管控能力，期待未来我们的治理能力越来越出色，为用户提供更加真实、贴合实际的商品数据以及更加优质的服务。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/">商品治理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">命令模式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">工厂模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "商品治理&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

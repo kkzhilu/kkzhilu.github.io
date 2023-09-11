@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Kerwin&#39;s Open Source - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      56
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Kerwin’s-Open-Source"><a href="#Kerwin’s-Open-Source" class="headerlink" title="Kerwin’s Open Source"></a>Kerwin’s Open Source</h1><h2 id="Open-Source"><a href="#Open-Source" class="headerlink" title="Open Source"></a>Open Source</h2><h3 id="08-23-会议纪要"><a href="#08-23-会议纪要" class="headerlink" title="08.23 会议纪要"></a>08.23 会议纪要</h3><p>本项目核心的目标：</p>
+<ol>
+<li>作为国内国外的开源项目桥梁，把好的国外项目翻译引进，把好的国内项目翻译并推出</li>
+<li>促进国内的开源氛围，做开源社区</li>
+</ol>
+<p>梳理本周进度及下周进度，注意点：</p>
+<ol>
+<li>优弧负责项目入选标准，以及人员招募，翻译项目流程机制</li>
+<li>小蝴蝶负责开源计划和翻译计划的奖励机制等</li>
+<li>小帅，xmanlin，尤毅 负责标签分类细节等</li>
+<li>老王和俊宁继续装修项目以及整理好卡片模块，必要时俊宁可以切过去协助翻译相关事情</li>
+<li>俊宁还需负责github机器人的调研</li>
+<li>Kerwin负责确定最终项目输出的版式，以及利用代码对项目进行合并，分类，以及issues模板，issues标签模板，安抚已提交自荐的人员</li>
+</ol>
+<p>所有人需要完成的事：</p>
+<ol>
+<li>各自输出一篇开源项目的介绍，尽量优先国内知名企业的开源库</li>
+</ol>
+<p>共识：以每个项目的md为元数据，进行自动构建</p>
+<h3 id="08-31-09-06-任务安排"><a href="#08-31-09-06-任务安排" class="headerlink" title="08.31-09.06 任务安排"></a>08.31-09.06 任务安排</h3><p>Open Source Todo List：</p>
+<ol>
+<li><p>迁移掘金老翻译项目的翻译，认领，审阅的流程至Open-Source-Translation中，包括部分MD文档和WiKi</p>
+</li>
+<li><p>确定自家项目介绍的最终文档模板，并新建至issues模板中，同时审阅现有的issues Label是否合理等等</p>
+</li>
+<li><p>模仿翻译项目的发布操作流程，撰写相关的md，wiki内容，必要的话新建一部分issues模板，和工作点2需要进行合作</p>
+</li>
+<li><p>在最终文档模板中指定区域开辟出一块内容用来构建MD元数据，放置分类标签，Star等额外信息，用程序对所有MD进行自动分类和排序，合并等</p>
+</li>
+<li><p>整体界面探索和文案撰写，目前阶段感觉内容比较贫乏，需要考虑能不能加入新的板块，比如（大公司项目友链，互推，项目初心的文案，或者知名项目的重大版本进度等等）</p>
+</li>
+<li><p>GitHub机器人 + 国内镜像</p>
+</li>
+<li><p>规范各个项目commit massage规范和提交检测</p>
+</li>
+<li><p>封装推荐模板（如小帅的杂志风推荐案例）</p>
+</li>
+<li><p>推广及扩散方案</p>
+<p><strong>上述没提到的，但是需要做的事，可自行提出</strong></p>
+</li>
+</ol>
+<p>| 人员         | 负责项 | 说明                      |<br>|  |  | - |<br>| Kerwin       | 1      |                           |<br>| xmanlin      | 2      | 2，3需要紧密合作          |<br>| 小帅         | 3      | 2，3需要紧密合作          |<br>| Kerwin       | 4      |                           |<br>| Cookieboty   | 5      |                           |<br>| 俊宁         | 6      |                           |<br>| isboyjc      | 7      | 对外的项目统一commit 规范 |<br>| Cookieboty   | 8      |                           |<br>| 小蝴蝶，小浩 | 9      |                           |</p>
+<p><strong>具体进度统计链接</strong>：<a href="https://juejin-im.feishu.cn/docs/doccnCo5EWfQlb4SEpcxlpb7Ypc" target="_blank" rel="noopener">https://juejin-im.feishu.cn/docs/doccnCo5EWfQlb4SEpcxlpb7Ypc</a></p>
+<h3 id="09-07-09-13-任务安排"><a href="#09-07-09-13-任务安排" class="headerlink" title="09.07-09.13 任务安排"></a>09.07-09.13 任务安排</h3><p>Open Source Todo List：</p>
+<ol>
+<li><p>迁移掘金老翻译项目的翻译，认领，审阅的流程至Open-Source-Translation中，包括部分MD文档和WiKi</p>
+</li>
+<li><p>确定自家项目介绍的最终文档模板，并新建至issues模板中，同时审阅现有的issues Label是否合理等等</p>
+</li>
+<li><p>模仿翻译项目的发布操作流程，撰写相关的md，wiki内容，必要的话新建一部分issues模板，和工作点2需要进行合作</p>
+</li>
+<li><p>在最终文档模板中指定区域开辟出一块内容用来构建MD元数据，放置分类标签，Star等额外信息，用程序对所有MD进行自动分类和排序，合并等</p>
+</li>
+<li><p>整体界面探索和文案撰写，目前阶段感觉内容比较贫乏，需要考虑能不能加入新的板块，比如（大公司项目友链，互推，项目初心的文案，或者知名项目的重大版本进度等等）</p>
+</li>
+<li><p>GitHub机器人 + 国内镜像</p>
+</li>
+<li><p>规范各个项目commit massage规范和提交检测</p>
+</li>
+<li><p>封装推荐模板（如小帅的杂志风推荐案例）</p>
+</li>
+<li><p>推广及扩散方案</p>
+<p><strong>上述没提到的，但是需要做的事，可自行提出</strong></p>
+</li>
+</ol>
+<p>| 人员         | 负责项 | 说明                      |<br>|  |  | - |<br>| Kerwin       | 1      |                           |<br>| xmanlin      | 2      | 2，3需要紧密合作          |<br>| 小帅         | 3      | 2，3需要紧密合作          |<br>| Kerwin       | 4      |                           |<br>| Cookieboty   | 5      |                           |<br>| 俊宁         | 6      |                           |<br>| isboyjc      | 7      | 对外的项目统一commit 规范 |<br>| Cookieboty   | 8      |                           |<br>| 小蝴蝶，小浩 | 9      |                           |</p>
+<p><strong>具体进度统计链接</strong>：<a href="https://juejin-im.feishu.cn/docs/doccnCo5EWfQlb4SEpcxlpb7Ypc" target="_blank" rel="noopener">https://juejin-im.feishu.cn/docs/doccnCo5EWfQlb4SEpcxlpb7Ypc</a></p>
+<h3 id="09-02-项目流程会议纪要"><a href="#09-02-项目流程会议纪要" class="headerlink" title="09.02 项目流程会议纪要"></a>09.02 项目流程会议纪要</h3><pre><code class="hljs bash">1. 提交模板（必填，例如 简介，分类，选填，例如效果截图）
+===》提供多个模板以供选择
+===》分类：语言 / 标签（学习，工具，UI类型）
+
+---
+language：C语言
+tags:：Nginx篇
+............
+---
+
+2. 项目评估标准：基于现有的WIKI和优弧碰一下（禁止引流）
+目标画像：大公司的新项目，大公司的主打项目，个人优质项目
+待确定：是否有star底限
+
+
+3. 期刊发布说明（考虑专题模式）：
+注意：开发者对自己项目审核进度和结果了解需求很旺盛
+每一期的特点是什么，特色是什么，尽量企业和个人混着来
+
+
+4.分类：结合现有语言分类，重新细化标签分类，配合第一点的模板，导出最终结果
+
+
+注意项：
+1. 可读性好
+2. 整体的连贯性
+3. 必要的超链，尽量所有的操作类都有相应超链或者issues模板
+
+
+翻译项目的启发：
+
+1.  A  -&gt;  开发者发布待翻译的文档
+2.  B   -&gt;  认领，进行翻译
+
+待考虑，是否加入类似的赏金举措（积分）：
+
+由我们自己或者开发者来提说，某一个项目非常好
+由另外一个熟悉的人来认领，写项目的介绍和推荐
+
+
+====》全范围挖掘好的开源库  +   着重跟进N个开源库（持续跟进，里程碑事件，版本迭代，重大版本影响等 =》 文章，沸点，单独的界面）
+====》探索 · 开放 · 开源</code></pre>
+
+
+
+<h3 id="09-07-09-13-任务安排-1"><a href="#09-07-09-13-任务安排-1" class="headerlink" title="09.07-09.13 任务安排"></a>09.07-09.13 任务安排</h3><p>Open Source Todo List：</p>
+<ol>
+<li>回顾上周未完成项</li>
+<li>SEO</li>
+<li>人员招募标准</li>
+<li>每人一期项目</li>
+<li>优弧重点项目推进</li>
+</ol>
+<h3 id="09-09-会议纪要"><a href="#09-09-会议纪要" class="headerlink" title="09.09 会议纪要"></a>09.09 会议纪要</h3><p>推荐文稿的流程</p>
+<ul>
+<li>撰写推荐文稿</li>
+<li>提issues，链接到文稿（掘金文章）</li>
+<li>审核打标</li>
+<li>PR</li>
+</ul>
+<p>标签：<br>              队列中   审核中   通过<br>已查看<br>             队列中   审核中   退回修改   通过</p>
+<p>更改：未来  ==》排期中</p>
+<p>人员招募的规则：</p>
+<ol>
+<li>推荐或自荐一篇合格的文稿</li>
+<li>对其他的文稿进行一个评价</li>
+</ol>
+<p>核心决定大的方向等 + 审核部分决策 + 参与者提意见，部分的执行<br>===》审核以上才能算作真正的贡献者<br>===》参与者奖励待定</p>
+<h2 id="重点项目跟进（TODO）"><a href="#重点项目跟进（TODO）" class="headerlink" title="重点项目跟进（TODO）"></a>重点项目跟进（TODO）</h2><p>相关信息：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>自荐地址</th>
+<th>项目所属</th>
+<th>体量</th>
+<th>负责人信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/didi/DoraemonKit" target="_blank" rel="noopener">地址</a></td>
+<td><a href="https://github.com/juejin-im/open-source/issues/22" target="_blank" rel="noopener">地址</a></td>
+<td>滴滴</td>
+<td>15.5k</td>
+<td>微信号：jintsky<br>邮     箱：<a href="mailto:704167880@qq.com">704167880@qq.com</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="人员引入（TODO）"><a href="#人员引入（TODO）" class="headerlink" title="人员引入（TODO）"></a>人员引入（TODO）</h2><ul>
+<li>Taro   已发：<a href="https://github.com/juejin-im/open-source/issues/23" target="_blank" rel="noopener">https://github.com/juejin-im/open-source/issues/23</a></li>
+</ul>
+<h2 id="掘金内容评审"><a href="#掘金内容评审" class="headerlink" title="掘金内容评审"></a>掘金内容评审</h2><h3 id="第三期-可视化"><a href="#第三期-可视化" class="headerlink" title="第三期 可视化"></a>第三期 可视化</h3><blockquote>
+<p>以下是我个人的看法</p>
+</blockquote>
+<p><strong>一等奖（3）：</strong></p>
+<ul>
+<li>（<code>真正的落地</code>）<a href="https://juejin.im/post/6865591917279870990" target="_blank" rel="noopener">不依赖任何库打造属于自己的可视化数据地图 | 🏆 技术专题第三期征文</a></li>
+<li>（<code>实践加思考的结晶</code>）<a href="https://juejin.im/post/6867451018482122760" target="_blank" rel="noopener">看房子的思考——房产数据可视化 | 🏆 技术专题第三期征文</a></li>
+<li>（<font color="red">待定：有些偏题</font>）<a href="https://juejin.im/post/6864410873709592584" target="_blank" rel="noopener">基于React+Koa实现一个h5页面可视化编辑器－Dooring | 🏆 技术专题第三期征文</a></li>
+</ul>
+<p><strong>二等奖（3）：</strong></p>
+<ul>
+<li>（<code>基于G2构建开源库</code>）<a href="https://juejin.im/post/6868570812195176461" target="_blank" rel="noopener">如何用G2构建简单易用的图表库？| 🏆 技术专题第三期征文</a></li>
+<li>（<code>解决实际问题</code>）<a href="https://juejin.im/post/6866236107982372878" target="_blank" rel="noopener">大数据地图渲染方案全面简介 | 🏆 技术专题第三期征文</a></li>
+<li>（<code>实战</code>）<a href="https://juejin.im/post/6868511625016508429" target="_blank" rel="noopener">聊聊流程图可视化和G6 | 🏆 技术专题第三期征文</a></li>
+</ul>
+<p><strong>三等奖（5）：</strong></p>
+<ul>
+<li><a href="https://juejin.im/post/6867032433834622984" target="_blank" rel="noopener">大批量数据下的基于arcgis和echarts的管网流向渲染优化|🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6867436612486168584" target="_blank" rel="noopener">让GIS三维可视化变得简单-Cesium地球初始化 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6866352135412711438" target="_blank" rel="noopener">D3.js入门教程 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6865313884967075853" target="_blank" rel="noopener">在Vue和React中使用ECharts的多种方法|🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6864459121828888584" target="_blank" rel="noopener">使用AntV G6实现流程图编辑 | 🏆 技术专题第三期征文</a></li>
+</ul>
+<p><strong>新人鼓励奖（10）：</strong></p>
+<ul>
+<li><a href="https://juejin.im/post/6868456047984508935" target="_blank" rel="noopener">G6基于类XML语法的节点定义 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6865114610396364807" target="_blank" rel="noopener">小白用svg画饼图 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6868456776677720077" target="_blank" rel="noopener">如何在 React 中使用 G6 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6844904050861801486/" target="_blank" rel="noopener">响应式 Echarts Flutter 组件 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6868150550266019853" target="_blank" rel="noopener">拥有自己的图表库 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6868139738243530765" target="_blank" rel="noopener">使用 Docker 探索 Superset BI 数据可视化平台，动真格、二次开发新的可视化组件之集成 Echarts 图表 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6867421471497519117" target="_blank" rel="noopener">阿里云轻量级开源前端图编排组件 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6867719745282506759" target="_blank" rel="noopener">前端拓扑图编辑器插件选型对比 | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6864142544260104200" target="_blank" rel="noopener">实现一个通用的可视化中间件需要怎么做? | 🏆 技术专题第三期征文</a></li>
+<li><a href="https://juejin.im/post/6867740226367225864" target="_blank" rel="noopener">全栈搬砖指北之位置信息可视化之OpenLayers|🏆 技术专题第三期征文</a></li>
+</ul>
+<p><strong>不合格：</strong></p>
+<ul>
+<li>（<code>不完整</code>）<a href="https://juejin.im/post/6868652727958765582" target="_blank" rel="noopener">掘金15W沸点简单分析(三) | 🏆 技术专题第三期征文</a></li>
+<li>（<code>没有按要求，且好像是翻译的文章</code>）<a href="https://juejin.im/post/6866960310650011662" target="_blank" rel="noopener">属性签名——高维数据可视化方法| 🏆 技术专题第三期</a></li>
+<li>（<code>过于简略</code>）<a href="https://juejin.im/post/6865574039398645774" target="_blank" rel="noopener">使用AntV G6制作可‘追寻’上下游的关系图 | 🏆 技术专题第三期征文</a></li>
+<li>（<code>篇幅过短，代码过多</code>）<a href="https://juejin.im/post/6868463482615005191" target="_blank" rel="noopener">如何让 G6 节点支持统计图表 | 🏆 技术专题第三期征文</a></li>
+</ul>
+<h3 id="第五期-微服务（推广文）"><a href="#第五期-微服务（推广文）" class="headerlink" title="第五期 微服务（推广文）"></a>第五期 微服务（推广文）</h3><p><strong>封面图</strong></p>
+<p><img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c3081122ac2c498fab4e7d37c6cfef4d~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" alt></p>
+<p>掘友们，大家好呀。</p>
+<p>第三期技术专题<a href="https://juejin.im/post/6864072407461101582" target="_blank" rel="noopener">技术专题第三期 | 数据可视化的那些事</a>在大家积极的参与下圆满结束。本期入选征文中，有关于 AntV、ECharts、D3的入门与实战的，有关于可视化编辑器实现的，有关于GIS地图可视化经验分享的，更有房产数据可视化这种结合具体场景的文章，同时第四期技术专题 <a href="https://juejin.im/post/6869996232249442311" target="_blank" rel="noopener"> 技术专题第四期 | 聊聊微前端的那些事</a>也如火如荼的展开了，那我们后端Boys也不能屈居人后不是？</p>
+<p> <strong>这一次，掘金酱诚邀您与我们分享您对微服务的理解，在微服务方面的实战经验，您在实际工作场景中的应用，以及对微服务的理解与期望。</strong></p>
+<p>在软件工程的鸿蒙时代，所有代码都融在一起，我们把它称之为单体架构时代，那个时代开发速度很慢，项目可以跑很远，一个工程应对所有场景。随着业务的发展，系统变得异常复杂，诸多大佬通过结构化思考，发现对于大规模协同开发，最有效的手段就是对系统进行抽象和分享，因此MVC架构设计正式登上历史舞台。</p>
+<p>但是，<strong>思考从不停歇。</strong></p>
+<p>新的架构设计：SOA ，大概兴起于 2000 年左右，当初 ERP、CRM、OA 之类的信息系统都是一套套部署起来的，不同系统往往由不同的供应商分别开发的，技术差别也很大，各个系统孤零零的，于是企业有了应用集成和数据集成的需求，SOA 就出来了，各个系统对外提供粗粒度的服务供外部系统访问，所有的服务都集中在一个 ESB 上，但是这种集成方式开发代价大、通信效率低，且有单点故障的风险， 实际上在企业中并没有得到大规模应用。</p>
+<p>互联网时代来临之后，公司业务规模增长快，变更多且频繁，同时互联网技术团队强烈关注 DevOps 和持续交付这样的研发理念，传统的架构无法满足迭代速度、系统扩展性、资源利用率优化等需求，微服务架构就闪亮登场了，通过解耦，解决掉各种难题。亚马逊、Netflix 和 Facebook 等主要的互联网公司，就是微服务架构实践的先驱，他们取得了很好的效果，也产生了一系列的最佳实践。</p>
+<p>在微服务中，每一个服务都是一个组件，可以独立开发，独立部署，独立伸缩。</p>
+<p>天哪！你用Go，我用Java，咱们竟然可以完美的融合在一起，还有什么比这更美妙？</p>
+<p>但是请等一下！你知道一个完整的微服务架构落地需要涉及多少环节吗？请参考<strong>网易云容器服务团队</strong>的案例：</p>
+<p><img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/926475b40cc74b068baf1b1c680cfc87~tplv-k3u1fbpfcp-zoom-1.image" srcset="/img/loading.gif" alt></p>
+<p>在以微服务架构构建大型系统时必然会遇到诸多的问题，诸如：</p>
+<ul>
+<li><p>服务之间调用出错如何排查</p>
+</li>
+<li><p>微服务如何集成CI/CD</p>
+</li>
+<li><p>微服务组件如何实现注册、发现</p>
+</li>
+<li><p>微服务的隔离和熔断</p>
+</li>
+<li><p>如何实现集群部署，弹性伸缩</p>
+</li>
+<li><p>如何减少服务间数据传输的时间损耗、网络开销</p>
+</li>
+<li><p>等等</p>
+</li>
+</ul>
+<p>所以微服务是不是软件工程架构的终止，而阅读本文的你又是如何从0到1的构建整个微服务架构？亦或是解决了其中的一个痛点问题？我们希望能够看到你的文章。</p>
+<p><strong>可以参考的技术主题</strong></p>
+<ul>
+<li>遗留系统改造成微服务</li>
+<li>微服务框架的技术选型深入对比</li>
+<li>微服务架构体系中痛点问题的解决方案</li>
+<li>微服务架构体系中运维人员的酸甜苦辣</li>
+<li>微服务架构体系中服务及流量监控</li>
+<li>微服务架构体系中的自动化测试</li>
+<li>微服务架构体系中的CI/CD</li>
+<li>微服务的未来</li>
+</ul>
+<h3 id="第五期-分布式（推广文）"><a href="#第五期-分布式（推广文）" class="headerlink" title="第五期 分布式（推广文）"></a>第五期 分布式（推广文）</h3><p><strong>封面图</strong></p>
+<p>![](Kerwin’s Open Source/如何掌握分布式.jpg)</p>
+<p>掘友们，大家好呀。</p>
+<p>第三期技术专题<a href="https://juejin.im/post/6864072407461101582" target="_blank" rel="noopener">技术专题第三期 | 数据可视化的那些事</a>在大家积极的参与下圆满结束。本期入选征文中，有关于 AntV、ECharts、D3的入门与实战的，有关于可视化编辑器实现的，有关于GIS地图可视化经验分享的，更有房产数据可视化这种结合具体场景的文章，同时第四期技术专题 <a href="https://juejin.im/post/6869996232249442311" target="_blank" rel="noopener"> 技术专题第四期 | 聊聊微前端的那些事</a>也如火如荼的展开了，那我们后端Boys也不能屈居人后不是？</p>
+<p> <strong>这一次，掘金酱诚邀您与我们分享您对分布式的理解，在分布式方面的实战经验，您在实际工作场景中的应用，以及对分布式的理解与期望。</strong></p>
+<p>20世纪90年代，业界采用了基于接口/构件的架构设计方式，很自然的演化出了SOA，基于服务的架构，但随着时间的发展，程序设计越来越追求轻量级，慢慢的如WSDL，XML被JSON，RESTful等方式替代，但是SOA的思想一直延续着，也就是如今所说的分布式服务架构。</p>
+<p>然而，分布式的世界中涉及到大量的协议（raft、2pc、lease、quorum等）、大量的理论（FLP， CAP等）、大量的系统（GFS、MongoDB、MapReduce、Spark、RabbitMQ等），两个字总结就是：<strong>硬核！</strong></p>
+<p>![image-20200912094140823](Kerwin’s Open Source/image-20200912094140823.png)</p>
+<p>我们需要使用分布式系统主要有两个原因：</p>
+<ul>
+<li><strong>增加系统容量</strong></li>
+<li><strong>加强系统可用</strong></li>
+</ul>
+<p>但就是为了上述的两个理由，引入了更多的复杂性，例如：</p>
+<ul>
+<li>架构设计变得异常复杂。</li>
+<li>分布式系统下部署流程变得更复杂。</li>
+<li>系统的吞吐量会变大，但是响应时间会变长。</li>
+<li>运维复杂度会因为服务变多而变得很复杂。</li>
+<li>测试和查错的复杂度增大。</li>
+<li>技术多元化，这会带来维护和运维的复杂度。</li>
+<li>管理分布式系统中的服务和调度变得困难和复杂。</li>
+</ul>
+<p>这可能就是技术发展的必然吧：<strong>解决一个问题，常常会引入新的问题。</strong></p>
+<p>比如，为了提高可用性，引入了冗余；而冗余又带来了副本之间的一致性问题，所以引入了中心化副本协议（primary/secondary)；那么接下来就要考虑primary（节点）故障时候的选举问题。</p>
+<p>还有的时候整个设计形成了一个闭环：我们需要<strong>提高性能</strong>，因此设计了<strong>分片缓存</strong>，然而<strong>为了保证数据的正确性</strong>，我们又需要考虑<strong>数据的一致性</strong>，然后为了<strong>数据的一致性</strong>，又不得不<strong>放弃一定的性能</strong>。</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 人间不值得。</span></code></pre>
+
+<p>![image-20200912095032264](Kerwin’s Open Source/image-20200912095032264.png)</p>
+<p>但是生活还得继续🤪，所以我们来一起聊一聊分布式吧。</p>
+<p><strong>可以参考的技术主题</strong></p>
+<ul>
+<li>如何学好分布式（我们不要说明书哦😂）</li>
+<li>手写一个分布式系统（如6.824中的简化版MapReduce）</li>
+<li>单体架构改造为分布式系统的实战经验</li>
+<li>如何解决分布式事务</li>
+<li>如何解决分布式系统中数据一致性的问题</li>
+<li>分布式系统的服务调度</li>
+<li>分布式系统的运维管理方案</li>
+<li>其他分布式系统中的核心问题等等</li>
+</ul>
+<h3 id="第六期-后端征文意见"><a href="#第六期-后端征文意见" class="headerlink" title="第六期 后端征文意见"></a>第六期 后端征文意见</h3><p>话题类：</p>
+<ul>
+<li>这些年我在编程道路上吃过的亏</li>
+<li>金九银十之后的反思</li>
+<li>你心中的后端技能图谱</li>
+<li>聊聊你最拿手的技术</li>
+<li>聊聊你解决的印象最深的BUG</li>
+</ul>
+<p>技术类：</p>
+<ul>
+<li>项目中数据库的设计方案</li>
+<li>谈谈缓存的妙用及问题（在项目中的帮助</li>
+</ul>
+<h3 id="第七期-缓存（推广文）"><a href="#第七期-缓存（推广文）" class="headerlink" title="第七期 缓存（推广文）"></a>第七期 缓存（推广文）</h3><p><strong>封面图</strong></p>
+<p>![](Kerwin’s Open Source/缓存.png)</p>
+<p>掘友们，大家好呀。</p>
+<p>第五期技术专题<a href="https://juejin.im/post/6888208307924762638" target="_blank" rel="noopener">技术专题第五期 | 聊聊分布式的那些事</a>以及第六期技术专题<a href="https://juejin.im/post/6889264500977958920/?utm_source=gold_browser_extension" target="_blank" rel="noopener">技术专题第六期 | 谈谈 React 17 的那些事！</a>正在热火朝天的进行中，这两大技术专题分别属于后端领域以及前端领域，那我们第七期就没有明显的领域限制啦。</p>
+<p><strong>本期我们来聊一聊缓存的妙用和问题，说一说你是如何利用缓存解决问题，也谈一谈因为缓存又带来了哪些新的问题！</strong></p>
+<p>回顾一下<strong>缓存</strong>的原始意义：是指访问速度比一般<strong>随机存取存储器（RAM）</strong>快的一种高速存储器，通常它不像系统主存那样使用<strong>DRAM</strong>技术，而使用昂贵但较快速的<strong>SRAM</strong>技术，缓存的设置是所有现代计算机系统发挥高性能的重要因素之一。可以看到<strong>缓存</strong>的最初使用是作用于系统级的，但随着一代代工程师的挖掘和实战，缓存慢慢的走进了更多的生态之中，比如：浏览器缓存，后端体系中如MyBatis框架中的一级、二级缓存、基于Redis搭建的缓存服务等等，甚至为了保证网络质量不佳情况时APP的正常使用，我们也会为所有的 API 加上缓存，从另一个方面说，缓存已经成为互联网生态中必不可少的一部分。</p>
+<p>总结一句话：<strong>缓存是提高性能最好的方式</strong>。</p>
+<p>在缓存的设计与使用中，存在多种多样的技巧和方案，本文抛砖引玉，以<strong>Cache Aside 更新模式</strong>为例来介绍一下最常用的缓存设计方案，主要逻辑即考虑：失效、命中、更新时的动作。</p>
+<ul>
+<li>失效：应用程序先从 Cache 取数据，如果没有得到，则从数据库中取数据，成功后，放到缓存中。</li>
+<li>命中：应用程序从 Cache 中取数据，取到后返回。</li>
+<li>更新：先把数据存到数据库中，成功后，再让缓存失效。</li>
+</ul>
+<p>![image-20201105083103344](Kerwin’s Open Source/image-20201105083103344.png)</p>
+<p>如此一来，便可以建立起一个简单的缓存服务，为接口提高最高效率的查询速度。</p>
+<p>但是朋友们，重点来了，这样做真的是完美方案吗？我们会问这样的几个问题：</p>
+<ul>
+<li>为什么不是写完数据库后更新缓存</li>
+<li>如何保证缓存的命中</li>
+<li>如何保证数据的强一致性</li>
+<li>如何设计缓存的淘汰策略</li>
+<li>如何有效的水平拓展缓存服务</li>
+<li>如何配合缓存设计最大吞吐量的系统</li>
+<li>如何做好针对缓存的监控</li>
+<li>如何设计多级缓存</li>
+</ul>
+<p>啊，思考这些问题一下子头都秃了，掘友们，掘金酱的头发就等着你们来拯救啦！希望小伙伴们踊跃的参与到本期的技术征文之中，可以参考的技术主题如下：</p>
+<ul>
+<li>缓存设计方案中临界问题的研究和探讨</li>
+<li>通用的缓存设计方案</li>
+<li>在实际项目中如何利用缓存提高系统性能</li>
+<li>因为使用缓存带来了什么问题，你又是如何解决的</li>
+<li>如何利用缓存解决网络质量差时前端渲染问题</li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%BC%80%E6%BA%90%E7%AF%87/">开源篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Kerwin-s-Open-Source/">Kerwin's Open Source</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/Kerwin&#39;s%20Library/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Kerwin's Library</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+                        <span class="hidden-mobile">Lambda初次使用很慢？从JIT到类加载再到实现原理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Kerwin's Open Source&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

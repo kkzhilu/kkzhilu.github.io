@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>「奇淫技巧」如何写最少的代码 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于性格原因，笔者很难沉下心来进行严肃的系统学习，总是喜欢折腾一些奇淫技巧，非常喜欢代码设计，扣代码的细节，所以本次分享一下我所知道的<code>如何写最少的代码</code>的小技巧，如果你有更好的方案，欢迎在评论区留言，<code>方案很棒的话，加我微信，为你送上冬天的一杯奶茶~</code></p>
+<h2 id="Java：我想返回多个返回值"><a href="#Java：我想返回多个返回值" class="headerlink" title="Java：我想返回多个返回值"></a>Java：我想返回多个返回值</h2><p>秀一下<code>Go</code>的多返回值：</p>
+<pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+<span class="hljs-keyword">import</span> <span class="hljs-string">"fmt"</span>
+
+<span class="hljs-comment">// 返回 X + Y 和 X * Y</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Computer</span><span class="hljs-params">(X, Y <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>)</span></span> &#123;
+    <span class="hljs-keyword">return</span> X + Y, X * Y
+&#125;</code></pre>
+
+
+
+<p>众所周知，Java仅支持单一返回值，一般情况下如果需要返回多个对象，我们会根据代码语义选择容器或者新建一个新的类，把我们需要的数据包起来。</p>
+<p><code>这样做有没有问题？</code>当然没有问题，但是瑕疵就在于：可能会产生没啥语义但又不得不存在的<code>中间类</code>，我个人非常讨论该类代码，那么该如何解决这种问题呢？</p>
+<p>首先需要认识到，解决方案必须满足几个要求：</p>
+<ul>
+<li>代码可复用</li>
+<li>语义要清晰</li>
+<li>安全</li>
+</ul>
+<p>既然如此，我们可以采用<code>泛型</code>来满足复用、语义清晰的要求，用<code>中间类</code>来满足代码安全性的要求，代码如下：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MultipleTwoReturn</span>&lt;<span class="hljs-title">A</span>, <span class="hljs-title">B</span>&gt; </span>&#123;
+    <span class="hljs-comment">/** 第一个返回值 **/</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> A first;
+
+    <span class="hljs-comment">/** 第二个返回值 **/</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> B second;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MultipleTwoReturn</span><span class="hljs-params">(A first, B second)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.first = first;
+        <span class="hljs-keyword">this</span>.second = second;
+    &#125;
+
+    <span class="hljs-comment">// 省略Get方法</span>
+&#125;</code></pre>
+
+<p>同时，我们可以依赖于<code>继承</code>，让该工具类拓展更多的参数：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MultipleThreeReturn</span>&lt;<span class="hljs-title">A</span>, <span class="hljs-title">B</span>, <span class="hljs-title">C</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">MultipleTwoReturn</span>&lt;<span class="hljs-title">A</span>, <span class="hljs-title">B</span>&gt; </span>&#123;
+
+    <span class="hljs-comment">/** 第三个返回值 **/</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> C third;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MultipleThreeReturn</span><span class="hljs-params">(A first, B second, C third)</span> </span>&#123;
+        <span class="hljs-keyword">super</span>(first, second);
+        <span class="hljs-keyword">this</span>.third = third;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>测试类：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MultipleApp</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        MultipleTwoReturn&lt;Integer, String&gt; returnTest = MultipleApp.getReturnTest();
+        System.out.println(returnTest.getFirst());
+        System.out.println(returnTest.getSecond());
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> MultipleTwoReturn&lt;Integer, String&gt; <span class="hljs-title">getReturnTest</span><span class="hljs-params">()</span> </span>&#123;
+        MultipleTwoReturn&lt;Integer, String&gt; demo = <span class="hljs-keyword">new</span> MultipleTwoReturn&lt;&gt;(<span class="hljs-number">0</span>, <span class="hljs-string">"Kerwin Demo."</span>);
+        <span class="hljs-keyword">return</span> demo;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>本质还是<code>普通对象</code>，但是加上<code>泛型</code>后威力剧增！由于在方法定义时就强制了<code>泛型约束</code>，语义非常清晰，同时可以完全杜绝上述的无语义中间类，当然一些必要的，有业务含义的组装类，不建议使用这种方式。</p>
+<h2 id="泛型：我想new一个对象"><a href="#泛型：我想new一个对象" class="headerlink" title="泛型：我想new一个对象"></a>泛型：我想new一个对象</h2><p>大家在学Java泛型之初有没有这种想法？我想利用<T>作为泛型约束，却需要<code>new</code>一个<code>T</code>，但是Java它<code>new</code>不出来啊 😂</T></p>
+<p>很久之前我在写一个通用的<code>Java爬虫接口</code>，里面有一个功能就是<code>传入目标网页的即可获取到针对不同网页设计的Bean</code>，大概如下所示：</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SpiderBeansHandle</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+    <span class="hljs-comment">/** 获取Url **/</span>
+    <span class="hljs-function">String <span class="hljs-title">getUrl</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/** 获取Cookie **/</span>
+    <span class="hljs-function">String <span class="hljs-title">getCookie</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/** 获取CSS selector **/</span>
+    <span class="hljs-function">String <span class="hljs-title">getSelector</span><span class="hljs-params">()</span></span>;
+    
+    <span class="hljs-comment">// ....</span>
+ &#125;</code></pre>
+
+
+
+<p>中间关键的一点即如何获取到这个Bean，那个时候我只有一个想法：<code>new 一个 T</code></p>
+<p>事实证明，我过于天真了 🙄</p>
+<p>但是换种思路，既然<code>new</code>不出来，那我就返回一下吧，于是代码出炉了~</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SpiderBeansHandle</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 获取Url</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">String <span class="hljs-title">getUrl</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 获取Cookie</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">String <span class="hljs-title">getCookie</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 获取CSS selector</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">String <span class="hljs-title">getSelector</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 解析Element</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> element  element</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function">T <span class="hljs-title">parseElement</span><span class="hljs-params">(Element element)</span></span>;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * Get Beans</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> handle  Bean对象 | handle对象</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> &lt;T&gt;     Bean类型</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@return</span>        List&lt;Beans&gt;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">List&lt;T&gt; <span class="hljs-title">getBeans</span><span class="hljs-params">(SpiderBeansHandle&lt;T&gt; handle)</span> </span>&#123;
+        List&lt;T&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+        List&lt;Element&gt; elements = SpiderUtils.getElementWithCookie(handle.getUrl(), handle.getSelector(), handle.getCookie());
+        <span class="hljs-keyword">for</span> (Element element : elements) &#123;
+            T bean = handle.parseElement(element);
+            <span class="hljs-keyword">if</span> (bean != <span class="hljs-keyword">null</span>) &#123;
+                list.add(bean);
+            &#125;
+        &#125;
+        <span class="hljs-keyword">return</span> list;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p>关键一步就在于：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/***</span>
+<span class="hljs-comment"> * 解析Element</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> element  element</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function">T <span class="hljs-title">parseElement</span><span class="hljs-params">(Element element)</span></span>;</code></pre>
+
+
+
+<p>那么这个小技巧有什么用呢？仔细看会不会觉得它像一种设计模式的变形体？没错！真相只有一个：<code>模板方法模式</code></p>
+<p>我刚提到了我需要一个<code>处理爬虫的通用接口</code>，因为简单爬虫无非就是拿到url然后请求，解析细节封装到自身的Bean里，然后获取一个列表，那么在开发业务代码的时候类似，肯定有某些场景和需求具有高度的一致性，那么使用这种设计方案即可大大的减少重复代码~</p>
+<h2 id="方法：你到底想干嘛？"><a href="#方法：你到底想干嘛？" class="headerlink" title="方法：你到底想干嘛？"></a>方法：你到底想干嘛？</h2><p>咱们在写代码的时候有没有遇到过这种问题？写了一个工具类方法，但是功能又过于单一，虽说单一原则好吧，但是一个小逻辑写一堆方法，总感觉不得劲，如何解决咧？</p>
+<p>Java8提供的函数式编程即可帮我们一定程度上解决这种问题，如：</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 写一个获取文件列表，且判断是否为txt结尾的工具类方法，新手会这么写</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> File <span class="hljs-title">getFileWithTxt</span><span class="hljs-params">(String path)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+    File file = <span class="hljs-keyword">new</span> File(path);
+    <span class="hljs-keyword">if</span> (!file.exists()) &#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"File is not exist."</span>);
+    &#125;
+
+    <span class="hljs-keyword">if</span> (file.getName().endsWith(<span class="hljs-string">".txt"</span>)) &#123;
+        <span class="hljs-keyword">return</span> file;
+    &#125;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+&#125;</code></pre>
+
+
+
+<p>老手一般会把 <code>.txt</code> 作为参数传入，<code>但是某一天我需要判断文件大小，文件长度，甚至是文件内容的时候，我该咋办？再写N个？</code></p>
+<p>最好的方案即传入 <code>Predicate</code> 谓词，让调用者<code>自定义处理逻辑</code>，然后再把最常用的逻辑基于该方法复写一下，拓展性Max！代码如下：</p>
+<pre><code class="hljs java"><span class="hljs-comment">/***</span>
+<span class="hljs-comment"> * 文件夹谓词匹配</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> file          文件</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> predicate     谓词匹配</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@return</span>              List&lt;File&gt;</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@throws</span> IOException  IOException</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;File&gt; <span class="hljs-title">listFilesInDirWithFilter</span><span class="hljs-params">(File file, Predicate&lt;String&gt; predicate)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;
+	<span class="hljs-keyword">if</span> (!file.exists()) &#123;
+		 <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">"File is not exist."</span>);
+     &#125;
+
+	List&lt;File&gt; fileList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+	<span class="hljs-keyword">if</span> (file.isDirectory()) &#123;
+		File[] files = file.listFiles();
+		<span class="hljs-keyword">for</span> (File f : Objects.requireNonNull(files)) &#123;
+			fileList.addAll(listFilesInDirWithFilter(f, predicate));
+         &#125;
+	&#125; <span class="hljs-keyword">else</span> &#123;
+		<span class="hljs-keyword">if</span> (predicate.test(file.getName())) &#123;
+			fileList.add(file);
+		&#125;
+	&#125;
+	<span class="hljs-keyword">return</span> fileList;
+&#125;</code></pre>
+
+
+
+<p>类似的还比如说处理 <code>IO</code>，直接上代码：</p>
+<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readLine</span><span class="hljs-params">(BufferedReader br, Consumer&lt;String&gt; handle, <span class="hljs-keyword">boolean</span> close)</span> </span>&#123;
+    String s;
+    <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-keyword">while</span> (((s = br.readLine()) != <span class="hljs-keyword">null</span>)) &#123;
+            handle.accept(s);
+        &#125;
+    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+        e.printStackTrace();
+    &#125; <span class="hljs-keyword">finally</span> &#123;
+        <span class="hljs-keyword">if</span> (close &amp;&amp; br != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                br.close();
+            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><code>方法</code>说你到底想干嘛？！算了，你想干嘛就干嘛吧，请随意😎~ </p>
+<h2 id="重载：写的更多也是为了写的更少"><a href="#重载：写的更多也是为了写的更少" class="headerlink" title="重载：写的更多也是为了写的更少"></a>重载：写的更多也是为了写的更少</h2><p><code>写的更多也是为了写的更少</code>，这句话乍一听感觉非常矛盾，但是编程经验比较丰富的小伙伴应该能体会到<code>方法重载</code>的威力，尤其是在写工具类或者底层接口的时候，建议大家先写一个大而全的<code>内部方法</code>，然后一点点去根据需要重载它，会有意想不到的好处。</p>
+<p>最简单的例子，如下：</p>
+<pre><code class="hljs java"><span class="hljs-comment">// Root 方法</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readLine</span><span class="hljs-params">(BufferedReader br, Consumer&lt;String&gt; handle, <span class="hljs-keyword">boolean</span> close)</span> </span>&#123;
+    String s;
+    <span class="hljs-keyword">try</span> &#123;
+        <span class="hljs-keyword">while</span> (((s = br.readLine()) != <span class="hljs-keyword">null</span>)) &#123;
+            handle.accept(s);
+        &#125;
+    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+        e.printStackTrace();
+    &#125; <span class="hljs-keyword">finally</span> &#123;
+        <span class="hljs-keyword">if</span> (close &amp;&amp; br != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">try</span> &#123;
+                br.close();
+            &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;
+                e.printStackTrace();
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 重载方法一</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readLine</span><span class="hljs-params">(String path, Consumer&lt;String&gt; handle, <span class="hljs-keyword">boolean</span> close)</span> </span>&#123;
+    <span class="hljs-keyword">try</span> &#123;
+        BufferedReader br = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> FileReader(path));
+        readLine(br, handle, close);
+    &#125; <span class="hljs-keyword">catch</span> (FileNotFoundException e) &#123;
+        e.printStackTrace();
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 重载方法二</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">readLine</span><span class="hljs-params">(String path, Consumer&lt;String&gt; handle)</span> </span>&#123;
+	readLine(path, handle, <span class="hljs-keyword">true</span>);
+&#125;</code></pre>
+
+
+
+<p><code>重载</code>可以让我们的方法调用方式变得丰富多彩，在语义明确的情况下，写代码有如神助，配合函数式编程，可以让工具类或者底层接口的能力大大增强。</p>
+<p>同时，当我们需要调整某一个方法逻辑时，也可以使用<code>继续重载</code>的方式，将影响面降到最小，尽量不动其他模块的代码。</p>
+<h2 id="终极：从设计模式到抽象"><a href="#终极：从设计模式到抽象" class="headerlink" title="终极：从设计模式到抽象"></a>终极：从设计模式到抽象</h2><p>与其说是<code>如何写最少的代码</code>，不如说是：<code>如何只写真正有价值的代码</code>。</p>
+<p>面对这种问题的时候，我们第一反应肯定就是设计模式了，例如上文的泛型章节提到的<code>模板方法模式</code>，小小的推荐一下我之前的文章：</p>
+<ul>
+<li><a href="https://juejin.cn/post/6844904176653172749" target="_blank" rel="noopener">【一起学系列】之模板方法：写SSO我只要5分钟</a></li>
+<li><a href="https://juejin.cn/post/6846687591425638413" target="_blank" rel="noopener">设计模式总篇：从为什么需要原则到实际落地</a></li>
+</ul>
+<p>通过良好的设计模式或者其变形体，我们可以得到高内聚低耦合的代码，这是一个非常好的思路。</p>
+<p>另一个思路，所有人都认同一点：<code>程序 = 算法 + 数据结构</code>，选择好正确的数据结构可以事倍功半，比如说我们做<code>类似文件夹需求</code>的时候，会想到使用<code>链表</code>或者<code>树</code>结构，在做如：<code>如何高效的给用户发送生日短信</code>时会想到用<code>堆</code>结构（用当前时间对比堆中的最大值，满足则继续迭代，减少遍历）等等。</p>
+<p>这其实都是抽象，或深或浅而已，我最开始学习Java的时候，老师会说一句话：万物皆为对象，我们来看看上面的技巧各自对应着什么？</p>
+<ul>
+<li>多返回值：封装对象 + 泛型约束</li>
+<li>泛型：封装对象的公共接口，高度抽象</li>
+<li>函数式方法：把方法当作一个对象</li>
+<li>重载：对象方法（行为）的不断演化</li>
+</ul>
+<p>所以如何只写真正有价值的代码？官方一点的话就是：<code>把变化的抽象出来</code>，那么到底该怎么抽？</p>
+<p>这就需要我们一点点的去探索了，毕竟<code>奇淫技巧</code>只是小道尔，不过我会一直探索下去。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>如果你觉得这篇内容对你有帮助的话：</p>
+<ol>
+<li>当然要点赞支持一下啦~</li>
+<li>另外，搜索并关注公众号「<strong>是Kerwin啊</strong>」，一起在技术的路上走下去吧~ 😋</li>
+</ol>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E3%80%8C%E5%A5%87%E6%B7%AB%E6%8A%80%E5%B7%A7%E3%80%8D%E5%A6%82%E4%BD%95%E5%86%99%E6%9C%80%E5%B0%91%E7%9A%84%E4%BB%A3%E7%A0%81/">「奇淫技巧」如何写最少的代码</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Testin - JSP项目有感</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/volatile%E5%92%8Csynchronized/">
+                        <span class="hidden-mobile">volatile和synchronized</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "「奇淫技巧」如何写最少的代码&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>Spring篇 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      57
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Spring篇核心问题"><a href="#Spring篇核心问题" class="headerlink" title="Spring篇核心问题"></a>Spring篇核心问题</h1><pre><code class="hljs java"><span class="hljs-comment">/***</span>
+<span class="hljs-comment">    * 入门：Spring的组成</span>
+<span class="hljs-comment">    * 1.Spring的核心 IOC 和 AOP的理解,优点是什么</span>
+<span class="hljs-comment">    * 2.简单实现Spring IOC容器，理解IOC源码</span>
+<span class="hljs-comment">    * 3.Spring中bean的注入方式</span>
+<span class="hljs-comment">    * 4.bean的行为模式,是否线程安全,为什么? 怎样处理线程不安全</span>
+<span class="hljs-comment">    * 5.什么是bean的自动装配，实现途径及局限性</span>
+<span class="hljs-comment">    * 6.理解bean工厂和ApplicationContext的区别</span>
+<span class="hljs-comment">    * 7.Spring中常见注解及实现原理</span>
+<span class="hljs-comment">    * 8.请解释自动装配模式的区别(配合注解)</span>
+<span class="hljs-comment">    * 9.Spring中bean的作用域及生命周期</span>
+<span class="hljs-comment">    * 10.深刻理解AOP的各个属性概念及掌握,具体的应用场景</span>
+<span class="hljs-comment">    * 11.动态,静态代理深入,对比JDK 动态代理和Cglib动态代理区别</span>
+<span class="hljs-comment">    * 12.Spring的事务处理类型,有几种方式，详细描述一种</span>
+<span class="hljs-comment">    * 13.描述Spring事务的传播</span>
+<span class="hljs-comment">    * 14.FileSystemResource和ClassPathResource有何区别？</span>
+<span class="hljs-comment">    * 15.Spring中设计模式体现在哪里,用到了哪些设计模式</span>
+<span class="hljs-comment">    * 16.Spring框架中有哪些不同类型的事件</span>
+<span class="hljs-comment">    *</span>
+<span class="hljs-comment">    * 常见题目一览：</span>
+<span class="hljs-comment">    * 1.https://www.jianshu.com/p/994489074601</span>
+<span class="hljs-comment">    * 2.https://blog.csdn.net/dengken53/article/details/54630062</span>
+<span class="hljs-comment">    * 3.http://www.importnew.com/19538.html</span>
+<span class="hljs-comment">    *</span>
+<span class="hljs-comment">    * <span class="hljs-doctag">@param</span> args</span>
+<span class="hljs-comment">    */</span></code></pre>
+
+<h2 id="Spring源码导入IDEA"><a href="#Spring源码导入IDEA" class="headerlink" title="Spring源码导入IDEA"></a>Spring源码导入IDEA</h2><pre><code class="hljs java">参考教程：https:<span class="hljs-comment">//www.liangzl.com/get-article-detail-126631.html</span>
+
+Jar包缺失解决方案：https:<span class="hljs-comment">//blog.csdn.net/wkztselina/article/details/81277627</span>
+
+注释aspect项目 ---》 :
+include <span class="hljs-string">"spring-aop"</span>
+<span class="hljs-comment">// include "spring-aspects"</span>
+include <span class="hljs-string">"spring-beans“......</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">报错解决方案：</span>
+<span class="hljs-string">Error:(30, 0) No such property: values for class: org.gradle.api.internal.tasks.DefaultTaskDependency</span>
+<span class="hljs-string">Possible solutions: values</span>
+<span class="hljs-string">Open File(spring-beans\spring-beans.gradle ）</span>
+<span class="hljs-string">点击：Open File 然后注释掉</span>
+<span class="hljs-string">//compileGroovy.dependsOn = compileGroovy.taskDependencies.values - ‘compileJava’</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">解决方案大全：https://blog.csdn.net/lianjiaokeji/article/details/82177236</span>
+<span class="hljs-string"></span>
+<span class="hljs-string"></span>
+<span class="hljs-string">总结步骤:</span>
+<span class="hljs-string">借鉴：https://blog.csdn.net/jiaotuwoaini/article/details/65937185</span>
+<span class="hljs-string">1.配置好gradle，配置阿里云镜像，配置仓库指向目标仓库</span>
+<span class="hljs-string">2.预编译oxm模块：cd 到目录 - gradlew cleanIdea :spring-oxm:compileTestJava (失败重试即可)</span>
+<span class="hljs-string">3.注释setting.gradles模块中aspect模块的内容  // include "</span>spring-aspects<span class="hljs-string">"</span>
+<span class="hljs-string">4.导入项目即可自动build，应该会遇到错误，如下，配置如下 -&gt; 入项目，即开启自动构建,配置加载可参考下图：截图       </span>
+<span class="hljs-string">5.提示错误：No such property: values for class: org.gradle.api.internal.tasks.DefaultTaskDependency</span>
+<span class="hljs-string">Possible solutions: values </span>
+<span class="hljs-string">文件名为: spring-beans.gradle</span>
+<span class="hljs-string">open file 注释 ---》 // compileGroovy.dependsOn = compileGroovy.taskDependencies.values - 'compileJava'</span>
+<span class="hljs-string">6.重新build，如没反应，则关闭重新打开，即会自动build</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">7.提示缺少依赖环境：参考下图执行相应命令：右侧gradle中 spring-Tasks-other-cglibRepack.jar（双击执行），执行</span>
+<span class="hljs-string">spring-Tasks-other-objenesisRepack.jar</span></code></pre>
+
+<p><img src="/2023/02/06/Spring%E7%AF%87/1561974269622.png" srcset="/img/loading.gif" alt="1561974269622"></p>
+<h2 id="源码-Spring-IOC容器源码分析"><a href="#源码-Spring-IOC容器源码分析" class="headerlink" title="源码: Spring IOC容器源码分析"></a>源码: Spring IOC容器源码分析</h2><ul>
+<li><input disabled type="checkbox"> <a href="https://javadoop.com/post/spring-ioc" target="_blank" rel="noopener">https://javadoop.com/post/spring-ioc</a> 容器源码分析</li>
+</ul>
+<h3 id="Spring的组成"><a href="#Spring的组成" class="headerlink" title="Spring的组成"></a>Spring的组成</h3><p>Spring共分为七层结构：</p>
+<p>A.  Spring Core  Spring最核心的部分，提供依赖注入实现了对Bean的管理，最基本的概念是BeanFactory，它是任何Spring应用的核 心。BeanFactory是工厂模式的一个实现，它使用IoC将应用配置和依赖说明从实际的应用代码中分离出来</p>
+<p>B.  SpringContext：ApplicationContext，扩展核心容器，提供事件处理、国际化等功能。它提供了一些企业级服务的功能，提供了JNDI，EJB，RMI的支持</p>
+<p>C.  Spring DAO DAO(Data Access Object)提供了JDBC的抽象层，它可消除冗长的JDBC编码和解析数据库厂商特有的错误代码。并且，JDBC封装包还提供了一种比编程性更好的声明性事务管理方法，不仅仅</p>
+<p>D.  Spring AOP：提供切面支持</p>
+<p>E.  Spring ORM：对流行的O/R Mapping封装或支持</p>
+<p>F.  Spring Web：提供Web应用上下文，对Web开发提供功能上的支持，如请求，表单，异常等。</p>
+<p>G.  Spring Web MVC：全功能MVC框架，作用等同于Struts。</p>
+<h3 id="Spring-IOC及DI理解和优点"><a href="#Spring-IOC及DI理解和优点" class="headerlink" title="Spring IOC及DI理解和优点"></a>Spring IOC及DI理解和优点</h3><pre><code class="hljs java">IOC及DI是同一层面的含义，前者是思想 - 控制反转，后者是实现，依赖注入，基本思想即解除AB对象相互引用的强耦合，将其转化到配置文件中，实现弱耦合的一种思想，控制反转，反转的是什么？即是获取对象的方式发生了变化，以前是直接<span class="hljs-keyword">new</span>一个对象，而现在则是从IOC容器中取，取的过程当中，需要set一些引用或者参数之类，这个即是依赖注入 ---&gt; 依赖注入是实现控制反转的方式
+
+
+谁依赖于谁：当然是应用程序依赖于IoC容器；
+
+为什么需要依赖：应用程序需要IoC容器来提供对象需要的外部资源；
+
+谁注入谁：很明显是IoC容器注入应用程序某个对象，应用程序依赖的对象；
+
+注入了什么：就是注入某个对象所需要的外部资源（包括对象、资源、常量数据）
+    
+IOC | DI ----&gt; AOP的基础</code></pre>
+
+
+
+<h3 id="Spring-AOP的理解"><a href="#Spring-AOP的理解" class="headerlink" title="Spring AOP的理解"></a>Spring AOP的理解</h3><pre><code class="hljs angelscript">AOP 即面向切面编程，以无侵入的方式，去为当前的业务逻辑系统增加一些额外的功能，比如日志输出等等
+
+概念理解:
+<span class="hljs-number">1.</span>通知（Advice）
+就是你想要的功能，也就是上面说的 安全，事物，日志等。你给先定义好把，然后在想用的地方用一下。
+
+<span class="hljs-number">2.</span>连接点（JoinPoint）
+这个更好解释了，就是spring允许你使用通知的地方，那可真就多了，基本每个方法的前，后（两者都有也行），或抛出异常时都可以是连接点，spring只支持方法连接点.其他如aspectJ还可以让你在构造器或属性注入时都行，不过那不是咱关注的，只要记住，和方法有关的前前后后（抛出异常），都是连接点。
+
+<span class="hljs-number">3.</span>切入点（Pointcut）
+上面说的连接点的基础上，来定义切入点，你的一个类里，有<span class="hljs-number">15</span>个方法，那就有几十个连接点了，但是你并不想在所有方法附近都使用通知（使用叫织入，以后再说），你只想让其中的几个，在调用这几个方法之前，之后或者抛出异常时干点什么，那么就用切点来定义这几个方法，让切点来筛选连接点，选中那几个你想要的方法。
+
+<span class="hljs-number">4.</span>切面（Aspect）
+切面是通知和切入点的结合。现在发现了吧，没连接点什么事情，连接点就是为了让你好理解切点，搞出来的，明白这个概念就行了。通知说明了干什么和什么时候干（什么时候通过方法名中的before,after，around等就能知道），而切入点说明了在哪干（指定到底是哪个方法），这就是一个完整的切面定义。
+
+<span class="hljs-number">5.</span>引入（<span class="hljs-built_in">int</span>roduction）
+允许我们向现有的类添加新方法属性。这不就是把切面（也就是新方法属性：通知定义的）用到目标类中吗
+
+<span class="hljs-number">6.</span>目标（target）
+引入中所提到的目标类，也就是要被通知的对象，也就是真正的业务逻辑，他可以在毫不知情的情况下，被咱们织入切面。而自己专注于业务本身的逻辑。
+
+<span class="hljs-number">7.</span>代理(proxy)
+怎么实现整套aop机制的，都是通过代理的方式
+
+<span class="hljs-number">8.</span>织入(weaving)
+把切面应用到目标对象来创建新的代理对象的过程,spring采用的是运行时
+关键就是：切点定义了哪些连接点会得到通知
+
+spring用代理类包裹切面，把他们织入到Spring管理的bean中。也就是说代理类伪装成目标类，它会截取对目标类中方法的调用，让调用者对目标类的调用都先变成调用伪装类，伪装类中就先执行了切面，再把调用转发给真正的目标bean
+
+代理类的两种方式 ---&gt; 
+兄弟模式  一种是实现了某一接口，则可以通过共同的实现，伪装其本类，然后执行方法，把属性转发给真正的Bean
+父子模式  另一种是无接口实现，spring使用CGLIB库生成目标类的一个子类，在创建这个子类的时候，spring织入通知，并且把对这个子类的调用委托到目标类
+
+
+思考：即使是Spring，它也无法绕过java本身的规则， 父子模式下，创建目标类的子类，那<span class="hljs-keyword">final</span>方法该怎么办？<span class="hljs-keyword">final</span>类会怎么样？
+答案是：如果是<span class="hljs-keyword">final</span>方法，则在AOP实现中，会调用其目标类本身的方法
+
+Demo：
+一个对象  <span class="hljs-keyword">final</span> getTest() , setTest()
+通过AOP，它会创建代理类，<span class="hljs-keyword">set</span>到代理对象，即注入到代理对象中了，但是调用<span class="hljs-keyword">get</span>方法时，由于被<span class="hljs-keyword">final</span>修饰，因此调用的是其目标类的<span class="hljs-keyword">get</span>方法，因此结果仍然为<span class="hljs-literal">null</span>
+
+Demo概括：Spring AOP默认使用cglib会生成目标对象的子类，然后调用<span class="hljs-keyword">set</span>时会直接设置被代理对象的data，所以造成了target的data没有设置，当你调用<span class="hljs-keyword">get</span>方法时因为是<span class="hljs-keyword">final</span> 所以没有被代理 直接调用的是目标对象的，所以是<span class="hljs-literal">null</span></code></pre>
+
+
+
+<h1 id="Spring视频学习笔记"><a href="#Spring视频学习笔记" class="headerlink" title="Spring视频学习笔记"></a>Spring视频学习笔记</h1><h2 id="注解驱动-IOC"><a href="#注解驱动-IOC" class="headerlink" title="@注解驱动  - IOC"></a>@注解驱动  - IOC</h2><pre><code class="hljs java"><span class="hljs-number">1</span>.<span class="hljs-meta">@Configuration</span>(自身也是组件Bean) - <span class="hljs-meta">@Bean</span>       ---&gt; 替代&lt;bean&gt;配置
+<span class="hljs-number">2</span>.<span class="hljs-meta">@ConmpoentScan</span> value 包名     ---&gt; 替代context-scan 包扫描 (自动扫描service,controller,Component,Repository)
+excludeFilters = Filter[] ===&gt;  排除某些不扫描
+
+demo:
+<span class="hljs-meta">@ConmpoentScan</span>(value=<span class="hljs-string">""</span>,excludeFilters = &#123;
+	<span class="hljs-meta">@Filter</span>(type=FilterType,ANNOTATION,CLASSES = &#123;Controller<span class="hljs-class">.<span class="hljs-keyword">class</span>...&#125;)</span>
+<span class="hljs-class">&#125;)</span>&#123;&#125;
+
+includeFilters 只扫描....
+    
+Filter规则很多...注解,类型,自定义...
+
+<span class="hljs-number">3</span>.组件作用域 <span class="hljs-meta">@Scope</span>(<span class="hljs-string">"prototype"</span>)
+singleton, prototype，request，session
+单实例 ---》 IOC容器启动，创建对象,永远唯一
+多实例 ---》 每次调用，才创建新的对象
+
+<span class="hljs-number">4</span>.懒加载
+【针对】单实例Bean - 容器启动时创建对象(懒加载:容器启动不加载，第一次使用的时候，即获取的时候才加载Bean)
+<span class="hljs-meta">@Lazy</span> 注解
+
+<span class="hljs-number">5</span>. <span class="hljs-meta">@Conditional</span> (用作具体的Bean或者类级别)
+Spring4<span class="hljs-number">.0</span>新增功能 按一定的条件进行判断，注册Bean
+补充：Spring可以获取到当前操作系统的详细信息 Environment
+注解的参数是conditonal数组，因此需要自定义条件接口实现，实现其match方法,通过context进行相关匹配等等，返回<span class="hljs-keyword">true</span>，<span class="hljs-keyword">false</span>
+
+如：<span class="hljs-meta">@Conditional</span>(&#123;Windows<span class="hljs-class">.<span class="hljs-keyword">class</span>&#125;)</span>
+<span class="hljs-class"></span>
+<span class="hljs-class">6.<span class="hljs-title">Bean</span>注册总结</span>
+<span class="hljs-class">一. 传统注解  <span class="hljs-title">Componment</span>，<span class="hljs-title">service</span>，<span class="hljs-title">controller</span>等</span>
+<span class="hljs-class">二. <span class="hljs-title">Bean</span>注解，通过包扫描去拿到<span class="hljs-title">Bean</span>(第三方包)</span>
+<span class="hljs-class">三. @<span class="hljs-title">Import</span>注解 快速给容器中导入一个组件</span>
+<span class="hljs-class"></span>
+<span class="hljs-class">方式三具体说明</span>;  value参数如下:
+A. 如：一个类 注解  <span class="hljs-meta">@Configuration</span>  加上注解 <span class="hljs-meta">@Import</span>(Color.clss) 即可直接导入该类的bean，ID默认是全类名
+导入多个： <span class="hljs-meta">@Import</span>(&#123;Color,<span class="hljs-class"><span class="hljs-keyword">class</span>,<span class="hljs-title">Red</span>,<span class="hljs-title">class</span>&#125;)</span>
+<span class="hljs-class"><span class="hljs-title">B</span>. <span class="hljs-title">ImportSelector</span> 导入选择器，接口 ，返回需要被导入的全类名数组即可 ---&gt; 包名+类名</span>
+<span class="hljs-class"><span class="hljs-title">C</span>. <span class="hljs-title">ImportBeanDefinitionRegistrar</span>接口，通过手动注册，可注册新的<span class="hljs-title">bean</span> 调用<span class="hljs-title">register</span>...注册方法即可</span>
+<span class="hljs-class"></span>
+<span class="hljs-class">四. <span class="hljs-title">Bean</span>注册之  <span class="hljs-title">FactoryBean</span> 工厂方式注册</span>
+<span class="hljs-class"><span class="hljs-title">ColorFactory</span> <span class="hljs-title">implents</span> <span class="hljs-title">FactoryBean</span>&lt;<span class="hljs-title">Color</span>&gt; </span>&#123;&#125;
+
+工厂Bean实现其接口即可,工厂类本身需要成为bean
+applicationContext.getBean(<span class="hljs-string">"colorFactory"</span>)  ====&gt; 获取的是其生产的对象
+applicationContext.getBean(<span class="hljs-string">"&amp;colorFactory"</span>) ====&gt; 获取工厂Bean本身
+
+<span class="hljs-number">7</span>.Bean的生命周期
+创建---初始化---销毁的过程  整个过程由容器去管理
+我们可以自定义初始化和销毁方法,容器在进行到当前的生命周期时，会调用我们定义的初始化和销毁方法
+
+单实例：
+  构造(对象创建) --- 容器启动时创建
+  初始化 --- 对象创建完成,并赋值好，调用初始化方法
+  销毁   --- 容器关闭时，销毁
+多实例:
+  构造(对象创建) --- 获取对象时
+  初始化 --- 对象创建完成,并赋值好，调用初始化方法
+  销毁   --- 容器关闭时不销毁...自行销毁,容器不会调用销方法
+
+
+A. 指定初始化和销毁方法(对应 xml：init-method,destroy-method)
+   <span class="hljs-meta">@Bean</span>(initMethod = <span class="hljs-string">"init"</span>, destroyMethod = <span class="hljs-string">"destroy"</span>)
+
+B, 实现接口 InitializingBean接口,afterPropertiesSet方法,定义初始化逻辑
+   实现接口 DisposableBean接口 ,destroy方法,定义销毁逻辑
+ 
+C. 注解  <span class="hljs-meta">@PostConstruct</span> 标注方法 --- 在bean创建完成并赋值完成后执行
+        <span class="hljs-meta">@PreDestroy</span> 被移除之前调用
+
+巧用<span class="hljs-meta">@PostConstruct</span>注解给<span class="hljs-keyword">static</span>变量赋值，利用的即是生命周期初始化的过程
+
+方式一 - 注入<span class="hljs-keyword">static</span>变量:
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DistinctUtil</span> </span>&#123;
+
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-keyword">private</span> RedisHelper redisHelper;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> DistinctUtil distinctUtil;
+
+    <span class="hljs-meta">@PostConstruct</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+        distinctUtil = redisHelper;
+
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doDistinct</span><span class="hljs-params">()</span> </span>&#123;
+        distinctUtil.redisHelper.sdiff();
+    &#125;
+&#125;
+
+方式二 - 注入<span class="hljs-keyword">static</span>变量:：
+<span class="hljs-meta">@Component</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DistinctUtil</span> </span>&#123;
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> RedisHelper redisHelper;
+
+    <span class="hljs-meta">@Autowired</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setRedisHelper</span><span class="hljs-params">(RedisHelper redisHelper)</span> </span>&#123;
+        DistinctUtil.redisHelper = redisHelper;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doDistinct</span><span class="hljs-params">()</span> </span>&#123;
+        redisHelper.sdiff();
+    &#125;
+&#125;
+
+
+D. 组件：BeanPostProcessor Bean的后置处理器(在bean初始化前后，进行处理工作)
+        方法：
+             【---源碼分析：属性赋值】
+             【bean的初始化】
+             postProcessBeforeInitialization  初始化之前处理工作
+             【自定义初始化方法】
+             postProcessAfterInitialization   初始化之后处理工作
+
+<span class="hljs-number">8</span>.BeanPostProcessor的应用  ApplicationContextAware接口，可以获取IOC容器
+应用于私有云SpringBoot获取IOC容器任务
+<span class="hljs-meta">@PostConstruct</span>注解...
+bean的赋值
+<span class="hljs-meta">@Autowire</span>注解...都是基于BeanPostProcessor的应用来实现的
+
+<span class="hljs-number">9</span>. <span class="hljs-meta">@Value</span>注解
+   方式：  A.直接写基本的数值
+          B.可以写SpEL =&gt; <span class="hljs-meta">@Value</span>(<span class="hljs-string">"#&#123;20 - 2&#125;"</span>)
+          C.<span class="hljs-meta">@Value</span>(<span class="hljs-string">"$&#123;配置文件&#125;"</span>)   ---&gt; 
+          如果没有配置文件可以用 <span class="hljs-meta">@PropertySource</span>(value&#123;<span class="hljs-string">"classpath:/person.properties"</span>,<span class="hljs-string">""</span>&#125;)注解指定配置文件,参数可以是字符串数组的形式，即一次加载多个
+          
+          注解写在<span class="hljs-meta">@Configuration</span>配置注解下
+注：ioc容器也可以直接获取到配置文件里面的参数等等.environment.getProperties()...
+
+    
+<span class="hljs-number">10</span>. 自动装配 <span class="hljs-meta">@Autowired</span> Spring依赖DI，完成对IOC容器中各个组件的依赖关系赋值
+A. 自动注入工作原理： 默认优先按照类型去容器中找组件（类型的意思即 xxx<span class="hljs-class">.<span class="hljs-keyword">class</span>）</span>
+<span class="hljs-class"><span class="hljs-title">B</span>. 如果有多个是如何处理的：相同类型找到多个，就将属性的名称作为组件的<span class="hljs-title">ID</span>，在容器中查找</span>
+配合 @Qualifier("bookDao") ---&gt; 明确装配的ID
+C. 如果容器中找不到该类型组件：报错，创建Bean失败,因此是默认一定要赋值成功，否则就抛出错误
+配合 <span class="hljs-meta">@Autowired</span>(required = <span class="hljs-keyword">false</span>) 即表示非必须找到，找不到就赋个<span class="hljs-keyword">null</span>
+
+<span class="hljs-meta">@Primary</span> 默认首选的bean，在可能多个的时候，此注解可以默认首选
+
+
+<span class="hljs-number">11</span>. <span class="hljs-meta">@Resource</span> 注解
+可以和Autowired一样，都是自动装配,它默认按照组件名称进行装配
+
+<span class="hljs-meta">@Inject</span> 需要导入javax.inject 和 autowired功能一致,但是内部无属性,所以用的也不多
+总结：Autowired是Spring的注解，Resource，inject是Java的规范
+AutowiredAnnotationBeanPostProcessor： 解析完成自动装配的功能
+
+
+<span class="hljs-number">12</span>. <span class="hljs-meta">@Autowired</span>  构造器，方法，属性使用该注解 ---&gt; 从容器中获取参数组件的值
+<span class="hljs-meta">@Autowired</span> 标注在方法上,spring容器创建该对象时，就会执行该方法，一般用以配置参数，<span class="hljs-keyword">static</span>变量赋值等等
+
+默认情况下容器启动，会调用bean的无参构造器构造对象,再进行初始化赋值等操作，但是放在构造器上，即可使之使用有参构造器
+如果组件只有一个有参构造器，这个有参构造器的<span class="hljs-meta">@Autowired</span>可以省略,参数位置的组件还是可以从容器中获取
+
+放到参数上 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">void</span> <span class="hljs-params">(@Autowired Car car)</span> </span>&#123;&#125;
+
+
+<span class="hljs-number">13</span>. 自定义组件想要使用Spring容器底层的组件,比如applicationContext...BeanFactory等等
+组件实现对应的 xxxAware接口即可
+如：ApplicationAware
+   EmbeddedValueResolver  字符串解析器.可以解析  $&#123;os.name&#125;  #$...
+原理：有其相关的ApplicationAwareProcessor后置处理器处理的...一一对应
+
+
+<span class="hljs-number">14</span>. Pofile - 可以结合Profile注解完成 - Spring为我们提供的可以根据当前环境，动态的激活和切换一系列组件的功能
+<span class="hljs-meta">@Profile</span> 指定组件在哪个环境的情况下才能被注册到容器中,默认是<span class="hljs-keyword">default</span>环境
+
+<span class="hljs-meta">@Profile</span>(<span class="hljs-string">"test"</span>)
+<span class="hljs-meta">@Bean</span>
+......
+运行方式: 
+A. jar运行时 指定激活类型m, 在虚拟机参数位置加载: -Dspring.profiles.active=test
+B. 代码的方式,利用无参构造器启动Spring容器:
+①创建applicationcontext对象
+②设置激活环境（environment.setActiveProfiles）
+③注册主配置类(register(MainConfig<span class="hljs-class">.<span class="hljs-keyword">class</span>))</span>
+<span class="hljs-class"></span>
+<span class="hljs-class">个人认为最好的实现方式还是类似云测项目中写在<span class="hljs-title">POM</span>文件中，切换更加方便</span>
+<span class="hljs-class">    </span>
+<span class="hljs-class"></span>
+<span class="hljs-class">15.<span class="hljs-title">IOC</span>小结 - 注意@<span class="hljs-title">Conditional</span> ,@<span class="hljs-title">Import</span> 注解 在<span class="hljs-title">boot</span>中使用频繁</span></code></pre>
+
+
+
+<h2 id="注解驱动-AOP"><a href="#注解驱动-AOP" class="headerlink" title="@注解驱动  - AOP"></a>@注解驱动  - AOP</h2><pre><code class="hljs java">AOP：在程序运行期间将某段代码切入到指定方法指定位置进行运行的编程方式
+
+<span class="hljs-number">1</span>.通知类型
+<span class="hljs-comment">// 匹配该类下所有方法,参数任意</span>
+前置通知：<span class="hljs-meta">@Before</span>(<span class="hljs-string">"public int com.xxx.MathCalculator.*(..)"</span>)
+后置通知：<span class="hljs-meta">@After</span>
+返回通知：<span class="hljs-meta">@AfterReturning</span>
+异常通知：<span class="hljs-meta">@AfterThrowing</span>
+环绕通知：<span class="hljs-meta">@Around</span>
+
+<span class="hljs-number">2</span>.基于注解配置
+<span class="hljs-comment">// 抽取公共的切入点表达式</span>
+<span class="hljs-meta">@Pointcut</span>(<span class="hljs-string">"public int com.xxx.MathCalculator.*(..)"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pointCut</span><span class="hljs-params">()</span></span>&#123;&#125;
+
+<span class="hljs-meta">@Before</span>(<span class="hljs-string">"pointCut()"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">demo</span><span class="hljs-params">()</span></span>&#123;&#125;
+ 
+<span class="hljs-number">3</span>.配置重点
+<span class="hljs-comment">// 重点 - 切面类和被切类都应该被加入到容器中，且切面类 需要加注解 @Aspect 表示切面类</span>
+<span class="hljs-comment">// 配置类开启AOP --- @EnableAspectJAutoProxy(配置类)</span>
+
+<span class="hljs-number">4</span>.拿到切点方法和参数的方式
+
+拿到切入点的具体参数
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">aop</span> <span class="hljs-params">(JoinPoint joinPoint)</span> </span>&#123;
+	joinPoint.getSignature().getName() ---&gt; 方法名
+	joinPoint.getArgs();  ---&gt; 参数列表
+&#125;
+
+
+<span class="hljs-number">5</span>,返回通知和异常通知拿到结果或者异常的方式
+获取返回值 --- AfterReturning(value = <span class="hljs-string">"pointCut()"</span>, returning = <span class="hljs-string">"result"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">returning</span> <span class="hljs-params">(Object result)</span> </span>&#123;&#125;
+
+获取异常 --- AfterReturning(value = <span class="hljs-string">"pointCut()"</span>, throwing = <span class="hljs-string">"exception"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">exception</span> <span class="hljs-params">(Exception exception)</span> </span>&#123;&#125;
+
+<span class="hljs-meta">@Around</span>(<span class="hljs-string">"com.javadoop.aop.SystemArchitecture.businessService()"</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">doBasicProfiling</span><span class="hljs-params">(ProceedingJoinPoint pjp)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+    <span class="hljs-comment">// start stopwatch</span>
+    Object retVal = pjp.proceed();
+    <span class="hljs-comment">// stop stopwatch</span>
+    <span class="hljs-keyword">return</span> retVal;
+&#125;
+
+
+总结: 
+A. 将业务逻辑和切面类加入到容器中，注意<span class="hljs-meta">@Aspect</span>
+B. 在切面类的每一个通知方法上标注通知注解，告诉Spring何时何地进行
+C. 基于注解的AOP配置  <span class="hljs-meta">@EnableAspectJAutoProxy</span>(配置类)</code></pre>
+
+
+
+<h2 id="原理-AOP"><a href="#原理-AOP" class="headerlink" title="原理 - AOP"></a>原理 - AOP</h2><pre><code class="hljs kotlin">源头：<span class="hljs-meta">@EnableAspectJAutoProxy</span>
+调用了AspectJAutoProxyRegister<span class="hljs-class">.<span class="hljs-keyword">class</span> ---&gt; 目的是为了向容器类注册<span class="hljs-title">bean</span> ---》 自动代理创建器</span>
+自动代理创建器即组件: AnnotatainAwareAspectJAutoProxyCreator
+
+
+Spring 通过组装advice注解，自动生成新的Bean，getBean的时候返回的实质即是 代理类
+
+代理一般分为两种方式：JDK自带的动态代理以及CGLIB代理
+JDK：接口
+CGLIB：继承，注意<span class="hljs-keyword">final</span>和<span class="hljs-keyword">private</span> 方法无法被增强
+
+Demo：
+一个对象  <span class="hljs-keyword">final</span> getTest() , setTest()
+通过AOP，它会创建代理类，<span class="hljs-keyword">set</span>到代理对象，即注入到代理对象中了，但是调用<span class="hljs-keyword">get</span>方法时，由于被<span class="hljs-keyword">final</span>修饰，因此调用的是其目标类的<span class="hljs-keyword">get</span>方法，因此结果仍然为<span class="hljs-literal">null</span>
+
+Demo概括：Spring AOP默认使用cglib会生成目标对象的子类，然后调用<span class="hljs-keyword">set</span>时会直接设置被代理对象的<span class="hljs-keyword">data</span>，所以造成了target的<span class="hljs-keyword">data</span>没有设置，当你调用<span class="hljs-keyword">get</span>方法时因为是<span class="hljs-keyword">final</span> 所以没有被代理 直接调用的是目标对象的，所以是<span class="hljs-literal">null</span></code></pre>
+
+
+
+<h3 id="Q1-为什么SpringIOC容器加载的时候-使用HashMap-线程不安全-检测有没有看Spring源码"><a href="#Q1-为什么SpringIOC容器加载的时候-使用HashMap-线程不安全-检测有没有看Spring源码" class="headerlink" title="Q1:为什么SpringIOC容器加载的时候 使用HashMap (线程不安全-检测有没有看Spring源码)?"></a>Q1:为什么SpringIOC容器加载的时候 使用HashMap (线程不安全-检测有没有看Spring源码)?</h3><pre><code class="hljs java"><span class="hljs-comment">// AutowiredAnnotationBeanPostProcessor</span>
+
+<span class="hljs-comment">// synchronized 锁住了代码块</span>
+<span class="hljs-keyword">synchronized</span>(<span class="hljs-keyword">this</span>.candidateConstructorsCache) &#123;
+    
+&#125;</code></pre>
+
+
+
+
+
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题:"></a>遗留问题:</h2><ol>
+<li>为什么Jdk1.8 可以支持重复注解扫描</li>
+</ol>
+<p>\1. IoC 属于哪种设计模式？</p>
+<p>\2. 谈谈你对 Spring IoC 和 DI 的理解，它们有什么区别？</p>
+<p>\3. 简单谈谈 IoC 容器的原理。</p>
+<p>\4. bean 的 scope 有几种类型？请详细列举。</p>
+<p>\5. 说说 IoC 中的继承和 Java 继承的区别。</p>
+<p>\6. IoC 中 car 对象的配置如下，现在要添加 user 对象，并且将 car 注入到 user 中，正确的配置是？</p>
+<p>\7. 请分别写出 IoC 静态工厂方法和实例工厂方法的配置。</p>
+<p>\8. IoC 自动装载有几种方式？</p>
+<p>\9. 介绍一下 Spring 框架中 bean 的生命周期。</p>
+<p>\10. IoC 容器自动完成装载，默认的方式是？</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Spring%E7%AF%87/">Spring篇</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/MyBatis%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MyBatis篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E7%AC%AC6%E7%AB%A0%20%20%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                        <span class="hidden-mobile">第6章  查询性能优化</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Spring篇&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

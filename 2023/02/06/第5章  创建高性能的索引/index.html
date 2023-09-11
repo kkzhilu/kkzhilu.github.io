@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>第5章  创建高性能的索引 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="第5章-创建高性能的索引"><a href="#第5章-创建高性能的索引" class="headerlink" title="第5章  创建高性能的索引"></a>第5章  创建高性能的索引</h1><blockquote>
+<p>本文为《高性能Mysql 第三版》第四章读书笔记，Mysql版本为5.5</p>
+</blockquote>
+<h2 id="索引基础"><a href="#索引基础" class="headerlink" title="索引基础"></a>索引基础</h2><p>索引的重要性：找一本800面的书的某一段内容，没有目录也没有页码（页码也可类比是索引）</p>
+<h3 id="索引类型"><a href="#索引类型" class="headerlink" title="索引类型"></a>索引类型</h3><ul>
+<li>B-Tree 索引 ： 可用于全值匹配、最左前缀匹配、列前缀匹配、范围值匹配、精确匹配某一列并范围匹配另外一列、只访问索引的查询 ，原文截图：</li>
+</ul>
+<p>![image-20200223222150784](第5章  创建高性能的索引/image-20200223222150784.png)</p>
+<ul>
+<li>哈希索引 ： 只适用于精确匹配查询，不适用于范围查询 </li>
+<li>空间数据索引 ： 可以有效地使用任意维度来组合查询 </li>
+<li>全文索引 ： 做的事情类似于搜索引擎，而不是简单的 where 条件匹配 </li>
+</ul>
+<h3 id="对于Mysql索引使用的歧义"><a href="#对于Mysql索引使用的歧义" class="headerlink" title="对于Mysql索引使用的歧义"></a>对于Mysql索引使用的歧义</h3><p>对于很早的版本，一直强调：最左前缀匹配，索引使用顺序，不可跳过索引中的列等等，但高性能Mysql一书之后的版本中对于mysql优化器进行了很大程度的优化，使得开发者在使用时候可以不用顾虑太多</p>
+<p>例如：</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`mytest`</span>.<span class="hljs-string">`student`</span>  (
+  <span class="hljs-string">`age`</span> <span class="hljs-built_in">int</span>(<span class="hljs-number">11</span>) <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'age'</span>,
+  <span class="hljs-string">`name`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'name'</span>,
+  <span class="hljs-string">`year`</span> <span class="hljs-built_in">varchar</span>(<span class="hljs-number">20</span>) <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> utf8 <span class="hljs-keyword">COLLATE</span> utf8_general_ci <span class="hljs-literal">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-literal">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'year'</span>,
+  <span class="hljs-keyword">INDEX</span> <span class="hljs-string">`demo`</span>(<span class="hljs-string">`age`</span>, <span class="hljs-string">`name`</span>, <span class="hljs-string">`year`</span>) <span class="hljs-keyword">USING</span> BTREE <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">'demo'</span>
+) <span class="hljs-keyword">ENGINE</span> = <span class="hljs-keyword">InnoDB</span> <span class="hljs-built_in">CHARACTER</span> <span class="hljs-keyword">SET</span> = utf8 <span class="hljs-keyword">COLLATE</span> = utf8_general_ci ROW_FORMAT = <span class="hljs-keyword">Compact</span>;</code></pre>
+
+
+
+<p>故意使用不按索引顺序查询：</p>
+<pre><code class="hljs n1ql">mysql&gt; <span class="hljs-keyword">explain</span> extended  <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-symbol">`student`</span> <span class="hljs-keyword">where</span> <span class="hljs-symbol">`name`</span> = <span class="hljs-number">1</span> <span class="hljs-keyword">and</span> <span class="hljs-symbol">`age`</span> = <span class="hljs-number">1</span>;
+实际: key:demo 使用到了索引</code></pre>
+
+
+
+<pre><code class="hljs 如何查看Mysql优化之后的SQL```：">
+&#96;&#96;&#96;sql
+# 仅在服务器环境下
+explain extended  SELECT * FROM &#96;student&#96; where &#96;name&#96; &#x3D; 1 and &#96;age&#96; &#x3D; 1;
+
+# 再执行
+show warnings;
+
+# 结果如下：
+&#x2F;* select#1 *&#x2F; select &#96;mytest&#96;.&#96;student&#96;.&#96;age&#96; AS &#96;age&#96;,&#96;mytest&#96;.&#96;student&#96;.&#96;name&#96; AS &#96;name&#96;,&#96;mytest&#96;.&#96;student&#96;.&#96;year&#96; AS &#96;year&#96; from &#96;mytest&#96;.&#96;student&#96; where ((&#96;mytest&#96;.&#96;student&#96;.&#96;age&#96; &#x3D; 1) and (&#96;mytest&#96;.&#96;student&#96;.&#96;name&#96; &#x3D; 1))</code></pre>
+
+
+
+<p>可以发现真正执行的SQL是 age在前，name在后</p>
+<p>对于仅使用year字段的查询结果呢？依然显示 -&gt; key:demo 使用到了索引</p>
+<p>总结：</p>
+<ul>
+<li>写代码时对于索引顺序不必有<code>太多顾虑</code></li>
+<li>优化SQL时候不仅仅只看 key参数是否使用索引，还需要注意type，ref等等</li>
+<li>Mysql 优化器<code>并不是一定改变SQL的参数查询顺序</code>，而是以它的判定方式选择它认为的最有效的查询</li>
+</ul>
+<h2 id="索引的优点"><a href="#索引的优点" class="headerlink" title="索引的优点"></a>索引的优点</h2><p>正常的索引数据结构可以有其独特的优点，比如哈希索引不支持顺序查询，而B-Tree，或者 B+Tree则可以，总结B-Tree系列索引优</p>
+<p>点如下：</p>
+<ul>
+<li>大大减少了服务器需要扫描的数据量</li>
+<li>可以帮助服务器避免排序和临时表</li>
+<li>可以将随机 I/O 变为顺序 I/O</li>
+</ul>
+<h2 id="高性能的索引策略"><a href="#高性能的索引策略" class="headerlink" title="高性能的索引策略"></a>高性能的索引策略</h2><h3 id="独立的列"><a href="#独立的列" class="headerlink" title="独立的列"></a>独立的列</h3><p><code>索引在使用中不可嵌入表达式或者方法</code> 错误示范： select * from where eid + 1 &lt; 10;</p>
+<h3 id="前缀索引和索引的选择性"><a href="#前缀索引和索引的选择性" class="headerlink" title="前缀索引和索引的选择性"></a>前缀索引和索引的选择性</h3><p>如果索引很长的字符串列，会导致索引变得很大并且很慢。一个处理策略是模拟哈希索引，另一个办法是索引开始的一部分字符串的值，即前缀索引。</p>
+<p><strong>索引的选择性</strong>指不重复的索引值和数据表中记录总数(#T)的比值。取值在为(1/ #T~1]。选择性越高则查询效率越高。唯一索引的选择性是1，是最好的索引选择性，性能也是最好的。</p>
+<p>前缀索引的<strong>优点</strong>是可以节约索引空间，提高索引效率。<strong>缺点</strong>是降低了索引的选择性，同时也无法使用前缀索引做ORDER BY 或 GROUP BY 操作，无法使用前缀索引做覆盖扫描。</p>
+<p>使用前缀索引时，<strong>确定前缀长度的依据</strong>是：计算前缀索引的选择性，使前缀索引选择性接近完整列的选择性</p>
+<h3 id="多列索引"><a href="#多列索引" class="headerlink" title="多列索引"></a>多列索引</h3><p>错误做法：为where字段的每一个列创建独立的索引，或者按照错误的顺序创建多列索引</p>
+<p>在explain中，如果发现索引合并，实际上说明了表上的索引建的不够好：</p>
+<ul>
+<li><p>当需要进行AND操作时，其实说明了需要建立一个包含所有相关列的多列索引；</p>
+</li>
+<li><p>当需要进行OR操作时，通常需要耗费大量CPU和内存资源在算法的缓存、排序和合并操作上；</p>
+</li>
+<li><p>优化器不会把这些计算到”查询成本“中，这会使得查询成本被低估，可能还不如全表扫描然后union。</p>
+</li>
+</ul>
+<h3 id="选择合适的索引顺序"><a href="#选择合适的索引顺序" class="headerlink" title="选择合适的索引顺序"></a>选择合适的索引顺序</h3><p>不考虑排序和分组时：将选择性最高的列放在前面通常是很好的（选择性即有效区分数据）</p>
+<p>但，性能不只是依赖于所有索引列的选择性，也和查询条件的具体值有关，也就是和值的分布有关，这就意味着可能需要根据那些运行频率最高的查询来调整索引列的顺序</p>
+<p>例如：一张订单表，需要查询的字段有两个，一个是地区ID，一个是用户ID，简单思考就一定能发现用户ID的区分度应该是比地区ID要高的多（相同用户ID的数据要远远少于相同地区ID），因此建立索引应该是（用户ID，地区ID）</p>
+<h3 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a><strong>聚簇索引</strong></h3><p><strong>聚簇索引：</strong>将数据存储与索引放到了一块，索引结构的叶子节点保存了行数据</p>
+<p><strong>非聚簇索引：</strong>将数据与索引分开存储，索引结构的叶子节点指向了数据对应的位置</p>
+<p><strong>在innodb中</strong>，在聚簇索引之上创建的索引称之为辅助索引，非聚簇索引都是辅助索引，像复合索引、前缀索引、唯一索引。<strong>辅助</strong></p>
+<p><strong>索引叶子节点存储的不再是行的物理位置，而是主键值，辅助索引访问数据总是需要二次查找</strong> </p>
+<p><strong>聚簇索引具有唯一性</strong>，由于聚簇索引是将数据跟索引结构放到一块，因此一个表仅有一个聚簇索引， <strong>聚簇索引默认是主键</strong>，如果表中没有定义主键，InnoDB 会选择一个<strong>唯一且非空的索引</strong>代替。如果没有这样的索引，InnoDB 会<strong>隐式定义一个主键（类似**</strong>oracle中的RowId）**来作为聚簇索引。如果已经设置了主键为聚簇索引又希望再单独设置聚簇索引，必须先删除主键，然后添加我们想要的聚簇索引，最后恢复设置主键即可 </p>
+<p>聚簇的数据的优点：</p>
+<ul>
+<li><p>可以把相关的数据保存在一起。如电子邮箱中，根据用户ID来聚簇数据，这样只要读取少数的数据页就可以获取某个用户的全部邮件。如果没有使用聚簇索引，可能每一封邮件导致一次磁盘I/O；</p>
+</li>
+<li><p>访问数据更快。聚簇索引将索引和数据报错在同一个B-Tree中，因此获取数据通常比非聚簇索引更快；</p>
+</li>
+<li><p>使用覆盖索引扫描的查询可以直接使用页节点的主键值</p>
+</li>
+</ul>
+<p>聚簇索引的缺点：</p>
+<ul>
+<li><p>聚簇索引能够提高I/O的密集程度，但如果所有的数据全都放在内存中，那么访问顺序就没那么重要了，聚簇索引也就没什么优势了</p>
+</li>
+<li><p>插入速度严重依赖于插入顺序。按照主键顺序插入是最快的。如果不是先找主键顺序加载数据，那么加载完成后最好用OPTIMIZE TABLE命令重新组织一下表</p>
+</li>
+<li><p>更新聚簇索引列的代价很高</p>
+</li>
+<li><p>基于聚簇索引的表在插入新行，或者主键被更新导致需要移动行时，可能面临”页分裂”的问题</p>
+</li>
+<li><p>举措索引可能导致全表扫描变慢，尤其是行比较稀疏，或者页分裂导致数据存储不连续的时候</p>
+</li>
+<li><p>二级索引（非聚簇索引）可能比想象的大，因为二级索引的叶子节点包含了引用行的主键列</p>
+</li>
+<li><p>二级索引访问需要两次索引查找，而不是一次（第一次获得主键，第二次根据主键值去聚簇索引中查找对应的行）</p>
+</li>
+</ul>
+<h4 id="在InnoDB表中按主键顺序插入行"><a href="#在InnoDB表中按主键顺序插入行" class="headerlink" title="在InnoDB表中按主键顺序插入行"></a>在InnoDB表中按主键顺序插入行</h4><p> 如果正在使用InnoDB表并且没有什么数据需要聚集，那么可以定义一个代理健作为主键。最简单的是使用AUTO INCREMENT自增列，这样可以保证数据行是顺序写入的，对于主键做关联操作也是最好的 </p>
+<p>最好避免随机的（不连续且值的分布范围非常大）聚簇索引，特别是对于I/O密集型的应用，例如UUID</p>
+<p>用UUID作为主键的坏处：</p>
+<ul>
+<li><p>写入的目标也可能已经疏导磁盘并从缓存中移除，或者还没有被加载到缓存中。InnoDB不得不先找到并且从磁盘读取目标页到内存，这导致了大量的随机I/O</p>
+</li>
+<li><p>因为写入是乱序的，InnoDB不得不频繁地做页分裂操作，会导致移动大量数据，一次插入最少需要修改三个页而不是一个页</p>
+</li>
+<li><p>由于频繁的页分裂，页会变的稀疏并被不规则填充，所以最终数据会有碎片</p>
+</li>
+<li><p>UUID较长，不利于作为索引</p>
+</li>
+</ul>
+<p><code>字符类型作为主键的通用替代方案</code>：<a href="https://tech.meituan.com/2019/03/07/open-source-project-leaf.html" target="_blank" rel="noopener">美团分布式ID生成项目</a>， 雪花ID</p>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>如果一个索引包含（或者说覆盖）所有需要查询的字段的值，我们就称之为：覆盖索引</p>
+<p>覆盖索引的好处：</p>
+<ul>
+<li><p>索引条目远小于数据行大小，能够极大地提高性能，所以如果只需要读取索引，那么MySQL就会极大地减少数据访问量</p>
+</li>
+<li><p>因为索引是按照值顺序存储的，所以对于I/O密集型的范围查询会比随机从磁盘中读取每一行数据的I/O要少的多</p>
+</li>
+</ul>
+<p>如果不覆盖索引，则会产生<code>回表查询</code>， 先定位主键值，再定位行记录，它的性能较扫一遍索引树更低 </p>
+<h3 id="使用索引扫描来做排序"><a href="#使用索引扫描来做排序" class="headerlink" title="使用索引扫描来做排序"></a>使用索引扫描来做排序</h3><p>MySQL有两种方式可以生成有序的结果：通过排序操作；或者按索引顺序扫描如果EXPLAIN出来的type列的值为index，则说明使用了索引扫描排序 </p>
+<p>扫描索引本身是很快的，因为只需要从一条索引记录移动到紧接着的下一条记录。但如果索引无法覆盖所有的列，那就不得不扫描一条索引记录就回表查询一次对应的行，这基本上属于随机I/O，因此按索引顺序读取数据的速度通常比顺序地全表扫描要慢</p>
+<h3 id="压缩（前缀压缩）索引"><a href="#压缩（前缀压缩）索引" class="headerlink" title="压缩（前缀压缩）索引"></a>压缩（前缀压缩）索引</h3><p> MyISAM使用前缀压缩来减少索引的大小，从而让更多的索引可以放入内存中，这在某种情况下可以极大地提高性能。默认只压缩字符串，但通过参数设置也可以对整数压缩 ， MyISAM存储引擎不过多深究</p>
+<h3 id="冗余和重复索引"><a href="#冗余和重复索引" class="headerlink" title="冗余和重复索引"></a><strong>冗余和重复索引</strong></h3><p><strong>重复索引</strong>：</p>
+<ul>
+<li>MySQL允许在相同列上创建多个索引，但这样需要单独维护重复的索引，并且优化查询的时候也需要逐个进行考虑，会影响性能，应该避免这么做</li>
+</ul>
+<p><strong>冗余索引</strong></p>
+<ul>
+<li><p>如果已经创建了索引（A, B），在创建索引（A），那么就是冗余索引，因为它只是前一个索引的前缀</p>
+</li>
+<li><p>冗余索引通常发生在表添加新索引的时候。如增加一个新的索引(A, B)，而没有扩展已有索引(A)，导致(A)成为冗余索引。或者将索引扩展为(A, 主键ID)，对InnoDB来说，主键已经包含在二级索引中了，因此也是冗余的</p>
+</li>
+</ul>
+<h3 id="索引和锁"><a href="#索引和锁" class="headerlink" title="索引和锁"></a>索引和锁</h3><p>索引可以让查询锁定更少的行，如果你的查询从不访问那些不需要的行，那么就会锁定更少的行，从两个方面来看这对性能都有好处：</p>
+<ul>
+<li><p>虽然InnoDB的行锁的效率很高，内存使用也很少，但是锁定行的时候依然会带来额外开销</p>
+</li>
+<li><p>锁定需要的行会增加所争用并减少并发性</p>
+</li>
+</ul>
+<p>InnoDB只有在访问行的时候才会对其加锁。而索引能够减少InnoDB访问的行数，从而减少锁的数量。但这只有当InnoDB在存储引擎能够过滤掉不需要的行时才有效，如果索引无法过滤掉无效的行，那么在InnoDB检索到数据并返回给服务器层之后，MySQL服务器才能应用Where子句，这时已经无法避免锁定行了：InnoDB已经锁住了这些行，到适当的时候才释放。</p>
+<p>Explain的Extra列显示“Using Where”，说明MySQL服务器将存储引擎返回行之后再应用where过滤条件。此时where子句以前的数据全都被加锁</p>
+<p>InnoDB在二级索引上使用共享锁（读锁），但访问主键索引需要排它锁（写锁）</p>
+<p><strong>InnoDB的行锁是建立在索引的基础之上的</strong>，行锁锁的是索引，不是数据，所以提高并发写的能力要在查询字段添加索引</p>
+<h2 id="维护索引和表"><a href="#维护索引和表" class="headerlink" title="维护索引和表"></a>维护索引和表</h2><p>使用正确的类型创建了表并加上了合适的索引后，还需要维护表和索引来确保它们正常工作，目的如下：</p>
+<ul>
+<li><p>找到并修复损坏的表</p>
+</li>
+<li><p>维护准确的索引统计信息</p>
+</li>
+<li><p>减少碎片</p>
+</li>
+</ul>
+<h3 id="找到并修复损坏的表"><a href="#找到并修复损坏的表" class="headerlink" title="找到并修复损坏的表"></a>找到并修复损坏的表</h3><p>可以通过CHECK TABLE检查是否发生了表错误</p>
+<p>可以用REPAIR TABLE或者一个不作任何操作的ALTER操作来修复表</p>
+<h3 id="更新索引统计信息"><a href="#更新索引统计信息" class="headerlink" title="更新索引统计信息"></a><strong>更新索引统计信息</strong></h3><ul>
+<li><p>records_in_range()，通过向存储引擎传入两个边界值获取在这个范围大概有多少条记录</p>
+</li>
+<li><p>info()，返回各种类型的数据，包括索引的基数（每个键值有多少条记录）</p>
+</li>
+</ul>
+<h3 id="减少索引和数据的碎片"><a href="#减少索引和数据的碎片" class="headerlink" title="减少索引和数据的碎片"></a>减少索引和数据的碎片</h3><p>B-Tree索引可能导致碎片化，会导致查询效率降低。有三类数据碎片</p>
+<ul>
+<li><p>行碎片：数据行被存储在多个片段中</p>
+</li>
+<li><p>行间碎片：逻辑上顺序的页，或者行在磁盘上不是顺序存储的</p>
+</li>
+<li><p>剩余空间碎片化：数据也中有大量的空余空间</p>
+</li>
+</ul>
+<p>对于MyISAM表，三类碎片都可能发生，InnoDB不会出现短小的碎片行，会移动短小的行并重写到一个片段中</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>选择索引以及利用索引查询时的三个原则：</p>
+<ul>
+<li><p>单行访问是很慢的。最好读取的块中包含尽可能多需要的行，使用索引可以创建位置引用以提升效率</p>
+</li>
+<li><p>按顺序访问范围数据是很快的，原因如下：</p>
+<ol>
+<li><p>顺序I/O不需要多次磁盘寻道，比随机I/O快</p>
+</li>
+<li><p>如果服务器能够按顺序读取数据，那么就不再需要额外的排序操作，并且GROUP BY查询也无须再做排序和将行按组进行聚合计算了</p>
+</li>
+</ol>
+</li>
+<li><p>索引覆盖查询是很快的</p>
+</li>
+</ul>
+<p>现实使用中，很难做到每一个查询都有完美的索引，这时候需要根据需求有所取舍地创建合适的索引，而非根据惯例一刀切</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MySQL/">MySQL</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AC%AC5%E7%AB%A0-%E5%88%9B%E5%BB%BA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E7%B4%A2%E5%BC%95/">第5章  创建高性能的索引</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E7%AC%AC1%E7%AB%A0%20%20Mysql%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%8E%86%E5%8F%B2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第1章  Mysql架构与历史</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">观察者模式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "第5章  创建高性能的索引&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

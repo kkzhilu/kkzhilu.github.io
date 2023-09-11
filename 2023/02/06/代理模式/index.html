@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>代理模式 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="代理模式篇"><a href="#代理模式篇" class="headerlink" title="代理模式篇"></a>代理模式篇</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p>为其他对象提供一种代理以控制对这个对象的访问</p>
+<h2 id="代理模式的诞生"><a href="#代理模式的诞生" class="headerlink" title="代理模式的诞生"></a>代理模式的诞生</h2><p>【<font color="orange">产品</font>】：Kerwin，我记得你是在通州租房住吧？</p>
+<p>【<font color="blue">开发</font>】：是啊，怎么了？</p>
+<p>【<font color="orange">产品</font>】：你是房东直租还是中介啊？我最近真是特别烦中介，收费都好黑！</p>
+<p>【<font color="blue">开发</font>】：我啊，我租的房子名义上倒是房东直租，但估计还是中介，你知道吗，中介的扩张是一个必然。</p>
+<p>【<font color="orange">产品</font>】：扩张？你指的是全北京的房子都是中介的意思吗？</p>
+<p>【<font color="blue">开发</font>】：现在肯定不至于全部都是，但也是大部分了，为什么会这样呢，因为中介需要控制租户，控制租金市场，如果租户直租房东，房东钱多人好，就很有可能很便宜，这就会打乱市场价格，所以拿下所有房老板，<font color="red">不仅为了赚钱，也是为了控制这种市场关系</font>。</p>
+<p>【<font color="orange">产品</font>】：我看你们程序员平常“傻傻的”，怎么对这个这么了解？莫非有计算机相关的故事？</p>
+<p>【<font color="blue">开发</font>】：被你说中了，这个就是代理模式！它的诞生就是为了控制对象的访问，<font color="red">不过我们一般是用来增强其功能</font>，不像XXX🤪</p>
+<p><img src="/2023/02/06/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/image-20200622004018317.png" srcset="/img/loading.gif" alt="image-20200622004018317"></p>
+<h2 id="HeadFirst-核心代码"><a href="#HeadFirst-核心代码" class="headerlink" title="HeadFirst 核心代码"></a>HeadFirst 核心代码</h2><p><strong><em>定义正常业务类接口</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">PhoneInterface</span> </span>&#123;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 更新电话号码</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> phoneNum    电话号码</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception  可能抛出Exception 异常</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">updatePhone</span><span class="hljs-params">(Long phoneNum)</span></span>;
+&#125;</code></pre>
+
+
+
+<p><strong><em>实现正常业务类</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PhoneServiceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">PhoneInterface</span></span>&#123;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updatePhone</span><span class="hljs-params">(Long phoneNum)</span> </span>&#123;
+        System.out.println(<span class="hljs-string">"update phoneNum is: -&gt; "</span> + phoneNum);
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><strong><em>静态代理业务类</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PhoneServiceProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">PhoneInterface</span> </span>&#123;
+
+    <span class="hljs-comment">/** 代理模式一般自行New对象, 反观装饰器模式则是传入对象 **/</span>
+    <span class="hljs-keyword">private</span> PhoneInterface phoneInterface;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PhoneServiceProxy</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.phoneInterface = <span class="hljs-keyword">new</span> PhoneServiceImpl();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">updatePhone</span><span class="hljs-params">(Long phoneNum)</span> </span>&#123;
+        before(phoneNum);
+        phoneInterface.updatePhone(phoneNum);
+        after();
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">before</span><span class="hljs-params">(Long phoneNum)</span> </span>&#123;
+        System.out.println(MessageFormat.format(<span class="hljs-string">"log start time:&#123;0&#125; , phoneNum is: &#123;1&#125;"</span>, <span class="hljs-keyword">new</span> Date(), phoneNum));
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> == phoneNum || String.valueOf(phoneNum).length() != <span class="hljs-number">11</span>) &#123;
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Update phoneNum fail, phoneNum is wrong."</span>);
+        &#125;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">after</span><span class="hljs-params">()</span> </span>&#123;
+        System.out.println(MessageFormat.format(<span class="hljs-string">"log end time:&#123;0&#125;"</span>, <span class="hljs-keyword">new</span> Date()));
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><font color="red">静态代理模式的设计思路：</font></p>
+<ul>
+<li>Proxy  代理类</li>
+<li>RealSubject  定义被代理的实体</li>
+<li>Subject  定义RealSubject和Proxy共用接口</li>
+</ul>
+<p>简单来说，</p>
+<ol>
+<li>需要一个普通接口及其普通实现类</li>
+<li>代理类同时实现该接口，自行new出对应实现类对象，对接口方法的前后增加额外操作</li>
+</ol>
+<blockquote>
+<p>如果看着有点模棱两可，建议看完本文后，访问专题设计模式开源项目，里面有具体的代码示例，链接在最下面</p>
+</blockquote>
+<h2 id="装饰器模式和代理模式的区别"><a href="#装饰器模式和代理模式的区别" class="headerlink" title="装饰器模式和代理模式的区别"></a>装饰器模式和代理模式的区别</h2><ul>
+<li>持有对象方式：代理模式一般是New，装饰器模式则是传入同一接口对象</li>
+<li>意图：装饰器模式意在增强方法功能，代理模式意在控制对象的访问（例如代码中增加校验）</li>
+</ul>
+<h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><p>刚才 HeadFirst核心代码 章节展示的是其静态代码的书写方式，如果所有的类都基于这样实现，那势必发生类膨胀的无解问题，因此真正常用的还是动态代理，分为两种 CGLIB | JDK动态代理</p>
+<h3 id="JDK-动态代理之MyBatis"><a href="#JDK-动态代理之MyBatis" class="headerlink" title="JDK 动态代理之MyBatis"></a>JDK 动态代理之MyBatis</h3><p><strong><em>注意事项：</em></strong></p>
+<ol>
+<li>JDK动态代理的本质是创造一个实现了同一个接口的Proxy代理类，去进行真正的调用</li>
+<li>JDK动态代理在实现中的本质是反射技术</li>
+<li>由于所有的代理类都实现了Proxy.class -&gt; 包括帮我们创造的代理类也是，因此由于JAVA单继承的特点，只能想要实现代理必须实现某一个接口</li>
+</ol>
+<p><strong><em>JDK 动态代理必不可少的三要素：InvocationHandler，newProxyInstance，invoke</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MybatisInvocation</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InvocationHandler</span> </span>&#123;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 代理指定的接口</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> tClass 接口class</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@param</span> &lt;T&gt;    接口类型</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span>  &lt;T&gt; <span class="hljs-function">T <span class="hljs-title">newProxyInstance</span><span class="hljs-params">(Class&lt;T&gt; tClass)</span> </span>&#123;
+        <span class="hljs-keyword">return</span> (T) Proxy.newProxyInstance(tClass.getClassLoader(), <span class="hljs-keyword">new</span> Class[]&#123;tClass&#125;, <span class="hljs-keyword">new</span> MybatisInvocation());
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(Object proxy, Method method, Object[] args)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+        <span class="hljs-keyword">if</span> (method.isAnnotationPresent(Select<span class="hljs-class">.<span class="hljs-keyword">class</span>)) </span>&#123;
+            Select select = method.getAnnotation(Select<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+            System.out.println(MessageFormat.format(<span class="hljs-string">"Method Name: &#123;0&#125; , Annotation Value is: &#123;1&#125;"</span>, method.getName(), select.value()));
+        &#125;
+
+        <span class="hljs-comment">// 获取到SQL及参数, 即可通过JDBC进行数据库操作查询数据, MyBatis不再神秘</span>
+        <span class="hljs-keyword">return</span> Arrays.asList(<span class="hljs-string">"I"</span>, <span class="hljs-string">" am"</span>, <span class="hljs-string">" Kerwin~"</span>);
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><strong><em>被代理的接口</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">MyBatis</span> </span>&#123;
+
+    <span class="hljs-meta">@Select</span>(<span class="hljs-string">"select * from demo"</span>)
+    <span class="hljs-function">List&lt;String&gt; <span class="hljs-title">select</span><span class="hljs-params">()</span></span>;
+&#125;</code></pre>
+
+
+
+<p><strong><em>测试调用</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+        <span class="hljs-comment">// JDK动态代理：模拟 MyBatis 核心代理阶段</span>
+        MyBatis batis = MybatisInvocation.newProxyInstance(MyBatis<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+        System.out.println(<span class="hljs-string">"Result:"</span> + batis.select());
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><strong><em>输出结果</em></strong></p>
+<pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Method Name: select , Annotation Value is: select * from demo</span>
+<span class="hljs-meta">#</span><span class="bash"> Result:[I,  am,  Kerwin~]</span></code></pre>
+
+
+
+<p><font color="red">MyBatis中的JDK 动态代理：</font>我们在使用MyaBtis的时候，肯定想过，它凭什么一个接口就可以输出结果，利用JDK 动态代理，可以非常方便的构建接口的代理，我们便可以在 <code>Invoke</code> 方法中大做文章，解析方法注解的值，解析其方法返回值，然后利用JDBC即可实现数据库查询实现一个简单ORM框架，推荐大家自行尝试一下</p>
+<h3 id="CGLIB-动态代理之AOP"><a href="#CGLIB-动态代理之AOP" class="headerlink" title="CGLIB 动态代理之AOP"></a>CGLIB 动态代理之AOP</h3><p><strong><em>基础使用</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PhoneCglibProxy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodInterceptor</span> </span>&#123;
+
+    Object target;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PhoneCglibProxy</span><span class="hljs-params">(Object o)</span> </span>&#123;
+        <span class="hljs-keyword">this</span>.target = o;
+    &#125;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">newProxyInstance</span><span class="hljs-params">()</span></span>&#123;
+
+        Enhancer en = <span class="hljs-keyword">new</span> Enhancer();
+
+        <span class="hljs-comment">// 设置要代理的目标类</span>
+        en.setSuperclass(target.getClass());
+
+        <span class="hljs-comment">// 设置要代理的拦截器</span>
+        en.setCallback(<span class="hljs-keyword">this</span>);
+
+        <span class="hljs-comment">// 生成代理类的实例</span>
+        <span class="hljs-keyword">return</span> en.create();
+    &#125;
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">intercept</span><span class="hljs-params">(Object o, Method method, Object[] objects, MethodProxy methodProxy)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;
+        System.out.println(MessageFormat.format(<span class="hljs-string">"Method Name is: &#123;0&#125; Params is: &#123;1&#125;"</span>, method.getName(), Arrays.toString(objects)));
+        <span class="hljs-keyword">return</span> methodProxy.invokeSuper(o, objects);
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><strong><em>测试调用</em></strong></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * CGLIB动态代理</span>
+<span class="hljs-comment">     *      如果类是final的，则无法生成代理对象，报错</span>
+<span class="hljs-comment">     *      如果方法是final的，代理无效</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * 关键代码：</span>
+<span class="hljs-comment">     *     1.PhoneCglibProxy 实现 MethodInterceptor 方法拦截器接口  同时实现其 newProxyInstance方法 -&gt; 该方法内容比较固定</span>
+<span class="hljs-comment">     *     2.通过代理工厂构建, 创建对象, 使用即可</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * Spring 3.2之后默认包含了cglib依赖</span>
+<span class="hljs-comment">     * 普通项目 CGLIB依赖如下:</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     *     &lt;dependency&gt;</span>
+<span class="hljs-comment">     *        &lt;groupId&gt;cglib&lt;/groupId&gt;</span>
+<span class="hljs-comment">     *        &lt;artifactId&gt;cglib-nodep&lt;/artifactId&gt;</span>
+<span class="hljs-comment">     *        &lt;version&gt;2.2.2&lt;/version&gt;</span>
+<span class="hljs-comment">     *     &lt;/dependency&gt;</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * 推荐代码阅读顺序：</span>
+<span class="hljs-comment">     *</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@see</span> PhoneServiceImpl</span>
+<span class="hljs-comment">     * <span class="hljs-doctag">@see</span> PhoneCglibProxy</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
+        PhoneServiceImpl phone = <span class="hljs-keyword">new</span> PhoneServiceImpl();
+
+        PhoneCglibProxy proxyFactory = <span class="hljs-keyword">new</span> PhoneCglibProxy(phone);
+        PhoneServiceImpl service = (PhoneServiceImpl) proxyFactory.newProxyInstance();
+        service.updatePhone(<span class="hljs-number">15186564812L</span>);
+    &#125;
+&#125;</code></pre>
+
+
+
+<p><font color="red">CGLIB 动态代理：</font>Spring 3.2之后默认包含了cglib依赖，在使用中也要注意 final 关键字会使CGLIB代理失效，另外<font color="red">Spring AOP 默认采用JDK 动态代理，同时配合CGLIB代理一起实现的</font>。</p>
+<h3 id="两种动态代理总结"><a href="#两种动态代理总结" class="headerlink" title="两种动态代理总结"></a>两种动态代理总结</h3><ul>
+<li>JDK 动态代理只能针对实现了接口的类的接口方法进行代理</li>
+<li>CgLib 动态代理基于继承来实现代理，所以无法对final类、private方法和static方法实现代理</li>
+</ul>
+<p><strong><em>Spring AOP</em></strong>：</p>
+<ul>
+<li>如果目标对象实现了接口，则默认采用JDK 动态代理</li>
+<li>如果目标对象没有实现接口，则采用CgLib 动态代理</li>
+<li>如果目标对象实现了接口，且强制CgLib 代理，则采用CgLib进行动态代理</li>
+</ul>
+<blockquote>
+<p>关于两种动态原理的实现原理可以查查其他的文章~</p>
+</blockquote>
+<h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><ul>
+<li>封装变化：在父级接口中提供 default 方法，子类实现其对应的状态方法即可</li>
+<li>多用组合，少用继承：代理模式经常和策略模式做对比，它们都是利用组合而非继承增强其变化和能力</li>
+</ul>
+<h2 id="什么场景适合使用代理模式"><a href="#什么场景适合使用代理模式" class="headerlink" title="什么场景适合使用代理模式"></a>什么场景适合使用代理模式</h2><p>当我们需要为额外控制对象方法的执行时，比如历史项目的接口都没有记录日志，在Spring环境下，我们可以对所有的Bean方法增加日志功能，又或是多数据源时，通过注解标明对应的数据源，解耦代码等等</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p><strong>附上GOF一书中对于代理模式的UML图：</strong></p>
+<p><img src="/2023/02/06/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/image-20200622012022768.png" srcset="/img/loading.gif" alt="image-20200622012022768"></p>
+<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<ul>
+<li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
+<li>提供了友好的阅读指导</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/172284a1c8caf324?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif" alt></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">代理模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一文入门DNS？从访问GitHub开始</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
+                        <span class="hidden-mobile">FastJson使用记录</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "代理模式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

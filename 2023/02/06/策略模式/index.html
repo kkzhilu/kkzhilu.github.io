@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>策略模式 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="策略模式篇"><a href="#策略模式篇" class="headerlink" title="策略模式篇"></a>策略模式篇</h1><h2 id="普遍定义"><a href="#普遍定义" class="headerlink" title="普遍定义"></a>普遍定义</h2><p>定义个一个算法族， 各个算法的实现可以相互替换， 算法的实现和具体的算法使用场景隔离</p>
+<h2 id="策略模式的进化"><a href="#策略模式的进化" class="headerlink" title="策略模式的进化"></a>策略模式的进化</h2><p>【<font color="orange">产品</font>】：我需要一堆鸭子，红色的，绿色的，黑色的，还要会飞！还要会叫！</p>
+<p>【<font color="blue">开发</font>】：明白，秒秒钟搞定，N种鸭子只要继承了我的Duck类然后重写，就搞定一切！</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
+    
+    <span class="hljs-comment">// 颜色属性</span>
+    String color;
+    
+    <span class="hljs-comment">// 飞行方法</span>
+    fly();
+    
+    <span class="hljs-comment">// 呱呱叫的方法</span>
+    quack();
+&#125;</code></pre>
+
+
+
+<p>Some times later…</p>
+<p>【<font color="red">BOSS</font>】：磕大头！你怎么回事！！！你能不能告诉我为什么橡皮鸭子会在天上飞！！！？？？</p>
+<p>【<font color="blue">开发</font>】：（不敢说话，只有内心独白： 原来无脑继承会出大问题啊…   我是谁…  我在哪…  我该怎么办…）</p>
+<p><img src="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/972352-07e55e231b95023f.webp" srcset="/img/loading.gif" alt="img"></p>
+<h3 id="磕大头的十万个问题"><a href="#磕大头的十万个问题" class="headerlink" title="磕大头的十万个问题"></a>磕大头的十万个问题</h3><p>Q1. 以后还有很多奇奇怪怪的情况，谁知道老板哪天要不要让橡皮鸭也飞起来，我该怎么办？</p>
+<p>Q2. 只用封装，继承好像不行，好像还有一个多态？</p>
+<p>Q3. 我该怎么使用多态呢？</p>
+<p>Q4. 我是不是可以把飞这个行为<font color="red"><strong>定义成接口，然后把这个接口……   放到鸭子基类里面去！！！</strong></font></p>
+<p><img src="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/972352-caa7a0b67a855303.webp" srcset="/img/loading.gif" alt="img"></p>
+<h2 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 飞行行为是动态的，可能会变的，因此抽成多个接口的组合，而不是让Duck类继承</span>
+<span class="hljs-comment">     */</span>
+    FlyBehavior flyBehavior;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * 每个鸭子的叫声不同，抽象成接口</span>
+<span class="hljs-comment">     */</span>
+    QuackBehavior quackBehavior;
+&#125;</code></pre>
+
+<p>这下子，好像真的就解决了呢，想怎么飞就怎么飞，想怎么叫就怎么叫</p>
+<h2 id="遵循的设计原则"><a href="#遵循的设计原则" class="headerlink" title="遵循的设计原则"></a>遵循的设计原则</h2><ul>
+<li>封装变化</li>
+<li>多用组合，少用继承</li>
+<li>针对接口编程，而不是针对实现编程</li>
+</ul>
+<h2 id="我之前的理解误区"><a href="#我之前的理解误区" class="headerlink" title="我之前的理解误区"></a>我之前的理解误区</h2><p>大家在初学Java的时候，肯定都绕不开设计模式这一Part，那个时候我对策略模式的认知是这样的，核心代码如下：</p>
+<pre><code class="hljs java"><span class="hljs-comment">// 不需要看全貌，就看这一段核心代码</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">strategyChoose</span><span class="hljs-params">(String mainName)</span></span>&#123;
+    <span class="hljs-keyword">switch</span> (name)&#123;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"A"</span>:
+            story = <span class="hljs-keyword">new</span> StoryB(name);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"B"</span>:
+            story = <span class="hljs-keyword">new</span> StoryA(name);
+            <span class="hljs-keyword">break</span>;
+        <span class="hljs-keyword">default</span>:
+            story = <span class="hljs-keyword">new</span> StoryB(name);
+            <span class="hljs-keyword">break</span>;
+    &#125;
+&#125;</code></pre>
+
+<p><font color="red"><strong>以下是错误理解：</strong></font></p>
+<p>我之前认为，策略模式，顾名思义就是定义不同的策略（即算法），然后动态的调用就好了，比如我定义A,B两种策略，然后通过Switch分支语句选择策略就可以</p>
+<p>这样理解的错误点在于：错误的理解了策略模式的重点，而误把工厂模式的策略选择当作策略模式</p>
+<p><font color="red"><strong>现在的理解：</strong></font></p>
+<ul>
+<li>设计模式肯定有其变种，我们不需要太拘泥于条条框框而限制了自我</li>
+<li>任何定义都有其普遍的理解，我们在突破自我的同时，不能完全走偏</li>
+<li>所以<font color="blue"><strong>真正的策略模式核心即：封装行为，依赖接口，组合代替继承</strong>  </font></li>
+</ul>
+<h2 id="为什么策略模式常和工厂模式或枚举混用？"><a href="#为什么策略模式常和工厂模式或枚举混用？" class="headerlink" title="为什么策略模式常和工厂模式或枚举混用？"></a>为什么策略模式常和工厂模式或枚举混用？</h2><p>首先我们知道了策略模式最初的起源和关键点：<strong>行为或者说算法的抽象及接口的组合</strong></p>
+<p>那么问题来了，在我们拥有多种策略的时候，策略的数量和类型会大大增加，那么调用N种策略肯定需要一个简单的逻辑进行更好的调用，那么策略枚举，或者简单工程则会成为我们最先考虑的方式之一，也正因为如此，才会有上文中我出现的理解误区</p>
+<h2 id="生活中的策略模式"><a href="#生活中的策略模式" class="headerlink" title="生活中的策略模式"></a>生活中的策略模式</h2><ul>
+<li><p>LOL里我喜欢玩奶妈，因为奶妈可以加血，那么在英雄技能设计上，加血是一种行为，具体的细节每个英雄都不一样，这就是策略模式的一种体现</p>
+</li>
+<li><p>比如支付场景中我们会抽取支付信息中的订单，状态，付款人，金钱等等信息，但是支付的细节可以是支付宝也可以是微信</p>
+</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>附上策略模式的UML图</p>
+<p><img src="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/image022.png" srcset="/img/loading.gif" alt="图 23. 策略模式的结构"></p>
+<p><img src="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png" srcset="/img/loading.gif" alt></p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E7%AC%AC4%E7%AB%A0%20%20Schema%20%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BC%98%E5%8C%96/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">第4章  Schema 与数据类型优化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E7%BC%96%E7%A8%8B%E6%B8%B8%E6%88%8F/">
+                        <span class="hidden-mobile">编程游戏</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "策略模式&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

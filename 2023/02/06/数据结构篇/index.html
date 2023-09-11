@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <title>数据结构篇 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-02-06 23:36">
+      2023年2月6日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      15.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      199
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="一、线性表"><a href="#一、线性表" class="headerlink" title="一、线性表"></a>一、线性表</h2><blockquote>
+<p>概念：线性表是最常用且最简单的一种数据结构，它是n个数据元素的有限序列</p>
+<p>实现线性表的方式一般有两种，一种是使用数组存储线性表的元素，即用一组连续的存储单元依次存储线性表的数据元素</p>
+<p>另一种是使用链表存储线性表的元素，即用一组任意的存储单元存储线性表的数据元素（存储单元可以是连续的，也可以是不连续的）</p>
+</blockquote>
+<h3 id="1-1-数组"><a href="#1-1-数组" class="headerlink" title="1.1 数组"></a>1.1 数组</h3><blockquote>
+<p>概念：数组是一种大小固定的数据结构，对线性表的所有操作都可以通过数组来实现</p>
+<p>虽然数组一旦创建之后，它的大小就无法改变了，但是当数组不能再存储线性表中的新元素时，我们可以创建一个新的大的数组来替换当前数组,这样就可以使用数组实现动态的数据结构</p>
+<p>寻址公式，计算出该元素存储的内存地址：</p>
+<pre><code class="hljs a[i]_address">
+数组支持随机访问，根据下标随机访问的时间复杂度为 O(1)
+
+
+
+上述的寻址公式也揭示了为什么数组下标一般从0开始，因为index索引位置，其实表示偏移量，如果一般情况从1开始，表示无偏移量则会写成 (i - 1) * xxxxx  这样CPU的操作就会又多了一次，效率肯定会降低一些，另外C语言是众多高级语言的初期领导者，也是为了一定程度的照顾开发者的使用习惯吧
+
+
+
+数组由于其结构特点，当删除元素的时，为了保证内存连续性，后置的元素需要前移，这样效率就会低，但是我们也可以通过记录被删除元素的位置，实现&#96;&#96;&#96;假删除&#96;&#96;&#96;，当存储空间不够，或者达到某一要求后，一次性删除所有应该删除的元素，然后元素移动只需要移动一次（移动的位置多了，但是不影响效率）即可
+
+上述的思路其实也是Java GC的标记清除算法的核心思想，即：
+
+ 大多数主流虚拟机采用可达性分析算法来判断对象是否存活，在标记阶段，会遍历所有 GC ROOTS，将所有 GC ROOTS 可达的对象标记为存活。只有当标记工作完成后，清理工作才会开始。
+
+不足：
+
+1.效率问题。标记和清理效率都不高，但是当知道只有少量垃圾产生时会很高效
+
+2.空间问题。会产生不连续的内存空间碎片
+
+
+
+**相关代码**
+
+&#96;&#96;&#96;创建一个更大的数组来替换当前的数组 </code></pre>
+</blockquote>
+<pre><code class="hljs java"><span class="hljs-comment">/***</span>
+<span class="hljs-comment"> * 数组扩容</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> oldArray  oldArray</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> newArray  newArray</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] expansione (<span class="hljs-keyword">int</span>[] oldArray, <span class="hljs-keyword">int</span>[] newArray) <span class="hljs-keyword">throws</span> Exception &#123;
+    <span class="hljs-keyword">if</span> (oldArray.length &gt; newArray.length) &#123;
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Exception(<span class="hljs-string">"oldArray is more than newArray"</span>);
+    &#125;
+
+    <span class="hljs-comment">// method one</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; oldArray.length; i++) &#123;
+        newArray[i] = oldArray[i];
+    &#125;
+
+    <span class="hljs-comment">// JDK Method</span>
+    <span class="hljs-comment">// System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);</span>
+    <span class="hljs-keyword">return</span> newArray;
+&#125;</code></pre>
+
+
+
+ <pre><code class="hljs 在数组位置index上添加元素e">
+&#96;&#96;&#96;java
+&#x2F;***
+ * 指定位置添加某一元素
+ * @param array  数组
+ * @param index  索引位置
+ * @param num    num元素
+ *&#x2F;
+private static void addElement (int[] array, int index, int num) throws Exception &#123;
+    if (index &gt;&#x3D; array.length) &#123;
+        throw new Exception(&quot;index value is more than array length&quot;);
+    &#125;
+
+    &#x2F;&#x2F; 针对最后一位直接处理
+    if (index &#x3D;&#x3D; array.length - 1) &#123;
+        array[index] &#x3D; num;
+        return;
+    &#125;
+
+    for (int i &#x3D; index; i &lt; array.length; i++) &#123;
+        array[index + 1] &#x3D; array[index];
+    &#125;
+
+    array[index] &#x3D; num;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常见算法：二分法```">
+&#96;&#96;&#96;java
+&#x2F;**
+ * 二分法查找 | 要求为有序数组
+ * @param array  数组
+ * @param num    元素
+ *&#x2F;
+private static boolean search (int[] array, int num) &#123;
+    if (array.length &#x3D;&#x3D; 0) &#123;
+        return false;
+    &#125;
+
+    int left  &#x3D; 0;
+    int right &#x3D; array.length - 1;
+    while (left &lt;&#x3D; right) &#123;
+        int mid &#x3D; (left + right) &#x2F; 2;
+        if (array[mid] &#x3D;&#x3D; num) &#123;
+            return true;
+        &#125; else if (array[mid] &gt; num) &#123;
+            right &#x3D; mid;
+        &#125; else &#123;
+            &#x2F;&#x2F; 因为mid 肯定不是，因此可以多 + 1
+            left &#x3D; mid + 1;
+        &#125;
+    &#125;
+    return false;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常见问题：找数问题">
+&gt; 1001数求和 减去 1000数求和即得到答案
+
+
+
+&#96;&#96;&#96;常见问题：数组逆置</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-comment">/***</span>
+<span class="hljs-comment"> * 数组逆置</span>
+<span class="hljs-comment"> * <span class="hljs-doctag">@param</span> array array</span>
+<span class="hljs-comment"> */</span>
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">reverse</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>[] array)</span> </span>&#123;
+    <span class="hljs-keyword">int</span> start = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> end   = array.length - <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">int</span> temp  = <span class="hljs-number">0</span>;
+
+    <span class="hljs-keyword">while</span> (start &lt; end) &#123;
+        temp         = array[start];
+        array[start] = array[end];
+        array[end]   = temp;
+        start++;
+        end--;
+    &#125;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常见问题：两数求和```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * 两数求和 LeeCode Q1
+ * 给定一个整数数组和一个目标值，找出数组中和为目标值的两个数
+ * 你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用
+ *&#x2F;
+private static int[] twoNumSum(int[] array, int target) &#123;
+    Map&lt;Integer, Integer&gt; map &#x3D; new HashMap&lt;&gt;(array.length);
+    for (int i &#x3D; 0; i &lt; array.length; i++) &#123;
+        int num &#x3D; target - array[i];
+        if (map.containsKey(num)) &#123;
+            return new int[] &#123;map.get(num), i&#125;;
+        &#125;
+        map.put(array[i], i);
+    &#125;
+    return null;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs JDK">
+&#96;&#96;&#96;java
+&#x2F;&#x2F; Arrays.binarySearch  二分查找
+&#x2F;&#x2F; Arrays.equals        判断两个数组是否相同 (值)
+&#x2F;&#x2F; Arrays.toString()    按特定格式打印数组
+&#x2F;&#x2F; Arrays.fill()        数据填充 (循环赋值)
+&#x2F;&#x2F; Arrays.sort()        排序
+&#x2F;&#x2F; System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);   从旧数组某处复制到新数组某处开始
+&#x2F;&#x2F; Arrays.copyOf()      数组拷贝 -&gt; 拷贝指定length的长度数组
+&#x2F;&#x2F; Arrays.asList()      数组转化为集合
+&#x2F;&#x2F; Arrays.hashCode()    获取数据的hashcode</code></pre>
+
+
+
+<h3 id="1-2-链表"><a href="#1-2-链表" class="headerlink" title="1.2 链表"></a>1.2 链表</h3><blockquote>
+<p>概念：链表是一种物理存储单元上非连续、非顺序的存储结构，数据元素的逻辑顺序是通过链表中的指针链接次序实现的链表由一系列节点组成，这些节点不必在内存中相连</p>
+<p>PS：数组需要内存连续，如果一个数组构建需要100M，剩下的空间大于100M但是不连续，仍然会申请失败，而链表则不同，内存不需要连续</p>
+<p>每个节点由数据部分Data和链部分Next，Next指向下一个节点，这样当添加或者删除时，只需要改变相关节点的Next的指向，效率很高 O(1)，遍历则是O(n)</p>
+</blockquote>
+<h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/1571130997512.png" srcset="/img/loading.gif" alt="1571130997512"></p>
+<h4 id="循环链表-（特殊的单链表）"><a href="#循环链表-（特殊的单链表）" class="headerlink" title="循环链表 （特殊的单链表）"></a>循环链表 （特殊的单链表）</h4><p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/1571131035351.png" srcset="/img/loading.gif" alt="1571131035351"></p>
+<h4 id="双向链表-（如-LinkedHashMap）"><a href="#双向链表-（如-LinkedHashMap）" class="headerlink" title="双向链表 （如 LinkedHashMap）"></a>双向链表 （如 LinkedHashMap）</h4><p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/1571131079625.png" srcset="/img/loading.gif" alt="1571131079625"></p>
+<blockquote>
+<p>真实使用场景：双向链表更多</p>
+<p>为什么？ 因此双向链表支持向前，向后遍历，在很多场景比单链表更灵活</p>
+<p>平均下来所耗时间比单链表少一半 （用空间换时间的思想）</p>
+</blockquote>
+<pre><code class="hljs 常用链表代码：LRU缓存淘汰算法```">
+&#96;&#96;&#96;java
+&#x2F;**
+ * ******************************
+ * author：      柯贤铭
+ * createTime:   2019&#x2F;10&#x2F;15 17:36
+ * description:  Linked LRU 单链表实现LRU算法
+ *               缓存淘汰算法
+ *               思路  如果此时缓存未满，则将此结点直接插入到链表的头部
+ *                     如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部
+ * version:      V1.0
+ * ******************************
+ *&#x2F;
+public class LinkedLRUApp &#123;
+
+    &#x2F;&#x2F; 头节点
+    private LinkedApp.LinkedNode head;
+
+    &#x2F;&#x2F; size
+    private int size;
+
+    &#x2F;&#x2F; 最大容量
+    private int maxSize;
+
+    &#x2F;**
+     * Demo 版本 以数组作为原始数据
+     *           缓存容量为数组的 2 倍
+     *&#x2F;
+    public LinkedLRUApp (int[] array) &#123;
+        LinkedApp.LinkedNode[] nodes &#x3D; new LinkedApp.LinkedNode[array.length];
+        for (int i &#x3D; 0; i &lt; nodes.length; i++) &#123;
+            LinkedApp.LinkedNode current &#x3D; new LinkedApp.LinkedNode();
+            current.setVal(array[i]);
+            nodes[i] &#x3D; current;
+        &#125;
+
+        &#x2F;&#x2F; 设置链表next
+        for (int i &#x3D; 0; i &lt; nodes.length; i++) &#123;
+            if (i &#x3D;&#x3D; nodes.length - 1)
+                break;
+            nodes[i].setNext(nodes[i + 1]);
+        &#125;
+
+        head &#x3D; nodes[0];
+
+        &#x2F;&#x2F; 设置size
+        size    &#x3D; array.length;
+
+        &#x2F;&#x2F; 最大容量为 2倍数组长度
+        maxSize &#x3D; size * 2;
+    &#125;
+
+    &#x2F;&#x2F; 获取容量
+    public int getSize () &#123;return size;&#125;
+
+    &#x2F;&#x2F; 打印缓存链表
+    public void printLinkedLRU () &#123;
+        System.out.println(head);
+    &#125;
+
+    &#x2F;***
+     * 添加缓存数据
+     * 如果此时缓存未满，则将此结点直接插入到链表的头部
+     * 如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部
+     *&#x2F;
+    public void addNum (int target) &#123;
+
+        LinkedApp.LinkedNode currentHead &#x3D; head;
+        head &#x3D; new LinkedApp.LinkedNode();
+        head.setVal(target);
+        head.setNext(currentHead);
+
+        &#x2F;&#x2F; 未满
+        if (size &lt; maxSize) &#123;
+            size++;
+            System.out.println(&quot;LRU :: 未满, 插入数据 &#x3D;&gt; &quot; + target);
+        &#125; else &#123;
+            LinkedApp.LinkedNode current &#x3D; head;
+            while (current.getNext() !&#x3D; null &amp;&amp; current.getNext().getNext() !&#x3D; null) &#123;
+                current &#x3D; current.getNext();
+            &#125;
+            current.setNext(null);
+            System.out.println(&quot;LRU :: 已满, 添加的数为: &quot; + target);
+        &#125;
+    &#125;
+    
+    public static void main(String[] args)&#123;
+        int[] array &#x3D; &#123;4, 8, 6&#125;;
+        LinkedLRUApp linkedLRUApp &#x3D; new LinkedLRUApp(array);
+        linkedLRUApp.printLinkedLRU();
+
+        for (int i &#x3D; 0; i &lt; 10; i++) &#123;
+            int target &#x3D; (int) (Math.random() * 20);
+            linkedLRUApp.addNum(target);
+            linkedLRUApp.printLinkedLRU();
+        &#125;
+    &#125;
+
+    &#x2F;*protected static class LinkedNode &#123;
+        private int val;
+
+        private LinkedNode next;
+
+        public int getVal() &#123;
+            return val;
+        &#125;
+
+        public void setVal(int val) &#123;
+            this.val &#x3D; val;
+        &#125;
+
+        public LinkedNode getNext() &#123;
+            return next;
+        &#125;
+
+        public void setNext(LinkedNode next) &#123;
+            this.next &#x3D; next;
+        &#125;
+
+        @Override
+        public String toString() &#123;
+            return &quot;[&quot; + &quot;val: &quot; + val + &quot;] &#x3D;&#x3D;&#x3D;&gt; &quot; + next;
+        &#125;
+    &#125;*&#x2F;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：去除头节点```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * 链表去除头节点
+ *&#x2F;
+private static LinkedNode removeHeadNode (LinkedNode node) &#123;
+    if (node &#x3D;&#x3D; null || node.getNext() &#x3D;&#x3D; null) &#123;
+        return node;
+    &#125;
+    return node &#x3D; node.getNext();
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：链表反转```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * LeeCode 206:
+ * [val: 12] &#x3D;&#x3D;&#x3D;&gt; [val: 7] &#x3D;&#x3D;&#x3D;&gt; [val: 6] &#x3D;&#x3D;&#x3D;&gt; [val: 3] &#x3D;&#x3D;&#x3D;&gt; null
+ * 即每次取出一个节点作为新的头, 利用变量存储，每次再取一个新的，然后设置之前存储的 &#x3D;&#x3D;&#x3D;&gt;
+ * 12         7-&gt;6-&gt;3
+ * 7-&gt;12      6-&gt;3
+ * 6-&gt;7-&gt;12   3
+ * 结果：3-&gt;6-&gt;7-&gt;12
+ *&#x2F;
+private static void reverser (LinkedNode head) &#123;
+    LinkedNode prev &#x3D; null;
+    LinkedNode curr &#x3D; head;
+    while (curr !&#x3D; null) &#123;
+        LinkedNode next &#x3D; curr.getNext();
+        curr.setNext(prev);
+        prev &#x3D; curr;
+        curr &#x3D; next;
+    &#125;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：判断是否包含环状链表```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * LeeCode 141: 判断是否是环状链表
+ * 判断循环一周的方式是: p-&gt;next&#x3D;&#x3D;head-&gt;next
+ *&#x2F;
+private static boolean hasCycle (LinkedNode head) &#123;
+    Map&lt;LinkedNode, LinkedNode&gt; map &#x3D; new HashMap&lt;&gt;();
+    while (head !&#x3D; null &amp;&amp; head.getNext() !&#x3D; null) &#123;
+        if (map.containsKey(head)) &#123;
+            return true;
+        &#125; else &#123;
+            map.put(head, head);
+        &#125;
+        head &#x3D; head.getNext();
+    &#125;
+    return false;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：合并两个有序链表```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * 哨兵节点 -&gt; 创建一个空值逻辑头节点, 简化实现难度
+ * LeeCode 21: 合并两个有序链表
+ * 把两个有序链表合并成一个
+ *&#x2F;
+private static LinkedNode mergeTwoLists(LinkedNode l1, LinkedNode l2) &#123;
+    System.out.println(&quot;*******************************************&quot;);
+    System.out.println(&quot;L1: -&gt; &quot; + l1);
+    System.out.println(&quot;L2: -&gt; &quot; + l2);
+
+    LinkedNode result  &#x3D; new LinkedNode();
+    LinkedNode current &#x3D; result;
+    while (l1 !&#x3D; null &amp;&amp; l2 !&#x3D; null) &#123;
+        if (l1.val &lt; l2.val) &#123;
+            current.next &#x3D; l1;
+            current &#x3D; current.next;
+            l1 &#x3D; l1.next;
+        &#125; else &#123;
+            current.next &#x3D; l2;
+            current &#x3D; current.next;
+            l2 &#x3D; l2.next;
+        &#125;
+    &#125;
+
+    &#x2F;&#x2F; 拼接剩下的链表
+    current.next &#x3D; (l1 !&#x3D; null ? l1 : l2);
+    return result.next;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：删除链表的倒数第N个节点```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * LeeCode 19: 删除链表的倒数第N个节点
+ * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点
+ *
+ * 示例：
+ * 给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n &#x3D; 2.
+ * 当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.
+ *&#x2F;
+private static LinkedNode removeNthFromEnd(LinkedNode head, int n) &#123;
+    System.out.println(&quot;*****************************************&quot;);
+    System.out.println(&quot;原结点Node: &quot; + head);
+
+    &#x2F;&#x2F; 一次遍历获取长度
+    LinkedNode current &#x3D; head;
+    int length &#x3D; 0;
+    while (current !&#x3D; null) &#123;
+        current &#x3D; current.next;
+        length++;
+    &#125;
+
+    &#x2F;&#x2F; 利用哨兵解决边界情况
+    LinkedNode dummy &#x3D; new LinkedNode();
+    dummy.next &#x3D; head;
+
+    &#x2F;&#x2F; 二次遍历确定 需要删除的前一个节点的位置
+    LinkedNode linkedNode &#x3D; dummy;
+    length &#x3D; length - n;
+    while (length &gt; 0) &#123;
+        linkedNode &#x3D; linkedNode.next;
+        length--;
+    &#125;
+
+    &#x2F;&#x2F; 删除节点
+    linkedNode.next &#x3D; linkedNode.next.next;
+    return dummy.next;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：链表的中间结点```">
+&#96;&#96;&#96;java
+&#x2F;***
+ * LeeCode 876: 链表的中间结点 | 利用哨兵解决边界情况
+ * 给定一个带有头结点 head 的非空单链表，返回链表的中间结点
+ * 如果有两个中间结点，则返回第二个中间结点
+ *&#x2F;
+private static LinkedNode middleNode(LinkedNode head) &#123;
+    System.out.println(&quot;*****************************************&quot;);
+    System.out.println(&quot;原结点Node: &quot; + head);
+
+    &#x2F;&#x2F; 一次遍历获取长度
+    LinkedNode current &#x3D; head;
+    int length &#x3D; 0;
+    while (current !&#x3D; null) &#123;
+        current &#x3D; current.next;
+        length++;
+    &#125;
+
+    &#x2F;&#x2F; 利用哨兵解决边界情况
+    LinkedNode dummy &#x3D; new LinkedNode();
+    dummy.next &#x3D; head;
+
+    &#x2F;&#x2F; 中间节点规则 | 根据题意无论奇偶都是该规则
+    LinkedNode linkedNode &#x3D; dummy;
+    int middleIndex &#x3D; length &#x2F; 2 + 1;
+    int index &#x3D; 0;
+
+    &#x2F;&#x2F; 把结点处理到中间结点位置
+    while (index &lt; middleIndex) &#123;
+        linkedNode &#x3D; linkedNode.next;
+        index++;
+    &#125;
+    return linkedNode;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 常用链表代码：两两交换链表中的元素（递归法）```">
+</code></pre>
+<p>题目：给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。<br>     你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。<br>示例：输入1-&gt;2-&gt;3-&gt;4<br>     输出2-&gt;1-&gt;4-&gt;3</p>
+<p>public class ListNode {<br>    int val;<br>    ListNode list;<br>    ListNode(int x) { val = x; }<br>}<br>public ListNode swapPairs(ListNode head) {<br>        //1.递归结束的条件：当链表为空时或链表只剩一个元素<br>        if(head == null || head.next == null){<br>            return head;<br>        }<br>       //3.本次递归的任务是交换三个节点中前两个节点的位置<br>       //交换三个节点的位置：head - next - swapPairs(n.next) -&gt; next - head-swapPairs(n.next)<br>        ListNode n = head.next;<br>        head.next = swapPairs(n.next);<br>        n.next = head;<br>        //2.需要返回给上一级的内容<br>        return n;<br>    }</p>
+<p>递归三要素：<br>1.结束递归的条件？<br>2.需要返回给上一级的内容？<br>3.本次递归的任务是什么？</p>
+<pre><code class="hljs">
+
+
+### 1.3 应用场景对比</code></pre>
+<p>数组：优点.查找数据的时候效率比较高；<br>     缺点.在改变数据个数时，增加、插入、删除数据效率比较低<br>         所需要的内容空间是连续的，容易造成out of memory<br>应用场景<br>    1.数据比较少；<br>    2.经常做的运算是按序号访问数据元素；<br>    3.数组更容易实现，任何高级语言都支持；<br>    4.构建的信息表较稳定；</p>
+<p>链表：优点.动态申请内存空间，数据增加和删除以及插入比数组灵活；<br>         天然支持扩容；<br>     缺点.查找数据的时候效率比较低<br>应用场景<br>    1.对线性表的长度或者规模难以估计；<br>    2.插入删除操作效率较高； （但会导致频繁的内存申请和释放，容易造成内存碎片，Java语言的话容易频发GC）<br>    3.构建动态性比较强的线性表；</p>
+<p>PS: CPU在从内存读取数据的时候，会先把读取到的数据加载到CPU的缓存中。而CPU每次从内存读取数据并不是只读取那个特定要访问的地址，而是读取一个数据块并保存到CPU缓存中，然后下次访问内存数据的时候就会先从CPU缓存开始查找，如果找到就不需要再从内存中取。这样就实现了比内存访问速度更快的机制，也就是CPU缓存存在的意义:为了弥补内存访问速度过慢与CPU执行速度快之间的差异而引入</p>
+<p>对于数组来说，存储空间是连续的，所以在加载某个下标的时候可以把以后的几个下标元素也加载到CPU缓存这样执行速度会快于存储空间不连续的链表存储</p>
+<pre><code class="hljs">
+
+
+## 二、堆、栈与队列
+
+### 2.1 栈（stack）
+
+&gt; 概念：它是一种运算受限的线性表,后进先出(LIFO)或者说先进后出(FILO)
+&gt;
+&gt;   1.LIFO(last in first out)意思是后进入的元素, 第一个弹出栈空间
+&gt;   2.其限制是仅允许在表的一端进行插入和删除运算。这一端被称为栈顶，相对地，把另一端称为栈底
+&gt;   3.向一个栈插入新元素又称作进栈、入栈或压栈，它是把新元素放到栈顶元素的上面，使之成为新的栈顶元素
+&gt;   4.从一个栈删除元素又称作出栈或退栈，它是把栈顶元素删除掉，使其相邻的元素成为新的栈顶元素
+&gt;
+&gt; 举例
+&gt; 生活中：邮件、自助餐的托盘
+&gt; 程序中：函数调用栈
+
+
+
+```实现一个栈:  定义栈结构，实现入栈出栈操作</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">stack</span> </span>&#123;
+	ArrayList&lt;Object&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    
+    <span class="hljs-comment">// 入栈</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(Object o)</span></span>&#123;
+        list.add(o);
+    &#125;
+    
+    <span class="hljs-comment">// 出栈</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">pop</span><span class="hljs-params">()</span></span>&#123;
+        Object o = list.get(list.size() - <span class="hljs-number">1</span>);
+        list.remove(o);
+        <span class="hljs-keyword">return</span> o;
+    &#125;
+    
+    <span class="hljs-comment">//栈是否为空</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> list.isEmpty();
+    &#125;
+    
+    <span class="hljs-comment">//栈大小</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> list.size();
+    &#125;
+    
+    <span class="hljs-comment">//打印栈元素</span>
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span></span>&#123;
+        <span class="hljs-keyword">return</span> String.valueOf(list);
+    &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+	<span class="hljs-comment">//创建一个栈</span>
+    Stack stack = <span class="hljs-keyword">new</span> Stack();
+    <span class="hljs-comment">//入栈</span>
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;i++)&#123;
+		stack.push(i);
+    &#125;
+    <span class="hljs-comment">//出栈</span>
+    <span class="hljs-keyword">while</span>(!stack.isEmpty())&#123;
+		System.out.println(<span class="hljs-string">"栈："</span> + stack.toString() + <span class="hljs-string">"\t栈大小为："</span> + stack.size() + <span class="hljs-string">"\t出栈元素为："</span> + stack.pop());
+	&#125;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 实现一个栈:">
+&#96;&#96;&#96;java
+&#x2F;***
+ * LeeCode 20  判断有效的括号
+ * 巧用Map反向构建匹配关系, 利用栈去匹配是否一致
+ * s: []()&#123;&#125;]]]
+ *&#x2F;
+private static boolean isValid(String str) &#123;
+    Map&lt;Character, Character&gt; map &#x3D; new HashMap&lt;&gt;();
+    map.put(&#39;&#125;&#39;, &#39;&#123;&#39;);
+    map.put(&#39;)&#39;, &#39;(&#39;);
+    map.put(&#39;]&#39;, &#39;[&#39;);
+
+    Stack&lt;Character&gt; stack &#x3D; new Stack&lt;&gt;();
+    for (int i &#x3D; 0; i &lt; str.length(); i++) &#123;
+        Character character &#x3D; str.charAt(i);
+        if (map.containsKey(character) &amp;&amp; !stack.empty()) &#123;
+            Character tep &#x3D; stack.pop();
+            if (map.get(character) !&#x3D; tep) &#123;
+                return false;
+            &#125;
+        &#125; else &#123;
+            stack.push(character);
+        &#125;
+    &#125;
+    return stack.empty();
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs 问：Java">
+内存中的堆栈和数据结构堆栈不是一个概念，JVM中的堆栈是实际存在的存储区域，数据结构中的堆栈是抽象的数据存储结构
+
+但是JVM栈确实运用了栈的数据结构 &#x3D;&#x3D;&#x3D;》
+
+**为什么函数调用要用“栈”来保存临时变量呢？用其他数据结构不行吗？**
+
+其实，我们不一定非要用栈来保存临时变量，只不过如果这个函数调用符合后进先出的特性，用栈这种数据结构来实现，是最顺理成章的选择。
+
+从调用函数进入被调用函数，对于数据来说，变化的是什么呢？是作用域。所以根本上，只要能保证每进入一个新的函数，都是一个新的作用域就可以。而要实现这个，用栈就非常方便。在进入被调用函数的时候，分配一段栈空间给这个函数的变量，在函数结束的时候，将栈顶复位，正好回到调用函数的作用域内。  
+
+
+
+#### 栈的应用场景</code></pre>
+<p>1.子程序的调用：在跳往子程序前，会将下个指令的地址存到堆栈中，直到子程序执行完后再将地址取出，以回到原来的程序中<br>2.处理递归调用：和子程序的调用类似，只是出了存储下一个指令的地址外，也将参数、区域变量等数据存入堆栈中<br>3.逆序输出<br>4.表达式的转换[中缀表达式转后缀表达式]与求值<br>5.二叉树的遍历<br>6.图的深度优先(depth-first)搜索法<br>7.数制转换：通过求余法，每次将余数进栈，最后将所有余数出栈即可<br>8.括号匹配校验<br>9.迷宫求解<br>10.实现递归-汉诺塔</p>
+<pre><code class="hljs">
+
+
+### 2.2 堆（heap）
+
+&gt; 概念：堆通常是一个可以被看做一棵树的数组对象。堆总是满足下列性质
+&gt;  1.堆中某个节点的值总是不大于或不小于其父节点的值；
+&gt;  2.堆总是一棵完全二叉树
+&gt;
+&gt; 
+&gt;
+&gt; 大顶堆：堆顶元素（即第一个元素）为最大项，
+&gt; 小顶堆：堆顶元素为最小项
+
+![1573396417450](数据结构篇/1573396417450.png)
+
+```堆的存储</code></pre>
+
+<p>堆 -&gt; 完全二叉树 -&gt; 完全二叉树非常适用于数组存储</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/4d349f57947df6590a2dd1364c3b0b1e.jpg" srcset="/img/loading.gif" alt="img"></p>
+<h4 id="堆的插入"><a href="#堆的插入" class="headerlink" title="堆的插入"></a>堆的插入</h4><blockquote>
+<p>往堆中插入一个元素后，我们需要继续满足堆的两个特性 需要调整堆，这个过程叫堆化</p>
+<p>堆化实际上有两种，从下往上和从上往下</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/e578654f930002a140ebcf72b11eb722-1573396645980.jpg" srcset="/img/loading.gif" alt="img"></p>
+<pre><code class="hljs 堆化非常简单，就是顺着节点所在的路径，向上或者向下，对比，然后交换```">
+
+
+#### 删除堆顶元素
+
+为了避免数组空洞（不符合完全二叉树的定义）
+
+有一个巧妙的方式，即把数组最后一位移到堆顶，利用自上而下的方式进行交换（堆化）即可
+
+
+
+#### 堆的构建及堆排序
+
+&#96;&#96;&#96;java
+&#x2F;***
+    * 什么是堆:
+    * 堆的实质就是完全二叉树，因此适合用数组存储
+    *
+    * 特性：
+    * 每个节点的值都大于等于或者小于等于子树每个节点的值
+    * 因此称之为大顶堆和小顶堆
+    *
+    * 插入 -&gt; 堆化调整结构
+    * 方式一：从下往上，即对比数据，交换节点即可
+    * 方式二: 从上往下，从上至下的对比数据，交换节点即可
+    *
+    *
+    * 删除堆顶元素：
+    * 为了避免数组空洞（不符合完全二叉树的定义）
+    * 有一个巧妙的方式，即把数组最后一位移到堆顶，利用自上而下的方式进行交换（堆化）即可
+    *
+    * 建堆：
+    * 思路一: 我们可以假设堆中只包含一个数据，根据堆本身的特点，调用插入操作即可（从前往后处理数据）
+    *
+    * 思路二: 从后往前处理数据，每个数据都是从上往下堆化
+    *
+    * 堆排序:
+    * 建堆结束之后，数组中的数据已经是按照大顶堆的特性来组织的
+    * 数组中的第一个元素就是堆顶，也就是最大的元素
+    * 我们把它跟最后一个元素交换，那最大元素就放到了下标为 n 的位置
+    * 然后循环操作直到数据剩一即可实现排序
+    *&#x2F; </code></pre>
+</blockquote>
+<h4 id="堆的应用场景"><a href="#堆的应用场景" class="headerlink" title="堆的应用场景"></a>堆的应用场景</h4><blockquote>
+<pre><code class="hljs 优先级队列```"> 在优先级队列中，数据的出队顺序不是先进先出，而是按照优先级来，优先级最高的，最先出队
+
+Q1：如何实现一个高性能定时器
+
+利用堆，可以很方便的实现（用数组的话需要遍历所有任务是否到达指定时间）
+
+关键点：利用小顶堆可以知道最小执行时间在哪里，然后程序可以多等待几秒再来执行，每次执行不用扫描全部数据
+
+
+
+&#96;&#96;&#96;利用堆求 Top K </code></pre>
+
+<p>维护一个大小为K的小顶堆，顺序遍历数组，从数组中取出数据与堆顶元素比较。如果比堆顶元素大，我们就把堆顶元素删除，并且将这个元素插入到堆中；如果比堆顶元素小，则不做处理，继续遍历数组。这样等数组中的数据都遍历完之后，堆中的数据就是前 K 大数据了</p>
+<pre><code class="hljs 利用堆求中位数```">
+对于静态不变的数据，进行排序即可，简单处理
+
+但是对于动态数据，利用堆方可更好的解决：
+
+我们需要维护两个堆，一个大顶堆，一个小顶堆，大顶堆存储前半部分数据，小顶堆存储后半部分数据，且小顶堆中的数据都大于大顶堆中的数据
+
+
+
+当插入数据的时候，根据大小插入到前半部分或者后半部分，同时主动通过移动堆顶元素，保持两个部分的平衡即可
+
+
+
+&#96;&#96;&#96;利用堆求百分之99响应时间 </code></pre>
+
+<p>思路和中位数一致：</p>
+<p>维护两个堆，一个大顶堆，一个小顶堆。假设当前总数据的个数是 n，大顶堆中保存 n * 99% 个数据，小顶堆中保存 n * 1% 个数据</p>
+<p>大顶堆堆顶的数据就是我们要找的数据</p>
+<pre><code class="hljs 真实问题：如何处理10亿关键字，求出TOP10```">
+求top多少一定需要使用堆这种数据结构，但是使用堆的前提是我们需要获得每个关键字的数量，因此可以对文件进行遍历，通过哈希表得到每个关键字的数量，然后通过堆进行求TOP10的操作
+
+但是如果限定内存只有1G呢，我们可以用分治的思路，通过对文件关键字进行哈希，然后对10取模，把文件分散到10个文件中，这样每个文件就是包含了若干个关键字的文件总集，然后利用哈希表扫描，存储关键字的重复次数
+
+得到最终的关键字-次数数据后，构建堆，即可轻松获取TOP的排名了
+
+启发：
+
+1. 真实问题的处理场景一定不能太过狭隘，使用单一数据结构，不现实
+
+2. 哈希表的成功性，通用性
+3. 不可一叶障目，比如得到TOP10的堆之后，如何获取排名呢？堆怎么获取排名呢？堆利用数组存储，10个长度而已直接利用排序即可，又或者取10次堆顶元素即可
+
+
+
+#### Java 关于堆的API
+
+&#96;&#96;&#96;java
+public static void main(String[] args)&#123;
+   &#x2F;&#x2F; 默认构建小顶堆
+   PriorityQueue&lt;Integer&gt; minHeap &#x3D; new PriorityQueue&lt;&gt;();
+   minHeap.offer(8);
+   minHeap.offer(5);
+   minHeap.offer(3);
+   minHeap.offer(4);
+   minHeap.offer(2);
+
+   while(!minHeap.isEmpty()) &#123;
+       &#x2F;&#x2F; poll取堆顶元素
+       System.out.println(minHeap.poll());
+   &#125;
+&#125; </code></pre>
+</blockquote>
+<h3 id="2-3-队列（queue）"><a href="#2-3-队列（queue）" class="headerlink" title="2.3 队列（queue）"></a>2.3 队列（queue）</h3><blockquote>
+<p>概念：队列是一种特殊的线性表，特殊之处在于它只允许在表的前端（front）进行删除操作，而在表的后端（rear）进行插入操作，和栈一样，队列是一种操作受限制的线性表。进行插入操作的端称为队尾，进行删除操作的端称为队头</p>
+</blockquote>
+<pre><code class="hljs 实现简单队列类（链表队列）```">
+&#96;&#96;&#96;java
+public class MyQueue&lt;E&gt; &#123;
+    private LinkedList&lt;E&gt; list &#x3D; new LinkedList&lt;&gt;();
+    &#x2F;&#x2F; 入队
+    public void enqueue(E e) &#123;
+        list.addLast(e);
+    &#125;
+    &#x2F;&#x2F; 出队
+    public E dequeue() &#123;
+        return list.removeFirst();
+    &#125;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs JDK普通队列">
+&#96;&#96;&#96;java
+&#x2F;&#x2F; ArrayDeque
+&#x2F;&#x2F; push -&gt; 添加元素在队首
+&#x2F;&#x2F; add  -&gt; 添加元素在队尾
+&#x2F;&#x2F; poll -&gt; 弹出第一个元素</code></pre>
+
+
+
+<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><blockquote>
+<p>队列的应用非常广泛，特别是一些具有某些额外特性的队列，比如循环队列、阻塞队列、并发队列。它们在很多偏底层的系统、框架、中间件的开发中，起着关键性的作用。比如高性能队列 Disruptor、Linux 环形缓存，都用到了循环并发队列；Java concurrent 并发包利用 ArrayBlockingQueue 来实现公平锁等。</p>
+<p>关于如何实现无锁并发队列<br>可以使用 cas + 数组的方式实现</p>
+<p>队列的其他应用<br>分布式消息队列，如 kafka 也是一种队列。 </p>
+</blockquote>
+<h4 id="简易队列实现"><a href="#简易队列实现" class="headerlink" title="简易队列实现"></a>简易队列实现</h4><blockquote>
+<p>首先我们来看一下基于内存的队列<br>在java并发包中已经提供了BlockingQueue的实现;<br>比较常用的有ArrayBlockingQueue和LinkedBlockingQueue,前者是以数组的形式存储，后者是以Node节点的链表形式存储</p>
+</blockquote>
+<h5 id="JDK-阻塞队列"><a href="#JDK-阻塞队列" class="headerlink" title="JDK 阻塞队列"></a>JDK 阻塞队列</h5><table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">put()</td>
+<td>往队列里插入元素,如果队列已满,则等待直到队列为空插入新元素,或线程被中断抛出异常</td>
+</tr>
+<tr>
+<td align="left">offer()</td>
+<td>往队列添加元素;队列已满返回false,队列未满则插入并返回true</td>
+</tr>
+<tr>
+<td align="left">add()</td>
+<td>对offer()方法的简单封装.如果队列已满,抛出异常</td>
+</tr>
+<tr>
+<td align="left">remove()</td>
+<td>直接删除队头元素</td>
+</tr>
+<tr>
+<td align="left">peek()</td>
+<td>直接取出队头元素,且不删除</td>
+</tr>
+<tr>
+<td align="left">element()</td>
+<td>对peek方法的简单封装,队头元素存在则取出且不删除,不存在抛出异常</td>
+</tr>
+<tr>
+<td align="left">poll()</td>
+<td>取出并删除队头元素,当队列为空,返回null</td>
+</tr>
+<tr>
+<td align="left">take()</td>
+<td>取出并删除队头元素,当队列为空,则等待直到队列有新元素可以取出,或线程被中断抛出异常</td>
+</tr>
+</tbody></table>
+<p>offer()方法一般跟poll()方法相对应, put()方法一般跟take()方法相对应.日常开发过程中offer()与poll()方法用的相对比较频繁</p>
+<pre><code class="hljs JDK">
+&#96;&#96;&#96;java
+public class UserTask &#123;
+    
+    &#x2F;&#x2F;队列大小
+    private final int QUEUE_LENGTH &#x3D; 10000*10;
+    
+    &#x2F;&#x2F;基于内存的阻塞队列
+    private BlockingQueue&lt;String&gt; queue &#x3D; new LinkedBlockingQueue&lt;String&gt;(QUEUE_LENGTH);
+    
+    &#x2F;&#x2F;创建计划任务执行器
+    private ScheduledExecutorService es &#x3D; Executors.newScheduledThreadPool(1);
+   
+    &#x2F;**
+     * 构造函数，执行execute方法
+     *&#x2F;
+    public UserTask() &#123;
+        execute();
+    &#125;
+       
+    &#x2F;**
+     * 添加信息至队列中
+     * @param content
+     *&#x2F; 
+    public void addQueue(String content) &#123;
+        queue.add(content);
+    &#125;
+       
+    &#x2F;**
+     * 初始化执行
+     *&#x2F; 
+    public void execute() &#123;
+        &#x2F;&#x2F; 每一分钟执行一次
+        es.scheduleWithFixedDelay(new Runnable()&#123;
+            public void run() &#123;
+                try &#123;
+                    String content &#x3D; queue.take();
+                    &#x2F;&#x2F; 处理队列中的信息...
+                    System.out.println(content);
+                &#125; catch (InterruptedException e) &#123;
+                    e.printStackTrace();
+                &#125;
+            &#125;
+        &#125;, 0, 1, TimeUnit.MINUTES);
+    &#125;
+&#125;</code></pre>
+
+<h5 id="Redis-消息队列"><a href="#Redis-消息队列" class="headerlink" title="Redis 消息队列"></a>Redis 消息队列</h5><p>利用redis发布订阅模式即可</p>
+<h5 id="基于数据库的队列"><a href="#基于数据库的队列" class="headerlink" title="基于数据库的队列"></a>基于数据库的队列</h5><p>数据库队列不建议使用，但最大的好处是整个流程都由自己设计和把握，且消息不存在丢失，重复的问题，适合小场景使用</p>
+<h2 id="三、哈希，跳表，各种树"><a href="#三、哈希，跳表，各种树" class="headerlink" title="三、哈希，跳表，各种树"></a>三、哈希，跳表，各种树</h2><h3 id="3-1-跳表"><a href="#3-1-跳表" class="headerlink" title="3.1 跳表"></a>3.1 跳表</h3><blockquote>
+<p>对于一个单链表来讲，即便链表中存储的数据是有序的，如果我们要想在其中查找某个数据，也只能从头到尾遍历链表。这样查找效率就会很低，时间复杂度会很高，是 O(n)</p>
+<p>对链表建立一级“索引”，查找起来是不是就会更快一些呢？每两个结点提取一个结点到上一级，我们把抽出来的那一级叫作索引或索引层</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/14753c824a5ee4a976ea799727adc78e-1571998941621.jpg" srcset="/img/loading.gif" alt="img"></p>
+<p>多级索引效果：</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/1572231378358.png" srcset="/img/loading.gif" alt="1572231378358"></p>
+</blockquote>
+<pre><code class="hljs 第">
+相比于红黑树，更趋于跳表实现，因为相对而言实现较为简单
+
+&#96;&#96;&#96;java
+&#x2F;**
+ * ******************************
+ * author：      柯贤铭
+ * createTime:   2019&#x2F;10&#x2F;28 10:40
+ * description:  跳表
+ *               跳表中存储的是正整数，并且存储的是不重复的
+ * version:      V1.0
+ * ******************************
+ *&#x2F;
+public class SkipListApp &#123;
+
+    private static final float SKIPLIST_P &#x3D; 0.5f;
+
+    private static final int MAX_LEVEL &#x3D; 16;
+
+    private int levelCount &#x3D; 1;
+
+    private Node head &#x3D; new Node();  &#x2F;&#x2F; 带头链表
+
+    public Node find(int value) &#123;
+        Node p &#x3D; head;
+        for (int i &#x3D; levelCount - 1; i &gt;&#x3D; 0; --i) &#123;
+            while (p.forwards[i] !&#x3D; null &amp;&amp; p.forwards[i].data &lt; value) &#123;
+                p &#x3D; p.forwards[i];
+            &#125;
+        &#125;
+
+        if (p.forwards[0] !&#x3D; null &amp;&amp; p.forwards[0].data &#x3D;&#x3D; value) &#123;
+            return p.forwards[0];
+        &#125; else &#123;
+            return null;
+        &#125;
+    &#125;
+
+    public void insert(int value) &#123;
+        int level &#x3D; randomLevel();
+        Node newNode &#x3D; new Node();
+        newNode.data &#x3D; value;
+        newNode.maxLevel &#x3D; level;
+        Node update[] &#x3D; new Node[level];
+        for (int i &#x3D; 0; i &lt; level; ++i) &#123;
+            update[i] &#x3D; head;
+        &#125;
+
+        &#x2F;&#x2F; record every level largest value which smaller than insert value in update[]
+        Node p &#x3D; head;
+        for (int i &#x3D; level - 1; i &gt;&#x3D; 0; --i) &#123;
+            while (p.forwards[i] !&#x3D; null &amp;&amp; p.forwards[i].data &lt; value) &#123;
+                p &#x3D; p.forwards[i];
+            &#125;
+            update[i] &#x3D; p;&#x2F;&#x2F; use update save node in search path
+        &#125;
+
+        &#x2F;&#x2F; in search path node next node become new node forwords(next)
+        for (int i &#x3D; 0; i &lt; level; ++i) &#123;
+            newNode.forwards[i] &#x3D; update[i].forwards[i];
+            update[i].forwards[i] &#x3D; newNode;
+        &#125;
+
+        &#x2F;&#x2F; update node hight
+        if (levelCount &lt; level) levelCount &#x3D; level;
+    &#125;
+
+    public void delete(int value) &#123;
+        Node[] update &#x3D; new Node[levelCount];
+        Node p &#x3D; head;
+        for (int i &#x3D; levelCount - 1; i &gt;&#x3D; 0; --i) &#123;
+            while (p.forwards[i] !&#x3D; null &amp;&amp; p.forwards[i].data &lt; value) &#123;
+                p &#x3D; p.forwards[i];
+            &#125;
+            update[i] &#x3D; p;
+        &#125;
+
+        if (p.forwards[0] !&#x3D; null &amp;&amp; p.forwards[0].data &#x3D;&#x3D; value) &#123;
+            for (int i &#x3D; levelCount - 1; i &gt;&#x3D; 0; --i) &#123;
+                if (update[i].forwards[i] !&#x3D; null &amp;&amp; update[i].forwards[i].data &#x3D;&#x3D; value) &#123;
+                    update[i].forwards[i] &#x3D; update[i].forwards[i].forwards[i];
+                &#125;
+            &#125;
+        &#125;
+
+        while (levelCount&gt;1&amp;&amp;head.forwards[levelCount]&#x3D;&#x3D;null)&#123;
+            levelCount--;
+        &#125;
+
+    &#125;
+
+    &#x2F;&#x2F; 理论来讲，一级索引中元素个数应该占原始数据的 50%，二级索引中元素个数占 25%，三级索引12.5% ，一直到最顶层。
+    &#x2F;&#x2F; 因为这里每一层的晋升概率是 50%。对于每一个新插入的节点，都需要调用 randomLevel 生成一个合理的层数。
+    &#x2F;&#x2F; 该 randomLevel 方法会随机生成 1~MAX_LEVEL 之间的数，且 ：
+    &#x2F;&#x2F;        50%的概率返回 1
+    &#x2F;&#x2F;        25%的概率返回 2
+    &#x2F;&#x2F;      12.5%的概率返回 3 ...
+    private int randomLevel() &#123;
+        int level &#x3D; 1;
+
+        while (Math.random() &lt; SKIPLIST_P &amp;&amp; level &lt; MAX_LEVEL)
+            level +&#x3D; 1;
+        return level;
+    &#125;
+
+    public void printAll() &#123;
+        Node p &#x3D; head;
+        while (p.forwards[0] !&#x3D; null) &#123;
+            System.out.print(p.forwards[0] + &quot; &quot;);
+            p &#x3D; p.forwards[0];
+        &#125;
+        System.out.println();
+    &#125;
+
+    public class Node &#123;
+        private int data &#x3D; -1;
+        private Node forwards[] &#x3D; new Node[MAX_LEVEL];
+        private int maxLevel &#x3D; 0;
+
+        @Override
+        public String toString() &#123;
+            StringBuilder builder &#x3D; new StringBuilder();
+            builder.append(&quot;&#123; data: &quot;);
+            builder.append(data);
+            builder.append(&quot;; levels: &quot;);
+            builder.append(maxLevel);
+            builder.append(&quot; &#125;&quot;);
+            return builder.toString();
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h3 id="3-2-哈希表-（散列表）"><a href="#3-2-哈希表-（散列表）" class="headerlink" title="3.2  哈希表 （散列表）"></a>3.2  哈希表 （散列表）</h3><blockquote>
+<p>散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表</p>
+</blockquote>
+<p>核心点：</p>
+<ul>
+<li>Key （键，关键字)</li>
+<li>散列函数（Hash函数）</li>
+<li>散列值（Hash值）</li>
+<li>装载因子（散列表的装载因子=填入表中的元素个数/散列表的长度   —》 </li>
+<li>装载因子越大，说明空闲位置越少，冲突越多，散列表的性能会下降）</li>
+</ul>
+<h4 id="如何解决：散列冲突问题"><a href="#如何解决：散列冲突问题" class="headerlink" title="如何解决：散列冲突问题"></a>如何解决：散列冲突问题</h4><pre><code class="hljs 开放寻址法```">
+&gt; 开放寻址法的核心思想是，如果出现了散列冲突，我们就重新探测一个空闲位置，将其插入
+
+探测方法：线性探测
+
+![1572231952736](数据结构篇&#x2F;1572231952736.png)
+
+&gt; 插入 -&gt; 从所计算位置开始，如果位置已被占用则向下挪一位
+&gt;
+&gt; 查找 -&gt; 从所计算位置开始，判断key是否相同，不同则向下挪一位，为null则表示不存在
+&gt;
+&gt; 删除 -&gt; 由于查找的特殊性，因此不可直接标记为null，增加deleted标识，表示被删除
+&gt;
+&gt; 当散列表中插入的数据越来越多时，散列冲突发生的可能性就会越来越大，空闲位置会越来越少，线性探测的时间就会越来越久。极端情况下，我们可能需要探测整个散列表，所以最坏情况下的时间复杂度为 O(n)。同理，在删除和查找时，也有可能会线性探测整张散列表，才能找到要查找或者删除的数据
+
+其他方法：
+
+二次探测：步长就变成了原来的“二次方”， 即 hash(key) + ---&gt; 0 1 4 .... 扩大向下挪动的位置
+
+双重散列：即利用多个hash函数进行探测，如果A函数占用了，则用B...
+
+
+
+**优点：**
+
+1.散列表中的数据都存储在数组中，可以有效地利用 CPU 缓存加快查询速度
+
+2.序列化起来比较简单
+
+**缺点：**
+
+1.删除数据的时候比较麻烦
+
+2.在开放寻址法中，所有的数据都存储在一个数组中，比起链表法来说，冲突的代价更高
+
+3.为了保证减少冲突，因此装载因子较大，所以更加浪费空间
+
+**总结：**
+
+当数据量比较小、装载因子小的时候，适合采用开放寻址法
+
+这也是 Java 中的ThreadLocalMap使用开放寻址法解决散列冲突的原因
+
+
+
+&#96;&#96;&#96;链表法</code></pre>
+
+<p>在散列表中，每个“桶（bucket）”或者“槽（slot）”会对应一条链表，所有散列值相同的元素我们都放到相同槽位对应的链表中</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/1572233670824.png" srcset="/img/loading.gif" alt="1572233670824"></p>
+<p><strong>总结：</strong></p>
+<p>基于链表的散列冲突处理方法比较适合存储大对象、大数据量的散列表，而且，比起开放寻址法，它更加灵活，支持更多的优化策略，比如用红黑树代替链表</p>
+<h4 id="到底什么是哈希算法"><a href="#到底什么是哈希算法" class="headerlink" title="到底什么是哈希算法"></a>到底什么是哈希算法</h4><blockquote>
+<p>将任意长度的二进制值串映射为固定长度的二进制值串，这个映射的规则就是哈希算法</p>
+<p> 而通过原始数据映射之后得到的二进制值串就是哈希值 </p>
+<p>哈希算法要求：</p>
+<ul>
+<li>从哈希值不能反向推导出原始数据（所以哈希算法也叫单向哈希算法；</li>
+<li>对输入数据非常敏感，哪怕原始数据只修改了一个 Bit，最后得到的哈希值也大不相同；</li>
+<li>散列冲突的概率要很小，对于不同的原始数据，哈希值相同的概率非常小；</li>
+<li>哈希算法的执行效率要尽量高效，针对较长的文本，也能快速地计算出哈希值 </li>
+</ul>
+</blockquote>
+<pre><code class="hljs 用途：```">
+-  应用一：安全加密 
+
+ MD5 消息摘要算法，SHA 安全散列算法 
+
+-  应用二：唯一标识 
+
+文件服务器，文件唯一标识 （例如取文件开头和末尾指定大小的字节量，进行哈希，获取唯一标识）
+
+-   应用三：数据校验 
+
+例如基于P2P协议，BT文件下载（P2P协议是去中心化的协议，利用种子文件，从无数个服务器中找到所需要的超大文件的分片信息，然后从多个服务器进并行下载，以此实现分布式及去除单点压力），问题来临：从多个服务器下载，如何保证安全性，因为黑客也可以模拟自己的身份，替换所需文件，然后植入木马  ---&gt;  即可利用哈希摘要进行验证
+
+-   应用四：散列函数 
+
+散列函数中用到的散列算法，更加关注散列后的值是否能平均分布，也就是，一组数据是否能均匀地散列在各个槽中
+
+除此之外，散列函数执行的快慢，也会影响散列表的性能，所以，散列函数用的散列算法一般都比较简单，比较追求效率
+
+-  应用五：负载均衡 
+
+常用的负载均衡的策略如： 轮询、随机、加权轮询 ，但是结合哈希，在nginx中可以轻松实现 iphash
+
+通过哈希算法，对客户端 IP 地址或者会话 ID 计算哈希值，将取得的哈希值与服务器列表的大小进行取模运算，最终得到的值就是
+
+应该被路由到的服务器编号 
+
+-  应用六：数据分片 
+
+MapReduce思想，利用散列进行数据分治
+
+-  应用七：分布式存储 
+
+基于散列表，对数据进行映射分散到多个存储容器中（Redis），当设备需要扩容操作时候，可以借用一致性哈希算法，更优雅的解决散列表映射扩容的问题
+
+#### 题外:如何防范密码字典攻击
+
+&gt; 1. 最好的办法是禁止用户输入简单密码
+&gt; 2. 可以采用  salt  的方式，对称加密的思想，设定公司独有或者基于用户不可变的特征等等进行与密码的糅合，这样即使输入的是简单密码，密码的复杂度也大大增加
+&gt; 3. 采用更复杂的密码加密模式 （MD5加密已被中国女博士从操作层面破解，绕过验证）
+
+
+
+### 3.3 树
+
+ ![img](数据结构篇&#x2F;220043e683ea33b9912425ef759556ae.jpg) 
+
+&gt;  &#96;&#96;&#96;父节点：&#96;&#96;&#96;A 节点就是 B 节点的父节点
+&gt;
+&gt; &#96;&#96;&#96;  子节点：&#96;&#96;&#96;B 节点是 A 节点的子节点
+&gt;
+&gt; &#96;&#96;&#96;兄弟节点：&#96;&#96;&#96;B，C，D节点
+&gt;
+&gt; &#96;&#96;&#96;根节点：&#96;&#96;&#96;E节点
+&gt;
+&gt; &#96;&#96;&#96;叶子节点 | 叶节点：&#96;&#96;&#96;G，H，I，J节点
+&gt;
+&gt; &#96;&#96;&#96;满二叉树：&#96;&#96;&#96; 叶子节点全都在最底层，除了叶子节点之外，每个节点都有左右两个子节点 
+&gt;
+&gt; &#96;&#96;&#96;完全二叉树：&#96;&#96;&#96;叶子节点都在最底下两层，最后一层的叶子节点都靠左排列，并且除了最后一层，其他层的节点个数都要达到最大 
+&gt;
+&gt; 
+&gt;
+&gt; &#96;&#96;&#96;高度，深度，层</code></pre>
+<blockquote>
+<p> <img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/image-20191106163644849.png" srcset="/img/loading.gif" alt="image-20191106163644849"> </p>
+</blockquote>
+<h4 id="如何存储一棵二叉树"><a href="#如何存储一棵二叉树" class="headerlink" title="如何存储一棵二叉树"></a>如何存储一棵二叉树</h4><pre><code class="hljs 基于引用的二叉链式存储法```">
+![image-20191106165539011](数据结构篇&#x2F;image-20191106165539011.png)
+
+&#96;&#96;&#96; 基于数组的顺序存储法</code></pre>
+
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/image-20191106165658136.png" srcset="/img/loading.gif" alt="image-20191106165658136"></p>
+<p>为什么二叉树需要把完全二叉树单独来讨论，因为如果一棵树是完全二叉树，则用数组存储是非常省内存的一种方式（因为不需要链表那样指针）</p>
+<p>为什么完全二叉树一个定义是最后一行靠左（因为这样数组的长度可以去掉不存在的部分）</p>
+<h4 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h4><ul>
+<li>前序遍历：根左右</li>
+<li>中序遍历：左根右</li>
+<li>后序遍历：左右根 </li>
+<li>层级遍历</li>
+</ul>
+<blockquote>
+<p>题外问题： 给定一组数据，比如 1，3，5，6，9，10。你来算算，可以构建出多少种不同的二叉树 </p>
+<p>由于树的其中一种存储方式即是数组，那么则该问题相当于数组内的元素有多少种组合方式 </p>
+</blockquote>
+<pre><code class="hljs 代码实践：打印一颗树及遍历```">
+&#96;&#96;&#96;java
+&#x2F;&#x2F; TreeNode 创建树的基类及打印一颗树
+public class TreeNode&#123;
+
+    public int val;
+
+    public TreeNode left;
+
+    public TreeNode right;
+
+    public TreeNode(int e)&#123; val &#x3D; e; &#125;
+
+    &#x2F;&#x2F; 用于获得树的层数
+    private static int getTreeDepth(TreeNode root) &#123;
+        return root &#x3D;&#x3D; null ? 0 : (1 + Math.max(getTreeDepth(root.left), getTreeDepth(root.right)));
+    &#125;
+
+    private static void writeArray(TreeNode currNode, int rowIndex, int columnIndex, String[][] res, int treeDepth) &#123;
+        &#x2F;&#x2F; 保证输入的树不为空
+        if (currNode &#x3D;&#x3D; null) return;
+        &#x2F;&#x2F; 先将当前节点保存到二维数组中
+        res[rowIndex][columnIndex] &#x3D; String.valueOf(currNode.val);
+
+        &#x2F;&#x2F; 计算当前位于树的第几层
+        int currLevel &#x3D; ((rowIndex + 1) &#x2F; 2);
+        &#x2F;&#x2F; 若到了最后一层，则返回
+        if (currLevel &#x3D;&#x3D; treeDepth) return;
+        &#x2F;&#x2F; 计算当前行到下一行，每个元素之间的间隔（下一行的列索引与当前元素的列索引之间的间隔）
+        int gap &#x3D; treeDepth - currLevel - 1;
+
+        &#x2F;&#x2F; 对左儿子进行判断，若有左儿子，则记录相应的&quot;&#x2F;&quot;与左儿子的值
+        if (currNode.left !&#x3D; null) &#123;
+            res[rowIndex + 1][columnIndex - gap] &#x3D; &quot;&#x2F;&quot;;
+            writeArray(currNode.left, rowIndex + 2, columnIndex - gap * 2, res, treeDepth);
+        &#125;
+
+        &#x2F;&#x2F; 对右儿子进行判断，若有右儿子，则记录相应的&quot;\&quot;与右儿子的值
+        if (currNode.right !&#x3D; null) &#123;
+            res[rowIndex + 1][columnIndex + gap] &#x3D; &quot;\\&quot;;
+            writeArray(currNode.right, rowIndex + 2, columnIndex + gap * 2, res, treeDepth);
+        &#125;
+    &#125;
+
+    public static void printTree (TreeNode root) &#123;
+        if (root &#x3D;&#x3D; null) System.out.println(&quot;EMPTY!&quot;);
+        &#x2F;&#x2F; 得到树的深度
+        int treeDepth &#x3D; getTreeDepth(root);
+
+        &#x2F;&#x2F; 最后一行的宽度为2的（n - 1）次方乘3，再加1
+        &#x2F;&#x2F; 作为整个二维数组的宽度
+        int arrayHeight &#x3D; treeDepth * 2 - 1;
+        int arrayWidth &#x3D; (2 &lt;&lt; (treeDepth - 2)) * 3 + 1;
+        &#x2F;&#x2F; 用一个字符串数组来存储每个位置应显示的元素
+        String[][] res &#x3D; new String[arrayHeight][arrayWidth];
+        &#x2F;&#x2F; 对数组进行初始化，默认为一个空格
+        for (int i &#x3D; 0; i &lt; arrayHeight; i ++) &#123;
+            for (int j &#x3D; 0; j &lt; arrayWidth; j ++) &#123;
+                res[i][j] &#x3D; &quot; &quot;;
+            &#125;
+        &#125;
+
+        &#x2F;&#x2F; 从根节点开始，递归处理整个树
+        writeArray(root, 0, arrayWidth&#x2F; 2, res, treeDepth);
+
+        &#x2F;&#x2F; 此时，已经将所有需要显示的元素储存到了二维数组中，将其拼接并打印即可
+        for (String[] line: res) &#123;
+            StringBuilder sb &#x3D; new StringBuilder();
+            for (int i &#x3D; 0; i &lt; line.length; i ++) &#123;
+                sb.append(line[i]);
+                if (line[i].length() &gt; 1 &amp;&amp; i &lt;&#x3D; line.length - 1) &#123;
+                    i +&#x3D; line[i].length() &gt; 4 ? 2: line[i].length() - 1;
+                &#125;
+            &#125;
+            System.out.println(sb.toString());
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs java"><span class="hljs-comment">// 树的遍历</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TraversingTreeApp</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
+        TreeNode root = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">8</span>);
+        TreeNode left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">4</span>);
+        TreeNode leftChild = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">11</span>);
+        left.left = leftChild;
+        TreeNode right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">6</span>);
+
+        root.left  = left;
+        root.right = right;
+
+        <span class="hljs-comment">// 打印树结构</span>
+        TreeNode.printTree(root);
+
+        System.out.println();
+        preorder(root);
+
+        System.out.println();
+        inorder(root);
+
+        System.out.println();
+        postorder(root);
+
+        System.out.println();
+        floorOrder(root);
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 前序遍历</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">preorder</span><span class="hljs-params">(TreeNode root)</span></span>&#123;
+        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span>;
+        System.out.print(root.val + <span class="hljs-string">" "</span>);
+        preorder(root.left);
+        preorder(root.right);
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 中序遍历</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inorder</span><span class="hljs-params">(TreeNode root)</span></span>&#123;
+        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span>;
+        inorder(root.left);
+        System.out.print(root.val + <span class="hljs-string">" "</span>);
+        inorder(root.right);
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 后序遍历</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postorder</span><span class="hljs-params">(TreeNode root)</span></span>&#123;
+        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>)
+            <span class="hljs-keyword">return</span>;
+        inorder(root.left);
+        inorder(root.right);
+        System.out.print(root.val + <span class="hljs-string">" "</span>);
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 层次遍历</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">floorOrder</span> <span class="hljs-params">(TreeNode root)</span> </span>&#123;
+        ArrayDeque&lt;TreeNode&gt; deque = <span class="hljs-keyword">new</span> ArrayDeque&lt;&gt;();
+        deque.add(root);
+        <span class="hljs-keyword">while</span> (deque.size() &gt; <span class="hljs-number">0</span>) &#123;
+            TreeNode poll = deque.poll();
+            System.out.print(poll.val + <span class="hljs-string">" "</span>);
+            <span class="hljs-keyword">if</span> (poll.left != <span class="hljs-keyword">null</span>) &#123;
+                deque.add(poll.left);
+            &#125;
+
+            <span class="hljs-keyword">if</span> (poll.right != <span class="hljs-keyword">null</span>) &#123;
+                deque.add(poll.right);
+            &#125;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h4 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h4><blockquote>
+<p> 二叉查找树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值 </p>
+</blockquote>
+<pre><code class="hljs 二叉查找树模型```">
+![img](数据结构篇&#x2F;96b3d86ed9b7c4f399e8357ceed0db2a.jpg)
+
+
+
+&#96;&#96;&#96;二叉查找树的简单实现</code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchTree</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
+        TreeNode root = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">8</span>);
+        TreeNode left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">4</span>);
+        left.left = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">3</span>);
+        TreeNode right = <span class="hljs-keyword">new</span> TreeNode(<span class="hljs-number">12</span>);
+
+        root.left  = left;
+        root.right = right;
+
+        <span class="hljs-comment">// 打印树结构</span>
+        TreeNode.printTree(root);
+
+        <span class="hljs-comment">// 查找</span>
+        TreeNode.printTree( find(root, <span class="hljs-number">4</span>) );
+
+        <span class="hljs-comment">// 插入</span>
+        insert(root,<span class="hljs-number">10</span>);
+        TreeNode.printTree(root);
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 二叉查找树 根据value找值</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> TreeNode <span class="hljs-title">find</span> <span class="hljs-params">(TreeNode root, <span class="hljs-keyword">int</span> val)</span> </span>&#123;
+        TreeNode p = root;
+        <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">if</span> (val &lt; p.val) p = p.left;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (val &gt; p.val) p = p.right;
+            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> p;
+        &#125;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 插入数据</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(TreeNode root, <span class="hljs-keyword">int</span> data)</span> </span>&#123;
+        <span class="hljs-keyword">if</span> (root == <span class="hljs-keyword">null</span>) &#123;
+            root = <span class="hljs-keyword">new</span> TreeNode(data);
+            <span class="hljs-keyword">return</span>;
+        &#125;
+
+        TreeNode p = root;
+        <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">null</span>) &#123;
+            <span class="hljs-keyword">if</span> (data &gt; p.val) &#123;
+                <span class="hljs-keyword">if</span> (p.right == <span class="hljs-keyword">null</span>) &#123;
+                    p.right = <span class="hljs-keyword">new</span> TreeNode(data);
+                    <span class="hljs-keyword">return</span>;
+                &#125;
+                p = p.right;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-keyword">if</span> (p.left == <span class="hljs-keyword">null</span>) &#123;
+                    p.left = <span class="hljs-keyword">new</span> TreeNode(data);
+                    <span class="hljs-keyword">return</span>;
+                &#125;
+                p = p.left;
+            &#125;
+        &#125;
+    &#125;
+
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 删除数据</span>
+<span class="hljs-comment">     * 第一种情况是，如果要删除的节点没有子节点，我们只需要直接将父节点中，指向要删除节点的指针置为 null</span>
+<span class="hljs-comment">     * 第二种情况是，如果要删除的节点只有一个子节点（只有左子节点或者右子节点），我们只需要更新父节点中，指向要删除节点的指针，让它指向要删除节点的子节点就可以</span>
+<span class="hljs-comment">     * 第三种情况是，如果要删除的节点有两个子节点，我们需要找到这个节点的右子树中的最小节点，把它替换到要删除的节点上。然后再删除掉这个最小节点</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">delete</span><span class="hljs-params">(TreeNode root, <span class="hljs-keyword">int</span> data)</span> </span>&#123;
+        TreeNode p = root;     <span class="hljs-comment">// p指向要删除的节点，初始化指向根节点</span>
+        TreeNode pp = <span class="hljs-keyword">null</span>;    <span class="hljs-comment">// pp记录的是p的父节点</span>
+        <span class="hljs-keyword">while</span> (p != <span class="hljs-keyword">null</span> &amp;&amp; p.val != data) &#123;
+            pp = p;
+            <span class="hljs-keyword">if</span> (data &gt; p.val) p = p.right;
+            <span class="hljs-keyword">else</span> p = p.left;
+        &#125;
+        <span class="hljs-keyword">if</span> (p == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// 没有找到</span>
+
+        <span class="hljs-comment">// 要删除的节点有两个子节点</span>
+        <span class="hljs-keyword">if</span> (p.left != <span class="hljs-keyword">null</span> &amp;&amp; p.right != <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// 查找右子树中最小节点</span>
+            TreeNode minP = p.right;
+            TreeNode minPP = p; <span class="hljs-comment">// minPP表示minP的父节点</span>
+            <span class="hljs-keyword">while</span> (minP.left != <span class="hljs-keyword">null</span>) &#123;
+                minPP = minP;
+                minP = minP.left;
+            &#125;
+            p.val = minP.val; <span class="hljs-comment">// 将minP的数据替换到p中</span>
+            p = minP;         <span class="hljs-comment">// 下面就变成了删除minP了</span>
+            pp = minPP;
+        &#125;
+
+        <span class="hljs-comment">// 删除节点是叶子节点或者仅有一个子节点</span>
+        TreeNode child; <span class="hljs-comment">// p的子节点</span>
+        <span class="hljs-keyword">if</span> (p.left != <span class="hljs-keyword">null</span>) child = p.left;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p.right != <span class="hljs-keyword">null</span>) child = p.right;
+        <span class="hljs-keyword">else</span> child = <span class="hljs-keyword">null</span>;
+
+        <span class="hljs-comment">// 删除的是根节点</span>
+        <span class="hljs-keyword">if</span> (pp == <span class="hljs-keyword">null</span>) root = child;
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pp.left == p) pp.left = child;
+        <span class="hljs-keyword">else</span> pp.right = child;
+    &#125;
+&#125;</code></pre>
+
+
+
+<h4 id="红黑树（平衡二叉查找树）"><a href="#红黑树（平衡二叉查找树）" class="headerlink" title="红黑树（平衡二叉查找树）"></a>红黑树（平衡二叉查找树）</h4><blockquote>
+<p>平衡二叉树的严格定义是这样的：二叉树中任意一个节点的左右子树的高度相差不能大于 1。从这个定义来看，完全二叉树、满二叉树其实都是平衡二叉树，但是非完全二叉树也有可能是平衡二叉树</p>
+<p>发明平衡二叉查找树这类数据结构的初衷是，解决普通二叉查找树在频繁的插入、删除等动态更新的情况下，出现时间复杂度退化的问题</p>
+<p>平衡二叉查找树中“平衡”的意思，其实就是让整棵树左右看起来比较“对称”、比较“平衡”，不要出现左子树很高、右子树很矮的情况。这样就能让整棵树的高度相对来说低一些，相应的插入、删除、查找等操作的效率高一些</p>
+<p>红黑树是一种平衡二叉查找树。它是为了解决普通二叉查找树在数据更新的过程中，复杂度退化的问题而产生的。红黑树的高度近似 log2n，所以它是近似平衡，插入、删除、查找操作的时间复杂度都是 O(logn)</p>
+<pre><code class="hljs 红黑树即不严格平衡二叉树```，主要核心要求如下：">
+- 根节点是黑色的；
+- 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据；
+- 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的；
+- 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；
+
+&#96;&#96;&#96;java
+&#x2F;***
+* 红黑树的基础是二叉查找树:
+* @see BinarySearchTree
+*
+* 红黑树的由来 -&gt; 树这种结构性能之高效就是因为其保证了树结构的特点，
+* 但是由于数据的修改和删除操作，会使得树结构的形状遭到破坏，比如
+* 二叉查找树一直插入比较小的值该怎么办呢? 整个树结构都退化成了链表，
+* 这就丧失了树结构的高效，因此需要有新的数据结构
+*
+* 即平衡二叉树 -&gt;  即左右高度相差不为1，实质就是保证树的左右对称性，避免性能退化
+*
+* 除了红黑树之外，还有很多如AVL树等等，但是红黑树实在兼容删除，更新等诸多操作时，
+* 节点调整最小，平均效率最高的一种非严格的平衡二叉树，因此红黑树的适用范围很广
+*
+* 红黑树的要求：
+* - 根节点是黑色的；
+* - 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据；
+* - 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的；
+* - 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；
+*
+* 代码实现：略
+*&#x2F; </code></pre>
+</blockquote>
+<h4 id="Trie树（字典树）"><a href="#Trie树（字典树）" class="headerlink" title="Trie树（字典树）"></a>Trie树（字典树）</h4><blockquote>
+<p> Trie 树的本质，就是利用字符串之间的公共前缀，将重复的前缀合并在一起 </p>
+<p>应用：通过公共前缀，查出符合前缀要求的字符串</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/image-20191126165545691.png" srcset="/img/loading.gif" alt="image-20191126165545691"></p>
+</blockquote>
+<p> Trie 树的构建过程：</p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/image-20191126165338413.png" srcset="/img/loading.gif" alt="image-20191126165338413"></p>
+<p><img src="/2023/02/06/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/image-20191126165352555.png" srcset="/img/loading.gif" alt="image-20191126165352555"></p>
+<h5 id="Java-Trie-类库"><a href="#Java-Trie-类库" class="headerlink" title="Java Trie 类库"></a>Java Trie 类库</h5><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 通用工具包 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.commons<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>commons-lang3<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.9<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
+
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TrieApp</span> </span>&#123;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
+
+        <span class="hljs-comment">// Double 权重</span>
+        PatriciaTrie&lt;Double&gt; t = <span class="hljs-keyword">new</span> PatriciaTrie&lt;&gt;();
+
+        t.put(<span class="hljs-string">"ronak"</span>  , <span class="hljs-number">100.0</span>);
+        t.put(<span class="hljs-string">"ronald"</span> , <span class="hljs-number">90.0</span>);
+        t.put(<span class="hljs-string">"rat"</span>    , <span class="hljs-number">50.0</span>);
+        t.put(<span class="hljs-string">"robert"</span> , <span class="hljs-number">200.0</span>);
+        t.put(<span class="hljs-string">"bat"</span>    , <span class="hljs-number">44.0</span>);
+        t.put(<span class="hljs-string">"batman"</span> , <span class="hljs-number">440.0</span>);
+        t.put(<span class="hljs-string">"张三"</span> , <span class="hljs-number">440.0</span>);
+        t.put(<span class="hljs-string">"张武"</span> , <span class="hljs-number">50.0</span>);
+        t.put(<span class="hljs-string">"李四"</span> , <span class="hljs-number">440.0</span>);
+
+        System.out.println(t.containsKey(<span class="hljs-string">"ronak"</span>));
+
+        <span class="hljs-comment">// 符合ro标准，权重最高者</span>
+        System.out.println(t.selectKey(<span class="hljs-string">"ro"</span>));
+
+        System.out.println(t.prefixMap(<span class="hljs-string">"r"</span>));
+        System.out.println(t.prefixMap(<span class="hljs-string">"ro"</span>));
+        System.out.println(t.prefixMap(<span class="hljs-string">"ron"</span>));
+        System.out.println(t.prefixMap(<span class="hljs-string">"张"</span>));
+        System.out.println(t.prefixMap(<span class="hljs-string">"李"</span>));
+    &#125;
+&#125;
+
+<span class="hljs-comment">// 控制台</span>
+<span class="hljs-comment">// robert</span>
+<span class="hljs-comment">// &#123;rat=50.0, robert=200.0, ronak=100.0, ronald=90.0&#125;</span>
+<span class="hljs-comment">// &#123;robert=200.0, ronak=100.0, ronald=90.0&#125;</span>
+<span class="hljs-comment">// &#123;ronak=100.0, ronald=90.0&#125;</span>
+<span class="hljs-comment">// &#123;张三=440.0, 张武=50.0&#125;</span>
+<span class="hljs-comment">// &#123;李四=440.0&#125;</span></code></pre>
+
+
+
+<h3 id="3-6-B-Tree-B-Tree"><a href="#3-6-B-Tree-B-Tree" class="headerlink" title="3.6 B-Tree B+Tree"></a>3.6 B-Tree B+Tree</h3><pre><code class="hljs B-Tree">
+&gt;  B树事实上是一种平衡的多叉查找树，也就是说最多可以开m个叉（m&gt;&#x3D;2），我们称之为m阶b树 
+
+![image-20191226172051621](数据结构篇&#x2F;image-20191226172051621.png)
+
+-  所有键值分布在整个树中
+-  任何关键字出现且只出现在一个节点中 
+-  搜索有可能在非叶子节点结束 
+-  在关键字全集内做一次查找，性能逼近二分查找算法 
+
+
+
+
+
+&gt;  B+树是B树的变体，也是一种多路平衡查找树，B+树的示意图为： 
+
+![image-20191226172504810](数据结构篇&#x2F;image-20191226172504810.png)
+
+-  所有关键字存储在叶子节点，非叶子节点不存储真正的data 
+-  为所有叶子节点增加了一个链指针 
+
+
+
+
+### 3.7 MySql索引为什么选择B+Tree
+
+#### 索引需要满足什么条件
+
+- 查找快，增删改尽量也快
+- 支持区域查找
+
+经过思考，仅支持区域查找这一条就让红黑树，哈希表等无法作为索引的数据结构，因此可供选择只有如跳表，但是跳表这种数据结构的诞生时间很晚，真正的抉择依然是改造现有的二叉查找树，即对子节点增加双向链表，让其支持区域查找
+
+
+
+#### 如何处理索引占用存储过大
+
+&gt;  比如，我们给一亿个数据构建二叉查找树索引，那索引中会包含大约 1 亿个节点，每个节点假设占用 16 个字节，那就需要大约 1GB 的内存空间 
+&gt;
+
+如果是十亿级别则是10G内存，这显然无法支持，因此需要利用时间换空间的思想，把数据存储到硬盘之中，以减少数据库对于内存的占用情况
+
+
+
+
+#### IO存储索引如何提高效率
+
+我们知道一次IO读取的耗时其实已经做出了很多的优化，因此无法在此处做特别的文章，因此只有一个办法，即尽可能的减少IO读取的次数
+
+以二叉查找树为例，我们以二叉查找树构建索引，IO的读取次数如何计算？
+
+![image-20191226175724120](数据结构篇&#x2F;image-20191226175724120.png)
+
+其实很容易想到，树的&#96;&#96;&#96;高度&#96;&#96;&#96;代表着IO交互的次数，也就是树的高度越低，那么IO次数越少，性能就越高
+
+
+
+#### 如何保证索引的高度和分叉的合理性
+
+ 对于相同个数的数据构建 m 叉树索引，m 叉树中的 m 越大，那树的高度就越小，那 m 叉树中的 m 是不是越大越好呢？
+
+到底多大才最合适呢？
+
+&gt; 不管是内存中的数据，还是磁盘中的数据，操作系统都是按页（一页大小通常是 4KB，这个值可以通过 getconfig PAGE_SIZE 命令查看）来读取的，一次会读一页的数据。如果要读取的数据量超过一页的大小，就会触发多次 IO 操作。所以，我们在选择 m 大小的时候，要尽量让每个节点的大小等于一个页的大小。读取一个节点，只需要一次磁盘 IO 操作。 
+
+
+
+&#96;&#96;按页读取的意义：涉及到系统的数据的区域局部性原理&#96;&#96;
+
+&gt; - 1）刚刚被访问过的元素，极有可能在不久之后再次被访问到；
+&gt; - 2）将被访问的下一个元素，极有可能就处于之前被访问过的某个元素的附近；
+&gt;
+&gt; 因此即使可能只需要一页中的一点点数据，机器仍然会默认每次IO读取一页数据，以提高效率
+
+
+
+
+#### 如何保证索引节点存储为一页
+
+ 对于一个 B+ 树来说，m 值是根据页的大小事先计算好的，也就是说，每个节点最多只能有 m 个子节点。在往数据库中写入数据
+
+的过程中，这样就有可能使索引中某些节点的子节点个数超过 m，这个节点的大小超过了一个页的大小，读取这样一个节点，就会
+
+导致多次磁盘 IO 操作。我们该如何解决这个问题呢？ 
+
+
+
+ 只需要将这个节点分裂成两个节点。但是，节点分裂之后，其上层父节点的子节点个数就有可能超过 m 个。不过这也没关系，我们可以用同样的方法，将父节点也分裂成两个节点。这种级联反应会从下往上，一直影响到根节点
+
+![image-20191226180732441](数据结构篇&#x2F;image-20191226180732441.png)
+
+
+
+#### 索引到底是怎么存储工作的
+
+
+刚才讲到由于数据的增大，我们需要把节点进行分裂，那整个B树的源头在哪里呢？已知索引存储到硬盘之中，但也不可能完全放弃内存的使用，因此我们可以把头节点和第一层存储到内存之中，每次服务启动时加载至内存，关闭时保存至硬盘，然后剩余三层结构都保存在硬盘之中
+
+
+
+#### 终极问题：为什么选择B+Tree
+
+B 树实际上是低级版的 B+ 树，或者说 B+ 树是 B 树的改进版
+
+B 树跟 B+ 树的不同点主要集中在这几个地方：
+
+- B+ 树中的节点不存储数据，只是索引，而 B 树中的节点存储数据；
+- B 树中的叶子节点并不需要链表来串联
+
+因此选B树还是选B+树，其实讨论的意义不大
+
+
+
+## 四、图
+
+### 如何理解图
+
+&gt; 图中的元素我们就叫作顶点（vertex）
+&gt;
+&gt; 从图中可以看出来，图中的一个顶点可以与任意其他顶点建立连接关系。我们把这种建立的关系叫作边（edge）
+&gt;
+&gt; ![img](数据结构篇&#x2F;df85dc345a9726cab0338e68982fd1af.jpg)
+&gt;
+&gt; 度：跟顶点相连接的边的条数
+&gt;
+&gt; 
+&gt;
+&gt; 如微博，QQ等在两个用户的之上还有复杂的如，互为好友，亲密度等信息，无非是在为点和点之间增加向量，同时增加权重，表示“亲密的”
+
+
+
+### 图的存储方式
+
+#### 邻接矩阵存储方法
+
+&gt; 邻接矩阵的底层依赖一个二维数组。对于无向图来说，如果顶点 i 与顶点 j 之间有边，我们就将 A[i][j] 和 A[j][i] 标记为 1；对于有向图来说，如果顶点 i 到顶点 j 之间，有一条箭头从顶点 i 指向顶点 j 的边，那我们就将 A[i][j] 标记为 1。同理，如果有一条箭头从顶点 j 指向顶点 i 的边，我们就将 A[j][i] 标记为 1。对于带权图，数组中就存储相应的权重
+
+![1573480157573](数据结构篇&#x2F;1573480157573.png)
+
+#### 邻接表存储方法
+
+![1573480277946](数据结构篇&#x2F;1573480277946.png)
+
+&gt; 针对链表的部分，还可以类似HashMap处理，当长度大于多少的时候转化为红黑树或者跳表
+
+
+
+#### ~~广度优先搜索算法~~
+
+![1573481231338](数据结构篇&#x2F;1573481231338.png)
+
+广度优先搜索算法即把数据点作为圆心，一层一层向外递进，即先查找离起始顶点最近的，然后是次近的，依次往外搜索
+
+
+
+#### ~~深度优先搜索算法~~
+
+&gt; 深度优先搜索用的是一种比较著名的算法思想，回溯思想。这种思想解决问题的过程，非常适合用递归来实现
+
+![1573482141433](数据结构篇&#x2F;1573482141433.png)
+
+
+
+### 图的拓扑排序
+
+&gt;  给定一幅有向图，将所有的顶点排序，使得所有的有向边均从排在前面的元素指向排在后面的元素 
+&gt;
+&gt; 应用：比如编译器编译类的时候，类加载顺序的问题
+
+
+
+#### 有向无环图 - 邻接表存储详解
+
+&#96;&#96;&#96;java
+public class GraphDirected &#123;
+
+    private int v;                      &#x2F;&#x2F; 顶点的个数
+    private LinkedList&lt;Integer&gt; adj[];  &#x2F;&#x2F; 邻接表
+
+    public GraphDirected(int v) &#123;
+        this.v &#x3D; v;
+        adj &#x3D; new LinkedList[v];
+        for (int i&#x3D;0; i&lt;v; ++i) &#123;
+            adj[i] &#x3D; new LinkedList&lt;&gt;();
+        &#125;
+    &#125;
+
+    &#x2F;&#x2F; s先于t，边s-&gt;t
+    public void addEdge(int s, int t) &#123;
+        adj[s].add(t);
+    &#125;
+
+    public static void main(String[] args)&#123;
+        GraphDirected directed &#x3D; new GraphDirected(6);
+
+        &#x2F;&#x2F; x-y 坐标，x表示顶点，y表示指向的顶点
+        directed.addEdge(1,3);
+        directed.addEdge(1,5);
+        directed.addEdge(2,5);
+        directed.addEdge(3,4);
+    &#125;
+&#125;</code></pre>
+
+<pre><code class="hljs 针对上述代码绘制图```">
+![image-20191221104226773](数据结构篇&#x2F;image-20191221104226773.png)
+
+
+
+####  Kahn 算法 
+
+&gt;  定义数据结构的时候，如果 s 需要先于 t 执行，那就添加一条 s 指向 t 的边。所以，如果某个顶点入度为 0， 也就表示，没有任何顶点必须先于这个顶点执行，那么这个顶点就可以执行了。
+&gt;
+&gt; 
+&gt;
+&gt; 我们先从图中，找出一个入度为 0 的顶点，将其输出到拓扑排序的结果序列中（对应代码中就是把它打印出来），并且把这个顶点从图中删除（也就是把这个顶点可达的顶点的入度都减 1）。我们循环执行上面的过程，直到所有的顶点都被输出。最后输出的序列，就是满足局部依赖关系的拓扑排序 
+&gt;
+&gt; &#96;&#96;&#96;用以输出有向无环图路径</code></pre>
+<blockquote>
+<pre><code class="hljs 用以检测是否存在循环依赖的情况```">
+**Kahn 算法，如果最后输出出来的顶点个数，少于图中顶点个数，图中还有入度不是 0 的顶点，那就说明，图中存在环** 
+
+&#96;&#96;&#96;java
+public void topoSortByKahn() &#123;
+   int[] inDegree &#x3D; new int[v]; &#x2F;&#x2F; 统计每个顶点的入度
+   for (int i &#x3D; 0; i &lt; v; ++i) &#123;
+       for (int j &#x3D; 0; j &lt; adj[i].size(); ++j) &#123;
+           int w &#x3D; adj[i].get(j); &#x2F;&#x2F; i-&gt;w
+           inDegree[w]++;
+       &#125;
+   &#125;
+   LinkedList&lt;Integer&gt; queue &#x3D; new LinkedList&lt;&gt;();
+   for (int i &#x3D; 0; i &lt; v; ++i) &#123;
+       if (inDegree[i] &#x3D;&#x3D; 0) queue.add(i);
+   &#125;
+   while (!queue.isEmpty()) &#123;
+       int i &#x3D; queue.remove();
+       System.out.print(&quot;-&gt;&quot; + i);
+       for (int j &#x3D; 0; j &lt; adj[i].size(); ++j) &#123;
+           int k &#x3D; adj[i].get(j);
+           inDegree[k]--;
+           if (inDegree[k] &#x3D;&#x3D; 0) queue.add(k);
+       &#125;
+   &#125;
+&#125; </code></pre>
+</blockquote>
+<h4 id="DFS-算法"><a href="#DFS-算法" class="headerlink" title="DFS 算法"></a>DFS 算法</h4><blockquote>
+<p> 深度优先遍历，遍历图中的所有顶点，而非只是搜索一个顶点到另一个顶点的路径 </p>
+</blockquote>
+<pre><code class="hljs java">
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">topoSortByDFS</span><span class="hljs-params">()</span> </span>&#123;
+  <span class="hljs-comment">// 先构建逆邻接表，边s-&gt;t表示，s依赖于t，t先于s</span>
+  LinkedList&lt;Integer&gt; inverseAdj[] = <span class="hljs-keyword">new</span> LinkedList[v];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; v; ++i) &#123; <span class="hljs-comment">// 申请空间</span>
+    inverseAdj[i] = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();
+  &#125;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; v; ++i) &#123; <span class="hljs-comment">// 通过邻接表生成逆邻接表</span>
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; adj[i].size(); ++j) &#123;
+      <span class="hljs-keyword">int</span> w = adj[i].get(j); <span class="hljs-comment">// i-&gt;w</span>
+      inverseAdj[w].add(i); <span class="hljs-comment">// w-&gt;i</span>
+    &#125;
+  &#125;
+  <span class="hljs-keyword">boolean</span>[] visited = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[v];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; v; ++i) &#123; <span class="hljs-comment">// 深度优先遍历图</span>
+    <span class="hljs-keyword">if</span> (visited[i] == <span class="hljs-keyword">false</span>) &#123;
+      visited[i] = <span class="hljs-keyword">true</span>;
+      dfs(i, inverseAdj, visited);
+    &#125;
+  &#125;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(</span></span>
+<span class="hljs-function"><span class="hljs-params">    <span class="hljs-keyword">int</span> vertex, LinkedList&lt;Integer&gt; inverseAdj[], <span class="hljs-keyword">boolean</span>[] visited)</span> </span>&#123;
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; inverseAdj[vertex].size(); ++i) &#123;
+    <span class="hljs-keyword">int</span> w = inverseAdj[vertex].get(i);
+    <span class="hljs-keyword">if</span> (visited[w] == <span class="hljs-keyword">true</span>) <span class="hljs-keyword">continue</span>;
+    visited[w] = <span class="hljs-keyword">true</span>;
+    dfs(w, inverseAdj, visited);
+  &#125; <span class="hljs-comment">// 先把vertex这个顶点可达的所有顶点都打印出来之后，再打印它自己</span>
+  System.out.print(<span class="hljs-string">"-&gt;"</span> + vertex);
+&#125;</code></pre>
+
+
+
+<h3 id="地图查找-最短路径算法"><a href="#地图查找-最短路径算法" class="headerlink" title="地图查找-最短路径算法"></a>地图查找-最短路径算法</h3><blockquote>
+<p>图的相关内容更多是了解，能够建立模型，具体的算法内容不作了解</p>
+<p>在处理地图最短路径寻路问题中，我们就应该想到如何把现实世界的模型进行抽象，转化为指定的数据结构</p>
+<p><code>我们在分析的时候可以明确考虑到地图可以转化为图，但是顶点如何规划，是否有向，是否有权值</code><br>          —&gt;   最终经过思考可以构建成有向加权图，把每一个路口作为顶点并增加权值（权值表示路的长度，红绿灯，当前车况，收费站个数等等）</p>
+<p>最后我们便得到了地图如何寻找最短路径的答案</p>
+<p>​          —&gt;   可以用广度遍历搜索出最短路径(无权值要求情况)<br>​          —&gt;   更专业适合算法是：Dijkstra算法，A*算法（去除明显相反方向的路径探索）</p>
+</blockquote>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95%E7%AF%87/">数据结构及算法篇</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AF%87/">数据结构篇</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/06/Redis%E7%AF%87/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis篇</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/06/%E8%8F%9C%E9%B8%9F%E5%8F%98%E5%A4%A7%E9%B8%9F%E7%9A%84%E6%84%9F%E6%82%9F/">
+                        <span class="hidden-mobile">菜鸟变大鸟的感悟</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    function loadValine() {
+      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
+          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
+          placeholder: "说点什么吧~",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail","link"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    }
+    createObserver(loadValine, 'vcomments');
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
+      powered by Valine.</a></noscript>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+	  <i class="iconfont icon-love"></i>
+	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
+        <span>Hosted BY 云开发 Cloudbase</span></a>
+    </div>
+    
+
+    
+  <!-- 备案信息 -->
+  <div class="beian">
+    <a href="http://beian.miit.gov.cn/" target="_blank"
+       rel="nofollow noopener">鄂ICP备18012070号</a>
+    
+  </div>
+
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 6,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "数据结构篇&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>
