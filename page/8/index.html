@@ -168,53 +168,6 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/" target="_self">
-          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="6.824（一）初识分布式">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/">6.824（一）初识分布式</a>
-
-      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/" class="index-excerpt">
-        
-        
-          
-        
-        <div>初始分布式前言本系列是源于「码农翻身」所属知识星球发起的读书活动，由大佬 @我的UDP不丢包 推荐而来，这次的读书活动有一些另类，我们抛弃了传统的书籍，开始攻略最高学府的研究生顶级课程 &lt;6.824&gt;，该课程是很多年前的蠕虫病毒发明者Robert Morris大佬授课，归属于麻省理工大学，授课方式主要是：视频 + Lab实验（Go语言） + 论文，全程英语，难度较大。
-分布式系统的判断</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/6-824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/">6.824（一）初识分布式</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2023/09/12/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/" target="_self">
           <img src="/img/articles/1.jpg" srcset="/img/loading.gif" alt="多线程并发基础">
         </a>
@@ -258,6 +211,67 @@ ThreadMXBean threadMXBean = ManagementFactor</div>
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/">多线程并发基础</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/" target="_self">
+          <img src="/img/articles/11.jpg" srcset="/img/loading.gif" alt="6.824（三）GFS">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">6.824（三）GFS</a>
+
+      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/" class="index-excerpt">
+        
+        
+          
+        
+        <div>GFS
+
+分布式存储系统为什么很难
+为了性能 -》需要分片
+为了解决错误 -》需要容错
+为了容错，需要复制 -》为了复制，需要解决一致性
+为了一致性 -》 性能降低
+
+因此分布式系统的构建，其中的难点就是一个死循环，而如何打破这种死循环，就需要平衡各方面的因素，以及设计更好的数据格式来处理相应的问题，比如用日志而非数据库存储状态提高效率，比如追求弱一致性而非强一致性
+
+
+GFS架构
+
+架构图
+
+每</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/6-824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">6.824（三）GFS</a>
             
           </div>
         
@@ -316,6 +330,105 @@ ThreadMXBean threadMXBean = ManagementFactor</div>
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" target="_self">
+          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="Ajax前后端交互">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/">Ajax前后端交互</a>
+
+      <a href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="index-excerpt">
+        
+        
+          
+        
+        <div>Ajax前后端交互注意：使用@RequestBody注解时需要注意，获取的实体类，或者集合，Map并不是真正的对象，hashmap或者Array等，而是linkehashMap等结构所以真正使用的时候注意进行转换，如：/*
+ * 注：(List&lt;MbtiAnswer&gt;) map.get("list") 转化得到的是LinkHashMap,而不是真正的集合
+ * 因此需要把list数组转</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/">Ajax前后端交互</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/" target="_self">
+          <img src="/img/articles/10.jpg" srcset="/img/loading.gif" alt="6.824（二）RPC and Threads">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/">6.824（二）RPC and Threads</a>
+
+      <a href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/" class="index-excerpt">
+        
+        
+          
+        
+        <div>RPC and ThreadsWhy Use Go?
+good support for threads  （对于线程的良好支持）
+convenient RPC（方便的RPC调用包）
+type safe（类型安全）
+garbage-collected (no use after freeing problems)（拥有垃圾回收机制，不需要考虑内存释放的问题）
+threads + GC is part</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/6-824%EF%BC%88%E4%BA%8C%EF%BC%89RPC-and-Threads/">6.824（二）RPC and Threads</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2023/09/12/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/" target="_self">
           <img src="/img/articles/8.jpg" srcset="/img/loading.gif" alt="CSS网站变灰代码">
         </a>
@@ -357,54 +470,6 @@ ThreadMXBean threadMXBean = ManagementFactor</div>
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/">CSS网站变灰代码</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" target="_self">
-          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="Ajax前后端交互">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/">Ajax前后端交互</a>
-
-      <a href="/2023/09/12/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/" class="index-excerpt">
-        
-        
-          
-        
-        <div>Ajax前后端交互注意：使用@RequestBody注解时需要注意，获取的实体类，或者集合，Map并不是真正的对象，hashmap或者Array等，而是linkehashMap等结构所以真正使用的时候注意进行转换，如：/*
- * 注：(List&lt;MbtiAnswer&gt;) map.get("list") 转化得到的是LinkHashMap,而不是真正的集合
- * 因此需要把list数组转</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Ajax%E5%89%8D%E5%90%8E%E7%AB%AF%E4%BA%A4%E4%BA%92/">Ajax前后端交互</a>
             
           </div>
         
@@ -566,57 +631,6 @@ ResultMap中的property支持自动补全，支持级联(属性A.属性B.属性C
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/MybatisCodeHelper%E7%AF%87/">MybatisCodeHelper篇</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/" target="_self">
-          <img src="/img/articles/10.jpg" srcset="/img/loading.gif" alt="6.824（二）RPC and Threads">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/">6.824（二）RPC and Threads</a>
-
-      <a href="/2023/09/12/6.824%EF%BC%88%E4%BA%8C%EF%BC%89RPC%20and%20Threads/" class="index-excerpt">
-        
-        
-          
-        
-        <div>RPC and ThreadsWhy Use Go?
-good support for threads  （对于线程的良好支持）
-convenient RPC（方便的RPC调用包）
-type safe（类型安全）
-garbage-collected (no use after freeing problems)（拥有垃圾回收机制，不需要考虑内存释放的问题）
-threads + GC is part</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%AF%87/">分布式篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/6-824%EF%BC%88%E4%BA%8C%EF%BC%89RPC-and-Threads/">6.824（二）RPC and Threads</a>
             
           </div>
         

@@ -168,35 +168,21 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/" target="_self">
-          <img src="/img/articles/11.jpg" srcset="/img/loading.gif" alt="6.824（三）GFS">
+        <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/" target="_self">
+          <img src="/img/articles/12.jpg" srcset="/img/loading.gif" alt="6.824（一）初识分布式">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">6.824（三）GFS</a>
+      <a class="index-header" href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/">6.824（一）初识分布式</a>
 
-      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%89%EF%BC%89GFS/" class="index-excerpt">
+      <a href="/2023/09/12/6.824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/" class="index-excerpt">
         
         
           
         
-        <div>GFS
-
-分布式存储系统为什么很难
-为了性能 -》需要分片
-为了解决错误 -》需要容错
-为了容错，需要复制 -》为了复制，需要解决一致性
-为了一致性 -》 性能降低
-
-因此分布式系统的构建，其中的难点就是一个死循环，而如何打破这种死循环，就需要平衡各方面的因素，以及设计更好的数据格式来处理相应的问题，比如用日志而非数据库存储状态提高效率，比如追求弱一致性而非强一致性
-
-
-GFS架构
-
-架构图
-
-每</div>
+        <div>初始分布式前言本系列是源于「码农翻身」所属知识星球发起的读书活动，由大佬 @我的UDP不丢包 推荐而来，这次的读书活动有一些另类，我们抛弃了传统的书籍，开始攻略最高学府的研究生顶级课程 &lt;6.824&gt;，该课程是很多年前的蠕虫病毒发明者Robert Morris大佬授课，归属于麻省理工大学，授课方式主要是：视频 + Lab实验（Go语言） + 论文，全程英语，难度较大。
+分布式系统的判断</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -217,7 +203,7 @@ GFS架构
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/6-824%EF%BC%88%E4%B8%89%EF%BC%89GFS/">6.824（三）GFS</a>
+              <a href="/tags/6-824%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86%E5%88%86%E5%B8%83%E5%BC%8F/">6.824（一）初识分布式</a>
             
           </div>
         
@@ -382,30 +368,23 @@ public static void main(String[] args) throws InterruptedException &#123;
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_self">
-          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="Lambda初次使用很慢？从JIT到类加载再到实现原理">
+        <a href="/2023/09/12/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_self">
+          <img src="/img/articles/23.jpg" srcset="/img/loading.gif" alt="GiHub下载过慢解决办法">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Lambda初次使用很慢？从JIT到类加载再到实现原理</a>
+      <a class="index-header" href="/2023/09/12/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GiHub下载过慢解决办法</a>
 
-      <a href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="index-excerpt">
+      <a href="/2023/09/12/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="index-excerpt">
         
         
           
         
-        <div>Lambda初次使用很慢？从JIT到类加载再到实现原理问题回顾描述的话不多说，直接上图：
-
-看到输出结果了吗？为什么第一次和第二次的时间相差如此之多？咱们一起琢磨琢磨，也可以先去看看结论再回过头看分析
-
-注：并非仅第二次快，而是除了第一次，之后的每一次都很快
-
-给与猜想
-是否和操作系统预热有关？
-是否和JIT（即时编译）有关？
-是否和ClassLoader类加载有关？
-是否和Lambda有关，并非</div>
+        <div>GiHub下载过慢解决办法方案一传统的由Gitee复制镜像、从Gitee拉取
+方案二切换网络连接为手机移动网络，可以显著提速
+方案三切换IP映射（效果较差）
+</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -418,7 +397,7 @@ public static void main(String[] args) throws InterruptedException &#123;
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
             
           </div>
         
@@ -426,7 +405,7 @@ public static void main(String[] args) throws InterruptedException &#123;
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Lambda初次使用很慢？从JIT到类加载再到实现原理</a>
+              <a href="/tags/GiHub%E4%B8%8B%E8%BD%BD%E8%BF%87%E6%85%A2%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GiHub下载过慢解决办法</a>
             
           </div>
         
@@ -494,26 +473,90 @@ public static void main(String[] args) throws InterruptedException &#123;
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" target="_self">
-          <img src="/img/articles/21.jpg" srcset="/img/loading.gif" alt="GitHub无法访问解决办法">
+        <a href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_self">
+          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="Lambda初次使用很慢？从JIT到类加载再到实现原理">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GitHub无法访问解决办法</a>
+      <a class="index-header" href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Lambda初次使用很慢？从JIT到类加载再到实现原理</a>
 
-      <a href="/2023/09/12/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="index-excerpt">
+      <a href="/2023/09/12/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="index-excerpt">
         
         
           
         
-        <div>GitHub无法访问解决办法核心解析域名与IP映射，但前提一定要找准！
-GitHub原始项目https://github.com/521xueweihan/GitHub520
-核心办法自我实践知乎链接：https://zhuanlan.zhihu.com/p/158938544
-官方域名映射地址查询：https://github.com.ipaddress.com/
+        <div>Lambda初次使用很慢？从JIT到类加载再到实现原理问题回顾描述的话不多说，直接上图：
 
-刷新DNS解析
-ipconf</div>
+看到输出结果了吗？为什么第一次和第二次的时间相差如此之多？咱们一起琢磨琢磨，也可以先去看看结论再回过头看分析
+
+注：并非仅第二次快，而是除了第一次，之后的每一次都很快
+
+给与猜想
+是否和操作系统预热有关？
+是否和JIT（即时编译）有关？
+是否和ClassLoader类加载有关？
+是否和Lambda有关，并非</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">Lambda初次使用很慢？从JIT到类加载再到实现原理</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2023/09/12/Google%E6%97%A0%E6%B3%95%E5%90%8C%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+          <img src="/img/articles/20.jpg" srcset="/img/loading.gif" alt="Google无法同步解决方案">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a class="index-header" href="/2023/09/12/Google%E6%97%A0%E6%B3%95%E5%90%8C%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Google无法同步解决方案</a>
+
+      <a href="/2023/09/12/Google%E6%97%A0%E6%B3%95%E5%90%8C%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="index-excerpt">
+        
+        
+          
+        
+        <div> 解决chrome不能自动同步问题，可以进行手动同步 
+
+首先确保账号登录正常
+
+chrome地址栏中输入： chrome://sync-internals/
+
+进行如图操作
+
+如果点击disable sync 再次点击 request 等待一会还是没有反应，且网络正常的话，尝试关闭打开一次浏览器再操作
+ 
+ 
+ 
+
+
+</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -534,7 +577,7 @@ ipconf</div>
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">GitHub无法访问解决办法</a>
+              <a href="/tags/Google%E6%97%A0%E6%B3%95%E5%90%8C%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">Google无法同步解决方案</a>
             
           </div>
         
@@ -598,21 +641,21 @@ CentOS 6.5 (64-bit) 或更高的版本
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/Spring-xsd/" target="_self">
-          <img src="/img/articles/17.jpg" srcset="/img/loading.gif" alt="Spring-xsd">
+        <a href="/2023/09/12/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" target="_self">
+          <img src="/img/articles/7.jpg" srcset="/img/loading.gif" alt="Guava的两种本地缓存策略">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/Spring-xsd/">Spring-xsd</a>
+      <a class="index-header" href="/2023/09/12/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">Guava的两种本地缓存策略</a>
 
-      <a href="/2023/09/12/Spring-xsd/" class="index-excerpt">
+      <a href="/2023/09/12/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" class="index-excerpt">
         
         
           
         
-        <div>Spring XSD篇错误描述有时候你会发现过去一直启动正常的系统，某天启动时会报出形如下面的错误： 
-org.xml.sax.SAXParseException: schema_reference.4: Failed to read schema document 'http://www.springframework.org/schema/beans/spring-beans-2.0.xsd'</div>
+        <div>Guava的两种本地缓存策略缓存在很多场景下都需要使用，如果电商网站的商品类别的查询，订单查询，用户基本信息的查询等等，针对这种读多写少的业务，都可以考虑使用到缓存。在一般的缓存系统中，除了分布式缓存，还会有多级缓存，在提升一定性能的前提下，可以在一定程度上避免缓存击穿或缓存雪崩，也能降低分布式缓存的负载。
+GuavaCache的优点1）很好的封装了get、put操作，能够集成数据源。一般我们在业</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -625,7 +668,7 @@ org.xml.sax.SAXParseException: schema_reference.4: Failed to read schema documen
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
             
           </div>
         
@@ -633,64 +676,7 @@ org.xml.sax.SAXParseException: schema_reference.4: Failed to read schema documen
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Spring-xsd/">Spring-xsd</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/09/12/Git-IDEA-%E6%8A%80%E5%B7%A7/" target="_self">
-          <img src="/img/articles/22.jpg" srcset="/img/loading.gif" alt="Git-IDEA-技巧">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/09/12/Git-IDEA-%E6%8A%80%E5%B7%A7/">Git-IDEA-技巧</a>
-
-      <a href="/2023/09/12/Git-IDEA-%E6%8A%80%E5%B7%A7/" class="index-excerpt">
-        
-        
-          
-        
-        <div>Git-IDEA-技巧GitHub高级搜索仓库名搜索in:name spring boot
-
-
-
-Stars | forks 搜索# 注意 stars:&gt;3000 中间要连起来,不要有空格
-in:name spring boot stars:&gt;3000
-
-                 ...forks:&gt;1000
-
-
-
-ReadMe搜索in:readme spring boo</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-09-12
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Git-IDEA-%E6%8A%80%E5%B7%A7/">Git-IDEA-技巧</a>
+              <a href="/tags/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">Guava的两种本地缓存策略</a>
             
           </div>
         
