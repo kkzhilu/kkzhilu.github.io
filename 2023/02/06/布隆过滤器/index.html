@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>布隆过滤器 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h1><h2 id="什么是布隆过滤器"><a href="#什么是布隆过滤器" class="headerlink" title="什么是布隆过滤器"></a>什么是布隆过滤器</h2><p>本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
+              <h1 id="布隆过滤器"><a href="#布隆过滤器" class="headerlink" title="布隆过滤器"></a>布隆过滤器</h1><p>标签： #Share</p>
+<h2 id="什么是布隆过滤器"><a href="#什么是布隆过滤器" class="headerlink" title="什么是布隆过滤器"></a>什么是布隆过滤器</h2><p>本质上布隆过滤器是一种数据结构，比较巧妙的概率型数据结构（probabilistic data structure），特点是高效地插入和查询，可以用来告诉你 “某样东西一定不存在或者可能存在”。</p>
 <p>相比于传统的 List、Set、Map 等数据结构，它更高效、占用空间更少，但是缺点是其返回的结果是概率性的，而不是确切的</p>
 <h2 id="布隆过滤器数据结构"><a href="#布隆过滤器数据结构" class="headerlink" title="布隆过滤器数据结构"></a>布隆过滤器数据结构</h2><p>布隆过滤器是一个 bit 向量或者说 bit 数组，长这样：</p>
 <p><img src="/2023/02/06/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/image-20210418134922226.png" srcset="/img/loading.gif" alt="image-20210418134922226"></p>
@@ -245,19 +234,19 @@
 <span class="hljs-comment">   * benefit of ensuring proper serialization and deserialization, which is important</span>
 <span class="hljs-comment">   * since &#123;<span class="hljs-doctag">@link</span> #equals&#125; also relies on object identity of funnels.</span>
 <span class="hljs-comment">   *</span>
-<span class="hljs-comment">   * <span class="hljs-doctag">@param</span> funnel the funnel of T's that the constructed &#123;<span class="hljs-doctag">@code</span> BloomFilter&lt;T&gt;&#125; will use</span>
+<span class="hljs-comment">   * <span class="hljs-doctag">@param</span> funnel the funnel of T&#x27;s that the constructed &#123;<span class="hljs-doctag">@code</span> BloomFilter&lt;T&gt;&#125; will use</span>
 <span class="hljs-comment">   * <span class="hljs-doctag">@param</span> expectedInsertions the number of expected insertions to the constructed</span>
 <span class="hljs-comment">   *     &#123;<span class="hljs-doctag">@code</span> BloomFilter&lt;T&gt;&#125;; must be positive</span>
 <span class="hljs-comment">   * <span class="hljs-doctag">@param</span> fpp the desired false positive probability (must be positive and less than 1.0)</span>
 <span class="hljs-comment">   * <span class="hljs-doctag">@return</span> a &#123;<span class="hljs-doctag">@code</span> BloomFilter&#125;</span>
 <span class="hljs-comment">   */</span>
-  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">BloomFilter&lt;T&gt; <span class="hljs-title">create</span><span class="hljs-params">(</span></span>
-<span class="hljs-function"><span class="hljs-params">      Funnel&lt;T&gt; funnel, <span class="hljs-keyword">int</span> expectedInsertions <span class="hljs-comment">/* n */</span>, <span class="hljs-keyword">double</span> fpp)</span> </span>&#123;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; BloomFilter&lt;T&gt; <span class="hljs-title function_">create</span><span class="hljs-params">(</span>
+<span class="hljs-params">      Funnel&lt;T&gt; funnel, <span class="hljs-type">int</span> expectedInsertions <span class="hljs-comment">/* n */</span>, <span class="hljs-type">double</span> fpp)</span> &#123;
     checkNotNull(funnel);
-    checkArgument(expectedInsertions &gt;= <span class="hljs-number">0</span>, <span class="hljs-string">"Expected insertions (%s) must be &gt;= 0"</span>,
+    checkArgument(expectedInsertions &gt;= <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Expected insertions (%s) must be &gt;= 0&quot;</span>,
         expectedInsertions);
-    checkArgument(fpp &gt; <span class="hljs-number">0.0</span>, <span class="hljs-string">"False positive probability (%s) must be &gt; 0.0"</span>, fpp);
-    checkArgument(fpp &lt; <span class="hljs-number">1.0</span>, <span class="hljs-string">"False positive probability (%s) must be &lt; 1.0"</span>, fpp);
+    checkArgument(fpp &gt; <span class="hljs-number">0.0</span>, <span class="hljs-string">&quot;False positive probability (%s) must be &gt; 0.0&quot;</span>, fpp);
+    checkArgument(fpp &lt; <span class="hljs-number">1.0</span>, <span class="hljs-string">&quot;False positive probability (%s) must be &lt; 1.0&quot;</span>, fpp);
     <span class="hljs-keyword">if</span> (expectedInsertions == <span class="hljs-number">0</span>) &#123;
       expectedInsertions = <span class="hljs-number">1</span>;
     &#125;
@@ -267,35 +256,35 @@
 <span class="hljs-comment">     * much of a point after all, e.g. optimalM(1000, 0.0000000000000001) = 76680</span>
 <span class="hljs-comment">     * which is less than 10kb. Who cares!</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-keyword">long</span> numBits = optimalNumOfBits(expectedInsertions, fpp);
-    <span class="hljs-keyword">int</span> numHashFunctions = optimalNumOfHashFunctions(expectedInsertions, numBits);
+    <span class="hljs-type">long</span> <span class="hljs-variable">numBits</span> <span class="hljs-operator">=</span> optimalNumOfBits(expectedInsertions, fpp);
+    <span class="hljs-type">int</span> <span class="hljs-variable">numHashFunctions</span> <span class="hljs-operator">=</span> optimalNumOfHashFunctions(expectedInsertions, numBits);
     <span class="hljs-keyword">try</span> &#123;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BloomFilter&lt;T&gt;(<span class="hljs-keyword">new</span> BitArray(numBits), numHashFunctions, funnel,
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BloomFilter</span>&lt;T&gt;(<span class="hljs-keyword">new</span> <span class="hljs-title class_">BitArray</span>(numBits), numHashFunctions, funnel,
           BloomFilterStrategies.MURMUR128_MITZ_32);
     &#125; <span class="hljs-keyword">catch</span> (IllegalArgumentException e) &#123;
-      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">"Could not create BloomFilter of "</span> + numBits + <span class="hljs-string">" bits"</span>, e);
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalArgumentException</span>(<span class="hljs-string">&quot;Could not create BloomFilter of &quot;</span> + numBits + <span class="hljs-string">&quot; bits&quot;</span>, e);
     &#125;
   &#125;
 <span class="hljs-comment">/**</span>
 <span class="hljs-comment">   * Returns &#123;<span class="hljs-doctag">@code</span> true&#125; if the element &lt;i&gt;might&lt;/i&gt; have been put in this Bloom filter,</span>
 <span class="hljs-comment">   * &#123;<span class="hljs-doctag">@code</span> false&#125; if this is &lt;i&gt;definitely&lt;/i&gt; not the case.</span>
 <span class="hljs-comment">   */</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">mightContain</span><span class="hljs-params">(T object)</span> </span>&#123;
+  <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">mightContain</span><span class="hljs-params">(T object)</span> &#123;
     <span class="hljs-keyword">return</span> strategy.mightContain(object, funnel, numHashFunctions, bits);
   &#125;</code></pre>
 
 <ul>
 <li>一个小例子</li>
 </ul>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String... args)</span></span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String... args)</span>&#123;
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 创建一个插入对象为一亿，误报率为0.01%的布隆过滤器</span>
 <span class="hljs-comment">     */</span>
-    BloomFilter&lt;CharSequence&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.forName(<span class="hljs-string">"utf-8"</span>)), <span class="hljs-number">100000000</span>, <span class="hljs-number">0.0001</span>);
-    bloomFilter.put(<span class="hljs-string">"121"</span>);
-    bloomFilter.put(<span class="hljs-string">"122"</span>);
-    bloomFilter.put(<span class="hljs-string">"123"</span>);
-    System.out.println(bloomFilter.mightContain(<span class="hljs-string">"121"</span>));
+    BloomFilter&lt;CharSequence&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(Charset.forName(<span class="hljs-string">&quot;utf-8&quot;</span>)), <span class="hljs-number">100000000</span>, <span class="hljs-number">0.0001</span>);
+    bloomFilter.put(<span class="hljs-string">&quot;121&quot;</span>);
+    bloomFilter.put(<span class="hljs-string">&quot;122&quot;</span>);
+    bloomFilter.put(<span class="hljs-string">&quot;123&quot;</span>);
+    System.out.println(bloomFilter.mightContain(<span class="hljs-string">&quot;121&quot;</span>));
 &#125;</code></pre>
             </article>
             <hr>
@@ -319,16 +308,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/">
+                      <a href="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">多线程并发基础</span>
+                        <span class="hidden-mobile">工厂模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -336,8 +325,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/">
-                        <span class="hidden-mobile">手写一个本地缓存</span>
+                      <a href="/2023/02/06/%E5%BB%BA%E9%80%A0%E8%80%85&amp;%E8%B4%A3%E4%BB%BB%E9%93%BE&amp;%E5%A4%87%E5%BF%98%E5%BD%95/">
+                        <span class="hidden-mobile">建造者&责任链&备忘录</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -352,30 +341,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/布隆过滤器/';
+          this.page.identifier = '/2023/02/06/布隆过滤器/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -439,24 +426,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -501,7 +477,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -588,13 +564,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

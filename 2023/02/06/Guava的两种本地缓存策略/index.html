@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Guava的两种本地缓存策略 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.8k 字
     </span>
   
 
@@ -204,11 +192,12 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Guava的两种本地缓存策略"><a href="#Guava的两种本地缓存策略" class="headerlink" title="Guava的两种本地缓存策略"></a>Guava的两种本地缓存策略</h1><p>缓存在很多场景下都需要使用，如果电商网站的商品类别的查询，订单查询，用户基本信息的查询等等，针对这种读多写少的业务，都可以考虑使用到缓存。在一般的缓存系统中，除了分布式缓存，还会有多级缓存，在提升一定性能的前提下，可以在一定程度上避免缓存击穿或缓存雪崩，也能降低分布式缓存的负载。</p>
-<h2 id="GuavaCache的优点"><a href="#GuavaCache的优点" class="headerlink" title="GuavaCache的优点"></a>GuavaCache的优点</h2><p>1）很好的封装了get、put操作，能够集成数据源。一般我们在业务中操作缓存都会操作缓存和数据源两部分。例如：put数据时，先插入DB再删除原来的缓存，get数据时，先查缓存，命中则返回，没有命中时需要查询DB，再把查询结果放入缓存中。Guava封装了这么多步骤，只需要调用一次get/put方法即可</p>
+              <h1 id="Guava的两种本地缓存策略"><a href="#Guava的两种本地缓存策略" class="headerlink" title="Guava的两种本地缓存策略"></a>Guava的两种本地缓存策略</h1><p>标签： #Share</p>
+<p>缓存在很多场景下都需要使用，如果电商网站的商品类别的查询，订单查询，用户基本信息的查询等等，针对这种读多写少的业务，都可以考虑使用到缓存。在一般的缓存系统中，除了分布式缓存，还会有多级缓存，在提升一定性能的前提下，可以在一定程度上避免缓存击穿或缓存雪崩，也能降低分布式缓存的负载。</p>
+<h2 id="GuavaCache的优点"><a href="#GuavaCache的优点" class="headerlink" title="GuavaCache的优点"></a>GuavaCache的优点</h2><p>1）很好的封装了get、put操作，能够集成数据源。一般我们在业务中操作缓存都会操作缓存和数据源两部分。例如：put数据时，先插入DB再删除原来的缓存，get数据时，先查缓存，命中则返回，没有命中时需要查询DB，再把查询结果放入缓存中。Guava封装了这么多步骤，只需要调用一次get&#x2F;put方法即可</p>
 <p>2）它是线程安全的缓存，与ConcurrentMap相似，但前者增加了更多的元素失效策略，后者只能显示的移除元素</p>
 <p>3）GuavaCache提供了三种基本的缓存回收方式：基于容量回收、定时回收和基于引用回收。定时回收有两种：按照写入时间，最早写入的最先回收；按照访问时间，最早访问的最早回收</p>
-<p>4）它可以监控加载/命中情况</p>
+<p>4）它可以监控加载&#x2F;命中情况</p>
 <h2 id="Cache类型本地缓存"><a href="#Cache类型本地缓存" class="headerlink" title="Cache类型本地缓存"></a>Cache类型本地缓存</h2><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.mine.localcache.guava;
 
 <span class="hljs-keyword">import</span> com.google.common.cache.Cache;
@@ -230,21 +219,21 @@
 <span class="hljs-comment"> * version:      V1.0</span>
 <span class="hljs-comment"> * ******************************</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CacheUtil</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CacheUtil</span> &#123;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 构造方法 - 进行初始化</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> maxSize      最大容量</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> invalidTime  刷新时间 | 基于分钟级别</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CacheUtil</span><span class="hljs-params">(<span class="hljs-keyword">long</span> maxSize, <span class="hljs-keyword">long</span> invalidTime)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">CacheUtil</span><span class="hljs-params">(<span class="hljs-type">long</span> maxSize, <span class="hljs-type">long</span> invalidTime)</span> &#123;
         init(maxSize, invalidTime);
     &#125;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 初始化</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span> <span class="hljs-params">(<span class="hljs-keyword">long</span> maxSize, <span class="hljs-keyword">long</span> invalidTime)</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span> <span class="hljs-params">(<span class="hljs-type">long</span> maxSize, <span class="hljs-type">long</span> invalidTime)</span> &#123;
 
         <span class="hljs-comment">// 缓存</span>
         cache = CacheBuilder.newBuilder()
@@ -267,7 +256,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; 从缓存中取value，没取到会返回null</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getValue</span> <span class="hljs-params">(String key)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getValue</span> <span class="hljs-params">(String key)</span> &#123;
         <span class="hljs-keyword">return</span> cache.getIfPresent(key);
     &#125;
 
@@ -275,7 +264,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; 从缓存中取value，没取到会执行call</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getValue</span> <span class="hljs-params">(String key, Callable callable)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getValue</span> <span class="hljs-params">(String key, Callable callable)</span> <span class="hljs-keyword">throws</span> Exception &#123;
         <span class="hljs-keyword">return</span> cache.get(key, callable);
     &#125;
 
@@ -283,7 +272,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; put</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putValue</span> <span class="hljs-params">(String key, Object value)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putValue</span> <span class="hljs-params">(String key, Object value)</span> &#123;
         cache.put(key, value);
     &#125;
 
@@ -291,7 +280,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; putMap</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putMap</span> <span class="hljs-params">(String key, Map map)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putMap</span> <span class="hljs-params">(String key, Map map)</span> &#123;
         cache.putAll(map);
     &#125;
 
@@ -299,7 +288,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; 判断是否存在key</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">constainsKey</span> <span class="hljs-params">(String key)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">constainsKey</span> <span class="hljs-params">(String key)</span> &#123;
         <span class="hljs-keyword">return</span> cache.asMap().containsKey(key);
     &#125;
 &#125;</code></pre>
@@ -338,23 +327,23 @@
 <span class="hljs-comment"> * version:      V1.0</span>
 <span class="hljs-comment"> * ******************************</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoadingCacheUtil</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoadingCacheUtil</span> &#123;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 构造方法 - 进行初始化</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> maxSize      最大容量</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> refreshTime  刷新时间 | 基于分钟级别</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LoadingCacheUtil</span><span class="hljs-params">(<span class="hljs-keyword">long</span> maxSize, <span class="hljs-keyword">long</span> refreshTime)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">LoadingCacheUtil</span><span class="hljs-params">(<span class="hljs-type">long</span> maxSize, <span class="hljs-type">long</span> refreshTime)</span> &#123;
         init(maxSize, refreshTime);
     &#125;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 初始化</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span> <span class="hljs-params">(<span class="hljs-keyword">long</span> maxSize, <span class="hljs-keyword">long</span> refreshTime)</span> </span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span> <span class="hljs-params">(<span class="hljs-type">long</span> maxSize, <span class="hljs-type">long</span> refreshTime)</span> &#123;
         <span class="hljs-comment">// 刷新线程池 -&gt; 如果数据都没了则启用后台线程进行刷新,让用户无感知 -&gt; 核心线程数 1, 最大线程数 2</span>
-        backgroundRefreshPools = MoreExecutors.listeningDecorator(<span class="hljs-keyword">new</span> ThreadPoolExecutor(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS, <span class="hljs-keyword">new</span> LinkedBlockingQueue&lt;&gt;()));
+        backgroundRefreshPools = MoreExecutors.listeningDecorator(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadPoolExecutor</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0L</span>, TimeUnit.MILLISECONDS, <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedBlockingQueue</span>&lt;&gt;()));
 
         <span class="hljs-comment">// 缓存</span>
         cache = CacheBuilder.newBuilder()
@@ -366,23 +355,23 @@
                 .maximumSize(maxSize)
                 .concurrencyLevel(Runtime.getRuntime().availableProcessors())
                 .recordStats()
-                .build(<span class="hljs-keyword">new</span> CacheLoader&lt;String, Object&gt;() &#123;
+                .build(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CacheLoader</span>&lt;String, Object&gt;() &#123;
                     <span class="hljs-comment">// 当本地缓存命没有中时，调用load方法获取结果并将结果缓存</span>
                     <span class="hljs-meta">@Override</span>
-                    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">load</span><span class="hljs-params">(String appKey)</span> </span>&#123;
+                    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">load</span><span class="hljs-params">(String appKey)</span> &#123;
                         <span class="hljs-keyword">return</span> getFromDB(appKey);
                     &#125;
 
                     <span class="hljs-comment">// 刷新时，开启一个新线程异步刷新，老请求直接返回旧值，防止耗时过长</span>
                     <span class="hljs-meta">@Override</span>
-                    <span class="hljs-function"><span class="hljs-keyword">public</span> ListenableFuture&lt;Object&gt; <span class="hljs-title">reload</span><span class="hljs-params">(String key, Object oldValue)</span> </span>&#123;
+                    <span class="hljs-keyword">public</span> ListenableFuture&lt;Object&gt; <span class="hljs-title function_">reload</span><span class="hljs-params">(String key, Object oldValue)</span> &#123;
                         <span class="hljs-keyword">return</span> backgroundRefreshPools.submit(() -&gt; getFromDB(key));
                     &#125;
 
                     <span class="hljs-comment">// 数据库进行查询</span>
-                    <span class="hljs-function"><span class="hljs-keyword">private</span> Object <span class="hljs-title">getFromDB</span> <span class="hljs-params">(String key)</span> </span>&#123;
+                    <span class="hljs-keyword">private</span> Object <span class="hljs-title function_">getFromDB</span> <span class="hljs-params">(String key)</span> &#123;
                         <span class="hljs-comment">// return entryMapper.selectByName(name)</span>
-                        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+                        <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;
                     &#125;
                 &#125;);
     &#125;
@@ -401,7 +390,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; 从缓存中取value，没取到会自动重载缓存,如果载入为null则触发异常</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getValue</span> <span class="hljs-params">(String key)</span> <span class="hljs-keyword">throws</span> ExecutionException </span>&#123;
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getValue</span> <span class="hljs-params">(String key)</span> <span class="hljs-keyword">throws</span> ExecutionException &#123;
         <span class="hljs-keyword">return</span> cache.get(key);
     &#125;
 
@@ -409,7 +398,7 @@
 <span class="hljs-comment">     * 对外暴露的方法 -&gt; 判断是否存在key</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">constainsKey</span> <span class="hljs-params">(String key)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">constainsKey</span> <span class="hljs-params">(String key)</span> &#123;
         <span class="hljs-keyword">return</span> cache.asMap().containsKey(key);
     &#125;
 &#125;</code></pre>
@@ -426,7 +415,7 @@
 </ul>
 <blockquote>
 <p>QQ：806857264</p>
-<p>GitHub：<a href="https://github.com/kkzhilu" target="_blank" rel="noopener">https://github.com/kkzhilu</a></p>
+<p>GitHub：<a target="_blank" rel="noopener" href="https://github.com/kkzhilu">https://github.com/kkzhilu</a></p>
 <p>如有什么问题，望指正，互相交流</p>
 </blockquote>
 
@@ -452,16 +441,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/">
+                      <a href="/2023/02/06/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Git-IDEA-技巧</span>
+                        <span class="hidden-mobile">GitHub无法访问解决办法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -469,8 +458,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">
-                        <span class="hidden-mobile">Java语法糖之泛型</span>
+                      <a href="/2023/02/06/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">JavaScript定时器及回调用法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -485,30 +474,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/Guava的两种本地缓存策略/';
+          this.page.identifier = '/2023/02/06/Guava的两种本地缓存策略/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -572,24 +559,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -634,7 +610,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -721,13 +697,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

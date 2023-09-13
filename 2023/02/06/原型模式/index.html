@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>原型模式 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      911 字
+      914 字
     </span>
   
 
@@ -204,13 +192,14 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="原型模式篇"><a href="#原型模式篇" class="headerlink" title="原型模式篇"></a>原型模式篇</h1><h3 id="官方解释"><a href="#官方解释" class="headerlink" title="官方解释"></a>官方解释</h3><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
+              <h1 id="原型模式篇"><a href="#原型模式篇" class="headerlink" title="原型模式篇"></a>原型模式篇</h1><p>标签： #Share</p>
+<h3 id="官方解释"><a href="#官方解释" class="headerlink" title="官方解释"></a>官方解释</h3><p>原型模式（Prototype Pattern）是用于创建重复的对象，同时又能保证性能。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。<br>这种模式是实现了一个原型接口，该接口用于创建当前对象的克隆。当直接创建对象的代价比较大时，则采用这种模式。例如，一个对象需要在一个高代价的数据库操作之后被创建。我们可以缓存该对象，在下一个请求时返回它的克隆，在需要的时候更新数据库，以此来减少数据库调用。</p>
 <h3 id="命令模式生活中使用"><a href="#命令模式生活中使用" class="headerlink" title="命令模式生活中使用"></a>命令模式生活中使用</h3><p>用原型模式实现细胞分裂</p>
 <p>分析：所有细胞的构造，构造都相同，无需重新从无到有的创建，而是以类似克隆的方式即可</p>
-<h3 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h3><p>Head First：<a href="https://www.cnblogs.com/xcsn/p/7352136.html" target="_blank" rel="noopener">https://www.cnblogs.com/xcsn/p/7352136.html</a></p>
-<p>菜鸟教程：<a href="https://www.runoob.com/design-pattern/prototype-pattern.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/prototype-pattern.html</a></p>
-<p>简书：<a href="https://www.jianshu.com/p/1e41ee3ac4b5" target="_blank" rel="noopener">https://www.jianshu.com/p/1e41ee3ac4b5</a></p>
-<h3 id="工作举例"><a href="#工作举例" class="headerlink" title="工作举例"></a>工作举例</h3><pre><code class="hljs crystal">详情见：<span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/github.com/kkzhilu</span><span class="hljs-regexp">/KerwinTools/tree</span><span class="hljs-regexp">/master/src</span><span class="hljs-regexp">/main/java</span><span class="hljs-regexp">/design/pattern</span>
+<h3 id="官方示例"><a href="#官方示例" class="headerlink" title="官方示例"></a>官方示例</h3><p>Head First：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xcsn/p/7352136.html">https://www.cnblogs.com/xcsn/p/7352136.html</a></p>
+<p>菜鸟教程：<a target="_blank" rel="noopener" href="https://www.runoob.com/design-pattern/prototype-pattern.html">https://www.runoob.com/design-pattern/prototype-pattern.html</a></p>
+<p>简书：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1e41ee3ac4b5">https://www.jianshu.com/p/1e41ee3ac4b5</a></p>
+<h3 id="工作举例"><a href="#工作举例" class="headerlink" title="工作举例"></a>工作举例</h3><pre><code class="hljs awk">详情见：https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/kkzhilu/</span>KerwinTools<span class="hljs-regexp">/tree/m</span>aster<span class="hljs-regexp">/src/m</span>ain<span class="hljs-regexp">/java/</span>design/pattern
 原型模式相关</code></pre>
 
 
@@ -266,7 +255,7 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -283,8 +272,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%B9%B6%E5%8F%91%E5%9F%BA%E7%A1%80/">
-                        <span class="hidden-mobile">多线程并发基础</span>
+                      <a href="/2023/02/06/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">命令模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -299,30 +288,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/原型模式/';
+          this.page.identifier = '/2023/02/06/原型模式/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -386,24 +373,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -448,7 +424,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -535,13 +511,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Lambda初次使用很慢？从JIT到类加载再到实现原理 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Lambda初次使用很慢？从JIT到类加载再到实现原理"><a href="#Lambda初次使用很慢？从JIT到类加载再到实现原理" class="headerlink" title="Lambda初次使用很慢？从JIT到类加载再到实现原理"></a>Lambda初次使用很慢？从JIT到类加载再到实现原理</h1><h2 id="问题回顾"><a href="#问题回顾" class="headerlink" title="问题回顾"></a>问题回顾</h2><p>描述的话不多说，直接上图：</p>
+              <h1 id="Lambda初次使用很慢？从JIT到类加载再到实现原理"><a href="#Lambda初次使用很慢？从JIT到类加载再到实现原理" class="headerlink" title="Lambda初次使用很慢？从JIT到类加载再到实现原理"></a>Lambda初次使用很慢？从JIT到类加载再到实现原理</h1><p>标签： #Share</p>
+<h2 id="问题回顾"><a href="#问题回顾" class="headerlink" title="问题回顾"></a>问题回顾</h2><p>描述的话不多说，直接上图：</p>
 <p><img src="/2023/02/06/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/image-20200629234626454.png" srcset="/img/loading.gif" alt="image-20200629234626454"></p>
 <p>看到输出结果了吗？为什么第一次和第二次的时间相差如此之多？咱们一起琢磨琢磨，<strong>也可以先去看看结论再回过头看分析</strong></p>
 <blockquote>
@@ -216,7 +205,7 @@
 <li>是否和ClassLoader类加载有关？</li>
 <li>是否和<code>Lambda</code>有关，并非<code>foreach</code>的问题</li>
 </ol>
-<h2 id="验证猜想"><a href="#验证猜想" class="headerlink" title="验证猜想"></a>验证猜想</h2><h3 id="操作系统预热"><a href="#操作系统预热" class="headerlink" title="操作系统预热"></a>操作系统预热</h3><p>操作系统预热这个概念是我咨询一位大佬得到的结论，在百度 / Google 中并未搜索到相应的词汇，但是在模拟测试中，我用 <font color="red">普通遍历</font> 的方式进行测试：</p>
+<h2 id="验证猜想"><a href="#验证猜想" class="headerlink" title="验证猜想"></a>验证猜想</h2><h3 id="操作系统预热"><a href="#操作系统预热" class="headerlink" title="操作系统预热"></a>操作系统预热</h3><p>操作系统预热这个概念是我咨询一位大佬得到的结论，在百度 &#x2F; Google 中并未搜索到相应的词汇，但是在模拟测试中，我用 <font color="red">普通遍历</font> 的方式进行测试：</p>
 <p><img src="/2023/02/06/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/image-20200630003352129.png" srcset="/img/loading.gif" alt="image-20200630003352129"></p>
 <p>基本上每次都是前几次速度较慢，后面的速度更快，因此 <font color="red">可能</font> 有这个因素影响，但差距并不会很大，因此该结论并不能作为问题的答案。</p>
 <h3 id="JIT-即时编译"><a href="#JIT-即时编译" class="headerlink" title="JIT 即时编译"></a>JIT 即时编译</h3><p>首先介绍一下什么是JIT即时编译：</p>
@@ -232,13 +221,11 @@
 </blockquote>
 <p>从上述的概念中，我们应该可以得到一个结论：第一条所谓的操作系统预热 <font color="red">大概率不正确</font>，因为普通遍历方法执行N次，后续执行的时间占用比较小，很可能是因为JIT导致的。</p>
 <p>那 JIT即时编译 是否是最终的答案？我们想办法把 JIT 关掉来测试一下，通过查询资料发现了如下内容：</p>
-<p><strong><em>Procedure</em></strong></p>
+<p><em><strong>Procedure</strong></em></p>
 <ul>
 <li><p>Use the <strong>-D</strong> option on the JVM command line to set the <strong>java.compiler</strong> property to NONE or the empty string.</p>
 <p>Type the following command at a shell or command prompt:</p>
-<pre><code class="hljs bash">java -Djava.compiler=NONE &lt;class&gt;</code></pre>
-
-</li>
+<pre><code class="hljs bash">java -Djava.compiler=NONE &lt;class&gt;</code></pre></li>
 </ul>
 <blockquote>
 <p>注：该段内容来自IBM官方资料，地址见 &lt;收获&gt; ，咱们先不要停止思考</p>
@@ -258,7 +245,7 @@ foreach time two: 5</code></pre>
 
 
 
-<p>我测试了很多次，结果都很相近，因此得到可以得到另一个结论：<code>JIT</code>并非引发该问题的原因（但是它的确能提高执行效率）</p>
+<p>我测试了很多次，结果都很相近，因此得到可以得到另一个结论：<code>JIT </code>并非引发该问题的原因（但是它的确能提高执行效率）</p>
 <h3 id="难道和类加载有关？"><a href="#难道和类加载有关？" class="headerlink" title="难道和类加载有关？"></a>难道和类加载有关？</h3><p>在进行类加载验证时，我依然无法放弃 <code>JIT</code> ，因此查阅了很多资料，知道了某个命令可以查看 <code>JIT</code>编译的耗时情况，命令如下：</p>
 <pre><code class="hljs bash">java -XX:+CITime com.code.jvm.preheat.Demo &gt;&gt; log.txt</code></pre>
 
@@ -374,12 +361,12 @@ Accumulated compiler <span class="hljs-built_in">times</span> (<span class="hljs
    5143  219       3       jdk.internal.org.objectweb.asm.ByteVector::&lt;init&gt; (13 bytes)
 [Loaded java.lang.invoke.LambdaForm<span class="hljs-variable">$MH</span>/531885035 from java.lang.invoke.LambdaForm]
    5143  222       3       jdk.internal.org.objectweb.asm.ByteVector::putInt (74 bytes)
-   5143  224       3       com.code.jvm.preheat.Demo$<span class="hljs-variable">$Lambda</span><span class="hljs-variable">$1</span>/834600351::accept (8 bytes)
-   5143  225       3       com.code.jvm.preheat.Demo::lambda<span class="hljs-variable">$getTime</span><span class="hljs-variable">$0</span> (6 bytes)
-   5144  226       4       com.code.jvm.preheat.Demo$<span class="hljs-variable">$Lambda</span><span class="hljs-variable">$1</span>/834600351::accept (8 bytes)
+   5143  224       3       com.code.jvm.preheat.Demo$$Lambda<span class="hljs-variable">$1</span>/834600351::accept (8 bytes)
+   5143  225       3       com.code.jvm.preheat.Demo::lambda$getTime<span class="hljs-variable">$0</span> (6 bytes)
+   5144  226       4       com.code.jvm.preheat.Demo$$Lambda<span class="hljs-variable">$1</span>/834600351::accept (8 bytes)
    5144  223       1       java.lang.Integer::intValue (5 bytes)
    5144  221       3       jdk.internal.org.objectweb.asm.ByteVector::putByteArray (49 bytes)
-   5144  224       3       com.code.jvm.preheat.Demo$<span class="hljs-variable">$Lambda</span><span class="hljs-variable">$1</span>/834600351::accept (8 bytes)   made not entrant
+   5144  224       3       com.code.jvm.preheat.Demo$$Lambda<span class="hljs-variable">$1</span>/834600351::accept (8 bytes)   made not entrant
    5145  227 %     4       java.util.ArrayList::forEach @ 27 (75 bytes)
    5146    3       3       java.lang.String::equals (81 bytes)   made not entrant
 foreach time one: 50
@@ -425,17 +412,17 @@ foreach time two: 1
 <p>完美印证了之前提出的问题：<font color="red">为什么第一次 foreach 慢，以后都很快</font>，但这就是真相吗？我们继续往下看</p>
 <h3 id="排除-foreach-的干扰"><a href="#排除-foreach-的干扰" class="headerlink" title="排除 foreach 的干扰"></a>排除 foreach 的干扰</h3><p>先来看看 <code>ArrayList</code>中 <code>foreach</code>方法的实现：</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Override</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-keyword">super</span> E&gt; action)</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> E&gt; action)</span> &#123;
     Objects.requireNonNull(action);
-    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> expectedModCount = modCount;
-    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)
-    <span class="hljs-keyword">final</span> E[] elementData = (E[]) <span class="hljs-keyword">this</span>.elementData;
-    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> size = <span class="hljs-keyword">this</span>.size;
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++) &#123;
+    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">expectedModCount</span> <span class="hljs-operator">=</span> modCount;
+    <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span>
+    <span class="hljs-keyword">final</span> E[] elementData = (E[]) <span class="hljs-built_in">this</span>.elementData;
+    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.size;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++) &#123;
         action.accept(elementData[i]);
     &#125;
     <span class="hljs-keyword">if</span> (modCount != expectedModCount) &#123;
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ConcurrentModificationException();
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcurrentModificationException</span>();
     &#125;
 &#125;</code></pre>
 
@@ -444,7 +431,7 @@ foreach time two: 1
 <p>乍一看，好像也没什么特别，我们来试试把 Consumer 预先定义好，代码如下：</p>
 <p><img src="/2023/02/06/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/image-20200630015101773.png" srcset="/img/loading.gif" alt="image-20200630015101773"></p>
 <p>可以发现速度很快，检查 <code>JIT编译时间</code>，检查<code>类加载</code>情况，发现耗时短，且无<code>LambdaMetafactory</code>加载</p>
-<p>根据刚才得到的结论，我们试试把 <code>Consumer</code> 用 <code>Lambda</code>的方式定义一下</p>
+<p>根据刚才得到的结论，我们试试把 <code>Consumer </code> 用 <code>Lambda</code>的方式定义一下</p>
 <pre><code class="hljs bash">Consumer consumer = o -&gt; &#123;
     int curr = (int) o;
 &#125;;
@@ -458,16 +445,16 @@ foreach time: 3</code></pre>
 <li>匿名内部类在编译阶段会多出一个类，而<code>Lambda</code>不会，它仅会多生成一个函数</li>
 <li>该函数会在运行阶段，会通过<code>LambdaMetafactory</code>工厂来生成一个class，进行后续的调用</li>
 </ul>
-<p><strong><em>为什么<code>Lamdba</code>要如此实现？</em></strong></p>
+<p><em><strong>为什么<code>Lamdba</code>要如此实现？</strong></em></p>
 <p>匿名内部类有一定的缺陷：</p>
 <ol>
-<li>编译器为每个匿名内部类生成一个新的类文件，生成许多类文件是不可取的，因为每个类文件在使用之前都需要加载和验证，这会影响应用程序的启动性能，加载可能是一个昂贵的操作，包括磁盘I/O和解压缩JAR文件本身。</li>
+<li>编译器为每个匿名内部类生成一个新的类文件，生成许多类文件是不可取的，因为每个类文件在使用之前都需要加载和验证，这会影响应用程序的启动性能，加载可能是一个昂贵的操作，包括磁盘I&#x2F;O和解压缩JAR文件本身。</li>
 <li>如果lambdas被转换为匿名内部类，那么每个lambda都有一个新的类文件。由于每个匿名内部类都将被加载，它将占用JVM的元空间，如果JVM将每个此类匿名内部类中的代码编译为机器码，那么它将存储在代码缓存中。</li>
 <li>此外，这些匿名内部类将被实例化为单独的对象。因此，匿名内部类会增加应用程序的内存消耗。</li>
 <li>最重要的是，从一开始就选择使用匿名内部类来实现lambdas，这将限制未来lambda实现更改的范围，以及它们根据未来JVM改进而演进的能力。</li>
 </ol>
 <blockquote>
-<p>内容参考：<a href="https://www.infoq.com/articles/Java-8-Lambdas-A-Peek-Under-the-Hood/" target="_blank" rel="noopener">https://www.infoq.com/articles/Java-8-Lambdas-A-Peek-Under-the-Hood/</a></p>
+<p>内容参考：<a target="_blank" rel="noopener" href="https://www.infoq.com/articles/Java-8-Lambdas-A-Peek-Under-the-Hood/">https://www.infoq.com/articles/Java-8-Lambdas-A-Peek-Under-the-Hood/</a></p>
 </blockquote>
 <h2 id="真相"><a href="#真相" class="headerlink" title="真相"></a>真相</h2><p>在理解了匿名内部类以及<code>Lambda</code>表达式的实现原理后，对<code>Lambda</code>耗时长的原因反而更懵逼，毕竟匿名内部类的生成一个新类和<code>Lambda</code>生成一个新方法所耗时间差别不会太多，然后运行期间同样有Class产生，耗时也不应该有太大的区别，到底哪里出现了问题呢？</p>
 <p>再次通过科学上网，最终找到了答案：</p>
@@ -497,15 +484,15 @@ foreach time: 3</code></pre>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
 <li>导致 foreach 测试时数据不正常的罪魁祸首是：<code>Lambda表达式</code></li>
 <li><code>Lambda表达式</code> 在应用程序中首次使用时，需要额外加载ASM框架，因此需要更多的编译，加载的时间</li>
-<li><code>Lambda表达式</code>的底层实现并非匿名内部类的语法糖，而是其优化版</li>
+<li><code>Lambda表达式 </code>的底层实现并非匿名内部类的语法糖，而是其优化版</li>
 <li>foreach 的底层实现其实和增强 for循环没有本质区别，一个是外部迭代器，一个是内部迭代器而已</li>
 <li>通过 foreach + Lambda 的写法，效率并不低，只不过需要提前进行<code>预热(加载框架)</code></li>
 </ul>
 <h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><ul>
 <li>JIT 即时编译的概念和相关命令</li>
-<li>IBM 官方资料库，<a href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/welcome/welcome_javasdk_version.html" target="_blank" rel="noopener">地址</a></li>
-<li>Oracle 关于JVM命令大全，<a href="https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html" target="_blank" rel="noopener">地址</a>  |   国内博主翻译版本 <a href="https://www.cnblogs.com/jack204/archive/2012/07/02/2572932.html" target="_blank" rel="noopener">地址</a></li>
-<li>Lambda底层实现文章，<a href="https://www.infoq.com/articles/Java-8-Lambdas-A-Peek-Under-the-Hood/" target="_blank" rel="noopener">地址</a></li>
+<li>IBM 官方资料库，<a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/SSYKE2_8.0.0/welcome/welcome_javasdk_version.html">地址</a></li>
+<li>Oracle 关于JVM命令大全，<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/vmoptions-jsp.html">地址</a>  |   国内博主翻译版本 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/jack204/archive/2012/07/02/2572932.html">地址</a></li>
+<li>Lambda底层实现文章，<a target="_blank" rel="noopener" href="https://www.infoq.com/articles/Java-8-Lambdas-A-Peek-Under-the-Hood/">地址</a></li>
 </ul>
 
             </article>
@@ -530,16 +517,16 @@ foreach time: 3</code></pre>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Kerwin&#39;s%20Open%20Source/">
+                      <a href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Kerwin's Open Source</span>
+                        <span class="hidden-mobile">Java语法糖之泛型</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -547,8 +534,8 @@ foreach time: 3</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/Mac%E5%B7%A5%E5%85%B7%20BitBar/">
-                        <span class="hidden-mobile">Mac工具 BitBar</span>
+                      <a href="/2023/02/06/MarkDown%E7%94%BB%E5%9B%BE%E7%AF%87/">
+                        <span class="hidden-mobile">MarkDown画图篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -563,30 +550,28 @@ foreach time: 3</code></pre>
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/Lambda初次使用很慢？从JIT到类加载再到实现原理/';
+          this.page.identifier = '/2023/02/06/Lambda初次使用很慢？从JIT到类加载再到实现原理/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -650,24 +635,13 @@ foreach time: 3</code></pre>
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -712,7 +686,7 @@ foreach time: 3</code></pre>
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -799,13 +773,6 @@ foreach time: 3</code></pre>
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

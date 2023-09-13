@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
+  <title>不要做迂腐的好人：用真诚与博弈好好生活 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-09-14 00:06">
+      2023年9月14日 凌晨
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="不要做迂腐的好人：用真诚与博弈好好生活"><a href="#不要做迂腐的好人：用真诚与博弈好好生活" class="headerlink" title="不要做迂腐的好人：用真诚与博弈好好生活"></a>不要做迂腐的好人：用真诚与博弈好好生活</h1><p>标签： #Thinking&#x2F;知与行 #Share #博弈论 #处世之道</p>
+<br>
+
+<h2 id="痛苦与不理解"><a href="#痛苦与不理解" class="headerlink" title="痛苦与不理解"></a>痛苦与不理解</h2><p>Scene one：</p>
+<p>在一次读书会里遇到这样一个事情，有个女生自信满满的询问：<strong>怎么样才能实现跨级晋升？</strong></p>
+<p>在场的人可能心里都有数，但都没有直接回复，然后她说：主动和老板去沟通，问老板想要跨级晋升，需要实现怎样的目标和达到怎样的能力。我心里突然间响起了两个声音，第一个声音是说：为什么她能不顾公平破坏惯例去争取自己想要的。第二个声音是说：其实我也想这样勇敢且清晰的表达诉求。</p>
+<p>Scene two：</p>
+<p>老黄牛的痛楚：努努力力本本分分的工作，但可能工作内容越来越多，甚至还会被PUA。</p>
+<p>优柔寡断、心怀疑虑、每天活得特别累，被自己的思绪困扰。</p>
+<p>Scene three：</p>
+<p>在看房阶段天然的抵触中介，在找工作时天然的不信任HR，在工作中排斥与领导沟通，总担心暴露自己的想法。</p>
+<br>
+
+<h2 id="《坏世界研究》-搞政治是国家间的生存方式"><a href="#《坏世界研究》-搞政治是国家间的生存方式" class="headerlink" title="《坏世界研究》 -  搞政治是国家间的生存方式"></a>《坏世界研究》 -  搞政治是国家间的生存方式</h2><p><strong>第一个问题：什么样的世界算是一个好世界？</strong></p>
+<p>这个是政治哲学研究的最高问题：什么样的制度，什么样的体制，什么样的政治框架是好政治。</p>
+<p>所以本书就对比和分析了东西方自古以来的各种政治哲学理论，从古典到现代对于最佳政治体制的论述，作者本人最推崇的是中国周朝的</p>
+<p>天下体制，它的特点就是化敌为友，扩大边界，是一种世界政治。</p>
+<p>但问题就在于，无论多么优越的体制都不是无懈可击的，人总有办法把一个好世界变成坏世界，所以就不得不面对第二个问题。</p>
+<p><strong>第二个问题：人如何在一个坏世界里生存？</strong></p>
+<p>为什么说我们的世界是一个坏世界？或者说什么样的世界算是一个坏世界？作者观点是：一个世界只要满足两个条件，就可能成为一个坏世界，也因此一定会成为一个坏世界。</p>
+<p>一个是资源稀缺，另外一个就是人性自私。资源稀缺就是我们一共只有这么点东西。人性自私就是所有人都想把最好的留给自己，趋利避害，想占便宜，还不想负责任。</p>
+<p>所以如果我们把最坏的情况都考虑进去的话，那这个世界一定是一个坏世界。</p>
+<p>而对付一个坏世界的唯一手段就是搞政治，不管是国家之间、城邦之间，还是个人之间的政治，因为所有人都想为自己谋取利益，而为自</p>
+<p>己谋取利益的唯一障碍就是其他人，其他人得同意你才能得到你想得到的东西。</p>
+<p>每个人想得到的东西可能是不一样的，但是我们都想得到点东西，这一点是一样的，对所有人都是一样的，</p>
+<br>
+
+<h2 id="社会的规训与桎梏"><a href="#社会的规训与桎梏" class="headerlink" title="社会的规训与桎梏"></a>社会的规训与桎梏</h2><p>社会的规训通过教育，影视传媒，社会模仿逐渐的深入每个人的心中，在大多数成年人心中，都有一个列表，这其中就储存了社会文</p>
+<p>化的规训条款，人在大多数情况下，都不会突破这些条款。</p>
+<p>我发自内心的希望自己是一个良善之人，但这并不代表我需要时刻为他人着想、并不代表我需要压抑自己的情绪与诉求、并不代表我需要</p>
+<p>完全按照社会期待的最容易受到剥削之人的形象去成长。</p>
+<br>
+
+<h2 id="《合作的进化》-用真诚与博弈好好生活"><a href="#《合作的进化》-用真诚与博弈好好生活" class="headerlink" title="《合作的进化》 - 用真诚与博弈好好生活"></a>《合作的进化》 - 用真诚与博弈好好生活</h2><p>思考一个问题：<strong>在与他人的持续交往中，人什么时候应该合作，什么时候只需为自己着想?</strong></p>
+<p>推荐一款网页游戏：<a target="_blank" rel="noopener" href="https://dccxi.com/trust/">https://dccxi.com/trust/</a></p>
+<p>可以从游戏中感受一下本书的核心观点，具有统计与数学价值的科学观点。</p>
+<p>在这个世界里，没有人想做坏人，所有人都是他自己那条故事线上的好人。</p>
+<p>不同的教育、经历与工作给予了他们不一样的性格和处事方式，每个人都是英雄，都是自己的英雄。但他们可能做出伤害别人的事情，可</p>
+<p>能会做出让你觉得匪夷所思的事情，所以你只看到自己那条故事线是不够的。你得看到别人的故事线，你得以别人的视角看到别人的故事</p>
+<p>线，你得看到所有的这些故事线是如何穿插交错的，看到这个游戏是如何布局的。</p>
+<br>
+
+<p>而在限定场景下，几方采取的策略互相影响，为了各自的利益而做出选择的过程，就是博弈。</p>
+<p>如果你尝试玩了上文的游戏，你会发现在持续性交往关系中 <strong>”一报还一报“</strong> 可能是最佳的理想策略。</p>
+<p>”以德报怨“ 的原文是：</p>
+<blockquote>
+<p>《论语 宪问》：“或曰：‘以德报怨何如？’子曰：‘何以报德？以直报怨，以德报德。’”</p>
+</blockquote>
+<p>所以，停止做一个压抑自我情绪以满足他人与社会期望的迂腐好人。</p>
+<p>我们要认识到：</p>
+<ol>
+<li>Scene one 中，主动与Ld沟通，表达自身诉求并不是破坏公平的表现，而是明确工作重点与方向，是值得学习的事情。</li>
+<li>Scene two 中，面对痛苦的事情，自我反思后努力修正，如果是他人的过错，也需要明确的 “报答” 回去，但采取的方式可以是聪明的。</li>
+<li>Scene three中，中介、猎头和HR与我们都是博弈与合作关系，在谋求各自利益最大值时不一定是纯粹的零和博弈，多沟通多展示自己的能力，引导对方与你进行合作，可能会有更多意想不到的收获。</li>
+</ol>
+<p>为什么这个简单的策略可以受到感性与理性的推崇？因为：</p>
+<ol>
+<li>它是善良的，是促进合作的：不首先背叛（对抗）；如何对方善良则原来过往的背叛（对抗）；</li>
+<li>它对于恶（背叛与对抗）是有惩罚作用的。</li>
+</ol>
+<p>愿大家都能成为心之所向的自己，与善良同行，  与背叛相抗。</p>
+<p>以上</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/articles/">articles</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%8D%E8%A6%81%E5%81%9A%E8%BF%82%E8%85%90%E7%9A%84%E5%A5%BD%E4%BA%BA%EF%BC%9A%E7%94%A8%E7%9C%9F%E8%AF%9A%E4%B8%8E%E5%8D%9A%E5%BC%88%E5%A5%BD%E5%A5%BD%E7%94%9F%E6%B4%BB/">不要做迂腐的好人：用真诚与博弈好好生活</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/08/JProfiler%E5%AE%9A%E4%BD%8D%E5%A4%A7%E5%AF%B9%E8%B1%A1%E4%B8%8E%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0/">
+                        <span class="hidden-mobile">JProfiler定位大对象与获取参数</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/09/14/不要做迂腐的好人：用真诚与博弈好好生活/';
+          this.page.identifier = '/2023/09/14/不要做迂腐的好人：用真诚与博弈好好生活/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "不要做迂腐的好人：用真诚与博弈好好生活&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

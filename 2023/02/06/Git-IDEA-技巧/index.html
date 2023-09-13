@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Git-IDEA-技巧 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      23
        分钟
     </span>
   
@@ -204,14 +192,15 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Git-IDEA-技巧"><a href="#Git-IDEA-技巧" class="headerlink" title="Git-IDEA-技巧"></a>Git-IDEA-技巧</h1><h2 id="GitHub高级搜索"><a href="#GitHub高级搜索" class="headerlink" title="GitHub高级搜索"></a>GitHub高级搜索</h2><h3 id="仓库名搜索"><a href="#仓库名搜索" class="headerlink" title="仓库名搜索"></a>仓库名搜索</h3><pre><code class="hljs applescript"><span class="hljs-keyword">in</span>:<span class="hljs-built_in">name</span> spring boot</code></pre>
+              <h1 id="Git-IDEA-技巧"><a href="#Git-IDEA-技巧" class="headerlink" title="Git-IDEA-技巧"></a>Git-IDEA-技巧</h1><p>标签： #Share</p>
+<h2 id="GitHub高级搜索"><a href="#GitHub高级搜索" class="headerlink" title="GitHub高级搜索"></a>GitHub高级搜索</h2><h3 id="仓库名搜索"><a href="#仓库名搜索" class="headerlink" title="仓库名搜索"></a>仓库名搜索</h3><pre><code class="hljs avrasm"><span class="hljs-symbol">in:</span>name spring boot</code></pre>
 
 
 
-<h3 id="Stars-forks-搜索"><a href="#Stars-forks-搜索" class="headerlink" title="Stars | forks 搜索"></a>Stars | forks 搜索</h3><pre><code class="hljs vim"># 注意 <span class="hljs-keyword">star</span><span class="hljs-variable">s:</span>&gt;<span class="hljs-number">3000</span> 中间要连起来,不要有空格
-in:name spring boot <span class="hljs-keyword">star</span><span class="hljs-variable">s:</span>&gt;<span class="hljs-number">3000</span>
+<h3 id="Stars-forks-搜索"><a href="#Stars-forks-搜索" class="headerlink" title="Stars | forks 搜索"></a>Stars | forks 搜索</h3><pre><code class="hljs avrasm"><span class="hljs-meta"># 注意 stars:&gt;3000 中间要连起来,不要有空格</span>
+<span class="hljs-symbol">in:</span>name spring boot stars:&gt;<span class="hljs-number">3000</span>
 
-                 ...fork<span class="hljs-variable">s:</span>&gt;<span class="hljs-number">1000</span></code></pre>
+                 ...forks:&gt;<span class="hljs-number">1000</span></code></pre>
 
 
 
@@ -227,7 +216,7 @@ in:name spring boot <span class="hljs-keyword">star</span><span class="hljs-vari
 
 
 
-<h3 id="Push时间限定"><a href="#Push时间限定" class="headerlink" title="Push时间限定"></a>Push时间限定</h3><pre><code class="hljs angelscript">Pushed:&gt;<span class="hljs-number">2019</span><span class="hljs-number">-10</span></code></pre>
+<h3 id="Push时间限定"><a href="#Push时间限定" class="headerlink" title="Push时间限定"></a>Push时间限定</h3><pre><code class="hljs apache"><span class="hljs-attribute">Pushed</span>:&gt;<span class="hljs-number">2019</span>-<span class="hljs-number">10</span></code></pre>
 
 
 
@@ -280,40 +269,39 @@ git add .
 
 
 
-<h3 id="Windows-Cmd-集成-Git-Bash"><a href="#Windows-Cmd-集成-Git-Bash" class="headerlink" title="Windows Cmd 集成 Git Bash"></a>Windows Cmd 集成 Git Bash</h3><pre><code class="hljs 安装">
-&#96;&#96;&#96;python
-# Path 变量添加如下路径:     测试验证：改变了系统级别CMD的功能，利用Java执行的linux 命令也可以支持
+<h3 id="Windows-Cmd-集成-Git-Bash"><a href="#Windows-Cmd-集成-Git-Bash" class="headerlink" title="Windows Cmd 集成 Git Bash"></a>Windows Cmd 集成 Git Bash</h3><p><code>安装 Git Bash</code></p>
+<pre><code class="hljs python"><span class="hljs-comment"># Path 变量添加如下路径:     测试验证：改变了系统级别CMD的功能，利用Java执行的linux 命令也可以支持</span>
 
 F:\Git\Git\cmd
-F:\Git\Git\usr\bin
-F:\Git\Git\mingw64\bin</code></pre>
+F:\Git\Git\usr\<span class="hljs-built_in">bin</span>
+F:\Git\Git\mingw64\<span class="hljs-built_in">bin</span></code></pre>
 
 
 
-<h3 id="Git合并多次提交结果为一次"><a href="#Git合并多次提交结果为一次" class="headerlink" title="Git合并多次提交结果为一次"></a>Git合并多次提交结果为一次</h3><p><a href="https://www.cnblogs.com/itplay/p/11732353.html" target="_blank" rel="noopener">原文介绍文章链接</a></p>
+<h3 id="Git合并多次提交结果为一次"><a href="#Git合并多次提交结果为一次" class="headerlink" title="Git合并多次提交结果为一次"></a>Git合并多次提交结果为一次</h3><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/itplay/p/11732353.html">原文介绍文章链接</a></p>
 <h2 id="IDEA调试技巧"><a href="#IDEA调试技巧" class="headerlink" title="IDEA调试技巧"></a>IDEA调试技巧</h2><h3 id="断点指定条件"><a href="#断点指定条件" class="headerlink" title="断点指定条件"></a>断点指定条件</h3><p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/1573740941349.png" srcset="/img/loading.gif" alt="1573740941349"></p>
 <h3 id="方法调用跳回"><a href="#方法调用跳回" class="headerlink" title="方法调用跳回"></a>方法调用跳回</h3><p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/1573741222341.png" srcset="/img/loading.gif" alt="1573741222341"></p>
 <h3 id="多线程调试"><a href="#多线程调试" class="headerlink" title="多线程调试"></a>多线程调试</h3><p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/640.webp" srcset="/img/loading.gif" alt="img"></p>
 <h3 id="调式中修改变量测试效果"><a href="#调式中修改变量测试效果" class="headerlink" title="调式中修改变量测试效果"></a>调式中修改变量测试效果</h3><p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/1573741336421.png" srcset="/img/loading.gif" alt="1573741336421"></p>
-<h3 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a>IDEA快捷键</h3><pre><code class="hljs elixir">ctrl + Alt + C         ---&gt; 抽取变量
+<h3 id="IDEA快捷键"><a href="#IDEA快捷键" class="headerlink" title="IDEA快捷键"></a>IDEA快捷键</h3><pre><code class="hljs xl"><span class="hljs-function"><span class="hljs-title">ctrl</span> + Alt + C         ---&gt;</span> 抽取变量
 
-ctrl + Alt + V         ---&gt; 抽取表达式
+<span class="hljs-function"><span class="hljs-title">ctrl</span> + Alt + V         ---&gt;</span> 抽取表达式
 
-ctrl + Alt + M         ---&gt; 抽取方法
+<span class="hljs-function"><span class="hljs-title">ctrl</span> + Alt + M         ---&gt;</span> 抽取方法
 
-Ctrl + O               ---&gt;  重写父类方法 
+C<span class="hljs-function"><span class="hljs-title">trl</span> + O               ---&gt;</span>  重写父类方法 
 
-Ctrl + H               ---&gt;  查看类的关系
+C<span class="hljs-function"><span class="hljs-title">trl</span> + H               ---&gt;</span>  查看类的关系
 
-Shift + Alt + R        弹出重构菜单 原<span class="hljs-symbol">:Ctrl+Alt+Shift+T</span>
+Shift + Alt + R        弹出重构菜单 原:Ctrl+Alt+Shift+T
 
 Shift + Alt + E        Extract菜单，帮助快速提取代码等
 
-Shift + Alt + Z        操作菜单，if，<span class="hljs-keyword">do</span> <span class="hljs-keyword">while</span>等等
+Shift + Alt + Z        操作菜单，<span class="hljs-keyword">if</span>，<span class="hljs-keyword">do</span> <span class="hljs-keyword">while</span>等等
 
 IDEA ----&gt;  iter       增强<span class="hljs-keyword">for</span>循环自动填充
 
-list.fori  list.for    自动填充
+list.fori  list.<span class="hljs-keyword">for</span>    自动填充
 
 Annotate               鼠标右键显示代码最近是谁提交的
 
@@ -325,22 +313,22 @@ ctrl + shift +  + | -  一键把缩略或者打开所有方法
 
 ctrl + + | -           缩略当前方法</code></pre>
 
-<p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/1571794285538.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/1571794285538.png" srcset="/img/loading.gif"></p>
 <h3 id="IDEA-全局搜索-替换功能"><a href="#IDEA-全局搜索-替换功能" class="headerlink" title="IDEA 全局搜索 | 替换功能"></a>IDEA 全局搜索 | 替换功能</h3><pre><code class="hljs java">
 <span class="hljs-comment">// 1. 全局搜索和全局替换 有文件类型筛选功能，指定路径范围， 作用范围等等</span>
 
 <span class="hljs-comment">// 2. 全局搜索 全局替换支持正则表达式</span>
 
 如 通过正则全局替换： 
-css\?v=.+?<span class="hljs-string">"   ---》  css"</span>
+css\?v=.+?<span class="hljs-string">&quot;   ---》  css&quot;</span>
 
-js\?v=.+?<span class="hljs-string">"    ---》   js"</span>
+js\?v=.+?<span class="hljs-string">&quot;    ---》   js&quot;</span>
 
-pdf\?v=.+?<span class="hljs-string">"   ---》  pdf"</span>
+pdf\?v=.+?<span class="hljs-string">&quot;   ---》  pdf&quot;</span>
     
-<span class="hljs-string">"/(.+?js)"</span>   <span class="hljs-string">"/(.+?css)"</span>    <span class="hljs-string">"/(.+?pdf)"</span>
+<span class="hljs-string">&quot;/(.+?js)&quot;</span>   <span class="hljs-string">&quot;/(.+?css)&quot;</span>    <span class="hljs-string">&quot;/(.+?pdf)&quot;</span>
 
-===&gt; <span class="hljs-string">"/$1?v=$&#123;oem_resource_version&#125;"</span>
+===&gt; <span class="hljs-string">&quot;/$1?v=$&#123;oem_resource_version&#125;&quot;</span>
     
 这也给我们启示，不要重复造轮子，好好利用当下的现有工具</code></pre>
 
@@ -354,7 +342,7 @@ pdf\?v=.+?<span class="hljs-string">"   ---》  pdf"</span>
 <li>Ctrl + Alt + Shift + I  -&gt; 输入需要插件的警告类型即可全局扫描</li>
 </ol>
 <h3 id="IDEA-导入-插件项目方法"><a href="#IDEA-导入-插件项目方法" class="headerlink" title="IDEA 导入 插件项目方法"></a>IDEA 导入 插件项目方法</h3><blockquote>
-<pre><code class="hljs 注意:```插件项目需要平常无所谓的">
+<pre><div class="caption"><span>.iml文件</span></div><code class="hljs 注意:```插件项目需要平常无所谓的">
 1. 注意项目SDK，设置Platform Settings idea SDK，设置 Project SDK为idea SDK
 2. 添加Configurations为Plugin
 
@@ -365,21 +353,22 @@ pdf\?v=.+?<span class="hljs-string">"   ---》  pdf"</span>
 
 
 
-### IDEA 快捷键打日志 </code></pre>
-<p>快捷键：自定义，如 logp<br>内容：logger.info(“$METHOD_NAME$::”$ARGUMENTS$);<br>参数一：methodName();<br>参数二：groovyScript(“def result=’’; def params=&quot;${_1}&quot;.replaceAll(‘[\\[|\\]|\\s]’, ‘’).split(‘,’).toList();for(i = 0; i &lt; params.size(); i++) {if(i==0){result+=’+&quot; ‘ + params[i] + ‘ :&quot;+ ‘+params[i];}else{result+=’ +&quot;; ‘ + params[i] + ‘ :&quot;+ ‘+params[i];}}; return result;”, methodParameters());</p>
+### IDEA 快捷键打日志
+</code></pre>
+<p>快捷键：自定义，如 logp<br>内容：logger.info(“$METHOD_NAME$::”$ARGUMENTS$);<br>参数一：methodName();<br>参数二：groovyScript(“def result&#x3D;’’; def params&#x3D;&quot;${_1}&quot;.replaceAll(‘[\\[|\\]|\\s]’, ‘’).split(‘,’).toList();for(i &#x3D; 0; i &lt; params.size(); i++) {if(i&#x3D;&#x3D;0){result+&#x3D;’+&quot; ‘ + params[i] + ‘ :&quot;+ ‘+params[i];}else{result+&#x3D;’ +&quot;; ‘ + params[i] + ‘ :&quot;+ ‘+params[i];}}; return result;”, methodParameters());</p>
 </blockquote>
-<pre><code class="hljs markdown">
-![<span class="hljs-string">image-20201122213200577</span>](<span class="hljs-link">Git-IDEA-技巧/image-20201122213200577.png</span>)
+<pre><code class="hljs clean">
+![image<span class="hljs-number">-20201122213200577</span>](Git-IDEA-技巧/image<span class="hljs-number">-20201122213200577.</span>png)
 
 
 
-<span class="hljs-section">### IDEA 显示Git更新涉及的文件</span>
+### IDEA 显示Git更新涉及的文件
 
 可能无意间点到显示差异导致Git查看无法显示涉及的文件，IDEA搜索快捷键：Version Control Systems | File History | Show Details
 
 然后进入Git，选择更新的记录，使用快捷键即可
 
-![<span class="hljs-string">image-20210121203609799</span>](<span class="hljs-link">Git-IDEA-技巧/image-20210121203609799.png</span>)
+![image<span class="hljs-number">-20210121203609799</span>](Git-IDEA-技巧/image<span class="hljs-number">-20210121203609799.</span>png)
 
 
 
@@ -387,36 +376,29 @@ pdf\?v=.+?<span class="hljs-string">"   ---》  pdf"</span>
 
 
 
-<span class="hljs-section">### Eclipse导入SpringBoot项目方法</span>
+### Eclipse导入SpringBoot项目方法
 
 基于Maven的方式导入之后，如果pom.xml报未知错误，是由于Maven版本不兼容导致，处理办法：
 
-<span class="hljs-code">```xml</span>
-<span class="hljs-code">// 设置Maven版本为3.1.1 然后Update项目即可</span>
-<span class="hljs-code">&lt;maven-jar-plugin.version&gt;3.1.1&lt;/maven-jar-plugin.version&gt;</span></code></pre>
+```xml
+<span class="hljs-comment">// 设置Maven版本为3.1.1 然后Update项目即可</span>
+&lt;maven-jar-plugin.version&gt;<span class="hljs-number">3.1</span><span class="hljs-number">.1</span>&lt;/maven-jar-plugin.version&gt;</code></pre>
 
 
 
-<h2 id="Pycharm-环境构建-统一依赖文件"><a href="#Pycharm-环境构建-统一依赖文件" class="headerlink" title="Pycharm 环境构建 统一依赖文件"></a>Pycharm 环境构建 统一依赖文件</h2><pre><code class="hljs 统一设置为">
-![image-20191120153539863](Git-IDEA-技巧&#x2F;image-20191120153539863.png)
-
-- 更改pip源，注意刷新：https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;pypi&#x2F;simple&#x2F;
-- 插件，快捷键参考IDEA即可
-
-## Maven 镜像
-
-
-
-### 配置阿里云镜像 - 并强制项目启用
-
-&#96;&#96;&#96;xml
-&lt;!--配置阿里云Maven镜像--&gt;
-&lt;mirror&gt;
-    &lt;id&gt;nexus-aliyun&lt;&#x2F;id&gt;
-    &lt;mirrorOf&gt;central&lt;&#x2F;mirrorOf&gt;
-    &lt;name&gt;Nexus aliyun&lt;&#x2F;name&gt;
-    &lt;url&gt;http:&#x2F;&#x2F;maven.aliyun.com&#x2F;nexus&#x2F;content&#x2F;groups&#x2F;public&lt;&#x2F;url&gt;
-&lt;&#x2F;mirror&gt;</code></pre>
+<h2 id="Pycharm-环境构建-统一依赖文件"><a href="#Pycharm-环境构建-统一依赖文件" class="headerlink" title="Pycharm 环境构建 统一依赖文件"></a>Pycharm 环境构建 统一依赖文件</h2><p><code>统一设置为 系统python.exe 共享依赖即可   ---&gt;  注意设置Default Setting</code></p>
+<p><img src="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/image-20191120153539863.png" srcset="/img/loading.gif" alt="image-20191120153539863"></p>
+<ul>
+<li>更改pip源，注意刷新：<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/pypi/simple/">https://mirrors.aliyun.com/pypi/simple/</a></li>
+<li>插件，快捷键参考IDEA即可</li>
+</ul>
+<h2 id="Maven-镜像"><a href="#Maven-镜像" class="headerlink" title="Maven 镜像"></a>Maven 镜像</h2><h3 id="配置阿里云镜像-并强制项目启用"><a href="#配置阿里云镜像-并强制项目启用" class="headerlink" title="配置阿里云镜像 - 并强制项目启用"></a>配置阿里云镜像 - 并强制项目启用</h3><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--配置阿里云Maven镜像--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">mirror</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>nexus-aliyun<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">mirrorOf</span>&gt;</span>central<span class="hljs-tag">&lt;/<span class="hljs-name">mirrorOf</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>Nexus aliyun<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">mirror</span>&gt;</span></code></pre>
 
 <pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 启用阿里云镜像下载依赖 --&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">repositories</span>&gt;</span>
@@ -437,19 +419,19 @@ pdf\?v=.+?<span class="hljs-string">"   ---》  pdf"</span>
 
 
 <h2 id="监听端口技巧"><a href="#监听端口技巧" class="headerlink" title="监听端口技巧"></a>监听端口技巧</h2><h3 id="伪造服务端监听端口"><a href="#伪造服务端监听端口" class="headerlink" title="伪造服务端监听端口"></a>伪造服务端监听端口</h3><pre><code class="hljs java"><span class="hljs-comment">// 伪造6379 redis-服务端，监听  jedis发送的协议内容</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SocketApp</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SocketApp</span> &#123;
     
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 监听 6379 传输的数据</span>
 <span class="hljs-comment">     * JVM端口需要进行设置</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span>  </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>  &#123;
         <span class="hljs-keyword">try</span> &#123;
-            ServerSocket serverSocket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">6379</span>);
-            Socket redis = serverSocket.accept();
-            <span class="hljs-keyword">byte</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">2048</span>];
+            <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">serverSocket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(<span class="hljs-number">6379</span>);
+            <span class="hljs-type">Socket</span> <span class="hljs-variable">redis</span> <span class="hljs-operator">=</span> serverSocket.accept();
+            <span class="hljs-type">byte</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">2048</span>];
             redis.getInputStream().read(result);
-            System.out.println(<span class="hljs-keyword">new</span> String(result));
+            System.out.println(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(result));
         &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;
             e.printStackTrace();
         &#125;
@@ -457,10 +439,10 @@ pdf\?v=.+?<span class="hljs-string">"   ---》  pdf"</span>
 &#125;
 
 <span class="hljs-comment">// jedis连接-发送命令</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
-        Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">"127.0.0.1"</span>);
-        jedis.set(<span class="hljs-string">"key"</span>, <span class="hljs-string">"This is value."</span>);
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;
+        <span class="hljs-type">Jedis</span> <span class="hljs-variable">jedis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Jedis</span>(<span class="hljs-string">&quot;127.0.0.1&quot;</span>);
+        jedis.set(<span class="hljs-string">&quot;key&quot;</span>, <span class="hljs-string">&quot;This is value.&quot;</span>);
         jedis.close();
     &#125;
 &#125;
@@ -502,7 +484,7 @@ $<span class="hljs-number">14</span></code></pre>
 </ol>
 </blockquote>
 <h2 id="IDEA-样式收集"><a href="#IDEA-样式收集" class="headerlink" title="IDEA 样式收集"></a>IDEA 样式收集</h2><ul>
-<li>IDEA  <a href="https://plugins.jetbrains.com/plugin/11938-one-dark-theme/versions" target="_blank" rel="noopener"> One-Dark-Theme </a></li>
+<li>IDEA  <a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/11938-one-dark-theme/versions"> One-Dark-Theme </a></li>
 </ul>
 
             </article>
@@ -527,16 +509,16 @@ $<span class="hljs-number">14</span></code></pre>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Docker%E7%AF%87/">
+                      <a href="/2023/02/06/FastJson%E4%BD%BF%E7%94%A8%E8%AE%B0%E5%BD%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker篇</span>
+                        <span class="hidden-mobile">FastJson使用记录</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -544,8 +526,8 @@ $<span class="hljs-number">14</span></code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">
-                        <span class="hidden-mobile">Guava的两种本地缓存策略</span>
+                      <a href="/2023/02/06/GitHub%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">
+                        <span class="hidden-mobile">GitHub无法访问解决办法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -560,30 +542,28 @@ $<span class="hljs-number">14</span></code></pre>
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/Git-IDEA-技巧/';
+          this.page.identifier = '/2023/02/06/Git-IDEA-技巧/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -647,24 +627,13 @@ $<span class="hljs-number">14</span></code></pre>
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -709,7 +678,7 @@ $<span class="hljs-number">14</span></code></pre>
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -796,13 +765,6 @@ $<span class="hljs-number">14</span></code></pre>
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

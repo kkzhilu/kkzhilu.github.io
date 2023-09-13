@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>一文入门DNS？从访问GitHub开始 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,25 +192,26 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大家都是做开发的，都有<code>GitHub</code>的账号，在日常使用中肯定会遇到这种情况，在不修改任何配置的情况下，有时可以正常访问GitHub，有时又直接未响应，来一起捋捋到底是为啥。</p>
+              <p>标签： #Share</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>大家都是做开发的，都有<code>GitHub</code>的账号，在日常使用中肯定会遇到这种情况，在不修改任何配置的情况下，有时可以正常访问GitHub，有时又直接未响应，来一起捋捋到底是为啥。</p>
 <h2 id="GitHub访问的千层套路"><a href="#GitHub访问的千层套路" class="headerlink" title="GitHub访问的千层套路"></a>GitHub访问的千层套路</h2><p>以我家里的电脑为例，在不修改任何配置，不启用什么代理工具的情况下，访问<code>GitHub</code>会得到以下结果：</p>
-<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/%E9%94%99%E4%B9%B1.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/%E9%94%99%E4%B9%B1.png" srcset="/img/loading.gif"></p>
 <p>😂😂😂</p>
 <p>虽然很戳心，但好歹能展示一部分。</p>
 <p>从网上搜了一堆乱七八糟的攻略，知道了可以通过修改电脑的<code>Hosts</code>文件达到正常访问的能力，于是胡搜了一通，</p>
-<p>步骤：<a href="https://jingyan.baidu.com/article/9113f81b49ed2f2b3214c7fa.html" target="_blank" rel="noopener">百度经验</a></p>
+<p>步骤：<a target="_blank" rel="noopener" href="https://jingyan.baidu.com/article/9113f81b49ed2f2b3214c7fa.html">百度经验</a></p>
 <p>效果如下：</p>
-<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/%E4%BC%98%E5%8C%96-1.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/%E4%BC%98%E5%8C%96-1.png" srcset="/img/loading.gif"></p>
 <p>访问效果依然很感人，最近活动数据不显示，整个界面加载都快接近2分钟了，有什么办法没有咧~</p>
 <h3 id="站长工具-PING-PING-PING"><a href="#站长工具-PING-PING-PING" class="headerlink" title="站长工具 PING PING PING"></a>站长工具 PING PING PING</h3><p>都是搞开发的，都会用F12看看网络或者资源请求的地址是什么，以上面耗时最慢的地址为例，域名为：<code>github.githu.com</code></p>
-<p>打开站长工具的PING功能，地址为：<a href="http://ping.chinaz.com/github.githu.com" target="_blank" rel="noopener">http://ping.chinaz.com/github.githu.com</a></p>
+<p>打开站长工具的PING功能，地址为：<a target="_blank" rel="noopener" href="http://ping.chinaz.com/github.githu.com">http://ping.chinaz.com/github.githu.com</a></p>
 <p>结果如下：</p>
 <p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/image-20200722010132371.png" srcset="/img/loading.gif" alt="image-20200722010132371"></p>
 <p>我发现 <code>185.199.108.154</code> 这个IP地址速度快的一批，于是立马更换 <code>Hosts</code>中该域名对应的IP地址</p>
 <p>再次访问，效果如下：</p>
-<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/%E4%BC%98%E5%8C%96-2.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/%E4%BC%98%E5%8C%96-2.png" srcset="/img/loading.gif"></p>
 <p>那句话怎么说的来着？如什么什么般丝滑，我感觉这就非常丝滑~  🤪</p>
-<h3 id="GitHub项目定时发布最新Hosts"><a href="#GitHub项目定时发布最新Hosts" class="headerlink" title="GitHub项目定时发布最新Hosts"></a>GitHub项目定时发布最新Hosts</h3><p>当然了，如果每次访问都得折腾一次，那滋味，简直不要太难受，所以网上已经有人开源了相关的项目，会定时发布最新的 <code>GitHub</code> IP地址，链接：<a href="https://github.com/521xueweihan/GitHub520" target="_blank" rel="noopener">https://github.com/521xueweihan/GitHub520</a></p>
+<h3 id="GitHub项目定时发布最新Hosts"><a href="#GitHub项目定时发布最新Hosts" class="headerlink" title="GitHub项目定时发布最新Hosts"></a>GitHub项目定时发布最新Hosts</h3><p>当然了，如果每次访问都得折腾一次，那滋味，简直不要太难受，所以网上已经有人开源了相关的项目，会定时发布最新的 <code>GitHub</code> IP地址，链接：<a target="_blank" rel="noopener" href="https://github.com/521xueweihan/GitHub520">https://github.com/521xueweihan/GitHub520</a></p>
 <p>本文撰写时的Hosts</p>
 <pre><code class="hljs bash"><span class="hljs-comment"># github</span>
 185.199.108.154               github.githu.com
@@ -260,10 +249,8 @@
 <li><p>本机系统缓存：即上文中提到的，通过 <code>hosts</code> 文件来映射域名和IP，在上古时期有很多垃圾软件会悄咪咪的修改系统的 hosts文件，达到 <code>DNS劫持</code> 的目的，即把淘宝域名指向另一个 <code>IP</code>，然后部署一个高仿的淘宝商城，静静等你输入账号，密码，然后凉凉…</p>
 </li>
 <li><p>本地域名解析服务系统：本地域名系统LDNS一般都是本地区的域名服务器。离你的位置都比较近，Windows系统使用命令<code>ipconfig</code> 就可以查看，在Linux和Mac系统下，直接使用命令 <code>cat /etc/resolv.conf</code> 来查看LDNS服务地址。<br>LDNS一般都缓存了大部分的域名解析的结果，大部分的解析工作到这里就差不多已经结束了</p>
+<p>以下即是所谓的 <code>递归解析</code></p>
 </li>
-</ol>
-<p>   以下即是所谓的 <code>递归解析</code></p>
-<ol start="4">
 <li><p>根域名解析：本地域名解析服务系统无法解析时，会向 <code>13根</code> 发起域名解析请求</p>
 <p><font color="red">说明：</font> 所谓的 13根，指的是根域名服务器，是架构因特网所必须的基础设施。根服务器主要用来管理互联网的主目录，由于DNS解析中采用的是UDP协议，仅能传递512字节的有效报文，因此只能构建出A-M 13个根服务器，而真正工作运行肯定不止13台服务器，而是包含很多服务器镜像的</p>
 </li>
@@ -287,7 +274,7 @@
 <p>答案：肯定不是，因为刚才也提到了，网关层是可以控制某些IP禁止访问的</p>
 <p>整一个工具来验证一下猜想，顺便看看我们的整个请求流程：</p>
 <p>软件名：BestTrace</p>
-<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/trans.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/trans.png" srcset="/img/loading.gif"></p>
 <p>我请求的域名是 <code>github.githu.com</code>，最终请求接收方IP和我Hosts配置的IP一致，那我换一个  facebook.com </p>
 <p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/image-20200722234214751.png" srcset="/img/loading.gif" alt="image-20200722234214751"></p>
 <p>可以看到，当请求到达 221.183.46.249 这个IP时，整个请求就被拦截下来了，因此这并不是万能的办法</p>
@@ -299,10 +286,10 @@
 <p><strong>如果系统吞吐超过nginx的性能极限</strong>，那么将难以扩容，此时就需要<code>dns-server</code>来配合水平扩展。</p>
 <p>即DNS解析服务器有序的把域名解析到不同的网关层，每次DNS解析请求，轮询返回不同的ip，这样就能实现nginx的水平扩展，这个方法叫 “<strong>DNS轮询</strong>”</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>参考资料：</p>
-<p><a href="https://www.cnblogs.com/kongtongshu/p/11069559.html" target="_blank" rel="noopener">博客园  DNS解析全过程分析</a></p>
-<p><a href="https://blog.csdn.net/shenjian58/article/details/107273629/" target="_blank" rel="noopener">除了解析域名，DNS还能干吗</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kongtongshu/p/11069559.html">博客园  DNS解析全过程分析</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shenjian58/article/details/107273629/">除了解析域名，DNS还能干吗</a></p>
 <p>如果觉得对你有用的话，不要忘记点个赞啊~    也可以扫描二维码关注我，一起朝着技术人的顶峰前进！</p>
-<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/1734e416a4d04ce4" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E4%B8%80%E6%96%87%E5%85%A5%E9%97%A8DNS%EF%BC%9F%E4%BB%8E%E8%AE%BF%E9%97%AEGitHub%E5%BC%80%E5%A7%8B/1734e416a4d04ce4" srcset="/img/loading.gif"></p>
 
             </article>
             <hr>
@@ -326,7 +313,7 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -343,8 +330,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">代理模式</span>
+                      <a href="/2023/02/06/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">享元模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -359,30 +346,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/一文入门DNS？从访问GitHub开始/';
+          this.page.identifier = '/2023/02/06/一文入门DNS？从访问GitHub开始/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -446,24 +431,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -508,7 +482,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -595,13 +569,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

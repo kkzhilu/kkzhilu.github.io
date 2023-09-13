@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Nginx篇 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Nginx篇"><a href="#Nginx篇" class="headerlink" title="Nginx篇"></a>Nginx篇</h1><h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>Nginx是一款轻量级的 Web服务器 / 反向代理服务器 / 电子邮件（IMAP/POP3）代理服务器，主要的优点是：</p>
+              <h1 id="Nginx篇"><a href="#Nginx篇" class="headerlink" title="Nginx篇"></a>Nginx篇</h1><p>标签： #Share</p>
+<h2 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h2><p>Nginx是一款轻量级的 Web服务器 &#x2F; 反向代理服务器 &#x2F; 电子邮件（IMAP&#x2F;POP3）代理服务器，主要的优点是：</p>
 <ol>
 <li><p>支持高并发连接，尤其是静态界面，官方测试Nginx能够支撑5万并发连接</p>
 </li>
@@ -219,9 +208,9 @@
 </li>
 </ol>
 <h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><h3 id="Windows版"><a href="#Windows版" class="headerlink" title="Windows版"></a>Windows版</h3><p><strong>安装</strong></p>
-<p>文件下载地址：<a href="http://nginx.org/en/docs/windows.html" target="_blank" rel="noopener">http://nginx.org/en/docs/windows.html</a></p>
+<p>文件下载地址：<a target="_blank" rel="noopener" href="http://nginx.org/en/docs/windows.html">http://nginx.org/en/docs/windows.html</a></p>
 <p>如果下载很慢可以用该链接：</p>
-<p>百度云盘链接: <a href="https://pan.baidu.com/s/1r3mSEGhmz4HA46Cw9w6QTQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1r3mSEGhmz4HA46Cw9w6QTQ</a> 提取码: d8bi</p>
+<p>百度云盘链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1r3mSEGhmz4HA46Cw9w6QTQ">https://pan.baidu.com/s/1r3mSEGhmz4HA46Cw9w6QTQ</a> 提取码: d8bi</p>
 <p>解压即可</p>
 <p><strong>基本命令</strong></p>
 <pre><code class="hljs bash"><span class="hljs-comment"># 启动</span>
@@ -264,8 +253,8 @@ C:\server\nginx-1.19.2&gt; nginx -t</code></pre>
 <p><img src="/2023/02/06/Nginx%E7%AF%87/image-20200905185913004.png" srcset="/img/loading.gif" alt="image-20200905185913004"></p>
 <h2 id="Nginx在架构体系中的作用"><a href="#Nginx在架构体系中的作用" class="headerlink" title="Nginx在架构体系中的作用"></a>Nginx在架构体系中的作用</h2><ul>
 <li>网关 （面向客户的总入口）</li>
-<li>虚拟主机（为不同域名 / ip  / 端口提供服务。如：VPS虚拟服务器）</li>
-<li>路由（正向代理 / 反向代理）</li>
+<li>虚拟主机（为不同域名 &#x2F; ip  &#x2F; 端口提供服务。如：VPS虚拟服务器）</li>
+<li>路由（正向代理 &#x2F; 反向代理）</li>
 <li>静态服务器</li>
 <li>负载集群（提供负载均衡）</li>
 </ul>
@@ -350,7 +339,7 @@ location /api &#123;
     resolver_timeout 3s;
     
     <span class="hljs-comment"># 转发至address参数结果上 参数名：address</span>
-    proxy_pass  <span class="hljs-string">"<span class="hljs-variable">$arg_address</span>"</span>;
+    proxy_pass  <span class="hljs-string">&quot;<span class="hljs-variable">$arg_address</span>&quot;</span>;
     
     <span class="hljs-comment"># 设置Header</span>
     proxy_hide_header Origin;
@@ -436,7 +425,7 @@ location /api &#123;
 <blockquote>
 <p>模块化设计使得Nginx方便开发和扩展，功能很强大</p>
 </blockquote>
-<h2 id="Nginx的请求处理流程"><a href="#Nginx的请求处理流程" class="headerlink" title="Nginx的请求处理流程"></a>Nginx的请求处理流程</h2><p>基于上文中的<code>Nginx</code>模块化结构，我们很容易想到，在请求的处理阶段也会经历诸多的过程，<code>Nginx</code>将各功能模块组织成一条链，当有请求到达的时候，请求依次经过这条链上的部分或者全部模块，进行处理，每个模块实现特定的功能。</p>
+<h2 id="Nginx的请求处理流程"><a href="#Nginx的请求处理流程" class="headerlink" title="Nginx的请求处理流程"></a>Nginx的请求处理流程</h2><p>基于上文中的<code>Nginx</code>模块化结构，我们很容易想到，在请求的处理阶段也会经历诸多的过程，<code>Nginx </code>将各功能模块组织成一条链，当有请求到达的时候，请求依次经过这条链上的部分或者全部模块，进行处理，每个模块实现特定的功能。</p>
 <p>一个 HTTP Request 的处理过程：</p>
 <ul>
 <li>初始化 HTTP Request</li>
@@ -446,9 +435,9 @@ location /api &#123;
 <li>输出内容依次经过 filter 模块处理</li>
 </ul>
 <p><img src="/2023/02/06/Nginx%E7%AF%87/798214-20191223134103333-1313823621.png" srcset="/img/loading.gif" alt="img"></p>
-<h2 id="Nginx的多进程模型"><a href="#Nginx的多进程模型" class="headerlink" title="Nginx的多进程模型"></a>Nginx的多进程模型</h2><p>Nginx 在启动后，会有一个 <code>master</code>进程和多个 <code>worker</code>进程。</p>
-<p><code>master</code>进程主要用来管理<code>worker</code>进程，包括接收来自外界的信号，向各 worker 进程发送信号，监控 worker 进程的运行状态以及启动 worker 进程。</p>
-<p> <code>worker</code>进程是用来处理来自客户端的请求事件。多个 worker 进程之间是对等的，它们同等竞争来自客户端的请求，各进程互相独立，一个请求只能在一个 worker 进程中处理。worker 进程的个数是可以设置的，一般会设置与机器 CPU 核数一致，这里面的原因与事件处理模型有关</p>
+<h2 id="Nginx的多进程模型"><a href="#Nginx的多进程模型" class="headerlink" title="Nginx的多进程模型"></a>Nginx的多进程模型</h2><p>Nginx 在启动后，会有一个 <code>master </code>进程和多个 <code>worker </code>进程。</p>
+<p><code>master </code>进程主要用来管理<code>worker </code>进程，包括接收来自外界的信号，向各 worker 进程发送信号，监控 worker 进程的运行状态以及启动 worker 进程。</p>
+<p> <code>worker </code>进程是用来处理来自客户端的请求事件。多个 worker 进程之间是对等的，它们同等竞争来自客户端的请求，各进程互相独立，一个请求只能在一个 worker 进程中处理。worker 进程的个数是可以设置的，一般会设置与机器 CPU 核数一致，这里面的原因与事件处理模型有关</p>
 <p>Nginx 的进程模型，可由下图来表示：</p>
 <p><img src="/2023/02/06/Nginx%E7%AF%87/8a4bf67b456016f07ea2679dca069051_articlex.png" srcset="/img/loading.gif" alt="img"></p>
 <p>这种设计带来以下优点：</p>
@@ -468,7 +457,7 @@ location /api &#123;
 <ul>
 <li>事件发送器每传递过来一个请求，目标对象就创建一个新的进程</li>
 <li>事件发送器每传递过来一个请求，目标对象就创建一个新的线程，来进行处理</li>
-<li>事件发送器每传递过来一个请求，目标对象就将其放入一个待处理事件的列表，使用非阻塞I/O方式调用</li>
+<li>事件发送器每传递过来一个请求，目标对象就将其放入一个待处理事件的列表，使用非阻塞I&#x2F;O方式调用</li>
 </ul>
 <p>第三种方式，在编写程序代码时，逻辑比前面两种都复杂。大多数网络服务器采用了第三种方式，逐渐形成了所谓的<code>事件驱动处理库</code>。</p>
 <p><code>事件驱动处理库</code>又被称为<code>多路IO复用方法</code>，最常见的包括以下三种：select模型，poll模型和epoll模型。</p>
@@ -613,14 +602,14 @@ http &#123;
         root /data/www/jd;
 
         <span class="hljs-comment"># 图片缓存时间设置</span>
-        location ~ .*.(gif|jpg|jpeg|png|bmp|swf)$&#123;
-            expires 10d;
-        &#125;
+        location ~ .*.(gif|jpg|jpeg|png|bmp|swf)<span class="hljs-variable">$&#123;</span>
+<span class="hljs-variable">            expires 10d;</span>
+<span class="hljs-variable">        &#125;</span>
          
         <span class="hljs-comment">#JS和CSS缓存时间设置</span>
-        location ~ .*.(js|css)?$&#123;
-            expires 1h;
-        &#125;
+        location ~ .*.(js|css)?<span class="hljs-variable">$&#123;</span>
+<span class="hljs-variable">            expires 1h;</span>
+<span class="hljs-variable">        &#125;</span>
          
         <span class="hljs-comment"># 日志格式设定</span>
         <span class="hljs-comment">#$remote_addr与$http_x_forwarded_for用以记录客户端的ip地址；</span>
@@ -630,13 +619,13 @@ http &#123;
         <span class="hljs-comment">#$status： 用来记录请求状态；成功是200，</span>
         <span class="hljs-comment">#$body_bytes_sent ：记录发送给客户端文件主体内容大小；</span>
         <span class="hljs-comment">#$http_referer：用来记录从那个页面链接访问过来的；</span>
-        log_format access <span class="hljs-string">'$remote_addr - $remote_user [$time_local] "$request" '</span>
-        <span class="hljs-string">'$status $body_bytes_sent "$http_referer" '</span>
-        <span class="hljs-string">'"$http_user_agent" $http_x_forwarded_for'</span>;
+        log_format access <span class="hljs-string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span>
+        <span class="hljs-string">&#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span>
+        <span class="hljs-string">&#x27;&quot;$http_user_agent&quot; $http_x_forwarded_for&#x27;</span>;
          
         <span class="hljs-comment"># 定义本虚拟主机的访问日志</span>
-        access_log  /usr/<span class="hljs-built_in">local</span>/nginx/logs/host.access.log  main;
-        access_log  /usr/<span class="hljs-built_in">local</span>/nginx/logs/host.access.404.log  log404;
+        access_log  /usr/local/nginx/logs/host.access.log  main;
+        access_log  /usr/local/nginx/logs/host.access.404.<span class="hljs-built_in">log</span>  log404;
          
         <span class="hljs-comment"># 对具体路由进行反向代理</span>
         location /connect-controller &#123;
@@ -712,7 +701,7 @@ http &#123;
 
 
 <h3 id="其他技巧"><a href="#其他技巧" class="headerlink" title="其他技巧"></a>其他技巧</h3><p>如：图片防盗链，请求过滤，泛域名转发，配置HTTPS等等</p>
-<p>可参考文章：<a href="https://juejin.im/post/6844904144235413512" target="_blank" rel="noopener">《Nginx 从入门到实践，万字详解！》</a></p>
+<p>可参考文章：<a target="_blank" rel="noopener" href="https://juejin.im/post/6844904144235413512">《Nginx 从入门到实践，万字详解！》</a></p>
 <h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="Q1：Nginx一般用作什么？"><a href="#Q1：Nginx一般用作什么？" class="headerlink" title="Q1：Nginx一般用作什么？"></a>Q1：Nginx一般用作什么？</h3><blockquote>
 <p>见上文中Nginx在架构体系中的作用，配合Nginx还能做什么作答即可</p>
 </blockquote>
@@ -746,10 +735,10 @@ http &#123;
 <p>实际上有两种，多进程和单进程，但是实际工作中都是多进程的</p>
 </blockquote>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://juejin.im/post/6844903849988227086" target="_blank" rel="noopener">【前端词典】如何向老板解释反向代理</a></li>
-<li><a href="https://www.jianshu.com/p/2b95794a3654" target="_blank" rel="noopener">[code.nginx] Nginx服务器的事件驱动模型</a></li>
-<li><a href="https://www.cnblogs.com/baby123/p/12052583.html" target="_blank" rel="noopener">Nginx模块化设计</a></li>
-<li><a href="https://www.nginx.cn/doc/" target="_blank" rel="noopener">Nginx中文文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/6844903849988227086">【前端词典】如何向老板解释反向代理</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2b95794a3654">[code.nginx] Nginx服务器的事件驱动模型</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/baby123/p/12052583.html">Nginx模块化设计</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.nginx.cn/doc/">Nginx中文文档</a></li>
 </ul>
 
             </article>
@@ -774,16 +763,16 @@ http &#123;
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Hexo%E7%AF%87/">
+                      <a href="/2023/02/06/PhantomJS%E7%AF%87/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hexo篇</span>
+                        <span class="hidden-mobile">PhantomJS篇</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -791,8 +780,8 @@ http &#123;
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/">
-                        <span class="hidden-mobile">日志套餐篇</span>
+                      <a href="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/">
+                        <span class="hidden-mobile">RocketMQ-消息队列篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -807,30 +796,28 @@ http &#123;
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/Nginx篇/';
+          this.page.identifier = '/2023/02/06/Nginx篇/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -894,24 +881,13 @@ http &#123;
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -956,7 +932,7 @@ http &#123;
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -1043,13 +1019,6 @@ http &#123;
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

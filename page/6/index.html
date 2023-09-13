@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -38,7 +38,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -46,7 +46,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -66,18 +66,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -167,13 +155,371 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" target="_self">
-          <img src="/img/articles/13.jpg" srcset="/img/loading.gif" alt="装饰器模式">
-        </a>
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/">手写一个本地缓存</a>
+
+      <a href="/2023/02/06/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/" class="index-excerpt">
+        
+        
+          
+        
+        <div>基于ConcurrentHashMap的本地缓存标签： #Share
+在系统中，有些数据，数据量小，但是访问十分频繁（例如国家标准行政区域数据），针对这种场景，需要将数据搞到应用的本地缓存中，以提升系统的访问效率，减少无谓的数据库访问（数据库访问占用数据库连接，同时网络消耗比较大），但是有一点需要注意，就是缓存的占用空间以及缓存的失效策略
+博文：https://www.jianshu.com/p/</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/">手写一个本地缓存</a>
+            
+          </div>
+        
       </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="col-12 col-md-8 mx-auto index-info">
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">手写简易SpringMVC</a>
+
+      <a href="/2023/02/06/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/" class="index-excerpt">
+        
+        
+          
+        
+        <div>手写简易SpringMVC标签： #Share
+
+手写系列框架代码基于普通Maven构建，因此在手写SpringMVC的过程中，需要手动的集成Tomcat容器
+必备知识：Servlet相关理解和使用，Maven，Java 反射，Java自定义注解
+
+配置Web类型结构结构如图所示：
+
+注意 要设置 webapp为web moudle -&gt; IDEA 有蓝色小圈圈为准，resource 配置为</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">手写简易SpringMVC</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/">日志套餐篇</a>
+
+      <a href="/2023/02/06/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>日志套餐篇 - log4j2 logback全量套餐标签： #Share
+
+前情提要：
+Log4j  Log4j2  logback是当下主流的日志框架
+slf4j则是新一代的日志框架接口，logback直接实现了slf4j接口，另外logback是SpringBoot最新的默认日志框架
+综合来看性能上依然推荐：log4j2（拥有logback全部特性）
+
+注：鉴于log4j已经跟不上时代的要求，</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Java%E7%AF%87/">Java篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%97%A5%E5%BF%97%E5%A5%97%E9%A4%90%E7%AF%87/">日志套餐篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">模板方法模式</a>
+
+      <a href="/2023/02/06/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>模板方法模式篇标签： #Share
+意图定义一个操作中的算法的骨架，将一些步骤延迟到子类中。 Template Method使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤
+模板方法模式的诞生模板方法模式为我们提供了一种代码复用的重要技巧，它定义了算法的步骤，把这些步骤的实现延迟到子类
+说人话就是：
+【产品】：开发小哥，你会做饭吗？
+【开发】：不会啊，怎么了？难道你要做给我吃？
+【产</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">模板方法模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">深度分页通用解决方案</a>
+
+      <a href="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="index-excerpt">
+        
+        
+          
+        
+        <div>标签： #Share
+面试题 &amp; 真实经历
+面试题：在数据量很大的情况下，怎么实现深度分页？
+
+大家在面试时，或者准备面试中可能会遇到上述的问题，大多的回答基本上是分库分表建索引，这是一种很标准的正确回答，但现实总是很骨感，所以面试官一般会追问你一句，现在工期不足，人员不足，该怎么实现深度分页？
+这个时候没有实际经验的同学基本麻爪，So，请听我娓娓道来。
+惨痛的教训首先必须明确一点：深度分</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MySQL/">MySQL</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">深度分页通用解决方案</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">状态模式</a>
+
+      <a href="/2023/02/06/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>状态模式篇标签： #Share
+意图允许一个对象在其内部状态改变时改变它的行为
+说人话：允许对象在改变自身状态时候，更改绑定的特定方法
+状态模式的诞生【产品】：Hello，开发小哥，我们需要开发一款 娃娃机 ，你可以提前想想怎么设计它啦。
+【开发】：娃娃机？我想想奥，它需要投币，用户移动，确认抓取，结束这几个动作，好像很好做欸，用一个变量维护它当前的阶段，然后写四个 if 语句就好啦。
+【BOSS</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">状态模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98%E7%AF%87/">算法实战篇</a>
+
+      <a href="/2023/02/06/%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98%E7%AF%87/" class="index-excerpt">
+        
+        
+          
+        
+        <div>算法实战篇 - 大数据量问题解决方案标签： #Share
+1. 如何从大量的 URL 中找出相同的 URL？题目描述给定 a、b 两个文件，各存放 50 亿个 URL，每个 URL 各占 64B，内存限制是 4G。请找出 a、b 两个文件共同的 URL。
+解答思路每个 URL 占 64B，那么 50 亿个 URL占用的空间大小约为 320GB。
+
+5,000,000,000 * 64B ≈ 5GB</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%8F%8A%E7%AE%97%E6%B3%95%E7%AF%87/">数据结构及算法篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AE%97%E6%B3%95%E5%AE%9E%E6%88%98%E7%AF%87/">算法实战篇</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
+
+      <a href="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
+        
+        
+          
+        
+        <div>策略模式篇标签： #Share
+普遍定义定义个一个算法族， 各个算法的实现可以相互替换， 算法的实现和具体的算法使用场景隔离
+策略模式的进化【产品】：我需要一堆鸭子，红色的，绿色的，黑色的，还要会飞！还要会叫！
+【开发】：明白，秒秒钟搞定，N种鸭子只要继承了我的Duck类然后重写，就搞定一切！
+public abstract class Duck &#123;
+    
+    // 颜色属性
+ </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BC%96%E7%A0%81%E5%8F%8A%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%AF%87/">编码及设计模式篇</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
       <a class="index-header" href="/2023/02/06/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">装饰器模式</a>
 
       <a href="/2023/02/06/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
@@ -181,10 +527,11 @@
         
           
         
-        <div>装饰器模式篇意图动态地给一个对象添加一些额外的职责，就增加功能来说，Decorator模式相比生成子类更为灵活
+        <div>装饰器模式篇标签： #Share
+意图动态地给一个对象添加一些额外的职责，就增加功能来说，Decorator模式相比生成子类更为灵活
 别名：包装器Wrapper
 装饰器模式的诞生有时我们希望给某个对象而不是整个类添加一些功能，例如：一个图形用户界面工具箱允许你对任意一个用户界面组件添加一些特性，例如边框。
-使用继承机制是添加功能的一种有效途径，但这种方法不够灵活，因为边框的选择是静态的，用户不能控制对组件加边框的方式和</div>
+使用继承机制是添加功能的一种有效途径，但这种方法不够灵活，因为边框的选择是静态的，用户不能控</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -216,78 +563,22 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" target="_self">
-          <img src="/img/articles/2.jpg" srcset="/img/loading.gif" alt="跨域问题">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/">设计模式总篇：剖析七大原则</a>
 
-      <a href="/2023/02/06/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/" class="index-excerpt">
+      <a href="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/" class="index-excerpt">
         
         
           
         
-        <div>前端交互篇 - 跨域SpringBoot - Cors解决跨域问题 - 本地请求其他域名时cookie无法传输SpringBoot 利用Cors解决跨域问题
+        <div>设计模式总篇：剖析七大原则标签： #Share
+聊聊为什么需要原则我们所有人都看过科幻电影，都看到过未来场景中人类和机器人和平相处的场景
 
-1.依赖
-&lt;dependency&gt;
-	&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-	&lt;artifactId&gt;spring-boot-starter-</div>
-      </a>
+为了让拥有自主智能的机器人不失控，人类为机器人制定了三大定律：
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%AF%87/">前端篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">跨域问题</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" target="_self">
-          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="适配器模式和外观模式">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">适配器模式和外观模式</a>
-
-      <a href="/2023/02/06/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" class="index-excerpt">
-        
-        
-          
-        
-        <div>适配器模式意图将一个类的接口转换成客户希望的另外一个接口，adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作
-别名：Wrapper包装器
-适配器模式的诞生【产品】：开发小哥，记得我们第一版的需求吗？
-【开发】：什么玩意？
-【产品】：我们第一版是不是造了很多鸭子啊，现在需要造一点火鸡，但是客户很奇葩，他们要让鸭子拥有火鸡一样的能力，怎么办？
-【开发】：把鸭子当火鸡写？
-【产品</div>
+第一定律：机器人不得伤害人类个体，或者目睹人类个体将遭受危险而袖手不管
+第二定律：机器人必须服从人给予它的命令，当该命令与第一定律冲突时例外
+第三定律：机器人在不违反第一、第二定律的情况下要尽可</div>
       </a>
 
       <div class="index-btm post-metas">
@@ -308,363 +599,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">适配器模式和外观模式</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/" target="_self">
-          <img src="/img/articles/9.jpg" srcset="/img/loading.gif" alt="CV程序员的一次进步">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/">CV程序员的一次进步</a>
-
-      <a href="/2023/02/06/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/" class="index-excerpt">
-        
-        
-          
-        
-        <div>CV程序员的一次进步
-原文链接：掘金
-
-一、调整顺序，让程序更高效假设业务需求是这样：会员，第一次登陆时，需要发一条感谢短信。如果没有经过思考，代码直接这样写了
-if(isUserVip &amp;&amp; isFirstLogin)&#123;
-    sendMsg();
-&#125;
-复制代码
-
-假设总共有5个请求，isUserVip通过的有3个请求，isFirstLogin通过的有1个请</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%E7%AF%87/">程序人生篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/">CV程序员的一次进步</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/Docker%E7%AF%87/" target="_self">
-          <img src="/img/articles/15.jpg" srcset="/img/loading.gif" alt="Docker篇">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/Docker%E7%AF%87/">Docker篇</a>
-
-      <a href="/2023/02/06/Docker%E7%AF%87/" class="index-excerpt">
-        
-        
-          
-        
-        <div>Docker篇CentOS 安装Docker - 菜鸟教程安装须知:
-1.Docker支持以下的CentOS版本：
-CentOS 7 (64-bit)
-CentOS 6.5 (64-bit) 或更高的版本
-
-2.Docker 要求 CentOS 系统的内核版本高于 3.10 ，查看本页面的前提条件来验证你的CentOS 版本是否支持 Docker 。
-通过 uname -r 命令查看你当前的内核版</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%AF%87/">中间件篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Docker%E7%AF%87/">Docker篇</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/" target="_self">
-          <img src="/img/articles/20.jpg" srcset="/img/loading.gif" alt="Git-IDEA-技巧">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/">Git-IDEA-技巧</a>
-
-      <a href="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/" class="index-excerpt">
-        
-        
-          
-        
-        <div>Git-IDEA-技巧GitHub高级搜索仓库名搜索in:name spring boot
-
-
-
-Stars | forks 搜索# 注意 stars:&gt;3000 中间要连起来,不要有空格
-in:name spring boot stars:&gt;3000
-
-                 ...forks:&gt;1000
-
-
-
-ReadMe搜索in:readme spring boo</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Tips%E7%AF%87/">Tips篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Git-IDEA-%E6%8A%80%E5%B7%A7/">Git-IDEA-技巧</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" target="_self">
-          <img src="/img/articles/5.jpg" srcset="/img/loading.gif" alt="Guava的两种本地缓存策略">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">Guava的两种本地缓存策略</a>
-
-      <a href="/2023/02/06/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/" class="index-excerpt">
-        
-        
-          
-        
-        <div>Guava的两种本地缓存策略缓存在很多场景下都需要使用，如果电商网站的商品类别的查询，订单查询，用户基本信息的查询等等，针对这种读多写少的业务，都可以考虑使用到缓存。在一般的缓存系统中，除了分布式缓存，还会有多级缓存，在提升一定性能的前提下，可以在一定程度上避免缓存击穿或缓存雪崩，也能降低分布式缓存的负载。
-GuavaCache的优点1）很好的封装了get、put操作，能够集成数据源。一般我们在业</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Java%E7%AF%87/">Java篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">Guava的两种本地缓存策略</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/" target="_self">
-          <img src="/img/articles/4.jpg" srcset="/img/loading.gif" alt="Java语法糖之泛型">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">Java语法糖之泛型</a>
-
-      <a href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/" class="index-excerpt">
-        
-        
-          
-        
-        <div>聊一聊-JAVA 泛型中的通配符 T，E，K，V，？
-原文来源：掘金
-原文链接：https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension
-
-前言Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许开发者在编译时检测到非法的类型。
-</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Java%E7%AF%87/">Java篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">Java语法糖之泛型</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/" target="_self">
-          <img src="/img/articles/10.jpg" srcset="/img/loading.gif" alt="SQL优化与诊断">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">SQL优化与诊断</a>
-
-      <a href="/2023/02/06/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/" class="index-excerpt">
-        
-        
-          
-        
-        <div>SQL优化与诊断Explain诊断Explain各参数的含义如下：
-| 列名     | 说明                                                     ||  |  || id           | 执行编号，标识select所属的行。如果在语句中没有子查询或关联查询，只有唯一的select，每行都将显示1.否则，内层的select语句一般会顺序编</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MySQL/">MySQL</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">SQL优化与诊断</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2023/02/06/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" target="_self">
-          <img src="/img/articles/17.jpg" srcset="/img/loading.gif" alt="SpringBoot配置多数据源">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a class="index-header" href="/2023/02/06/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a>
-
-      <a href="/2023/02/06/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/" class="index-excerpt">
-        
-        
-          
-        
-        <div>SpringBoot配置多数据源核心技术点​        在Spring 2.x 中引入了AbstractRoutingDataSource, 该类充当了DataSource的路由中介, 能有在运行时, 根据某种key值来动态切换到真正的DataSource上。
-​        Spring动态配置多数据源，即在大型应用中对数据进行切分，并且采用多个数据库实例进行管理，这样可以有效提高系统的水</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2023-02-06
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%A1%86%E6%9E%B6%E7%AF%87/">框架篇</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">SpringBoot配置多数据源</a>
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/">设计模式总篇：剖析七大原则</a>
             
           </div>
         
@@ -676,7 +611,7 @@ GuavaCache的优点1）很好的封装了get、put操作，能够集成数据源
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/5/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
@@ -733,24 +668,13 @@ GuavaCache的优点1）很好的封装了get、put操作，能够集成数据源
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -787,7 +711,7 @@ GuavaCache的优点1）很好的封装了get、put操作，能够集成数据源
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "一切都是有可能的，甚至那些不可能的也是&nbsp;",
+        "一切都是有可能的，甚至那些不可能的也是。&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

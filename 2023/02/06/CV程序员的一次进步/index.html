@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>CV程序员的一次进步 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.1k 字
     </span>
   
 
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36
+      37
        分钟
     </span>
   
@@ -204,14 +192,15 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="CV程序员的一次进步"><a href="#CV程序员的一次进步" class="headerlink" title="CV程序员的一次进步"></a>CV程序员的一次进步</h2><blockquote>
-<p>原文链接：<a href="https://juejin.im/post/5dfe2e72518825125f39a2de?utm_source=gold_browser_extension" target="_blank" rel="noopener">掘金</a></p>
+              <p>标签： #Share</p>
+<h2 id="CV程序员的一次进步"><a href="#CV程序员的一次进步" class="headerlink" title="CV程序员的一次进步"></a>CV程序员的一次进步</h2><blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://juejin.im/post/5dfe2e72518825125f39a2de?utm_source=gold_browser_extension">掘金</a></p>
 </blockquote>
 <h3 id="一、调整顺序，让程序更高效"><a href="#一、调整顺序，让程序更高效" class="headerlink" title="一、调整顺序，让程序更高效"></a>一、调整顺序，让程序更高效</h3><p>假设业务需求是这样：会员，第一次登陆时，需要发一条感谢短信。如果没有经过思考，代码直接这样写了</p>
-<pre><code class="hljs isbl"><span class="hljs-function"><span class="hljs-title">if</span>(<span class="hljs-variable">isUserVip</span> &amp;&amp; <span class="hljs-variable">isFirstLogin</span>)&#123;</span>
-<span class="hljs-function">    <span class="hljs-title">sendMsg</span>();</span>
-<span class="hljs-function">&#125;</span>
-<span class="hljs-function">复制代码</span></code></pre>
+<pre><code class="hljs scss"><span class="hljs-built_in">if</span>(isUserVip &amp;&amp; isFirstLogin)&#123;
+    <span class="hljs-built_in">sendMsg</span>();
+&#125;
+复制代码</code></pre>
 
 <p><strong>假设总共有5个请求，isUserVip通过的有3个请求，isFirstLogin通过的有1个请求。</strong> 那么以上代码，isUserVip执行的次数为5次，isFirstLogin执行的次数也是3次，如下：</p>
 <p><img src="/2023/02/06/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/16f4312ee2db2f80" srcset="/img/loading.gif" alt="img"></p>
@@ -225,11 +214,11 @@
 <p><strong>酱紫你的程序是否更高效呢？</strong></p>
 <h3 id="二、是否创建了不必要的对象。"><a href="#二、是否创建了不必要的对象。" class="headerlink" title="二、是否创建了不必要的对象。"></a>二、是否创建了不必要的对象。</h3><p>举个粟子吧，判断用户会员是否处于有效期，通常有以下类似代码：</p>
 <pre><code class="hljs java"><span class="hljs-comment">//判断用户会员是否在有效期</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isUserVIPValid</span><span class="hljs-params">()</span> </span>&#123;
-  Date now = <span class="hljs-keyword">new</span> Date();
-  Calendar gmtCal = Calendar.getInstance();
+<span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isUserVIPValid</span><span class="hljs-params">()</span> &#123;
+  <span class="hljs-type">Date</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();
+  <span class="hljs-type">Calendar</span> <span class="hljs-variable">gmtCal</span> <span class="hljs-operator">=</span> Calendar.getInstance();
   gmtCal.set(<span class="hljs-number">2019</span>, Calendar.JANUARY, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
-  Date beginTime = gmtCal.getTime();
+  <span class="hljs-type">Date</span> <span class="hljs-variable">beginTime</span> <span class="hljs-operator">=</span> gmtCal.getTime();
   gmtCal.set(<span class="hljs-number">2020</span>, Calendar.JANUARY, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
   Date endTime= gmtCal.getTime();
   <span class="hljs-keyword">return</span> now.compareTo(beginTime) &gt;= <span class="hljs-number">0</span> &amp;&amp; now.compareTo(endTime) &lt;= <span class="hljs-number">0</span>;
@@ -238,12 +227,12 @@
 
 
 <p>但是呢，每次调用isUserVIPValid方法，都会创建Calendar和Date对象。其实吧，除了New Date，其他对象都是不变的，我们可以<strong>抽出全局变量</strong>，<strong>避免创建了不必要的对象</strong>，从而提高程序效率，如下：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;
 
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Date BEGIN_TIME;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Date END_TIME;
     <span class="hljs-keyword">static</span> &#123;
-        Calendar gmtCal = Calendar.getInstance();
+        <span class="hljs-type">Calendar</span> <span class="hljs-variable">gmtCal</span> <span class="hljs-operator">=</span> Calendar.getInstance();
         gmtCal.set(<span class="hljs-number">2019</span>, Calendar.JANUARY, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
         BEGIN_TIME = gmtCal.getTime();
         gmtCal.set(<span class="hljs-number">2020</span>, Calendar.JANUARY, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
@@ -251,8 +240,8 @@
     &#125;
 
     <span class="hljs-comment">//判断用户会员是否在有效期</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isUserVIPValid</span><span class="hljs-params">()</span> </span>&#123;
-        Date now = <span class="hljs-keyword">new</span> Date();
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isUserVIPValid</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-type">Date</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>();
         <span class="hljs-keyword">return</span> now.compareTo(BEGIN_TIME) &gt;= <span class="hljs-number">0</span> &amp;&amp; now.compareTo(END_TIME) &lt;= <span class="hljs-number">0</span>;
     &#125;
 &#125;</code></pre>
@@ -261,12 +250,12 @@
 
 <h3 id="三、有没有查多了数据？"><a href="#三、有没有查多了数据？" class="headerlink" title="三、有没有查多了数据？"></a>三、有没有查多了数据？</h3><p>大家都知道，查库是比较耗时的操作，尤其数据量大的时候。所以，查询DB时，我们取所需就好，没有必要大包大揽。</p>
 <p>假设业务场景是这样：查询某个用户是否是会员。曾经看过实现代码是这样。。。</p>
-<pre><code class="hljs java">List&lt;Long&gt; userIds = sqlMap.queryList(<span class="hljs-string">"select userId from user where vip=1"</span>);
-<span class="hljs-keyword">boolean</span> isVip = userIds.contains(userId);</code></pre>
+<pre><code class="hljs java">List&lt;Long&gt; userIds = sqlMap.queryList(<span class="hljs-string">&quot;select userId from user where vip=1&quot;</span>);
+<span class="hljs-type">boolean</span> <span class="hljs-variable">isVip</span> <span class="hljs-operator">=</span> userIds.contains(userId);</code></pre>
 
 <p>为什么先把所有会有查出来，再判断是否包含这个useId，来确定useId是否是会员呢？直接把userId传进sql，它不香吗？如下：</p>
-<pre><code class="hljs java">Long userId = sqlMap.queryObject(<span class="hljs-string">"select userId from user where userId='userId' and vip='1' "</span>)
-<span class="hljs-keyword">boolean</span> isVip = userId！=<span class="hljs-keyword">null</span>;</code></pre>
+<pre><code class="hljs java"><span class="hljs-type">Long</span> <span class="hljs-variable">userId</span> <span class="hljs-operator">=</span> sqlMap.queryObject(<span class="hljs-string">&quot;select userId from user where userId=&#x27;userId&#x27; and vip=&#x27;1&#x27; &quot;</span>)
+<span class="hljs-type">boolean</span> <span class="hljs-variable">isVip</span> <span class="hljs-operator">=</span> userId！=<span class="hljs-literal">null</span>;</code></pre>
 
 <p>实际上，我们除了把查询条件都传过去，避免数据库查多余的数据回来，还可以通过<strong>select 具体字段</strong>代替<code>select *</code>，从而使程序更高效。</p>
 <h3 id="四、加了一行通知类的代码，总不能影响到主要流程吧。"><a href="#四、加了一行通知类的代码，总不能影响到主要流程吧。" class="headerlink" title="四、加了一行通知类的代码，总不能影响到主要流程吧。"></a>四、加了一行通知类的代码，总不能影响到主要流程吧。</h3><p>假设业务流程这样：需要在用户登陆时，添加个短信通知它的粉丝。 很容易想到的实现流程如下：</p>
@@ -277,94 +266,94 @@
 <p>因此，我们添加通知类等不是非主要，可降级的接口时，应该静下心来考虑是否会影响主要流程，思考怎么处理最好。</p>
 <h3 id="五、对空指针保持嗅觉，如使用equals比较时，常量或确定值放左边。"><a href="#五、对空指针保持嗅觉，如使用equals比较时，常量或确定值放左边。" class="headerlink" title="五、对空指针保持嗅觉，如使用equals比较时，常量或确定值放左边。"></a>五、对空指针保持嗅觉，如使用equals比较时，常量或确定值放左边。</h3><p>NullPointException在Java世界早已司空见惯，我们在写代码时，可以三思而后写，尽量避免低级的空指针问题。</p>
 <p>比如有以下业务场景，判断用户是否是会员，经常可见如下代码：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">boolean</span> isVip = user.getUserFlag().equals(<span class="hljs-string">"1"</span>);</code></pre>
+<pre><code class="hljs java"><span class="hljs-type">boolean</span> <span class="hljs-variable">isVip</span> <span class="hljs-operator">=</span> user.getUserFlag().equals(<span class="hljs-string">&quot;1&quot;</span>);</code></pre>
 
 <p>如果让这个行代码上生产环境，待君蓦然回首，可能那空指针bug，就在灯火阑珊处。显然，这样可能会产生空指针异常，因为user.getUserFlag()可能是null。</p>
 <p>怎样避免空指针问题呢？把常量1放到左边就可以啦，如下：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">boolean</span> isVip = <span class="hljs-string">"1"</span>.equals(user.getUserFlag());</code></pre>
+<pre><code class="hljs java"><span class="hljs-type">boolean</span> <span class="hljs-variable">isVip</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;1&quot;</span>.equals(user.getUserFlag());</code></pre>
 
 
 
 <h3 id="六、你的关键业务代码是否有日志保驾护航？"><a href="#六、你的关键业务代码是否有日志保驾护航？" class="headerlink" title="六、你的关键业务代码是否有日志保驾护航？"></a>六、你的关键业务代码是否有日志保驾护航？</h3><p>关键业务代码无论身处何地，都应该有足够的<strong>日志</strong>保驾护航。</p>
 <p>比如：<strong>你实现转账业务，转个几百万，然后转失败了，接着客户投诉，然后你还没有打印到日志，想想那种水深火热的困境下，你却毫无办法</strong>。。。</p>
 <p>那么，你的转账业务都<strong>需要那些日志信息</strong>呢？至少，方法调用前，入参需要打印需要吧，接口调用后，需要捕获一下异常吧，同时打印异常相关日志吧，如下：</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">transfer</span><span class="hljs-params">(TransferDTO transferDTO)</span></span>&#123;
-    log.info(<span class="hljs-string">"invoke tranfer begin"</span>);
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">transfer</span><span class="hljs-params">(TransferDTO transferDTO)</span>&#123;
+    log.info(<span class="hljs-string">&quot;invoke tranfer begin&quot;</span>);
     <span class="hljs-comment">//打印入参</span>
-    log.info(<span class="hljs-string">"invoke tranfer,paramters:&#123;&#125;"</span>,transferDTO);
+    log.info(<span class="hljs-string">&quot;invoke tranfer,paramters:&#123;&#125;&quot;</span>,transferDTO);
     <span class="hljs-keyword">try</span> &#123;
       res=  transferService.transfer(transferDTO);
     &#125;<span class="hljs-keyword">catch</span>(Exception e)&#123;
-     log.error(<span class="hljs-string">"transfer fail,cifno:&#123;&#125;，account：&#123;&#125;"</span>,transferDTO.getCifno（），
+     log.error(<span class="hljs-string">&quot;transfer fail,cifno:&#123;&#125;，account：&#123;&#125;&quot;</span>,transferDTO.getCifno（），
      transferDTO.getaccount（）)
-     log.error(<span class="hljs-string">"transfer fail,exception:&#123;&#125;"</span>,e);
+     log.error(<span class="hljs-string">&quot;transfer fail,exception:&#123;&#125;&quot;</span>,e);
     &#125;
-    log.info(<span class="hljs-string">"invoke tranfer end"</span>);
+    log.info(<span class="hljs-string">&quot;invoke tranfer end&quot;</span>);
     &#125;</code></pre>
 
 <p>除了打印足够的日志，我们还需要注意一点是，<strong>日志级别别混淆使用</strong>，别本该打印info的日志，你却打印成error级别，告警半夜三更催你起来排查问题就不好了。</p>
 <h3 id="七、对于行数比较多的函数，是否可以划分小函数来优化呢？"><a href="#七、对于行数比较多的函数，是否可以划分小函数来优化呢？" class="headerlink" title="七、对于行数比较多的函数，是否可以划分小函数来优化呢？"></a>七、对于行数比较多的函数，是否可以划分小函数来优化呢？</h3><p>我们在维护老代码的时候，经常会见到一坨坨的代码，有些<strong>函数几百行甚至上千行</strong>，阅读起来比较吃力。</p>
 <p>假设现在有以下代码</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;
     <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-keyword">private</span> Vector&lt;Order&gt; orders = <span class="hljs-keyword">new</span> Vector&lt;Order&gt;();
+    <span class="hljs-keyword">private</span> Vector&lt;Order&gt; orders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vector</span>&lt;Order&gt;();
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printOwing</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printOwing</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-comment">//print banner</span>
-        System.out.println(<span class="hljs-string">"****************"</span>);
-        System.out.println(<span class="hljs-string">"*****customer Owes *****"</span>);
-        System.out.println(<span class="hljs-string">"****************"</span>);
+        System.out.println(<span class="hljs-string">&quot;****************&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;*****customer Owes *****&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;****************&quot;</span>);
 
         <span class="hljs-comment">//calculate totalAmount</span>
-        Enumeration env = orders.elements();
-        <span class="hljs-keyword">double</span> totalAmount = <span class="hljs-number">0.0</span>;
+        <span class="hljs-type">Enumeration</span> <span class="hljs-variable">env</span> <span class="hljs-operator">=</span> orders.elements();
+        <span class="hljs-type">double</span> <span class="hljs-variable">totalAmount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.0</span>;
         <span class="hljs-keyword">while</span> (env.hasMoreElements()) &#123;
-            Order order = (Order) env.nextElement();
+            <span class="hljs-type">Order</span> <span class="hljs-variable">order</span> <span class="hljs-operator">=</span> (Order) env.nextElement();
             totalAmount += order.getAmout();
         &#125;
 
         <span class="hljs-comment">//print details</span>
-        System.out.println(<span class="hljs-string">"name:"</span> + name);
-        System.out.println(<span class="hljs-string">"amount:"</span> + totalAmount);
+        System.out.println(<span class="hljs-string">&quot;name:&quot;</span> + name);
+        System.out.println(<span class="hljs-string">&quot;amount:&quot;</span> + totalAmount);
     &#125;
 &#125;</code></pre>
 
 
 
 <p><strong>划分为功能单一的小函数后：</strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test</span> &#123;
     <span class="hljs-keyword">private</span> String name;
-    <span class="hljs-keyword">private</span> Vector&lt;Order&gt; orders = <span class="hljs-keyword">new</span> Vector&lt;Order&gt;();
+    <span class="hljs-keyword">private</span> Vector&lt;Order&gt; orders = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Vector</span>&lt;Order&gt;();
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printOwing</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printOwing</span><span class="hljs-params">()</span> &#123;
 
         <span class="hljs-comment">//print banner</span>
         printBanner();
         <span class="hljs-comment">//calculate totalAmount</span>
-        <span class="hljs-keyword">double</span> totalAmount = getTotalAmount();
+        <span class="hljs-type">double</span> <span class="hljs-variable">totalAmount</span> <span class="hljs-operator">=</span> getTotalAmount();
         <span class="hljs-comment">//print details</span>
         printDetail(totalAmount);
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printBanner</span><span class="hljs-params">()</span></span>&#123;
-        System.out.println(<span class="hljs-string">"****************"</span>);
-        System.out.println(<span class="hljs-string">"*****customer Owes *****"</span>);
-        System.out.println(<span class="hljs-string">"****************"</span>);
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">printBanner</span><span class="hljs-params">()</span>&#123;
+        System.out.println(<span class="hljs-string">&quot;****************&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;*****customer Owes *****&quot;</span>);
+        System.out.println(<span class="hljs-string">&quot;****************&quot;</span>);
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">double</span> <span class="hljs-title">getTotalAmount</span><span class="hljs-params">()</span></span>&#123;
-        Enumeration env = orders.elements();
-        <span class="hljs-keyword">double</span> totalAmount = <span class="hljs-number">0.0</span>;
+    <span class="hljs-type">double</span> <span class="hljs-title function_">getTotalAmount</span><span class="hljs-params">()</span>&#123;
+        <span class="hljs-type">Enumeration</span> <span class="hljs-variable">env</span> <span class="hljs-operator">=</span> orders.elements();
+        <span class="hljs-type">double</span> <span class="hljs-variable">totalAmount</span> <span class="hljs-operator">=</span> <span class="hljs-number">0.0</span>;
         <span class="hljs-keyword">while</span> (env.hasMoreElements()) &#123;
-            Order order = (Order) env.nextElement();
+            <span class="hljs-type">Order</span> <span class="hljs-variable">order</span> <span class="hljs-operator">=</span> (Order) env.nextElement();
             totalAmount += order.getAmout();
         &#125;
         <span class="hljs-keyword">return</span> totalAmount;
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">printDetail</span><span class="hljs-params">(<span class="hljs-keyword">double</span> totalAmount)</span></span>&#123;
-        System.out.println(<span class="hljs-string">"name:"</span> + name);
-        System.out.println(<span class="hljs-string">"amount:"</span> + totalAmount);
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">printDetail</span><span class="hljs-params">(<span class="hljs-type">double</span> totalAmount)</span>&#123;
+        System.out.println(<span class="hljs-string">&quot;name:&quot;</span> + name);
+        System.out.println(<span class="hljs-string">&quot;amount:&quot;</span> + totalAmount);
     &#125;
     
 &#125;</code></pre>
@@ -390,11 +379,11 @@
 <li>你的查询sql是否命中索引</li>
 <li>你的sql是否还有优化余地</li>
 </ul>
-<p>一般情况下，数据量超过10万的表，就要考虑给表加索引了。哪些情况下，索引会失效呢？like通配符、索引列运算等会导致索引失效。有兴趣的朋友可以看一下我这篇文章。 <a href="https://juejin.im/post/5de99dd2518825125e1ba49d" target="_blank" rel="noopener">后端程序员必备：索引失效的十大杂症</a></p>
+<p>一般情况下，数据量超过10万的表，就要考虑给表加索引了。哪些情况下，索引会失效呢？like通配符、索引列运算等会导致索引失效。有兴趣的朋友可以看一下我这篇文章。 <a target="_blank" rel="noopener" href="https://juejin.im/post/5de99dd2518825125e1ba49d">后端程序员必备：索引失效的十大杂症</a></p>
 <h3 id="十一、你的方法到底应该返回空集合还是-null呢？"><a href="#十一、你的方法到底应该返回空集合还是-null呢？" class="headerlink" title="十一、你的方法到底应该返回空集合还是 null呢？"></a>十一、你的方法到底应该返回空集合还是 null呢？</h3><p>如果返回null，调用方在忘记检测的时候，可能会抛出空指针异常。返回一个空集合呢，就省去该问题了。</p>
 <p>mybatis查询的时候，如果返回一个集合，结果为空时也会返回一个空集合，而不是null。</p>
 <p><strong>正例</strong></p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;UserResult&gt; <span class="hljs-title">getUserResultList</span><span class="hljs-params">()</span></span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;UserResult&gt; <span class="hljs-title function_">getUserResultList</span><span class="hljs-params">()</span>&#123;
     <span class="hljs-keyword">return</span> Collections.EMPTY_LIST;
 &#125;</code></pre>
 
@@ -404,22 +393,22 @@
 <p><img src="/2023/02/06/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/16f4c63cf25c4b13" srcset="/img/loading.gif" alt="img"></p>
 <p>假设你的map要存储的元素个数是15个左右，最优写法如下</p>
 <pre><code class="hljs java"><span class="hljs-comment">//initialCapacity = 15/0.75+1=21</span>
-Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number">21</span>);</code></pre>
+<span class="hljs-type">Map</span> <span class="hljs-variable">map</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>(<span class="hljs-number">21</span>);</code></pre>
 
 
 
 <h3 id="十三、查询数据库时，如果数据返回过多，考虑分批进行。"><a href="#十三、查询数据库时，如果数据返回过多，考虑分批进行。" class="headerlink" title="十三、查询数据库时，如果数据返回过多，考虑分批进行。"></a>十三、查询数据库时，如果数据返回过多，考虑分批进行。</h3><p>假设你的订单表有10万数据要更新状态，不能一次性查询所有未更新的订单，要分批。</p>
 <p><strong>反例：</strong></p>
-<pre><code class="hljs java">List&lt;Order&gt; list = sqlMap.queryList(<span class="hljs-string">"select * from Order where status='0'"</span>);
+<pre><code class="hljs java">List&lt;Order&gt; list = sqlMap.queryList(<span class="hljs-string">&quot;select * from Order where status=&#x27;0&#x27;&quot;</span>);
 <span class="hljs-keyword">for</span>(Order order:list)&#123;
   order.setStatus(<span class="hljs-number">1</span>);
   sqlMap.update(order);  
 &#125;</code></pre>
 
 <p><strong>正例：</strong></p>
-<pre><code class="hljs java">Integer count = sqlMap.queryCount(<span class="hljs-function">select <span class="hljs-title">count</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span> from Order where status </span>=<span class="hljs-string">'0'</span>);
-<span class="hljs-keyword">while</span>(<span class="hljs-keyword">true</span>)&#123;
-    <span class="hljs-keyword">int</span> size=sqlMap.batchUpdate(params);
+<pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlMap.queryCount(select <span class="hljs-title function_">count</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span> from Order <span class="hljs-type">where</span> <span class="hljs-variable">status</span> <span class="hljs-operator">=</span><span class="hljs-string">&#x27;0&#x27;</span>);
+<span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;
+    <span class="hljs-type">int</span> size=sqlMap.batchUpdate(params);
     <span class="hljs-keyword">if</span>（size&lt;<span class="hljs-number">500</span>）&#123;
         <span class="hljs-keyword">break</span>;
     &#125;
@@ -436,13 +425,13 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
 <p><strong>假设有业务场景：</strong></p>
 <p>用户点击下载按钮，系统开始下载文件，用户再次点击下载，会提示文件正在下载中。</p>
 <p>有一部分人会这样实现：</p>
-<pre><code class="hljs java">Integer count = sqlMap.selectCount(<span class="hljs-string">"select count(1) from excel where state=1"</span>);
+<pre><code class="hljs java"><span class="hljs-type">Integer</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlMap.selectCount(<span class="hljs-string">&quot;select count(1) from excel where state=1&quot;</span>);
 <span class="hljs-keyword">if</span>(count&lt;=<span class="hljs-number">0</span>)&#123;
     Excel.setStatus(<span class="hljs-number">1</span>);
     updateExcelStatus();
     downLoadExcel();
 &#125;<span class="hljs-keyword">else</span>&#123;
-    <span class="hljs-string">"文件正在下载中"</span>
+    <span class="hljs-string">&quot;文件正在下载中&quot;</span>
 &#125;</code></pre>
 
 <p>我们可以看一下，两个请求过来可能会有什么问题？</p>
@@ -458,15 +447,15 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
 <pre><code class="hljs java"><span class="hljs-keyword">if</span>(updateExcelStatus(<span class="hljs-number">1</span>)&#123;
     downLoadExcel(); 
 &#125;<span class="hljs-keyword">else</span>&#123;
-    <span class="hljs-string">"文件正在下载中"</span>
+    <span class="hljs-string">&quot;文件正在下载中&quot;</span>
 &#125;</code></pre>
 
 
 
 <h3 id="十五、用一个私有构造器强化你的工具类，此不美哉？"><a href="#十五、用一个私有构造器强化你的工具类，此不美哉？" class="headerlink" title="十五、用一个私有构造器强化你的工具类，此不美哉？"></a>十五、用一个私有构造器强化你的工具类，此不美哉？</h3><p>工具类的方法都是静态方法，通过类来直接调用即可。但是有些调用方可能会先实例化，再用对象去调用，而这就不好了。怎么避免这种情况，让你的工具类到达可控状态呢，<strong>添加私有构造器</strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StringUtis</span></span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">StringUtis</span><span class="hljs-params">()</span></span>&#123;&#125; <span class="hljs-comment">///私有构造类，防止意外实例出现</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> bool <span class="hljs-title">validataString</span><span class="hljs-params">(String str)</span></span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StringUtis</span>&#123;
+    <span class="hljs-keyword">private</span> <span class="hljs-title function_">StringUtis</span><span class="hljs-params">()</span>&#123;&#125; <span class="hljs-comment">///私有构造类，防止意外实例出现</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> bool <span class="hljs-title function_">validataString</span><span class="hljs-params">(String str)</span>&#123;
     &#125;
 &#125;</code></pre>
 
@@ -500,16 +489,16 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2023/02/06/CSS%E7%BD%91%E7%AB%99%E5%8F%98%E7%81%B0%E4%BB%A3%E7%A0%81/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">适配器模式和外观模式</span>
+                        <span class="hidden-mobile">CSS网站变灰代码</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -517,8 +506,8 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/Docker%E7%AF%87/">
-                        <span class="hidden-mobile">Docker篇</span>
+                      <a href="/2023/02/06/Docsify%E7%AF%87/">
+                        <span class="hidden-mobile">Docsify篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -533,30 +522,28 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/CV程序员的一次进步/';
+          this.page.identifier = '/2023/02/06/CV程序员的一次进步/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -620,24 +607,13 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -682,7 +658,7 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -769,13 +745,6 @@ Map map = <span class="hljs-keyword">new</span> HashMap(<span class="hljs-number
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

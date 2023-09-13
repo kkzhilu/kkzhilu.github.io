@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>深度分页通用解决方案 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      17
        分钟
     </span>
   
@@ -204,12 +192,13 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="面试题-amp-真实经历"><a href="#面试题-amp-真实经历" class="headerlink" title="面试题 &amp; 真实经历"></a>面试题 &amp; 真实经历</h2><blockquote>
+              <p>标签： #Share</p>
+<h2 id="面试题-真实经历"><a href="#面试题-真实经历" class="headerlink" title="面试题 &amp; 真实经历"></a>面试题 &amp; 真实经历</h2><blockquote>
 <p>面试题：在数据量很大的情况下，怎么实现深度分页？</p>
 </blockquote>
 <p>大家在面试时，或者准备面试中可能会遇到上述的问题，大多的回答基本上是<code>分库分表建索引</code>，这是一种很<code>标准的正确回答</code>，但现实总是很骨感，所以面试官一般会追问你一句，<font color="red">现在工期不足，人员不足，该怎么实现深度分页？</font></p>
 <p>这个时候没有实际经验的同学基本麻爪，So，请听我娓娓道来。</p>
-<h2 id="惨痛的教训"><a href="#惨痛的教训" class="headerlink" title="惨痛的教训"></a>惨痛的教训</h2><p><strong><em>首先必须明确一点：</em></strong>深度分页可以做，但是<font color="red">深度随机跳页绝对需要禁止。</font></p>
+<h2 id="惨痛的教训"><a href="#惨痛的教训" class="headerlink" title="惨痛的教训"></a>惨痛的教训</h2><p><em><strong>首先必须明确一点：</strong></em>深度分页可以做，但是<font color="red">深度随机跳页绝对需要禁止。</font></p>
 <p>上一张图：</p>
 <p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20200714233120650.png" srcset="/img/loading.gif" alt="image-20200714233120650"></p>
 <p>你们猜，我点一下第<code>142360</code>页，服务会不会爆炸？</p>
@@ -223,7 +212,7 @@
 <pre><code class="hljs mysql">db.t_data.find().limit(5).skip(5);</code></pre>
 
 <p>同样的，随着页码的增大，skip 跳过的条目也会随之变大，而这个操作是通过 cursor 的迭代器来实现的，对于cpu的消耗会非常明显，当页码非常大时且频繁时，必然爆炸。</p>
-<h3 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h3><p>从业务的角度来说，<code>ElasticSearch</code>不是典型的数据库，它是一个搜索引擎，如果在筛选条件下没有搜索出想要的数据，继续深度分页也不会找到想要的数据，退一步讲，假如我们把<code>ES</code>作为数据库来使用进行查询，在进行分页的时候一定会遇到<code>max_result_window</code>的限制，看到没，官方都告诉你最大偏移量限制是一万。</p>
+<h3 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h3><p>从业务的角度来说，<code>ElasticSearch</code>不是典型的数据库，它是一个搜索引擎，如果在筛选条件下没有搜索出想要的数据，继续深度分页也不会找到想要的数据，退一步讲，假如我们把<code>ES</code>作为数据库来使用进行查询，在进行分页的时候一定会遇到<code>max_result_window </code>的限制，看到没，官方都告诉你最大偏移量限制是一万。</p>
 <p>查询流程：</p>
 <ol>
 <li>如查询第501页，每页10条，客户端发送请求到某节点</li>
@@ -250,34 +239,34 @@
 </ul>
 <h3 id="MySQL-1"><a href="#MySQL-1" class="headerlink" title="MySQL"></a>MySQL</h3><p>原分页SQL：</p>
 <pre><code class="hljs mysql"># 第一页
-SELECT * FROM &#96;year_score&#96; where &#96;year&#96; &#x3D; 2017 ORDER BY id limit 0, 20;
+SELECT * FROM `year_score` where `year` = 2017 ORDER BY id limit 0, 20;
 
 # 第N页
-SELECT * FROM &#96;year_score&#96; where &#96;year&#96; &#x3D; 2017 ORDER BY id limit (N - 1) * 20, 20;</code></pre>
+SELECT * FROM `year_score` where `year` = 2017 ORDER BY id limit (N - 1) * 20, 20;</code></pre>
 
 
 
 <p>通过上下文关系，改写为：</p>
 <pre><code class="hljs mysql"># XXXX 代表已知的数据
-SELECT * FROM &#96;year_score&#96; where &#96;year&#96; &#x3D; 2017 and id &gt; XXXX ORDER BY id limit 20;</code></pre>
+SELECT * FROM `year_score` where `year` = 2017 and id &gt; XXXX ORDER BY id limit 20;</code></pre>
 
 
 
-<p>在 <a href="https://juejin.im/post/5ea16dede51d45470b4ffc5b#heading-9" target="_blank" rel="noopener">没内鬼，来点干货！SQL优化和诊断</a> 一文中提到过，LIMIT会在满足条件下停止查询，因此该方案的扫描总量会急剧减少，效率提升Max！</p>
+<p>在 <a target="_blank" rel="noopener" href="https://juejin.im/post/5ea16dede51d45470b4ffc5b#heading-9">没内鬼，来点干货！SQL优化和诊断</a> 一文中提到过，LIMIT会在满足条件下停止查询，因此该方案的扫描总量会急剧减少，效率提升Max！</p>
 <h3 id="ES"><a href="#ES" class="headerlink" title="ES"></a>ES</h3><p>方案和<code>MySQL</code>相同，此时我们就可以随用所欲的使用 <code>FROM-TO</code> Api，而且不用考虑最大限制的问题。</p>
 <h3 id="MongoDB-1"><a href="#MongoDB-1" class="headerlink" title="MongoDB"></a>MongoDB</h3><p>方案基本类似，基本代码如下：</p>
 <p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/6635252.png" srcset="/img/loading.gif" alt="img"></p>
 <p>相关性能测试：</p>
 <p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/5698435.png" srcset="/img/loading.gif" alt="img"></p>
 <h2 id="我的方案：基于时间分割"><a href="#我的方案：基于时间分割" class="headerlink" title="我的方案：基于时间分割"></a>我的方案：基于时间分割</h2><p>我这次的数据展现方案，最终定的是时间分割策略，因为我们的数据展现都会有时间排序，示意图如下：</p>
-<p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20200723163317073.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/image-20200723163317073.png" srcset="/img/loading.gif"></p>
 <h2 id="如果非要深度随机跳页"><a href="#如果非要深度随机跳页" class="headerlink" title="如果非要深度随机跳页"></a>如果非要深度随机跳页</h2><p>如果你没有杠过产品经理，又该怎么办呢，没关系，还有一丝丝的机会。</p>
-<p>在 <a href="https://juejin.im/post/5ea16dede51d45470b4ffc5b#heading-8" target="_blank" rel="noopener">SQL优化</a> 一文中还提到过<code>MySQL</code>深度分页的处理技巧，代码如下：</p>
+<p>在 <a target="_blank" rel="noopener" href="https://juejin.im/post/5ea16dede51d45470b4ffc5b#heading-8">SQL优化</a> 一文中还提到过<code>MySQL</code>深度分页的处理技巧，代码如下：</p>
 <pre><code class="hljs mysql"># 反例（耗时129.570s）
 select * from task_result LIMIT 20000000, 10;
 
 # 正例（耗时5.114s）
-SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b where a.id &#x3D; b.id;
+SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b where a.id = b.id;
 
 # 说明
 # task_result表为生产环境的一个表，总数据量为3400万，id为主键，偏移量达到2000万</code></pre>
@@ -291,13 +280,13 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
 <li>通过主键ID定向查询需要的数据</li>
 </ol>
 <p>瑕疵：当偏移量非常大时，耗时较长，如文中的 5s</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>参考文章：<a href="https://mongoing.com/archives/25469" target="_blank" rel="noopener">MongoDB中文社区</a></p>
-<p>参考文章：<a href="https://mongoing.com/archives/25469" target="_blank" rel="noopener">https://mongoing.com/archives/25469</a></p>
-<p>参考文章：<a href="https://my.oschina.net/u/1787735/blog/3024051" target="_blank" rel="noopener">https://my.oschina.net/u/1787735/blog/3024051</a></p>
-<p>参考文章：<a href="https://www.cnblogs.com/kebibuluan/p/12987290.html" target="_blank" rel="noopener">https://www.cnblogs.com/kebibuluan/p/12987290.html</a></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>参考文章：<a target="_blank" rel="noopener" href="https://mongoing.com/archives/25469">MongoDB中文社区</a></p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://mongoing.com/archives/25469">https://mongoing.com/archives/25469</a></p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://my.oschina.net/u/1787735/blog/3024051">https://my.oschina.net/u/1787735/blog/3024051</a></p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kebibuluan/p/12987290.html">https://www.cnblogs.com/kebibuluan/p/12987290.html</a></p>
 <p>感谢 @程大设计师 为我倾情设计的二维码😜</p>
 <p>如果觉得对你有用的话，不要忘记点个赞啊~</p>
-<p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/LOGO-1594745448393.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/LOGO-1594745448393.jpg" srcset="/img/loading.gif"></p>
 
             </article>
             <hr>
@@ -321,16 +310,16 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98/">
+                      <a href="/2023/02/06/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">手写一个本地缓存</span>
+                        <span class="hidden-mobile">模板方法模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -338,8 +327,8 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E7%AC%AC10%E7%AB%A0%20%20%E5%A4%8D%E5%88%B6/">
-                        <span class="hidden-mobile">第10章  复制</span>
+                      <a href="/2023/02/06/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">状态模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -354,30 +343,28 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/深度分页通用解决方案/';
+          this.page.identifier = '/2023/02/06/深度分页通用解决方案/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -441,24 +428,13 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -503,7 +479,7 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -590,13 +566,6 @@ SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

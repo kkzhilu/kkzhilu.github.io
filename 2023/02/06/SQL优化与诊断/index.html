@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>SQL优化与诊断 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34
+      33
        分钟
     </span>
   
@@ -204,8 +192,9 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="SQL优化与诊断"><a href="#SQL优化与诊断" class="headerlink" title="SQL优化与诊断"></a>SQL优化与诊断</h1><h2 id="Explain诊断"><a href="#Explain诊断" class="headerlink" title="Explain诊断"></a>Explain诊断</h2><p>Explain各参数的含义如下：</p>
-<p>| <strong>列名</strong>     | <strong>说明</strong>                                                     |<br>|  |  |<br>| id           | 执行编号，标识select所属的行。如果在语句中没有子查询或关联查询，只有唯一的select，每行都将显示1.否则，内层的select语句一般会顺序编号，对应于其在原始语句中的位置 |<br>| select_type  | 显示本行是简单或复杂select，如果查询有任何复杂的子查询，则最外层标记为PRIMARY（DERIVED、UNION、UNION RESUIT） |<br>| table        | 访问引用哪个表（引用某个查询，如“derived3”）                 |<br>| type         | 数据访问/读取操作类型（All、index、range、ref、eq_ref、const/system、NULL） |<br>| possible_key | 揭示哪一些索引可能有利于高效的查找                           |<br>| key          | 显示mysql实际决定采用哪个索引来优化查询                      |<br>| key_len      | 显示mysql在索引里使用的字节数                                |<br>| ref          | 显示了之前的表在key列记录的索引中查找值所用的列或常量        |<br>| rows         | 为了找到所需要的行而需要读取的行数，估算值                   |<br>| Extra        | 额外信息，如using index、filesort等                          |</p>
+              <h1 id="SQL优化与诊断"><a href="#SQL优化与诊断" class="headerlink" title="SQL优化与诊断"></a>SQL优化与诊断</h1><p>标签： #Share</p>
+<h2 id="Explain诊断"><a href="#Explain诊断" class="headerlink" title="Explain诊断"></a>Explain诊断</h2><p>Explain各参数的含义如下：</p>
+<p>| <strong>列名</strong>     | <strong>说明</strong>                                                     |<br>|  |  |<br>| id           | 执行编号，标识select所属的行。如果在语句中没有子查询或关联查询，只有唯一的select，每行都将显示1.否则，内层的select语句一般会顺序编号，对应于其在原始语句中的位置 |<br>| select_type  | 显示本行是简单或复杂select，如果查询有任何复杂的子查询，则最外层标记为PRIMARY（DERIVED、UNION、UNION RESUIT） |<br>| table        | 访问引用哪个表（引用某个查询，如“derived3”）                 |<br>| type         | 数据访问&#x2F;读取操作类型（All、index、range、ref、eq_ref、const&#x2F;system、NULL） |<br>| possible_key | 揭示哪一些索引可能有利于高效的查找                           |<br>| key          | 显示mysql实际决定采用哪个索引来优化查询                      |<br>| key_len      | 显示mysql在索引里使用的字节数                                |<br>| ref          | 显示了之前的表在key列记录的索引中查找值所用的列或常量        |<br>| rows         | 为了找到所需要的行而需要读取的行数，估算值                   |<br>| Extra        | 额外信息，如using index、filesort等                          |</p>
 <h3 id="select-type-常见类型及其含义"><a href="#select-type-常见类型及其含义" class="headerlink" title="select_type 常见类型及其含义"></a>select_type 常见类型及其含义</h3><ul>
 <li><strong>SIMPLE</strong>：不包含子查询或者 UNION 操作的查询</li>
 <li><strong>PRIMARY</strong>：查询中如果包含任何子查询，那么最外层的查询则被标记为 PRIMARY </li>
@@ -225,7 +214,7 @@
 <li><strong>index_merge</strong>：该联接类型表示使用了索引进行合并优化 </li>
 <li><code>range</code>：使用索引进行范围扫描，常见于 between、&gt; 、&lt; 这样的查询条件 </li>
 <li><code>index</code>：索引连接类型与 ALL 相同，只是扫描的是索引树，通常出现在索引是该查询的覆盖索引的情况 </li>
-<li><strong>ALL</strong>：全表扫描，效率最差的查找方式 </li>
+<li><strong>ALL</strong>：全表扫描，效率最差的查找方式</li>
 </ul>
 <p>阿里编码规范要求：<code>至少要达到 range 级别，要求是 ref 级别，如果可以是 consts 最好</code></p>
 <h3 id="key列"><a href="#key列" class="headerlink" title="key列"></a>key列</h3><p>实际在查询中是否使用到索引的标志字段</p>
@@ -238,25 +227,23 @@
 <li><strong>Using temporary</strong>：表示需要使用临时表来处理查询，常出现在 GROUP BY 或 ORDER BY 语句中</li>
 </ul>
 <h3 id="如何查看Mysql优化器优化之后的SQL"><a href="#如何查看Mysql优化器优化之后的SQL" class="headerlink" title="如何查看Mysql优化器优化之后的SQL"></a>如何查看Mysql优化器优化之后的SQL</h3><pre><code class="hljs mysql"># 仅在服务器环境下或通过Navicat进入命令列界面
-explain extended  SELECT * FROM &#96;student&#96; where &#96;name&#96; &#x3D; 1 and &#96;age&#96; &#x3D; 1;
+explain extended  SELECT * FROM `student` where `name` = 1 and `age` = 1;
 
 # 再执行
 show warnings;
 
 # 结果如下：
-&#x2F;* select#1 *&#x2F; select &#96;mytest&#96;.&#96;student&#96;.&#96;age&#96; AS &#96;age&#96;,&#96;mytest&#96;.&#96;student&#96;.&#96;name&#96; AS &#96;name&#96;,&#96;mytest&#96;.&#96;student&#96;.&#96;year&#96; AS &#96;year&#96; from &#96;mytest&#96;.&#96;student&#96; where ((&#96;mytest&#96;.&#96;student&#96;.&#96;age&#96; &#x3D; 1) and (&#96;mytest&#96;.&#96;student&#96;.&#96;name&#96; &#x3D; 1))</code></pre>
+/* select#1 */ select `mytest`.`student`.`age` AS `age`,`mytest`.`student`.`name` AS `name`,`mytest`.`student`.`year` AS `year` from `mytest`.`student` where ((`mytest`.`student`.`age` = 1) and (`mytest`.`student`.`name` = 1))</code></pre>
 
 <p>为什么要做这个事呢？我们知道Mysql有一个最左匹配原则，那么如果我的索引建的是age，name，那我以name，age这样的顺序去查询能否使用到索引呢？实际上是可以的，就是因为Mysql查询优化器可以帮助我们自动对SQL的执行顺序等进行优化，以选取代价最低的方式进行查询（注意是代价最低，不是时间最短）</p>
 <h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="超大分页场景解决方案"><a href="#超大分页场景解决方案" class="headerlink" title="超大分页场景解决方案"></a>超大分页场景解决方案</h3><p>如表中数据需要进行深度分页，如何提高效率？在阿里出品的Java编程规范中写道：</p>
-<pre><code class="hljs 利用延迟关联或者子查询优化超多分页场景```">
-说明：MySQL 并不是跳过 offset 行，而是取 offset+N 行，然后返回放弃前 offset 行，返回 N 行，那当 offset 特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL 改写
-
-&#96;&#96;&#96;mysql
-# 反例（耗时129.570s）
+<p><code>利用延迟关联或者子查询优化超多分页场景</code> </p>
+<p>说明：MySQL 并不是跳过 offset 行，而是取 offset+N 行，然后返回放弃前 offset 行，返回 N 行，那当 offset 特别大的时候，效率就非常的低下，要么控制返回的总页数，要么对超过特定阈值的页数进行 SQL 改写</p>
+<pre><code class="hljs mysql"># 反例（耗时129.570s）
 select * from task_result LIMIT 20000000, 10;
 
 # 正例（耗时5.114s）
-SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b where a.id &#x3D; b.id;
+SELECT a.* FROM task_result a, (select id from task_result LIMIT 20000000, 10) b where a.id = b.id;
 
 # 说明
 task_result表为生产环境的一个表，总数据量为3400万，id为主键，偏移量达到2000万</code></pre>
@@ -266,10 +253,10 @@ task_result表为生产环境的一个表，总数据量为3400万，id为主键
 <h3 id="获取一条数据时的Limit-1"><a href="#获取一条数据时的Limit-1" class="headerlink" title="获取一条数据时的Limit 1"></a>获取一条数据时的Limit 1</h3><p>如果数据表的情况已知，某个业务需要获取符合某个Where条件下的一条数据，注意使用Limit</p>
 <p>说明：在很多情况下我们已知数据仅存在一条，此时我们应该告知数据库只用查一条，否则将会转化为全表扫描</p>
 <pre><code class="hljs mysql"># 反例（耗时2424.612s）
-select * from task_result where unique_key &#x3D; &#39;ebbf420b65d95573db7669f21fa3be3e_861414030800727_48&#39;;
+select * from task_result where unique_key = &#x27;ebbf420b65d95573db7669f21fa3be3e_861414030800727_48&#x27;;
 
 # 正例（耗时1.036s）
-select * from task_result where unique_key &#x3D; &#39;ebbf420b65d95573db7669f21fa3be3e_861414030800727_48&#39; LIMIT 1;
+select * from task_result where unique_key = &#x27;ebbf420b65d95573db7669f21fa3be3e_861414030800727_48&#x27; LIMIT 1;
 
 # 说明
 task_result表为生产环境的一个表，总数据量为3400万，where条件非索引字段，数据所在行为第19486条记录</code></pre>
@@ -277,12 +264,12 @@ task_result表为生产环境的一个表，总数据量为3400万，where条件
 
 
 <h3 id="批量插入"><a href="#批量插入" class="headerlink" title="批量插入"></a>批量插入</h3><pre><code class="hljs mysql"># 反例
-INSERT into person(name,age) values(&#39;A&#39;,24)
-INSERT into person(name,age) values(&#39;B&#39;,24)
-INSERT into person(name,age) values(&#39;C&#39;,24)
+INSERT into person(name,age) values(&#x27;A&#x27;,24)
+INSERT into person(name,age) values(&#x27;B&#x27;,24)
+INSERT into person(name,age) values(&#x27;C&#x27;,24)
 
 # 正例
-INSERT into person(name,age) values(&#39;A&#39;,24),(&#39;B&#39;,24),(&#39;C&#39;,24);
+INSERT into person(name,age) values(&#x27;A&#x27;,24),(&#x27;B&#x27;,24),(&#x27;C&#x27;,24);
 
 # 说明
 比较常规，就不多做说明了</code></pre>
@@ -290,13 +277,12 @@ INSERT into person(name,age) values(&#39;A&#39;,24),(&#39;B&#39;,24),(&#39;C&#39
 
 
 <h3 id="like语句的优化"><a href="#like语句的优化" class="headerlink" title="like语句的优化"></a>like语句的优化</h3><p>like语句一般业务要求都是 <code>&#39;%关键字%&#39;</code>这种形式，但是依然要思考能否考虑使用右模糊的方式去替代产品的要求，其中阿里的编码规范提到：</p>
-<pre><code class="hljs 页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决```">
-&#96;&#96;&#96;mysql
-# 反例（耗时78.843s）
-EXPLAIN select * from task_result where taskid LIKE &#39;%tt600e6b601677b5cbfe516a013b8e46%&#39; LIMIT 1;
+<p><code>页面搜索严禁左模糊或者全模糊，如果需要请走搜索引擎来解决</code></p>
+<pre><code class="hljs mysql"># 反例（耗时78.843s）
+EXPLAIN select * from task_result where taskid LIKE &#x27;%tt600e6b601677b5cbfe516a013b8e46%&#x27; LIMIT 1;
 
 # 正例（耗时0.986s）
-select * from task_result where taskid LIKE &#39;tt600e6b601677b5cbfe516a013b8e46%&#39; LIMIT 1
+select * from task_result where taskid LIKE &#x27;tt600e6b601677b5cbfe516a013b8e46%&#x27; LIMIT 1
 
 ##########################################################################
 # 对正例的Explain
@@ -311,10 +297,10 @@ task_result表为生产环境的一个表，总数据量为3400万，taskid是�
 
 
 <h3 id="避免SQL中对where字段进行函数转换或表达式计算"><a href="#避免SQL中对where字段进行函数转换或表达式计算" class="headerlink" title="避免SQL中对where字段进行函数转换或表达式计算"></a>避免SQL中对where字段进行函数转换或表达式计算</h3><pre><code class="hljs mysql"># 反例
-select * from task_result where id + 1 &#x3D; 15551;
+select * from task_result where id + 1 = 15551;
 
 # 正例
-select * from task_result where id &#x3D; 15550;
+select * from task_result where id = 15550;
 
 ##########################################################################
 # 对正例的Explain
@@ -330,7 +316,7 @@ select * from task_result where id &#x3D; 15550;
 
 <h3 id="使用-ISNULL-来判断是否为-NULL-值"><a href="#使用-ISNULL-来判断是否为-NULL-值" class="headerlink" title="使用 ISNULL()来判断是否为 NULL 值"></a>使用 ISNULL()来判断是否为 NULL 值</h3><p>说明：NULL 与任何值的直接比较都为 NULL</p>
 <pre><code class="hljs mysql"># 1） NULL&lt;&gt;NULL 的返回结果是 NULL，而不是 false。 
-# 2） NULL&#x3D;NULL 的返回结果是 NULL，而不是 true。 
+# 2） NULL=NULL 的返回结果是 NULL，而不是 true。 
 # 3） NULL&lt;&gt;1 的返回结果是 NULL，而不是 true。</code></pre>
 
 
@@ -342,29 +328,21 @@ select * from task_result where id &#x3D; 15550;
 <p>那么这个过多指代的是多少呢？</p>
 <p>我的测试结果是50%，但个人认为MySQL优化器不会完全纠结于行数区分是否全表，而是有很多其他因素综合考虑发现全表扫描的效率更高等等，所以充分认识到该问题即可</p>
 <h3 id="count-还是-count-id"><a href="#count-还是-count-id" class="headerlink" title="count(*) 还是 count(id)"></a>count(*) 还是 count(id)</h3><p>阿里的Java编码规范中有以下内容：</p>
-<pre><code class="hljs 【强制】不要使用">
-count(*) 是 SQL92 定义的标准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。 
-
-说明：count(*)会统计值为 NULL 的行，而 count(列名)不会统计此列为 NULL 值的行
-
-
-
-### 字段类型不同导致索引失效
-
-阿里的Java编码规范中有以下内容：
-
-&#96;&#96;&#96;【推荐】防止因字段类型不同造成的隐式转换，导致索引失效</code></pre>
-
+<p><code>【强制】不要使用 count(列名) 或 count(常量) 来替代 count(*)</code></p>
+<p>count(*) 是 SQL92 定义的标准统计行数的语法，跟数据库无关，跟 NULL 和非 NULL 无关。 </p>
+<p>说明：count(*)会统计值为 NULL 的行，而 count(列名)不会统计此列为 NULL 值的行</p>
+<h3 id="字段类型不同导致索引失效"><a href="#字段类型不同导致索引失效" class="headerlink" title="字段类型不同导致索引失效"></a>字段类型不同导致索引失效</h3><p>阿里的Java编码规范中有以下内容：</p>
+<p><code>【推荐】防止因字段类型不同造成的隐式转换，导致索引失效</code></p>
 <p>实际上数据库在查询的时候会作一层隐式的转换，比如 varchar 类型字段通过 数字去查询</p>
 <pre><code class="hljs mysql"># 正例
-EXPLAIN SELECT * FROM &#96;user_coll&#96; where pid &#x3D; &#39;1&#39;;
+EXPLAIN SELECT * FROM `user_coll` where pid = &#x27;1&#x27;;
 type：ref
 ref：const	
 rows:1	
 Extra:Using index condition
 
 # 反例
-EXPLAIN SELECT * FROM &#96;user_coll&#96; where pid &#x3D; 1;
+EXPLAIN SELECT * FROM `user_coll` where pid = 1;
 type：index
 ref：NULL	
 rows:3(总记录数)
@@ -378,18 +356,18 @@ pid字段有相应索引，且格式为varchar</code></pre>
 
 
 <h2 id="关于"><a href="#关于" class="headerlink" title="关于"></a>关于</h2><p>感谢以下博文及其作者：</p>
-<p><a href="https://juejin.im/post/5e0f5eec5188253a9d4a436f#heading-4" target="_blank" rel="noopener">干货！SQL性能优化，书写高质量SQL语句</a></p>
-<p><a href="https://juejin.im/post/5e1eb8ebf265da3e4244e094" target="_blank" rel="noopener">干货！SQL性能优化，书写高质量SQL语句（二）</a></p>
-<p><a href="https://dev.mysql.com/doc/refman/5.6/en/optimize-overview.html" target="_blank" rel="noopener">MySQL官方文档</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5e0f5eec5188253a9d4a436f#heading-4">干货！SQL性能优化，书写高质量SQL语句</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5e1eb8ebf265da3e4244e094">干货！SQL性能优化，书写高质量SQL语句（二）</a></p>
+<p><a target="_blank" rel="noopener" href="https://dev.mysql.com/doc/refman/5.6/en/optimize-overview.html">MySQL官方文档</a></p>
 <h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>自建数据表进行测试</p>
-<pre><code class="hljs mysql">CREATE TABLE &#96;student&#96; (
-  &#96;id&#96; bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#39;主键&#39;,
-  &#96;name&#96; varchar(255) NOT NULL,
-  &#96;class&#96; varchar(255) DEFAULT NULL,
-  &#96;page&#96; bigint(20) DEFAULT NULL,
-  &#96;status&#96; tinyint(3) unsigned NOT NULL COMMENT &#39;状态：0 正常，1 冻结，2 删除&#39;,
-  PRIMARY KEY (&#96;id&#96;)
-) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;0 DEFAULT CHARSET&#x3D;utf8mb4</code></pre>
+<pre><code class="hljs mysql">CREATE TABLE `student` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT &#x27;主键&#x27;,
+  `name` varchar(255) NOT NULL,
+  `class` varchar(255) DEFAULT NULL,
+  `page` bigint(20) DEFAULT NULL,
+  `status` tinyint(3) unsigned NOT NULL COMMENT &#x27;状态：0 正常，1 冻结，2 删除&#x27;,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4</code></pre>
 
 
 
@@ -398,13 +376,13 @@ pid字段有相应索引，且格式为varchar</code></pre>
     CREATE PROCEDURE insertData()
     BEGIN
         declare i int;
-        set i &#x3D; 1 ;
+        set i = 1 ;
         WHILE (i &lt; 1000000) DO
-            INSERT INTO student(&#96;name&#96;,class,&#96;page&#96;,&#96;status&#96;)
-                VALUES(CONCAT(&#39;class_&#39;, i),
-                    CONCAT(&#39;class_&#39;, i),
+            INSERT INTO student(`name`,class,`page`,`status`)
+                VALUES(CONCAT(&#x27;class_&#x27;, i),
+                    CONCAT(&#x27;class_&#x27;, i),
                 i, (SELECT FLOOR(RAND() * 2)));
-            set i &#x3D; i + 1;
+            set i = i + 1;
         END WHILE;
         commit;
 		END;;
@@ -432,16 +410,16 @@ CALL insertData();</code></pre>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">
+                      <a href="/2023/02/06/Redis%E7%AF%87/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java语法糖之泛型</span>
+                        <span class="hidden-mobile">Redis篇</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -449,8 +427,8 @@ CALL insertData();</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
-                        <span class="hidden-mobile">SpringBoot配置多数据源</span>
+                      <a href="/2023/02/06/Spring-xsd/">
+                        <span class="hidden-mobile">Spring-xsd</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -465,30 +443,28 @@ CALL insertData();</code></pre>
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/SQL优化与诊断/';
+          this.page.identifier = '/2023/02/06/SQL优化与诊断/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -552,24 +528,13 @@ CALL insertData();</code></pre>
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -614,7 +579,7 @@ CALL insertData();</code></pre>
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -701,13 +666,6 @@ CALL insertData();</code></pre>
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

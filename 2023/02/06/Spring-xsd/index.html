@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Spring-xsd - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      920 字
+      868 字
     </span>
   
 
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      12
        分钟
     </span>
   
@@ -204,14 +192,15 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Spring-XSD篇"><a href="#Spring-XSD篇" class="headerlink" title="Spring XSD篇"></a>Spring XSD篇</h1><h2 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h2><p>有时候你会发现过去一直启动正常的系统，某天启动时会报出形如下面的错误： </p>
-<pre><code class="hljs xquery">org.xml.sax.SAXParseException: schema_reference.<span class="hljs-number">4</span>: Failed <span class="hljs-keyword">to</span> read <span class="hljs-keyword">schema</span><span class="hljs-built_in"> document</span> <span class="hljs-string">'http://www.springframework.org/schema/beans/spring-beans-2.0.xsd'</span>, because <span class="hljs-number">1</span>) could<span class="hljs-built_in"> not</span> find the<span class="hljs-built_in"> document</span>; <span class="hljs-number">2</span>) the<span class="hljs-built_in"> document</span> could<span class="hljs-built_in"> not</span> be read; <span class="hljs-number">3</span>) the<span class="hljs-built_in"> root</span> <span class="hljs-keyword">element</span> of the <span class="hljs-keyword">document</span> is not &lt;xsd:schema&gt;.</code></pre>
+              <h1 id="Spring-XSD篇"><a href="#Spring-XSD篇" class="headerlink" title="Spring XSD篇"></a>Spring XSD篇</h1><p>标签： #Share</p>
+<h2 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h2><p>有时候你会发现过去一直启动正常的系统，某天启动时会报出形如下面的错误： </p>
+<pre><code class="hljs xquery">org.xml.sax.SAXParseException: schema_reference.<span class="hljs-number">4</span>: Failed <span class="hljs-keyword">to</span> read <span class="hljs-keyword">schema</span><span class="hljs-built_in"> document</span> <span class="hljs-string">&#x27;http://www.springframework.org/schema/beans/spring-beans-2.0.xsd&#x27;</span>, because <span class="hljs-number">1</span>) could<span class="hljs-built_in"> not</span> find the<span class="hljs-built_in"> document</span>; <span class="hljs-number">2</span>) the<span class="hljs-built_in"> document</span> could<span class="hljs-built_in"> not</span> be read; <span class="hljs-number">3</span>) the<span class="hljs-built_in"> root</span> <span class="hljs-keyword">element</span> of the <span class="hljs-keyword">document</span> is not &lt;xsd:schema&gt;.</code></pre>
 
-<p> 很显然，spring xml配置文件中指定的xsd文件读取不到了，原因多是因为断网或spring的官网暂时无法连接导致的。 你可以通过在浏览器输入xsd文件的URL，如：<a href="http://www.springframework.org/schema/beans/spring-beans-2.0.xsd" target="_blank" rel="noopener">http://www.springframework.org/schema/beans/spring-beans-2.0.xsd</a> 进行确认 </p>
+<p> 很显然，spring xml配置文件中指定的xsd文件读取不到了，原因多是因为断网或spring的官网暂时无法连接导致的。 你可以通过在浏览器输入xsd文件的URL，如：<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">http://www.springframework.org/schema/beans/spring-beans-2.0.xsd</a> 进行确认 </p>
 <h2 id="XSD文件的作用"><a href="#XSD文件的作用" class="headerlink" title="XSD文件的作用"></a>XSD文件的作用</h2><p>xml文档要有格式，为了Spring的配置文件增加的节点(比如&lt;tx:advice)能符合要求、合法，必须通过引入校验该xml格式的文件，也就是xsd文件，Spring通过配置可以联网引入xsd文件，也可以在断网下使用本地xsd文件校验xml文件</p>
 <p> xsi:schemaLocation 属性提供一种方法来查找在 XML 实例文档中定义的命名空间的 XML 架构定义。它的值是用空白分隔的统一资源标识符 (URI) 对的列表，其中的每一对 URI 都依次包含一个命名空间以及该命名空间的 XML 架构定义（通常为 .xsd 文件）的位置 </p>
-<pre><code class="hljs Spring在启动时默认要加载xsd文件来验证XML文件的">
-![image-20191209135859502](Spring-xsd&#x2F;image-20191209135859502.png)
+<pre><div class="caption"><span>```:</span><a target="_blank" rel="noopener" href="http://www.springframework.org/schema/tx">link</a></div><code class="hljs Spring在启动时默认要加载xsd文件来验证XML文件的">
+![image-20191209135859502](Spring-xsd/image-20191209135859502.png)
 
 
 
@@ -233,48 +222,48 @@
 
 示例：
 
-![image-20191209140226954](Spring-xsd&#x2F;image-20191209140226954.png)
+![image-20191209140226954](Spring-xsd/image-20191209140226954.png)
 
 
 
 Spring中：
 
-![image-20191209140357800](Spring-xsd&#x2F;image-20191209140357800.png)
+![image-20191209140357800](Spring-xsd/image-20191209140357800.png)
 
 
 
 上述的版本无法对应，因此就会从网络读取，如果恰好服务器断网或没有外网，则项目启动后会在几秒钟之后停止，报关于解析xml文件错误
 
-&#96;&#96;&#96;java
-java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 1 in XML document from cn.testin.common.spring.pojo.DynamicResource@957e06 is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1297; cvc-complex-type.2.4.c: The matching wildcard is strict, but no declaration can be found for element &#39;mongo:mongo-client&#39;.</code></pre>
+```java
+java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStoreException: Line 1 in XML document from cn.testin.common.spring.pojo.DynamicResource@957e06 is invalid; nested exception is org.xml.sax.SAXParseException; lineNumber: 1; columnNumber: 1297; cvc-complex-type.2.4.c: The matching wildcard is strict, but no declaration can be found for element &#x27;mongo:mongo-client&#x27;.</code></pre>
 
 
 
 <h2 id="XSD引用解决方案"><a href="#XSD引用解决方案" class="headerlink" title="XSD引用解决方案"></a>XSD引用解决方案</h2> <pre><code class="hljs 不要在Spring的配置文件中配置XSD的版本号```，因为没配置版本号时，默认取当前jar里的XSD文件，减少了各种风险">
 例子：
 
-&#96;&#96;&#96;xml
-&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&quot;
-       xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSchema-instance&quot;
-       xmlns:context&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&quot;
-       xmlns:aop&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&quot;
-       xsi:schemaLocation&#x3D;&quot;http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans
-       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;beans&#x2F;spring-beans.xsd
-       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context
-       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;context&#x2F;spring-context.xsd
-       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop
-       http:&#x2F;&#x2F;www.springframework.org&#x2F;schema&#x2F;aop&#x2F;spring-aop.xsd&quot;&gt;
-&lt;&#x2F;beans&gt;</code></pre>
+```xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;
+&lt;/beans&gt;</code></pre>
 
 
 
 <p>其他方法：</p>
 <p>思路一致，既然需要解决断网情况下无法启动的问题，则保证配置的能够生效即可</p>
 <ul>
-<li>将tx的某个版本的xsd文件拷贝到工程的source folder下，然后xml的配置改成如下形式： </li>
+<li>将tx的某个版本的xsd文件拷贝到工程的source folder下，然后xml的配置改成如下形式：</li>
 </ul>
-<pre><code class="hljs xml">xsi:schemaLocation="http://www.springframework.org/schema/beans 
+<pre><code class="hljs xml">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans 
         classpath:beans/spring-beans-4.1.xsd 
         http://www.springframework.org/schema/mvc 
         classpath:mvc/spring-mvc-4.1.xsd 
@@ -283,10 +272,10 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
         http://www.springframework.org/schema/aop 
         classpath:aop/spring-aop-4.1.xsd 
         http://www.springframework.org/schema/tx   
-        classpath:tx/spring-tx-4.1.xsd "&gt;</code></pre>
+        classpath:tx/spring-tx-4.1.xsd &quot;&gt;</code></pre>
 
 <ul>
-<li><strong>根据使用的Spring的相应jar包版本更改对应的版本</strong> </li>
+<li><strong>根据使用的Spring的相应jar包版本更改对应的版本</strong></li>
 </ul>
 
             </article>
@@ -311,16 +300,16 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Ping%E4%B8%8ETelnet/">
+                      <a href="/2023/02/06/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ping与Telnet</span>
+                        <span class="hidden-mobile">SQL优化与诊断</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -328,8 +317,8 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/">
-                        <span class="hidden-mobile">SpringBoot代码生成器</span>
+                      <a href="/2023/02/06/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">
+                        <span class="hidden-mobile">SpringBoot-自定义starter</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -344,30 +333,28 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/Spring-xsd/';
+          this.page.identifier = '/2023/02/06/Spring-xsd/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -431,24 +418,13 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -493,7 +469,7 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -580,13 +556,6 @@ java.lang.Throwable: org.springframework.beans.factory.xml.XmlBeanDefinitionStor
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

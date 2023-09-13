@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>SpringBoot-自定义starter - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.4k 字
     </span>
   
 
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      19
        分钟
     </span>
   
@@ -204,13 +192,16 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Spring-Boot-Starter简介"><a href="#Spring-Boot-Starter简介" class="headerlink" title="Spring Boot Starter简介"></a>Spring Boot Starter简介</h1><p>Starter是Spring Boot中的一个非常重要的概念，Starter相当于模块，它能将模块所需的依赖整合起来并对模块内的Bean根据环境（ 条件）进行自动配置。使用者只需要依赖相应功能的Starter，无需做过多的配置和依赖，Spring Boot就能自动扫描并加载相应的模块。</p>
+              <h1 id="Spring-Boot-Starter简介"><a href="#Spring-Boot-Starter简介" class="headerlink" title="Spring Boot Starter简介"></a>Spring Boot Starter简介</h1><p>标签： #Share</p>
+<p>Starter是Spring Boot中的一个非常重要的概念，Starter相当于模块，它能将模块所需的依赖整合起来并对模块内的Bean根据环境（ 条件）进行自动配置。使用者只需要依赖相应功能的Starter，无需做过多的配置和依赖，Spring Boot就能自动扫描并加载相应的模块。</p>
 <p>例如在Maven的依赖中加入spring-boot-starter-web就能使项目支持Spring MVC，并且Spring Boot还为我们做了很多默认配置，无需再依赖spring-web、spring-webmvc等相关包及做相关配置就能够立即使用起来。</p>
 <h2 id="Starter的开发步骤"><a href="#Starter的开发步骤" class="headerlink" title="Starter的开发步骤"></a>Starter的开发步骤</h2><p>编写Starter非常简单，与编写一个普通的Spring Boot应用没有太大区别，总结如下：</p>
 <pre><code>1.新建Maven项目，在项目的POM文件中定义使用的依赖；
 2.新建配置类，写好配置项和默认的配置值，指明配置项前缀；
 3.新建自动装配类，使用@Configuration和@Bean来进行自动装配；
-4.新建spring.factories文件，指定Starter的自动装配类；</code></pre><h2 id="Starter的开发示例"><a href="#Starter的开发示例" class="headerlink" title="Starter的开发示例"></a>Starter的开发示例</h2><p>下面，我就以创建一个自动配置来讲一下各个步骤及细节。<br>1.新建Maven项目，在项目的POM文件中定义使用的依赖。</p>
+4.新建spring.factories文件，指定Starter的自动装配类；
+</code></pre>
+<h2 id="Starter的开发示例"><a href="#Starter的开发示例" class="headerlink" title="Starter的开发示例"></a>Starter的开发示例</h2><p>下面，我就以创建一个自动配置来讲一下各个步骤及细节。<br>1.新建Maven项目，在项目的POM文件中定义使用的依赖。</p>
 <pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
@@ -226,27 +217,27 @@
 
 
 <p>2.新建配置类，写好配置项和默认的配置值，指明配置项前缀。</p>
-<pre><code class="hljs java"><span class="hljs-meta">@ConfigurationProperties</span>(<span class="hljs-string">"example.service"</span>)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StarterServiceProperties</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-meta">@ConfigurationProperties(&quot;example.service&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StarterServiceProperties</span> &#123;
 
     <span class="hljs-keyword">private</span> String config;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> enabled;
+    <span class="hljs-keyword">private</span> <span class="hljs-type">boolean</span> enabled;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setConfig</span><span class="hljs-params">(String config)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.config = config;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setConfig</span><span class="hljs-params">(String config)</span> &#123;
+        <span class="hljs-built_in">this</span>.config = config;
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getConfig</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getConfig</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> config;
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isEnabled</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isEnabled</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> enabled;
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setEnabled</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> enabled)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.enabled = enabled;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setEnabled</span><span class="hljs-params">(<span class="hljs-type">boolean</span> enabled)</span> &#123;
+        <span class="hljs-built_in">this</span>.enabled = enabled;
     &#125;
 &#125;</code></pre>
 <blockquote>
@@ -254,8 +245,8 @@
 </blockquote>
 <p>3.新建自动装配类，使用<code>@Configuration</code>和<code>@Bean</code>来进行自动装配。</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
-<span class="hljs-meta">@EnableConfigurationProperties</span>(StarterServiceProperties<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">StarterAutoConfigure</span> </span>&#123;
+<span class="hljs-meta">@EnableConfigurationProperties(StarterServiceProperties.class)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StarterAutoConfigure</span> &#123;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 注意：构建SpringBoot项目时候会自动增加plugin 工具，starter 不需要boot启动类</span>
@@ -266,10 +257,10 @@
     <span class="hljs-keyword">private</span> StarterServiceProperties properties;
 
     <span class="hljs-meta">@Bean</span>
-    <span class="hljs-meta">@ConditionalOnMissingBean</span>(StarterService<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class">    @<span class="hljs-title">ConditionalOnProperty</span>(<span class="hljs-title">prefix</span> </span>= <span class="hljs-string">"example.service"</span>, value = <span class="hljs-string">"enabled"</span>, havingValue = <span class="hljs-string">"true"</span>)
-    <span class="hljs-function">StarterService <span class="hljs-title">starterService</span> <span class="hljs-params">()</span></span>&#123;
-        StarterService starterService = <span class="hljs-keyword">new</span> StarterService();
+    <span class="hljs-meta">@ConditionalOnMissingBean(StarterService.class)</span>
+    <span class="hljs-meta">@ConditionalOnProperty(prefix = &quot;example.service&quot;, value = &quot;enabled&quot;, havingValue = &quot;true&quot;)</span>
+    StarterService <span class="hljs-title function_">starterService</span> <span class="hljs-params">()</span>&#123;
+        <span class="hljs-type">StarterService</span> <span class="hljs-variable">starterService</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StarterService</span>();
         starterService.setConfig(properties.getConfig());
         <span class="hljs-keyword">return</span> starterService;
     &#125;
@@ -280,7 +271,7 @@
 <span class="hljs-attr">org.springframework.boot.autoconfigure.EnableAutoConfiguration</span>=com.bootstarter.StarterAutoConfigure</code></pre>
 
 <blockquote>
-<p>spring.factories文件位于resources/META-INF目录下，需要手动创建;<br><code>org.springframework.boot.autoconfigure.EnableAutoConfiguration</code>后面的类名说明了自动装配类，如果有多个 ，则用逗号分开;<br>使用者应用（SpringBoot）在启动的时候，会通过<code>org.springframework.core.io.support.SpringFactoriesLoader</code>读取classpath下每个Starter的spring.factories文件，加载自动装配类进行Bean的自动装配；</p>
+<p>spring.factories文件位于resources&#x2F;META-INF目录下，需要手动创建;<br><code>org.springframework.boot.autoconfigure.EnableAutoConfiguration</code>后面的类名说明了自动装配类，如果有多个 ，则用逗号分开;<br>使用者应用（SpringBoot）在启动的时候，会通过<code>org.springframework.core.io.support.SpringFactoriesLoader</code>读取classpath下每个Starter的spring.factories文件，加载自动装配类进行Bean的自动装配；</p>
 </blockquote>
 <p>至此，整个Starter开发完毕，Deploy到中央仓库或Install到本地仓库后即可使用</p>
 <h2 id="Starter的使用"><a href="#Starter的使用" class="headerlink" title="Starter的使用"></a>Starter的使用</h2><p>1.创建Maven项目，依赖刚才发布的es-starter包。</p>
@@ -308,95 +299,36 @@
 <p>3.编写应用程序启动类。</p>
 <pre><code class="hljs java"><span class="hljs-comment">// 根据example.service.enabled 参数配置是否进行自动装配</span>
 <span class="hljs-meta">@Component</span>
-<span class="hljs-meta">@ConditionalOnExpression</span>(<span class="hljs-string">"$&#123;example.service.enabled:true&#125;"</span>)
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceTest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ApplicationRunner</span> </span>&#123;
+<span class="hljs-meta">@ConditionalOnExpression(&quot;$&#123;example.service.enabled:true&#125;&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ServiceTest</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ApplicationRunner</span> &#123;
 
     <span class="hljs-meta">@Autowired</span>
     <span class="hljs-keyword">private</span> StarterService starterService;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(ApplicationArguments args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;
-        System.out.println(Arrays.toString(starterService.split(<span class="hljs-string">","</span>)));
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">(ApplicationArguments args)</span> <span class="hljs-keyword">throws</span> Exception &#123;
+        System.out.println(Arrays.toString(starterService.split(<span class="hljs-string">&quot;,&quot;</span>)));
     &#125;
 &#125;</code></pre>
 
 
 <p>5.运行程序测试</p>
-<pre><code class="hljs maxima">  .   ____          <span class="hljs-symbol">_</span>            <span class="hljs-symbol">__</span> <span class="hljs-symbol">_</span> <span class="hljs-symbol">_</span>
- /\\ / ___'<span class="hljs-symbol">_</span> <span class="hljs-symbol">__</span> <span class="hljs-symbol">_</span> <span class="hljs-symbol">_</span>(<span class="hljs-symbol">_</span>)<span class="hljs-symbol">_</span> <span class="hljs-symbol">__</span>  <span class="hljs-symbol">__</span> <span class="hljs-symbol">_</span> \ \ \ \
-( ( )\___ | '<span class="hljs-symbol">_</span> | '<span class="hljs-symbol">_</span>| | '<span class="hljs-symbol">_</span> \/ <span class="hljs-symbol">_</span>` | \ \ \ \
- \\/  ___)| |<span class="hljs-symbol">_</span>)| | | | | || (<span class="hljs-symbol">_</span>| |  ) ) ) )
-  '  |____| .<span class="hljs-symbol">__</span>|<span class="hljs-symbol">_</span>| |<span class="hljs-symbol">_</span>|<span class="hljs-symbol">_</span>| |<span class="hljs-symbol">_</span>\<span class="hljs-symbol">__</span>, | / / / /
- =========|<span class="hljs-symbol">_</span>|==============|___/=/<span class="hljs-symbol">_</span>/<span class="hljs-symbol">_</span>/<span class="hljs-symbol">_</span>/
- :: Spring Boot ::        (v2<span class="hljs-number">.1</span><span class="hljs-number">.7</span>.RELEASE)
-
-<span class="hljs-number">2019</span>-<span class="hljs-number">08</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">28</span>:<span class="hljs-number">27.061</span>  INFO <span class="hljs-number">9844</span> --- [           main] com.<span class="hljs-built_in">demo</span>.BootDemoApplication             : Starting BootDemoApplication on Kerwin with PID <span class="hljs-number">9844</span> (C:\Users\Administrator\Desktop\Codes\KerwinBoots\boot-<span class="hljs-built_in">demo</span>\target\classes started by Administrator <span class="hljs-keyword">in</span> C:\Users\Administrator\Desktop\Codes\KerwinBoots)
-<span class="hljs-number">2019</span>-<span class="hljs-number">08</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">28</span>:<span class="hljs-number">27.064</span>  INFO <span class="hljs-number">9844</span> --- [           main] com.<span class="hljs-built_in">demo</span>.BootDemoApplication             : No active profile set, falling back to default profiles: default
-<span class="hljs-number">2019</span>-<span class="hljs-number">08</span>-<span class="hljs-number">29</span> <span class="hljs-number">14</span>:<span class="hljs-number">28</span>:<span class="hljs-number">28.317</span>  INFO <span class="hljs-number">9844</span> --- [           main] com.<span class="hljs-built_in">demo</span>.BootDemoApplication             : Started BootDemoApplication <span class="hljs-keyword">in</span> <span class="hljs-number">1.733</span> seconds (JVM running <span class="hljs-keyword">for</span> <span class="hljs-number">2.975</span>)
-[abc-des-dde, SSS-DRS-RE,SDR-SDFR-XXX]</code></pre>
+<pre><code class="hljs gherkin">  .   ____          _            __ _ _
+ /\\ / ___&#x27;_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ |<span class="hljs-string"> &#x27;_ </span>|<span class="hljs-string"> &#x27;_</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> &#x27;_ \/ _` </span>|<span class="hljs-string"> \ \ \ \</span>
+<span class="hljs-string"> \\/  ___)</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_)</span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>|<span class="hljs-string"> </span>||<span class="hljs-string"> (_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">  ) ) ) )</span>
+<span class="hljs-string">  &#x27;  </span>|<span class="hljs-string">____</span>|<span class="hljs-string"> .__</span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_</span>|<span class="hljs-string">_</span>|<span class="hljs-string"> </span>|<span class="hljs-string">_\__, </span>|<span class="hljs-string"> / / / /</span>
+<span class="hljs-string"> =========</span>|<span class="hljs-string">_</span>|<span class="hljs-string">==============</span>|<span class="hljs-string">___/=/_/_/_/</span>
+<span class="hljs-string"> :: Spring Boot ::        (v2.1.7.RELEASE)</span>
+<span class="hljs-string"></span>
+<span class="hljs-string">2019-08-29 14:28:27.061  INFO 9844 --- [           main] com.demo.BootDemoApplication             : Starting BootDemoApplication on Kerwin with PID 9844 (C:\Users\Administrator\Desktop\Codes\KerwinBoots\boot-demo\target\classes started by Administrator in C:\Users\Administrator\Desktop\Codes\KerwinBoots)</span>
+<span class="hljs-string">2019-08-29 14:28:27.064  INFO 9844 --- [           main] com.demo.BootDemoApplication             : No active profile set, falling back to default profiles: default</span>
+<span class="hljs-string">2019-08-29 14:28:28.317  INFO 9844 --- [           main] com.demo.BootDemoApplication             : Started BootDemoApplication in 1.733 seconds (JVM running for 2.975)</span>
+<span class="hljs-string">[abc-des-dde, SSS-DRS-RE,SDR-SDFR-XXX]</span></code></pre>
 <blockquote>
-<p>运行程序，观察控制台输出: 源码可见: <a href="https://github.com/kkzhilu/KerwinBoots" target="_blank" rel="noopener">https://github.com/kkzhilu/KerwinBoots</a> | boot_starter 分支</p>
+<p>运行程序，观察控制台输出: 源码可见: <a target="_blank" rel="noopener" href="https://github.com/kkzhilu/KerwinBoots">https://github.com/kkzhilu/KerwinBoots</a> | boot_starter 分支</p>
 </blockquote>
-<h2 id="注解说明"><a href="#注解说明" class="headerlink" title="注解说明"></a>注解说明</h2><table>
-<thead>
-<tr>
-<th>注解</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>@ConditionalOnSingleCandidate</code></td>
-<td>当给定类型的bean存在并且指定为Primary的给定类型存在时,返回true</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnMissingBean</code></td>
-<td>当给定的类型、类名、注解、昵称在beanFactory中不存在时返回true.各类型间是or的关系</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnBean</code></td>
-<td>与上面相反，要求bean存在</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnMissingClass</code></td>
-<td>当给定的类名在类路径上不存在时返回true,各类型间是and的关系</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnClass</code></td>
-<td>与上面相反，要求类存在</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnCloudPlatform</code></td>
-<td>当所配置的CloudPlatform为激活时返回true</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnExpression</code></td>
-<td>spel表达式执行为true</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnJava</code></td>
-<td>运行时的java版本号是否包含给定的版本号.如果包含,返回匹配,否则,返回不匹配</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnProperty</code></td>
-<td>要求配置属性匹配条件</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnJndi</code></td>
-<td>给定的jndi的Location 必须存在一个.否则,返回不匹配</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnNotWebApplication</code></td>
-<td>web环境不存在时</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnWebApplication</code></td>
-<td>web环境存在时</td>
-</tr>
-<tr>
-<td><code>@ConditionalOnResource</code></td>
-<td>要求制定的资源存在</td>
-</tr>
-</tbody></table>
+<h2 id="注解说明"><a href="#注解说明" class="headerlink" title="注解说明"></a>注解说明</h2><p>| 注解                              | 说明                                                         |<br>| — |  |<br>| <code>@ConditionalOnSingleCandidate</code>   | 当给定类型的bean存在并且指定为Primary的给定类型存在时,返回true |<br>| <code>@ConditionalOnMissingBean</code>       | 当给定的类型、类名、注解、昵称在beanFactory中不存在时返回true.各类型间是or的关系 |<br>| <code>@ConditionalOnBean</code>              | 与上面相反，要求bean存在                                     |<br>| <code>@ConditionalOnMissingClass</code>      | 当给定的类名在类路径上不存在时返回true,各类型间是and的关系   |<br>| <code>@ConditionalOnClass</code>             | 与上面相反，要求类存在                                       |<br>| <code>@ConditionalOnCloudPlatform</code>     | 当所配置的CloudPlatform为激活时返回true                      |<br>| <code>@ConditionalOnExpression</code>        | spel表达式执行为true                                         |<br>| <code>@ConditionalOnJava</code>              | 运行时的java版本号是否包含给定的版本号.如果包含,返回匹配,否则,返回不匹配 |<br>| <code>@ConditionalOnProperty</code>          | 要求配置属性匹配条件                                         |<br>| <code>@ConditionalOnJndi</code>              | 给定的jndi的Location 必须存在一个.否则,返回不匹配            |<br>| <code>@ConditionalOnNotWebApplication</code> | web环境不存在时                                              |<br>| <code>@ConditionalOnWebApplication</code>    | web环境存在时                                                |<br>| <code>@ConditionalOnResource</code>          | 要求制定的资源存在                                           |</p>
 
             </article>
             <hr>
@@ -420,16 +352,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/">
+                      <a href="/2023/02/06/Spring-xsd/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SpringBoot代码生成器</span>
+                        <span class="hidden-mobile">Spring-xsd</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -437,8 +369,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/SpringBoot%E7%AF%87/">
-                        <span class="hidden-mobile">SpringBoot篇</span>
+                      <a href="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/">
+                        <span class="hidden-mobile">SpringBoot代码生成器</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -453,30 +385,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/SpringBoot-自定义starter/';
+          this.page.identifier = '/2023/02/06/SpringBoot-自定义starter/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -540,24 +470,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -602,7 +521,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -689,13 +608,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

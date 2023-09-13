@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>SpringBoot配置多数据源 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.1k 字
     </span>
   
 
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      28
+      29
        分钟
     </span>
   
@@ -204,32 +192,33 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="SpringBoot配置多数据源"><a href="#SpringBoot配置多数据源" class="headerlink" title="SpringBoot配置多数据源"></a>SpringBoot配置多数据源</h1><h2 id="核心技术点"><a href="#核心技术点" class="headerlink" title="核心技术点"></a>核心技术点</h2><p>​        在Spring 2.x 中引入了AbstractRoutingDataSource, 该类充当了<strong>DataSource的路由中介</strong>, 能有在<strong>运行时</strong>, 根据某种key值来<strong>动态切换</strong>到真正的DataSource上。</p>
+              <h1 id="SpringBoot配置多数据源"><a href="#SpringBoot配置多数据源" class="headerlink" title="SpringBoot配置多数据源"></a>SpringBoot配置多数据源</h1><p>标签： #Share</p>
+<h2 id="核心技术点"><a href="#核心技术点" class="headerlink" title="核心技术点"></a>核心技术点</h2><p>​        在Spring 2.x 中引入了AbstractRoutingDataSource, 该类充当了<strong>DataSource的路由中介</strong>, 能有在<strong>运行时</strong>, 根据某种key值来<strong>动态切换</strong>到真正的DataSource上。</p>
 <p>​        Spring动态配置多数据源，即在大型应用中对数据进行切分，并且采用多个数据库实例进行管理，这样可以有效提高系统的水平伸缩性。而这样的方案就会不同于常见的单一数据实例的方案，这就要程序在运行时根据当时的请求及系统状态来动态的决定将数据存储在哪个数据库实例中，以及从哪个数据库提取数据。</p>
 <p>​        Spring2.x的版本中采用Proxy模式，就是我们在方案中实现一个虚拟的数据源，并且用它来<strong>封装数据源选择逻辑</strong>，这样就可以有效地将数据源选择逻辑从Client中分离出来。Client<strong>提供选择所需的上下文</strong>（因为这是Client所知道的），由虚拟的DataSource根据Client提供的上下文来实现数据源的选择。 </p>
-<pre><code class="hljs 具体的实现如下```">
-&#96;&#96;&#96;java
-public class DynamicRoutingDataSource extends AbstractRoutingDataSource &#123;
-    @Override
-    protected Object determineCurrentLookupKey() &#123;
-        &#x2F;&#x2F; TODO
-        &#x2F;&#x2F; 重写 determineCurrentLookupKey 方法
+<p><code>具体的实现如下</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DynamicRoutingDataSource</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractRoutingDataSource</span> &#123;
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-keyword">protected</span> Object <span class="hljs-title function_">determineCurrentLookupKey</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-comment">// TODO</span>
+        <span class="hljs-comment">// 重写 determineCurrentLookupKey 方法</span>
     &#125;
-&#125;</code></pre>
+&#125;
+</code></pre>
 
 
 
 <p>原理:</p>
 <pre><code class="hljs java"><span class="hljs-comment">// AbstractRoutingDataSource 类</span>
-<span class="hljs-function"><span class="hljs-keyword">protected</span> DataSource <span class="hljs-title">determineTargetDataSource</span><span class="hljs-params">()</span> </span>&#123;
-		Assert.notNull(<span class="hljs-keyword">this</span>.resolvedDataSources, <span class="hljs-string">"DataSource router not initialized"</span>);
-		Object lookupKey = determineCurrentLookupKey();
-		DataSource dataSource = <span class="hljs-keyword">this</span>.resolvedDataSources.get(lookupKey);
-		<span class="hljs-keyword">if</span> (dataSource == <span class="hljs-keyword">null</span> &amp;&amp; (<span class="hljs-keyword">this</span>.lenientFallback || lookupKey == <span class="hljs-keyword">null</span>)) &#123;
-			dataSource = <span class="hljs-keyword">this</span>.resolvedDefaultDataSource;
+<span class="hljs-keyword">protected</span> DataSource <span class="hljs-title function_">determineTargetDataSource</span><span class="hljs-params">()</span> &#123;
+		Assert.notNull(<span class="hljs-built_in">this</span>.resolvedDataSources, <span class="hljs-string">&quot;DataSource router not initialized&quot;</span>);
+		<span class="hljs-type">Object</span> <span class="hljs-variable">lookupKey</span> <span class="hljs-operator">=</span> determineCurrentLookupKey();
+		<span class="hljs-type">DataSource</span> <span class="hljs-variable">dataSource</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.resolvedDataSources.get(lookupKey);
+		<span class="hljs-keyword">if</span> (dataSource == <span class="hljs-literal">null</span> &amp;&amp; (<span class="hljs-built_in">this</span>.lenientFallback || lookupKey == <span class="hljs-literal">null</span>)) &#123;
+			dataSource = <span class="hljs-built_in">this</span>.resolvedDefaultDataSource;
 		&#125;
-		<span class="hljs-keyword">if</span> (dataSource == <span class="hljs-keyword">null</span>) &#123;
-			<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalStateException(<span class="hljs-string">"Cannot determine target DataSource for lookup key ["</span> + lookupKey + <span class="hljs-string">"]"</span>);
+		<span class="hljs-keyword">if</span> (dataSource == <span class="hljs-literal">null</span>) &#123;
+			<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">IllegalStateException</span>(<span class="hljs-string">&quot;Cannot determine target DataSource for lookup key [&quot;</span> + lookupKey + <span class="hljs-string">&quot;]&quot;</span>);
 		&#125;
 		<span class="hljs-keyword">return</span> dataSource;
 	&#125;</code></pre>
@@ -240,11 +229,11 @@ public class DynamicRoutingDataSource extends AbstractRoutingDataSource &#123;
 <span class="hljs-comment"> * 2.去除JDBC 自动配置数据源</span>
 <span class="hljs-comment"> */</span>
 <span class="hljs-meta">@EnableTransactionManagement</span>
-<span class="hljs-meta">@SpringBootApplication</span>(exclude = DataSourceAutoConfiguration<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">KerwinBootsApplication</span> </span>&#123;
+<span class="hljs-meta">@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">KerwinBootsApplication</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-        SpringApplication.run(KerwinBootsApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+        SpringApplication.run(KerwinBootsApplication.class, args);
     &#125;
 &#125;</code></pre>
 
@@ -267,41 +256,41 @@ spring.datasource.update.password=</code></pre>
 
 
 <h3 id="配置数据源Bean"><a href="#配置数据源Bean" class="headerlink" title="配置数据源Bean"></a>配置数据源Bean</h3><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DataSourceConfig</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DataSourceConfig</span> &#123;
 
     <span class="hljs-comment">// application.properteis中对应属性的前缀</span>
-    <span class="hljs-meta">@Bean</span>(name = <span class="hljs-string">"selectDataSource"</span>)
-    <span class="hljs-meta">@ConfigurationProperties</span>(prefix = <span class="hljs-string">"spring.datasource.select"</span>)
-    <span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">selectDataSource</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-meta">@Bean(name = &quot;selectDataSource&quot;)</span>
+    <span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.datasource.select&quot;)</span>
+    <span class="hljs-keyword">public</span> DataSource <span class="hljs-title function_">selectDataSource</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> DataSourceBuilder.create().build();
     &#125;
 
-    <span class="hljs-meta">@Bean</span>(name = <span class="hljs-string">"updateDataSource"</span>)
-    <span class="hljs-meta">@ConfigurationProperties</span>(prefix = <span class="hljs-string">"spring.datasource.update"</span>)
-    <span class="hljs-function"><span class="hljs-keyword">public</span> DataSource <span class="hljs-title">updateDataSource</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-meta">@Bean(name = &quot;updateDataSource&quot;)</span>
+    <span class="hljs-meta">@ConfigurationProperties(prefix = &quot;spring.datasource.update&quot;)</span>
+    <span class="hljs-keyword">public</span> DataSource <span class="hljs-title function_">updateDataSource</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> DataSourceBuilder.create().build();
     &#125;
 &#125;</code></pre>
 
 
 
-<h3 id="构造线程数据源持有者"><a href="#构造线程数据源持有者" class="headerlink" title="构造线程数据源持有者"></a>构造线程数据源持有者</h3><pre><code class="hljs java"><span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DataSourceContextHolder</span> </span>&#123;
+<h3 id="构造线程数据源持有者"><a href="#构造线程数据源持有者" class="headerlink" title="构造线程数据源持有者"></a>构造线程数据源持有者</h3><pre><code class="hljs java"><span class="hljs-keyword">final</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DataSourceContextHolder</span> &#123;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * ThreadLocal提供了线程内存储变量的能力，这些变量不同之处在于每一个线程读取的变量是对应的互相独立的</span>
 <span class="hljs-comment">     * 通过get和set方法就可以得到当前线程对应的值</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;String&gt; CONTEXT_HOLDER = <span class="hljs-keyword">new</span> ThreadLocal&lt;&gt;();
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ThreadLocal&lt;String&gt; CONTEXT_HOLDER = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ThreadLocal</span>&lt;&gt;();
 
-    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDbType</span><span class="hljs-params">(String dbType)</span> </span>&#123;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDbType</span><span class="hljs-params">(String dbType)</span> &#123;
         CONTEXT_HOLDER.set(dbType);
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">static</span> String <span class="hljs-title">getDbType</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">static</span> String <span class="hljs-title function_">getDbType</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> CONTEXT_HOLDER.get();
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span> </span>&#123; CONTEXT_HOLDER.remove();&#125;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> &#123; CONTEXT_HOLDER.remove();&#125;
 &#125;</code></pre>
 
 
@@ -310,22 +299,22 @@ spring.datasource.update.password=</code></pre>
 <span class="hljs-meta">@Component</span>
 <span class="hljs-meta">@Primary</span> <span class="hljs-comment">// 多个DataSource Bean 因此@Primary 将作为首选者</span>
          <span class="hljs-comment">// @Priority 优先级</span>
-         <span class="hljs-comment">// 多个按类型的dataSource 为了让它找到bean可以给当前bean修改 名称 -&gt; @Component(value = "dataSource")</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DynamicRoutingDataSource</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractRoutingDataSource</span> </span>&#123;
+         <span class="hljs-comment">// 多个按类型的dataSource 为了让它找到bean可以给当前bean修改 名称 -&gt; @Component(value = &quot;dataSource&quot;)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DynamicRoutingDataSource</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractRoutingDataSource</span> &#123;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger logger = LoggerFactory.getLogger(DynamicRoutingDataSource<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(DynamicRoutingDataSource.class);
 
     <span class="hljs-meta">@Autowired</span>
-    <span class="hljs-meta">@Qualifier</span>(<span class="hljs-string">"selectDataSource"</span>)
+    <span class="hljs-meta">@Qualifier(&quot;selectDataSource&quot;)</span>
     <span class="hljs-keyword">private</span> DataSource selectDataSource;
 
     <span class="hljs-meta">@Autowired</span>
-    <span class="hljs-meta">@Qualifier</span>(<span class="hljs-string">"updateDataSource"</span>)
+    <span class="hljs-meta">@Qualifier(&quot;updateDataSource&quot;)</span>
     <span class="hljs-keyword">private</span> DataSource updateDataSource;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> Object <span class="hljs-title">determineCurrentLookupKey</span><span class="hljs-params">()</span> </span>&#123;
-        logger.info(<span class="hljs-string">"切换数据源: "</span> + DataSourceContextHolder.getDbType());
+    <span class="hljs-keyword">protected</span> Object <span class="hljs-title function_">determineCurrentLookupKey</span><span class="hljs-params">()</span> &#123;
+        logger.info(<span class="hljs-string">&quot;切换数据源: &quot;</span> + DataSourceContextHolder.getDbType());
         <span class="hljs-keyword">return</span> DataSourceContextHolder.getDbType();
     &#125;
 
@@ -333,13 +322,13 @@ spring.datasource.update.password=</code></pre>
 <span class="hljs-comment">     * 重写after配置方法, 配置默认数据源</span>
 <span class="hljs-comment">     */</span>
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">afterPropertiesSet</span><span class="hljs-params">()</span> </span>&#123;
-        Map&lt;Object,Object&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
-        map.put(<span class="hljs-string">"selectDataSource"</span>, selectDataSource);
-        map.put(<span class="hljs-string">"updateDataSource"</span>, updateDataSource);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterPropertiesSet</span><span class="hljs-params">()</span> &#123;
+        Map&lt;Object,Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+        map.put(<span class="hljs-string">&quot;selectDataSource&quot;</span>, selectDataSource);
+        map.put(<span class="hljs-string">&quot;updateDataSource&quot;</span>, updateDataSource);
         setTargetDataSources(map);
         setDefaultTargetDataSource(updateDataSource);
-        <span class="hljs-keyword">super</span>.afterPropertiesSet();
+        <span class="hljs-built_in">super</span>.afterPropertiesSet();
     &#125;
 &#125;</code></pre>
 
@@ -347,26 +336,26 @@ spring.datasource.update.password=</code></pre>
 
 <h3 id="考虑自动切换数据源方案-AOP-（注解或依据方法名）"><a href="#考虑自动切换数据源方案-AOP-（注解或依据方法名）" class="headerlink" title="考虑自动切换数据源方案 - AOP （注解或依据方法名）"></a>考虑自动切换数据源方案 - AOP （注解或依据方法名）</h3><pre><code class="hljs java"><span class="hljs-meta">@Aspect</span>
 <span class="hljs-meta">@Component</span>
-<span class="hljs-meta">@Order</span>(<span class="hljs-number">0</span>) <span class="hljs-comment">// Order设定AOP执行顺序 使之在数据库事务上先执行</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DynamicDataSourceAspect</span> </span>&#123;
+<span class="hljs-meta">@Order(0)</span> <span class="hljs-comment">// Order设定AOP执行顺序 使之在数据库事务上先执行</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DynamicDataSourceAspect</span> &#123;
 
-    <span class="hljs-meta">@Before</span>(<span class="hljs-string">"execution(* com.boot.service.*.*(..))"</span>)
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">processMethodName</span> <span class="hljs-params">(JoinPoint joinPoint)</span> </span>&#123;
+    <span class="hljs-meta">@Before(&quot;execution(* com.boot.service.*.*(..))&quot;)</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">processMethodName</span> <span class="hljs-params">(JoinPoint joinPoint)</span> &#123;
         String methodName=joinPoint.getSignature().getName();
-        <span class="hljs-keyword">if</span> (methodName.startsWith(<span class="hljs-string">"get"</span>)
-                ||methodName.startsWith(<span class="hljs-string">"count"</span>)
-                ||methodName.startsWith(<span class="hljs-string">"find"</span>)
-                ||methodName.startsWith(<span class="hljs-string">"list"</span>)
-                ||methodName.startsWith(<span class="hljs-string">"select"</span>)
-                ||methodName.startsWith(<span class="hljs-string">"check"</span>))&#123;
-            DataSourceContextHolder.setDbType(<span class="hljs-string">"selectDataSource"</span>);
+        <span class="hljs-keyword">if</span> (methodName.startsWith(<span class="hljs-string">&quot;get&quot;</span>)
+                ||methodName.startsWith(<span class="hljs-string">&quot;count&quot;</span>)
+                ||methodName.startsWith(<span class="hljs-string">&quot;find&quot;</span>)
+                ||methodName.startsWith(<span class="hljs-string">&quot;list&quot;</span>)
+                ||methodName.startsWith(<span class="hljs-string">&quot;select&quot;</span>)
+                ||methodName.startsWith(<span class="hljs-string">&quot;check&quot;</span>))&#123;
+            DataSourceContextHolder.setDbType(<span class="hljs-string">&quot;selectDataSource&quot;</span>);
         &#125;<span class="hljs-keyword">else</span> &#123;
             <span class="hljs-comment">//切换dataSource</span>
-            DataSourceContextHolder.setDbType(<span class="hljs-string">"updateDataSource"</span>);
+            DataSourceContextHolder.setDbType(<span class="hljs-string">&quot;updateDataSource&quot;</span>);
         &#125;
     &#125;
 
-<span class="hljs-comment">//    @Before("execution(* com.boot.service.*.*(..))")</span>
+<span class="hljs-comment">//    @Before(&quot;execution(* com.boot.service.*.*(..))&quot;)</span>
 <span class="hljs-comment">//    public void process(JoinPoint point) &#123;</span>
 <span class="hljs-comment">//</span>
 <span class="hljs-comment">//        //获得当前访问的class</span>
@@ -394,12 +383,12 @@ spring.datasource.update.password=</code></pre>
 <span class="hljs-comment">//            &#125;</span>
 <span class="hljs-comment">//        &#125; catch (Exception e) &#123;</span>
 <span class="hljs-comment">//            e.printStackTrace();</span>
-<span class="hljs-comment">//            System.out.println("error.");</span>
+<span class="hljs-comment">//            System.out.println(&quot;error.&quot;);</span>
 <span class="hljs-comment">//        &#125;</span>
 <span class="hljs-comment">//    &#125;</span>
 
-    <span class="hljs-meta">@After</span>(<span class="hljs-string">"execution(* com.boot.service.*.*(..))"</span>)
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">afterswitchDs</span> <span class="hljs-params">(JoinPoint point)</span></span>&#123;
+    <span class="hljs-meta">@After(&quot;execution(* com.boot.service.*.*(..))&quot;)</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterswitchDs</span> <span class="hljs-params">(JoinPoint point)</span>&#123;
         DataSourceContextHolder.clear();
     &#125;
 &#125;</code></pre>
@@ -412,7 +401,7 @@ spring.datasource.update.password=</code></pre>
 <p>ThreadLocal    -&gt; 保证多线程情况下变量私有性（数据隔离）</p>
 <p>即每个线程的变量只对自己本线程负责 （不会存在A线程改了影响B的情况，要的就是数据隔离）</p>
 <p>官方解释:</p>
-<pre><code class="hljs oxygene">This <span class="hljs-keyword">class</span> provides thread-local variables. These variables differ <span class="hljs-keyword">from</span> their normal counterparts <span class="hljs-keyword">in</span> that <span class="hljs-keyword">each</span> thread that accesses one (via its <span class="hljs-comment">&#123;@code get&#125;</span> <span class="hljs-keyword">or</span> <span class="hljs-comment">&#123;@code set&#125;</span> <span class="hljs-function"><span class="hljs-keyword">method</span>) <span class="hljs-title">has</span> <span class="hljs-title">its</span> <span class="hljs-title">own</span>, <span class="hljs-title">independently</span> <span class="hljs-title">initialized</span> <span class="hljs-title">copy</span> <span class="hljs-title">of</span> <span class="hljs-title">the</span> <span class="hljs-title">variable</span>. <span class="hljs-comment">&#123;@code ThreadLocal&#125;</span> <span class="hljs-title">instances</span> <span class="hljs-title">are</span> <span class="hljs-title">typically</span> <span class="hljs-title">private</span> <span class="hljs-title">static</span> <span class="hljs-title">fields</span> <span class="hljs-title">in</span> <span class="hljs-title">classes</span> <span class="hljs-title">that</span> <span class="hljs-title">wish</span> <span class="hljs-title">to</span> <span class="hljs-title">associate</span> <span class="hljs-title">state</span> <span class="hljs-title">with</span> <span class="hljs-title">a</span> <span class="hljs-title">thread</span> <span class="hljs-params">(e.g., a user ID <span class="hljs-keyword">or</span> Transaction ID)</span>.</span></code></pre>
+<pre><code class="hljs oxygene">This <span class="hljs-keyword">class</span> provides thread-local variables. These variables differ <span class="hljs-keyword">from</span> their normal counterparts <span class="hljs-keyword">in</span> that <span class="hljs-keyword">each</span> thread that accesses one (via its <span class="hljs-comment">&#123;@code get&#125;</span> <span class="hljs-keyword">or</span> <span class="hljs-comment">&#123;@code set&#125;</span> <span class="hljs-keyword">method</span>) <span class="hljs-title function_">has</span> <span class="hljs-title function_">its</span> <span class="hljs-title function_">own</span>, <span class="hljs-title function_">independently</span> <span class="hljs-title function_">initialized</span> <span class="hljs-title function_">copy</span> <span class="hljs-title function_">of</span> <span class="hljs-title function_">the</span> <span class="hljs-title function_">variable</span>. <span class="hljs-comment">&#123;@code ThreadLocal&#125;</span> <span class="hljs-title function_">instances</span> <span class="hljs-title function_">are</span> <span class="hljs-title function_">typically</span> <span class="hljs-title function_">private</span> <span class="hljs-title function_">static</span> <span class="hljs-title function_">fields</span> <span class="hljs-title function_">in</span> <span class="hljs-title function_">classes</span> <span class="hljs-title function_">that</span> <span class="hljs-title function_">wish</span> <span class="hljs-title function_">to</span> <span class="hljs-title function_">associate</span> <span class="hljs-title function_">state</span> <span class="hljs-title function_">with</span> <span class="hljs-title function_">a</span> <span class="hljs-title function_">thread</span> <span class="hljs-params">(e.g., a user ID <span class="hljs-keyword">or</span> Transaction ID)</span>.</code></pre>
 
 <p>总结:</p>
 <blockquote>
@@ -428,40 +417,40 @@ spring.datasource.update.password=</code></pre>
 <span class="hljs-comment"> * 配置<span class="hljs-doctag">@Transactional</span>注解</span>
 <span class="hljs-comment"> */</span>
 <span class="hljs-meta">@Bean</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> PlatformTransactionManager <span class="hljs-title">transactionManager</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> DataSourceTransactionManager(dynamicDataSource());
+<span class="hljs-keyword">public</span> PlatformTransactionManager <span class="hljs-title function_">transactionManager</span><span class="hljs-params">()</span> &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataSourceTransactionManager</span>(dynamicDataSource());
 &#125;</code></pre>
 
 <p>回顾方案一，跟踪断点发现如下代码:</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Configuration</span>
-<span class="hljs-meta">@ConditionalOnClass</span>(&#123; DataSource<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">JdbcTemplate</span>.<span class="hljs-title">class</span> &#125;)</span>
-<span class="hljs-class">@<span class="hljs-title">ConditionalOnSingleCandidate</span>(<span class="hljs-title">DataSource</span>.<span class="hljs-title">class</span>)</span>
-<span class="hljs-class">@<span class="hljs-title">AutoConfigureAfter</span>(<span class="hljs-title">DataSourceAutoConfiguration</span>.<span class="hljs-title">class</span>)</span>
-<span class="hljs-class">@<span class="hljs-title">EnableConfigurationProperties</span>(<span class="hljs-title">JdbcProperties</span>.<span class="hljs-title">class</span>)</span>
-<span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">JdbcTemplateAutoConfiguration</span> </span>&#123;
+<span class="hljs-meta">@ConditionalOnClass(&#123; DataSource.class, JdbcTemplate.class &#125;)</span>
+<span class="hljs-meta">@ConditionalOnSingleCandidate(DataSource.class)</span>
+<span class="hljs-meta">@AutoConfigureAfter(DataSourceAutoConfiguration.class)</span>
+<span class="hljs-meta">@EnableConfigurationProperties(JdbcProperties.class)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JdbcTemplateAutoConfiguration</span> &#123;
 
 	<span class="hljs-meta">@Configuration</span>
-	<span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JdbcTemplateConfiguration</span> </span>&#123;
+	<span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JdbcTemplateConfiguration</span> &#123;
 
 		<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> DataSource dataSource;
 
 		<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> JdbcProperties properties;
 
 		JdbcTemplateConfiguration(DataSource dataSource, JdbcProperties properties) &#123;
-			<span class="hljs-keyword">this</span>.dataSource = dataSource;
-			<span class="hljs-keyword">this</span>.properties = properties;
+			<span class="hljs-built_in">this</span>.dataSource = dataSource;
+			<span class="hljs-built_in">this</span>.properties = properties;
 		&#125;
 
 		<span class="hljs-meta">@Bean</span>
 		<span class="hljs-meta">@Primary</span>
-		<span class="hljs-meta">@ConditionalOnMissingBean</span>(JdbcOperations<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class">		<span class="hljs-title">public</span> <span class="hljs-title">JdbcTemplate</span> <span class="hljs-title">jdbcTemplate</span>() </span>&#123;
-			JdbcTemplate jdbcTemplate = <span class="hljs-keyword">new</span> JdbcTemplate(<span class="hljs-keyword">this</span>.dataSource);
-			JdbcProperties.Template template = <span class="hljs-keyword">this</span>.properties.getTemplate();
+		<span class="hljs-meta">@ConditionalOnMissingBean(JdbcOperations.class)</span>
+		<span class="hljs-keyword">public</span> JdbcTemplate <span class="hljs-title function_">jdbcTemplate</span><span class="hljs-params">()</span> &#123;
+			<span class="hljs-type">JdbcTemplate</span> <span class="hljs-variable">jdbcTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JdbcTemplate</span>(<span class="hljs-built_in">this</span>.dataSource);
+			JdbcProperties.<span class="hljs-type">Template</span> <span class="hljs-variable">template</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.properties.getTemplate();
 			jdbcTemplate.setFetchSize(template.getFetchSize());
 			jdbcTemplate.setMaxRows(template.getMaxRows());
-			<span class="hljs-keyword">if</span> (template.getQueryTimeout() != <span class="hljs-keyword">null</span>) &#123;
-				jdbcTemplate.setQueryTimeout((<span class="hljs-keyword">int</span>) template.getQueryTimeout().getSeconds());
+			<span class="hljs-keyword">if</span> (template.getQueryTimeout() != <span class="hljs-literal">null</span>) &#123;
+				jdbcTemplate.setQueryTimeout((<span class="hljs-type">int</span>) template.getQueryTimeout().getSeconds());
 			&#125;
 			<span class="hljs-keyword">return</span> jdbcTemplate;
 		&#125;
@@ -469,15 +458,15 @@ spring.datasource.update.password=</code></pre>
 	&#125;
 
 	<span class="hljs-meta">@Configuration</span>
-	<span class="hljs-meta">@Import</span>(JdbcTemplateConfiguration<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class">	<span class="hljs-title">static</span> <span class="hljs-title">class</span> <span class="hljs-title">NamedParameterJdbcTemplateConfiguration</span> </span>&#123;
+	<span class="hljs-meta">@Import(JdbcTemplateConfiguration.class)</span>
+	<span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">NamedParameterJdbcTemplateConfiguration</span> &#123;
 
 		<span class="hljs-meta">@Bean</span>
 		<span class="hljs-meta">@Primary</span>
-		<span class="hljs-meta">@ConditionalOnSingleCandidate</span>(JdbcTemplate<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class">		@<span class="hljs-title">ConditionalOnMissingBean</span>(<span class="hljs-title">NamedParameterJdbcOperations</span>.<span class="hljs-title">class</span>)</span>
-<span class="hljs-class">		<span class="hljs-title">public</span> <span class="hljs-title">NamedParameterJdbcTemplate</span> <span class="hljs-title">namedParameterJdbcTemplate</span>(<span class="hljs-title">JdbcTemplate</span> <span class="hljs-title">jdbcTemplate</span>) </span>&#123;
-			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NamedParameterJdbcTemplate(jdbcTemplate);
+		<span class="hljs-meta">@ConditionalOnSingleCandidate(JdbcTemplate.class)</span>
+		<span class="hljs-meta">@ConditionalOnMissingBean(NamedParameterJdbcOperations.class)</span>
+		<span class="hljs-keyword">public</span> NamedParameterJdbcTemplate <span class="hljs-title function_">namedParameterJdbcTemplate</span><span class="hljs-params">(JdbcTemplate jdbcTemplate)</span> &#123;
+			<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NamedParameterJdbcTemplate</span>(jdbcTemplate);
 		&#125;
 	&#125;
 &#125;
@@ -486,14 +475,14 @@ spring.datasource.update.password=</code></pre>
 
 
 <span class="hljs-meta">@Configuration</span>
-<span class="hljs-meta">@ConditionalOnClass</span>(&#123; JdbcTemplate<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">PlatformTransactionManager</span>.<span class="hljs-title">class</span> &#125;)</span>
-<span class="hljs-class">@<span class="hljs-title">AutoConfigureOrder</span>(<span class="hljs-title">Ordered</span>.<span class="hljs-title">LOWEST_PRECEDENCE</span>)</span>
-<span class="hljs-class">@<span class="hljs-title">EnableConfigurationProperties</span>(<span class="hljs-title">DataSourceProperties</span>.<span class="hljs-title">class</span>)</span>
-<span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">DataSourceTransactionManagerAutoConfiguration</span> </span>&#123;
+<span class="hljs-meta">@ConditionalOnClass(&#123; JdbcTemplate.class, PlatformTransactionManager.class &#125;)</span>
+<span class="hljs-meta">@AutoConfigureOrder(Ordered.LOWEST_PRECEDENCE)</span>
+<span class="hljs-meta">@EnableConfigurationProperties(DataSourceProperties.class)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DataSourceTransactionManagerAutoConfiguration</span> &#123;
 
 	<span class="hljs-meta">@Configuration</span>
-	<span class="hljs-meta">@ConditionalOnSingleCandidate</span>(DataSource<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class">	<span class="hljs-title">static</span> <span class="hljs-title">class</span> <span class="hljs-title">DataSourceTransactionManagerConfiguration</span> </span>&#123;
+	<span class="hljs-meta">@ConditionalOnSingleCandidate(DataSource.class)</span>
+	<span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DataSourceTransactionManagerConfiguration</span> &#123;
 
 		<span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> DataSource dataSource;
 
@@ -501,16 +490,16 @@ spring.datasource.update.password=</code></pre>
 
 		DataSourceTransactionManagerConfiguration(DataSource dataSource,
 				ObjectProvider&lt;TransactionManagerCustomizers&gt; transactionManagerCustomizers) &#123;
-			<span class="hljs-keyword">this</span>.dataSource = dataSource;
-			<span class="hljs-keyword">this</span>.transactionManagerCustomizers = transactionManagerCustomizers.getIfAvailable();
+			<span class="hljs-built_in">this</span>.dataSource = dataSource;
+			<span class="hljs-built_in">this</span>.transactionManagerCustomizers = transactionManagerCustomizers.getIfAvailable();
 		&#125;
 
 		<span class="hljs-meta">@Bean</span>
-		<span class="hljs-meta">@ConditionalOnMissingBean</span>(PlatformTransactionManager<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>
-<span class="hljs-class">		<span class="hljs-title">public</span> <span class="hljs-title">DataSourceTransactionManager</span> <span class="hljs-title">transactionManager</span>(<span class="hljs-title">DataSourceProperties</span> <span class="hljs-title">properties</span>) </span>&#123;
-			DataSourceTransactionManager transactionManager = <span class="hljs-keyword">new</span> DataSourceTransactionManager(<span class="hljs-keyword">this</span>.dataSource);
-			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.transactionManagerCustomizers != <span class="hljs-keyword">null</span>) &#123;
-				<span class="hljs-keyword">this</span>.transactionManagerCustomizers.customize(transactionManager);
+		<span class="hljs-meta">@ConditionalOnMissingBean(PlatformTransactionManager.class)</span>
+		<span class="hljs-keyword">public</span> DataSourceTransactionManager <span class="hljs-title function_">transactionManager</span><span class="hljs-params">(DataSourceProperties properties)</span> &#123;
+			<span class="hljs-type">DataSourceTransactionManager</span> <span class="hljs-variable">transactionManager</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataSourceTransactionManager</span>(<span class="hljs-built_in">this</span>.dataSource);
+			<span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.transactionManagerCustomizers != <span class="hljs-literal">null</span>) &#123;
+				<span class="hljs-built_in">this</span>.transactionManagerCustomizers.customize(transactionManager);
 			&#125;
 			<span class="hljs-keyword">return</span> transactionManager;
 		&#125;
@@ -523,7 +512,7 @@ spring.datasource.update.password=</code></pre>
 <p>解决方案有三种</p>
 <pre><code class="hljs java"><span class="hljs-comment">// 多个DataSource Bean 因此@Primary 将作为首选者</span>
 <span class="hljs-comment">// @Priority 优先级</span>
-<span class="hljs-comment">// 多个按类型的dataSource 为了让它找到bean可以给当前bean修改 名称 -&gt; @Component(value = "dataSource")</span></code></pre>
+<span class="hljs-comment">// 多个按类型的dataSource 为了让它找到bean可以给当前bean修改 名称 -&gt; @Component(value = &quot;dataSource&quot;)</span></code></pre>
             </article>
             <hr>
             <div>
@@ -546,16 +535,16 @@ spring.datasource.update.password=</code></pre>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">
+                      <a href="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL优化与诊断</span>
+                        <span class="hidden-mobile">SpringBoot代码生成器</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -563,8 +552,8 @@ spring.datasource.update.password=</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/SpringMVC%E7%AF%87/">
-                        <span class="hidden-mobile">SpringMVC篇</span>
+                      <a href="/2023/02/06/Testin%20-%20JSP%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/">
+                        <span class="hidden-mobile">Testin - JSP项目有感</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -579,30 +568,28 @@ spring.datasource.update.password=</code></pre>
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/SpringBoot配置多数据源/';
+          this.page.identifier = '/2023/02/06/SpringBoot配置多数据源/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -666,24 +653,13 @@ spring.datasource.update.password=</code></pre>
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -728,7 +704,7 @@ spring.datasource.update.password=</code></pre>
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -815,13 +791,6 @@ spring.datasource.update.password=</code></pre>
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

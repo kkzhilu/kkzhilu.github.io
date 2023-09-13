@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
+  <meta name="author" content="Kerwin">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
+  <title>MongoTemplate的优化引发FullGC导致服务假死 - Kerwin&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/article.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2023-08-24 23:25">
+      2023年8月24日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="MongoTemplate的优化引发FullGC导致服务假死"><a href="#MongoTemplate的优化引发FullGC导致服务假死" class="headerlink" title="MongoTemplate的优化引发FullGC导致服务假死"></a>MongoTemplate的优化引发FullGC导致服务假死</h1><p>标签： #技术&#x2F;JVM #效能工具&#x2F;内存分析工具 #Share </p>
+<h2 id="问题表现"><a href="#问题表现" class="headerlink" title="问题表现"></a>问题表现</h2><ol>
+<li>内部收到JVM告警，其表现为：</li>
+</ol>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823102630723.png" srcset="/img/loading.gif" alt="image-20230823102630723"></p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823102646362.png" srcset="/img/loading.gif" alt="image-20230823102646362"></p>
+<ol start="2">
+<li>外部应用反馈接口可用率&#x2F;耗时严重波动</li>
+</ol>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823102546257.png" srcset="/img/loading.gif" alt="image-20230823102546257"></p>
+<h2 id="止损方案"><a href="#止损方案" class="headerlink" title="止损方案"></a>止损方案</h2><ol>
+<li>观察核心接口的响应时间，在发现低响应机器时立即下线JSF流量</li>
+<li>观察UMP的内存使用情况，发现较为异常GC机器，提前下线JSF流量</li>
+<li>观察MDC情况，发现CPU异常情况，提前下线JSF流量</li>
+</ol>
+<h2 id="影响"><a href="#影响" class="headerlink" title="影响"></a>影响</h2><p>由于发现及时，响应及时，再加上是B端流程，各个下游都有相关的兼容策略，所以仅是告警较多，没有产生大的业务影响。</p>
+<h2 id="排查思路"><a href="#排查思路" class="headerlink" title="排查思路"></a>排查思路</h2><p>当晚我们组织了几个人从多个角度分别去排查：</p>
+<ol>
+<li><p>JVM堆栈进行分析</p>
+<p><strong>基于该条线路定位到了内存中的大对象，相关方法</strong></p>
+</li>
+<li><p>业务流量、多维监控、机器日志、异常请求</p>
+<p><strong>基于该条线路定位到了某一次Trace请求一共花了50分钟才结束，也间接知道了相关方法</strong></p>
+</li>
+<li><p>脑暴思考发生这种周期性问题的场景，例如周期性请求、MQ重试等，观察相关的数据</p>
+</li>
+</ol>
+<h2 id="快速定位的手段-Dump日志分析"><a href="#快速定位的手段-Dump日志分析" class="headerlink" title="快速定位的手段 Dump日志分析"></a>快速定位的手段 Dump日志分析</h2><p>实际上我们在定位该问题时花费的时间较长，原因是Dump日志过大以及相关分析能力不够熟练，但同一个错误不犯第二次，未来再出现类似情况有信心在10分钟之内定位。</p>
+<p>定位相关问题必做的两件事：</p>
+<ol>
+<li>保留问题现场</li>
+<li>问题机器务必摘掉流量</li>
+</ol>
+<p>由于该问题是典型的OOM导致疯狂FullGC，那一定存在大对象，利用行云&#x2F;机器的Jmap命令可以获取其Dump日志，我们采用的是行云工具：</p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823104412082.png" srcset="/img/loading.gif" alt="image-20230823104412082"></p>
+<h3 id="困境：Dump日志过大"><a href="#困境：Dump日志过大" class="headerlink" title="困境：Dump日志过大"></a>困境：Dump日志过大</h3><p>这是我们在定位问题时遇到的第一个问题，Dump日志过大，压缩包为1.8G左右，解压后文件大小为10.8G左右，下载传输本来就很耗时，同事们的<code>MAT工具</code>第一次尝试打开的时候还总失败，给MAT工具加大内存后，打开一个超大Dump日志还比较随缘，要么电脑死机，要么需要10分钟左右。</p>
+<p>后续又研究了一下，同一文件打开的速度如下：</p>
+<p>MemoryAnalyzerTool：10分钟左右且需要主动调节最大内存，不太稳定。</p>
+<p>Visual VM：20分钟左右且需要主动调节最大内存，打开后如果涉及分析引用，又需要几十分钟。</p>
+<p>为了未来定位更加高效，从市面上筛选了一下更新的分析工具，最终确定到这一款：<strong>YourKit Java Profiler</strong>。</p>
+<p>下载地址为：<a target="_blank" rel="noopener" href="https://www.yourkit.com/java/profiler/download/">https://www.yourkit.com/java/profiler/download/</a></p>
+<p>这款软件导入11G左右的Dump日志（Mac 16G内存电脑 M1芯片）只需要40秒左右，后续涉及计算的部分大概也都是5秒钟之内能够响应。</p>
+<h3 id="YourKitJavaProfiler"><a href="#YourKitJavaProfiler" class="headerlink" title="YourKitJavaProfiler"></a>YourKitJavaProfiler</h3><p>基于上述问题整个分析与操作的过程如下：</p>
+<ol>
+<li><p>将拿到的文件解压后修改后缀名为：.hprof</p>
+</li>
+<li><p>导入YourKitJavaProfiler中（File - Open snapshop…）</p>
+<p>需要大概几十秒到1分钟的时间，进度条非常给力，不会让人害怕突然崩掉</p>
+</li>
+<li><p>选择类视图，排序后找到堆当中明细异常的对象（很好发现）</p>
+</li>
+</ol>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823110114279.png" srcset="/img/loading.gif" alt="image-20230823110114279"></p>
+<ol start="4">
+<li>右键，进入该对象的深入分析</li>
+</ol>
+<p>可以看到这个对象的占用非常高，查看其GC Roots 可以看到似乎是一个ArrayList里放了77万个该对象，另外相关的线程名是：<strong>JSF-BZ-22000-203-T-15</strong></p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823110250540.png" srcset="/img/loading.gif" alt="image-20230823110250540"></p>
+<ol start="5">
+<li>从Incoming References中也可以得到相同的结果</li>
+</ol>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823110509659.png" srcset="/img/loading.gif" alt="image-20230823110509659"></p>
+<ol start="6">
+<li>知道线程名后，进入线程界面进行查询</li>
+</ol>
+<p>该模型可以支持按线程名或ID查询，然后就是熟悉的调用链路了，按照从下往上看的原则，慢慢找的话，一定可以找到和我们相关的异常之处。</p>
+<p>可以点击 <strong>Thread ID：610</strong>，进入更细节的链路之中。</p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823110617149.png" srcset="/img/loading.gif" alt="image-20230823110617149"></p>
+<ol start="7">
+<li>拿到请求入参</li>
+</ol>
+<p>我们发现整个调用链路中有一个核心对象承接了请求入参，代码如下：</p>
+<pre><code class="hljs java"><span class="hljs-comment">// SkuMainInfoRequest类即是请求体</span>
+ServiceResponse&lt;SkuMainParterResponse&gt; <span class="hljs-title function_">updateSkuBaseInfo</span><span class="hljs-params">(SkuMainInfoRequest request)</span></code></pre>
+
+
+
+<p>我们拿这个对象去搜索，可以得到更细节的内容</p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823111029690.png" srcset="/img/loading.gif" alt="image-20230823111029690"></p>
+<ol start="8">
+<li>拿到入参和入口后，用安全的机器多调用几次，查看表现是否符合预期，然后继续定位Bug，修复上线即可。</li>
+</ol>
+<h2 id="问题根因"><a href="#问题根因" class="headerlink" title="问题根因"></a>问题根因</h2><p>由于上文的分析流程，我们很容易就知道了到底什么参数什么情形引起了该问题，继续分析发现其实很简单，即：</p>
+<p>某一次 IN 查询时IN的是一个包含Null值的集合（不符合预期，相关数据起码几十万条），如下：</p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823111335575.png" srcset="/img/loading.gif" alt="image-20230823111335575"></p>
+<p><strong>其实按照我们朴素的直觉来看，这样的问题应该是一个慢查询，带来的影响应该是慢查询导致线程耗尽，服务器受影响，不应该是疯狂FullGC的。</strong></p>
+<p>在跟进MongoTemplate的客户端代码后发现，它底层在进行 <strong>find</strong> 查询时使用的是游标的方式。</p>
+<p>核心方法：org.springframework.data.mongodb.core.MongoTemplate#executeFindMultiInternal</p>
+<p>截图：</p>
+<p><img src="/2023/08/24/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/image-20230823111559708.png" srcset="/img/loading.gif" alt="image-20230823111559708"></p>
+<p><strong>怎么说呢，感谢MongoTemplate做出的优化，不然我们遇到的问题可能是数据库宕机，那就非常糟糕了。</strong></p>
+<p>所以结论就是：</p>
+<p>业务代码中某一次判断不太合适，让程序执行了一次 IN NULL 的操作（涉及几十万条数据），由于MongoTemplate的底层优化，让我们避免了数据库宕机的风险，但是导致拿的数据太多存储在内存之中，一直触发FullGC，进而服务器假死。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>花了一定时间研究内存分析工具之后，深感其能力的强大，也让我有信心在下次遇到类似问题时，5-10分钟即可定位。</p>
+<p>另外，在发现工具用的相当不顺手时，也要果断的寻找新的解决之道。</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%AB%A0%E7%B3%BB%E5%88%97/">文章系列</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/MongoTemplate%E7%9A%84%E4%BC%98%E5%8C%96%E5%BC%95%E5%8F%91FullGC%E5%AF%BC%E8%87%B4%E6%9C%8D%E5%8A%A1%E5%81%87%E6%AD%BB/">MongoTemplate的优化引发FullGC导致服务假死</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/09/08/JProfiler%E5%AE%9A%E4%BD%8D%E5%A4%A7%E5%AF%B9%E8%B1%A1%E4%B8%8E%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JProfiler定位大对象与获取参数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/20/ChatGPT%E4%B9%8B%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E4%B8%8E%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E7%96%AF%E7%8B%82%E8%BD%AC%E6%8D%A2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98%E4%B8%8E%E5%BA%94%E7%94%A8%E7%81%B5%E6%84%9F/">
+                        <span class="hidden-mobile">ChatGPT之自然语言与编程语言的疯狂转换-代码实战与应用灵感</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <div class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/08/24/MongoTemplate的优化引发FullGC导致服务假死/';
+          this.page.identifier = '/2023/08/24/MongoTemplate的优化引发FullGC导致服务假死/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "MongoTemplate的优化引发FullGC导致服务假死&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>FastJson使用记录 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      286 字
+      301 字
     </span>
   
 
@@ -204,33 +192,34 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="FastJson-getBytes"><a href="#FastJson-getBytes" class="headerlink" title="FastJson getBytes"></a>FastJson getBytes</h1><blockquote>
+              <h1 id="FastJson-getBytes"><a href="#FastJson-getBytes" class="headerlink" title="FastJson getBytes"></a>FastJson getBytes</h1><p>标签： #Share</p>
+<blockquote>
 <p>在使用FastJson过程中出现了</p>
-<pre><code class="hljs java">Exception in thread <span class="hljs-string">"main"</span> com.alibaba.fastjson.JSONException: can not cast to <span class="hljs-keyword">int</span>, value : [-<span class="hljs-number">119</span>,<span class="hljs-number">80</span>,<span class="hljs-number">78</span>,<span class="hljs-number">71</span>,<span class="hljs-number">13</span>]</code></pre>
+<pre><code class="hljs java">Exception in thread <span class="hljs-string">&quot;main&quot;</span> com.alibaba.fastjson.JSONException: can not cast to <span class="hljs-type">int</span>, value : [-<span class="hljs-number">119</span>,<span class="hljs-number">80</span>,<span class="hljs-number">78</span>,<span class="hljs-number">71</span>,<span class="hljs-number">13</span>]</code></pre>
 
 <p>异常，现来分析其报错原因</p>
 </blockquote>
 <h2 id="getBytes-异常"><a href="#getBytes-异常" class="headerlink" title="getBytes 异常"></a>getBytes 异常</h2><pre><code class="hljs java"><span class="hljs-comment">// ImgUtilApp 具备 byte[] 变量</span>
-ImgUtilApp imgUtilApp = <span class="hljs-keyword">new</span> ImgUtilApp();
+<span class="hljs-type">ImgUtilApp</span> <span class="hljs-variable">imgUtilApp</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ImgUtilApp</span>();
 imgUtilApp.setBytes(bytes);
 
 <span class="hljs-comment">// FastJson</span>
-JSONObject fastJson = (JSONObject) JSON.toJSON(imgUtilApp);
+<span class="hljs-type">JSONObject</span> <span class="hljs-variable">fastJson</span> <span class="hljs-operator">=</span> (JSONObject) JSON.toJSON(imgUtilApp);
 
-System.out.println(fastJson.getBytes(<span class="hljs-string">"bytes"</span>));
+System.out.println(fastJson.getBytes(<span class="hljs-string">&quot;bytes&quot;</span>));
 
 <span class="hljs-comment">// 异常:</span>
-Exception in thread <span class="hljs-string">"main"</span> com.alibaba.fastjson.JSONException: can not cast to <span class="hljs-keyword">int</span>, value : [-<span class="hljs-number">119</span>,<span class="hljs-number">80</span>,<span class="hljs-number">78</span>,<span class="hljs-number">71</span>,<span class="hljs-number">13</span>]</code></pre>
+Exception in thread <span class="hljs-string">&quot;main&quot;</span> com.alibaba.fastjson.JSONException: can not cast to <span class="hljs-type">int</span>, value : [-<span class="hljs-number">119</span>,<span class="hljs-number">80</span>,<span class="hljs-number">78</span>,<span class="hljs-number">71</span>,<span class="hljs-number">13</span>]</code></pre>
 
 
 
-<h2 id="getBytes-源码"><a href="#getBytes-源码" class="headerlink" title="getBytes 源码"></a>getBytes 源码</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">byte</span>[] castToBytes(Object value) &#123;
-    <span class="hljs-keyword">if</span> (value <span class="hljs-keyword">instanceof</span> <span class="hljs-keyword">byte</span>[]) &#123;
-        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">byte</span>[])((<span class="hljs-keyword">byte</span>[])value);
+<h2 id="getBytes-源码"><a href="#getBytes-源码" class="headerlink" title="getBytes 源码"></a>getBytes 源码</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">byte</span>[] castToBytes(Object value) &#123;
+    <span class="hljs-keyword">if</span> (value <span class="hljs-keyword">instanceof</span> <span class="hljs-type">byte</span>[]) &#123;
+        <span class="hljs-keyword">return</span> (<span class="hljs-type">byte</span>[])((<span class="hljs-type">byte</span>[])value);
     &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (value <span class="hljs-keyword">instanceof</span> String) &#123;
         <span class="hljs-keyword">return</span> IOUtils.decodeBase64((String)value);
     &#125; <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> JSONException(<span class="hljs-string">"can not cast to int, value : "</span> + value);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONException</span>(<span class="hljs-string">&quot;can not cast to int, value : &quot;</span> + value);
     &#125;
 &#125;
 
@@ -238,9 +227,9 @@ Exception in thread <span class="hljs-string">"main"</span> com.alibaba.fastjson
 
 
 
-<h2 id="正确使用方式"><a href="#正确使用方式" class="headerlink" title="正确使用方式"></a>正确使用方式</h2><pre><code class="hljs java">JSONObject fastJson = (JSONObject) JSON.toJSON(imgUtilApp);
-fastJson.put(<span class="hljs-string">"bytesDemo"</span>, bytes);
-System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span>));
+<h2 id="正确使用方式"><a href="#正确使用方式" class="headerlink" title="正确使用方式"></a>正确使用方式</h2><pre><code class="hljs java"><span class="hljs-type">JSONObject</span> <span class="hljs-variable">fastJson</span> <span class="hljs-operator">=</span> (JSONObject) JSON.toJSON(imgUtilApp);
+fastJson.put(<span class="hljs-string">&quot;bytesDemo&quot;</span>, bytes);
+System.out.println(fastJson.getBytes(<span class="hljs-string">&quot;bytesDemo&quot;</span>));
 
 <span class="hljs-comment">// 主动put byte[]类型，方可直接取出</span></code></pre>
 
@@ -274,16 +263,16 @@ System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2023/02/06/Docsify%E7%AF%87/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">代理模式</span>
+                        <span class="hidden-mobile">Docsify篇</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -291,8 +280,8 @@ System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">
-                        <span class="hidden-mobile">命令模式</span>
+                      <a href="/2023/02/06/Git-IDEA-%E6%8A%80%E5%B7%A7/">
+                        <span class="hidden-mobile">Git-IDEA-技巧</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -307,30 +296,28 @@ System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/FastJson使用记录/';
+          this.page.identifier = '/2023/02/06/FastJson使用记录/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -394,24 +381,13 @@ System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -456,7 +432,7 @@ System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -543,13 +519,6 @@ System.out.println(fastJson.getBytes(<span class="hljs-string">"bytesDemo"</span
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

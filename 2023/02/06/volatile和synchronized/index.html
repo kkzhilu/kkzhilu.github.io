@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>volatile和synchronized - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><p>volatile关键字是在一般面试中经常问到的一个点，大家对它的回答莫过于两点：</p>
+              <p>标签： #Share</p>
+<h2 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h2><p>volatile关键字是在一般面试中经常问到的一个点，大家对它的回答莫过于两点：</p>
 <ul>
 <li>保证内存可见性</li>
 <li>防止指令重排</li>
@@ -224,44 +213,44 @@
 <p><em>在多处理器系统中，每个处理器都有自己的高速缓存，而他们又共享同一主存</em></p>
 </blockquote>
 <h3 id="volatile如何保证内存可见性"><a href="#volatile如何保证内存可见性" class="headerlink" title="volatile如何保证内存可见性"></a>volatile如何保证内存可见性</h3><p>我们来看一段代码：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">VolatileTest</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">VolatileTest</span> &#123;
     <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> String key;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
-        key = <span class="hljs-string">"Happy Birthday To Me!"</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;
+        key = <span class="hljs-string">&quot;Happy Birthday To Me!&quot;</span>;
     &#125;
 &#125;</code></pre>
 
 <p>通过对代码进行javap命令，获取其字节码，内容如下（可以忽略啦）：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">mine</span>.<span class="hljs-title">juc</span>.<span class="hljs-title">lock</span>.<span class="hljs-title">VolatileTest</span></span>
-  minor version: 0
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">com</span>.mine.juc.lock.VolatileTest
+  minor version: <span class="hljs-number">0</span>
   major version: <span class="hljs-number">52</span>
   flags: ACC_PUBLIC, ACC_SUPER
 Constant pool:
-   #1 = Methodref          #5.#21         // java/lang/Object."&lt;init&gt;":()V
-   #2 = String             #22            // Happy Birthday To Me!
-   #3 = Fieldref           #4.#23         // com/mine/juc/lock/VolatileTest.key:Ljava/lang/String;
-   #4 = Class              #24            // com/mine/juc/lock/VolatileTest
-   #5 = Class              #25            // java/lang/Object
-   #6 = Utf8               key
-   #7 = Utf8               Ljava/lang/String;
-   #8 = Utf8               &lt;init&gt;
-   #9 = Utf8               ()V
-  #10 = Utf8               Code
-  #11 = Utf8               LineNumberTable
-  #12 = Utf8               LocalVariableTable
-  #13 = Utf8               this
-  #14 = Utf8               Lcom/mine/juc/lock/VolatileTest;
-  #15 = Utf8               main
-  #16 = Utf8               ([Ljava/lang/String;)V
-  #17 = Utf8               args
-  #18 = Utf8               [Ljava/lang/String;
-  #19 = Utf8               SourceFile
-  #20 = Utf8               VolatileTest.java
-  #21 = NameAndType        #8:#9          // "&lt;init&gt;":()V
-  #22 = Utf8               Happy Birthday To Me!
-  #23 = NameAndType        #6:#7          // key:Ljava/lang/String;
-  #24 = Utf8               com/mine/juc/lock/VolatileTest
-  #25 = Utf8               java/lang/Object
+   #<span class="hljs-number">1</span> = Methodref          #<span class="hljs-number">5.</span>#<span class="hljs-number">21</span>         <span class="hljs-comment">// java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
+   #<span class="hljs-number">2</span> = String             #<span class="hljs-number">22</span>            <span class="hljs-comment">// Happy Birthday To Me!</span>
+   #<span class="hljs-number">3</span> = Fieldref           #<span class="hljs-number">4.</span>#<span class="hljs-number">23</span>         <span class="hljs-comment">// com/mine/juc/lock/VolatileTest.key:Ljava/lang/String;</span>
+   #<span class="hljs-number">4</span> = Class              #<span class="hljs-number">24</span>            <span class="hljs-comment">// com/mine/juc/lock/VolatileTest</span>
+   #<span class="hljs-number">5</span> = Class              #<span class="hljs-number">25</span>            <span class="hljs-comment">// java/lang/Object</span>
+   #<span class="hljs-number">6</span> = Utf8               key
+   #<span class="hljs-number">7</span> = Utf8               Ljava/lang/String;
+   #<span class="hljs-number">8</span> = Utf8               &lt;init&gt;
+   #<span class="hljs-number">9</span> = Utf8               ()V
+  #<span class="hljs-number">10</span> = Utf8               Code
+  #<span class="hljs-number">11</span> = Utf8               LineNumberTable
+  #<span class="hljs-number">12</span> = Utf8               LocalVariableTable
+  #<span class="hljs-number">13</span> = Utf8               <span class="hljs-built_in">this</span>
+  #<span class="hljs-number">14</span> = Utf8               Lcom/mine/juc/lock/VolatileTest;
+  #<span class="hljs-number">15</span> = Utf8               main
+  #<span class="hljs-number">16</span> = Utf8               ([Ljava/lang/String;)V
+  #<span class="hljs-number">17</span> = Utf8               args
+  #<span class="hljs-number">18</span> = Utf8               [Ljava/lang/String;
+  #<span class="hljs-number">19</span> = Utf8               SourceFile
+  #<span class="hljs-number">20</span> = Utf8               VolatileTest.java
+  #<span class="hljs-number">21</span> = NameAndType        #<span class="hljs-number">8</span>:#<span class="hljs-number">9</span>          <span class="hljs-comment">// &quot;&lt;init&gt;&quot;:()V</span>
+  #<span class="hljs-number">22</span> = Utf8               Happy Birthday To Me!
+  #<span class="hljs-number">23</span> = NameAndType        #<span class="hljs-number">6</span>:#<span class="hljs-number">7</span>          <span class="hljs-comment">// key:Ljava/lang/String;</span>
+  #<span class="hljs-number">24</span> = Utf8               com/mine/juc/lock/VolatileTest
+  #<span class="hljs-number">25</span> = Utf8               java/lang/Object
 &#123;
   <span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> java.lang.String key;
     descriptor: Ljava/lang/String;
@@ -273,21 +262,21 @@ Constant pool:
     Code:
       stack=<span class="hljs-number">1</span>, locals=<span class="hljs-number">1</span>, args_size=<span class="hljs-number">1</span>
          <span class="hljs-number">0</span>: aload_0
-         1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+         <span class="hljs-number">1</span>: invokespecial #<span class="hljs-number">1</span>                  <span class="hljs-comment">// Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
          <span class="hljs-number">4</span>: <span class="hljs-keyword">return</span>
       LineNumberTable:
         line <span class="hljs-number">11</span>: <span class="hljs-number">0</span>
       LocalVariableTable:
         Start  Length  Slot  Name   Signature
-            <span class="hljs-number">0</span>       <span class="hljs-number">5</span>     <span class="hljs-number">0</span>  <span class="hljs-keyword">this</span>   Lcom/mine/juc/lock/VolatileTest;
+            <span class="hljs-number">0</span>       <span class="hljs-number">5</span>     <span class="hljs-number">0</span>  <span class="hljs-built_in">this</span>   Lcom/mine/juc/lock/VolatileTest;
 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(java.lang.String[])</span></span>;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(java.lang.String[])</span>;
     descriptor: ([Ljava/lang/String;)V
     flags: ACC_PUBLIC, ACC_STATIC
     Code:
       stack=<span class="hljs-number">1</span>, locals=<span class="hljs-number">1</span>, args_size=<span class="hljs-number">1</span>
-         0: ldc           #2                  // String Happy Birthday To Me!
-         2: putstatic     #3                  // Field key:Ljava/lang/String;
+         <span class="hljs-number">0</span>: ldc           #<span class="hljs-number">2</span>                  <span class="hljs-comment">// String Happy Birthday To Me!</span>
+         <span class="hljs-number">2</span>: putstatic     #<span class="hljs-number">3</span>                  <span class="hljs-comment">// Field key:Ljava/lang/String;</span>
          <span class="hljs-number">5</span>: <span class="hljs-keyword">return</span>
       LineNumberTable:
         line <span class="hljs-number">16</span>: <span class="hljs-number">0</span>
@@ -296,7 +285,7 @@ Constant pool:
         Start  Length  Slot  Name   Signature
             <span class="hljs-number">0</span>       <span class="hljs-number">6</span>     <span class="hljs-number">0</span>  args   [Ljava/lang/String;
 &#125;
-SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
+SourceFile: <span class="hljs-string">&quot;VolatileTest.java&quot;</span></code></pre>
 
 <p>请大家注意这一段代码：</p>
 <pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">volatile</span> java.lang.String key;
@@ -306,16 +295,16 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 <p>可以看到，volatile关键字在编译的时候会主动为变量增加标识：<code>ACC_VOLATILE</code>，再研究下去就过于硬核了（汇编指令），我可能硬不起来（手动狗头），以后我会再对它进行深入的研究，我们只用了解到，Java关键字volatile，是在编译阶段主动为变量增加了ACC_VOLATILE标识，以此保证了它的<code>内存可见性</code></p>
 <p>即然volatile可以保证内存可见性，那至少有一个场景我们是可以放心使用的，即：<code>一写多读场景</code></p>
 <p>另外，大家在验证volatile内存可见性的时候，不要使用 System.out.println() ，原因如下：</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">()</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">println</span><span class="hljs-params">()</span> &#123;
     newLine();
 &#125;
 
 <span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 是不是赫然看到一个synchronized，具体原因见下文</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">newLine</span><span class="hljs-params">()</span> </span>&#123;
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">newLine</span><span class="hljs-params">()</span> &#123;
     <span class="hljs-keyword">try</span> &#123;
-        <span class="hljs-keyword">synchronized</span> (<span class="hljs-keyword">this</span>) &#123;
+        <span class="hljs-keyword">synchronized</span> (<span class="hljs-built_in">this</span>) &#123;
             ensureOpen();
             textOut.newLine();
             textOut.flushBuffer();
@@ -328,7 +317,7 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
         Thread.currentThread().interrupt();
     &#125;
     <span class="hljs-keyword">catch</span> (IOException x) &#123;
-        trouble = <span class="hljs-keyword">true</span>;
+        trouble = <span class="hljs-literal">true</span>;
     &#125;
 &#125;</code></pre>
 
@@ -338,7 +327,7 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 <h3 id="指令重排例子"><a href="#指令重排例子" class="headerlink" title="指令重排例子"></a>指令重排例子</h3><p><img src="/2023/02/06/volatile%E5%92%8Csynchronized/volatile.png" srcset="/img/loading.gif" alt="img"></p>
 <p>运行这段代码我们可能会得到一个匪夷所思的结果:我们获得的单例对象是未初始化的。为什么会出现这种情况？因为<code>指令重排</code></p>
 <p>首先要明确一点，同步代码块中的代码也是能够被指令重排的。然后来看问题的关键</p>
-<pre><code class="hljs java">INSTANCE = <span class="hljs-keyword">new</span> Singleton();</code></pre>
+<pre><code class="hljs java">INSTANCE = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();</code></pre>
 
 <p>虽然在代码中只有一行,编译出的字节码指令可以用如下三行表示</p>
 <ul>
@@ -347,7 +336,7 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 <li>3.将INSTANCE变量指向刚分配的内存地址</li>
 </ul>
 <p>由于步骤2，3交换不会改变单线程环境下的执行结果，故而这种重排序是被允许的。也就是我们在初始化对象之前就把INSTANCE变量指向了该对象。而如果这时另一个线程刚好执行到代码所示的2处</p>
-<pre><code class="hljs java"><span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-keyword">null</span>)</code></pre>
+<pre><code class="hljs java"><span class="hljs-keyword">if</span> (INSTANCE == <span class="hljs-literal">null</span>)</code></pre>
 
 <p>那么这时候有意思的事情就发生了:虽然INSTANCE指向了一个未被初始化的对象，但是它确实不为null了，所以这个判断会返回false，之后它将return一个未被初始化的单例对象！</p>
 <p>如下：</p>
@@ -359,41 +348,18 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 
 <p>这短短一行代码在字节码级别其实分为了多个步骤进行，如获取变量，赋值，计算等等，如CPU基本执行原理一般，真正执行的是一个个命令，分为很多步骤</p>
 <p>volatile 关键字可以保证的是单个读取操作是具有原子性的（每次读取都是从主内存获取最新的值）</p>
-<p>但是如 index += 1;  实质是三个步骤，三次行为，因此它无法保证整块代码的原子性</p>
+<p>但是如 index +&#x3D; 1;  实质是三个步骤，三次行为，因此它无法保证整块代码的原子性</p>
 <h2 id="synchronize关键字"><a href="#synchronize关键字" class="headerlink" title="synchronize关键字"></a>synchronize关键字</h2><h3 id="驳斥关于类锁的概念"><a href="#驳斥关于类锁的概念" class="headerlink" title="驳斥关于类锁的概念"></a>驳斥关于类锁的概念</h3><p>首先驳斥一个关于类锁的概念，synchronize就是对象锁，在普通方法，静态方法，同步块时锁的对象分别是：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th align="center">代码示例</th>
-<th align="center">锁住的对象</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>普通方法</td>
-<td align="center">synchronized void test() { }</td>
-<td align="center">当前对象</td>
-</tr>
-<tr>
-<td>静态方法</td>
-<td align="center">synchronized static void test() { }</td>
-<td align="center">锁的是当前类的Class 对象</td>
-</tr>
-<tr>
-<td>同步块</td>
-<td align="center">void fun () {  synchronized (this) {} }</td>
-<td align="center">锁的是（）中的对象</td>
-</tr>
-</tbody></table>
+<p>|   类型   |                代码示例                 |        锁住的对象        |<br>| :: | :-: | :—-: |<br>| 普通方法 |      synchronized void test() { }       |         当前对象         |<br>| 静态方法 |   synchronized static void test() { }   | 锁的是当前类的Class 对象 |<br>|  同步块  | void fun () {  synchronized (this) {} } |    锁的是（）中的对象    |</p>
 <p>大家都同意在同步代码块中，锁住的是括号里的对象，那么见以下代码：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SynDemo</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SynDemo</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
-        <span class="hljs-keyword">new</span> Thread(<span class="hljs-keyword">new</span> Runnable() &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;
             <span class="hljs-meta">@Override</span>
-            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
-                <span class="hljs-keyword">synchronized</span> (SynDemo<span class="hljs-class">.<span class="hljs-keyword">class</span>) </span>&#123;
-                    System.out.println(<span class="hljs-string">"真的有所谓的类锁？"</span>);
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;
+                <span class="hljs-keyword">synchronized</span> (SynDemo.class) &#123;
+                    System.out.println(<span class="hljs-string">&quot;真的有所谓的类锁？&quot;</span>);
                     <span class="hljs-keyword">try</span> &#123;
                         Thread.sleep(<span class="hljs-number">3000</span>);
                     &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;
@@ -407,8 +373,8 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
         answer();
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">answer</span> <span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"答案清楚了吗"</span>);
+    <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">answer</span> <span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;答案清楚了吗&quot;</span>);
     &#125;
 &#125;
 
@@ -425,31 +391,31 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 <p>流程图如下：</p>
 <p><img src="/2023/02/06/volatile%E5%92%8Csynchronized/exec.png" srcset="/img/loading.gif" alt="1566131929317"></p>
 <p>代码例子：</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-    <span class="hljs-keyword">synchronized</span> (Synchronize<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>&#123;
-        System.out.println(<span class="hljs-string">"Synchronize"</span>);
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+    <span class="hljs-keyword">synchronized</span> (Synchronize.class)&#123;
+        System.out.println(<span class="hljs-string">&quot;Synchronize&quot;</span>);
     &#125;
 &#125;</code></pre>
 
 
 
 <p>字节码：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">crossoverjie</span>.<span class="hljs-title">synchronize</span>.<span class="hljs-title">Synchronize</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">com</span>.crossoverjie.synchronize.Synchronize &#123;
   <span class="hljs-keyword">public</span> com.crossoverjie.synchronize.Synchronize();
     Code:
        <span class="hljs-number">0</span>: aload_0
-       1: invokespecial #1                  // Method java/lang/Object."&lt;init&gt;":()V
+       <span class="hljs-number">1</span>: invokespecial #<span class="hljs-number">1</span>                  <span class="hljs-comment">// Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span>
        <span class="hljs-number">4</span>: <span class="hljs-keyword">return</span>
 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(java.lang.String[])</span></span>;
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(java.lang.String[])</span>;
     Code:
-       0: ldc           #2                  // class com/crossoverjie/synchronize/Synchronize
+       <span class="hljs-number">0</span>: ldc           #<span class="hljs-number">2</span>                  <span class="hljs-comment">// class com/crossoverjie/synchronize/Synchronize</span>
        <span class="hljs-number">2</span>: dup
        <span class="hljs-number">3</span>: astore_1
        **<span class="hljs-number">4</span>: monitorenter**
-       5: getstatic     #3                  // Field java/lang/System.out:Ljava/io/PrintStream;
-       8: ldc           #4                  // String Synchronize
-      10: invokevirtual #5                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+       <span class="hljs-number">5</span>: getstatic     #<span class="hljs-number">3</span>                  <span class="hljs-comment">// Field java/lang/System.out:Ljava/io/PrintStream;</span>
+       <span class="hljs-number">8</span>: ldc           #<span class="hljs-number">4</span>                  <span class="hljs-comment">// String Synchronize</span>
+      <span class="hljs-number">10</span>: invokevirtual #<span class="hljs-number">5</span>                  <span class="hljs-comment">// Method java/io/PrintStream.println:(Ljava/lang/String;)V</span>
       <span class="hljs-number">13</span>: aload_1
       **<span class="hljs-number">14</span>: monitorexit**
       <span class="hljs-number">15</span>: goto          <span class="hljs-number">23</span>
@@ -485,31 +451,31 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 </ul>
 <p>这也就是上文提到的System.out.println()为何会影响内存可见性的原因了</p>
 <h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><p>字节码获取方法：</p>
-<pre><code class="hljs properties"><span class="hljs-meta">用法</span>: <span class="hljs-string">javap &lt;options&gt; &lt;classes&gt;</span>
-<span class="hljs-meta">其中,</span> <span class="hljs-string">可能的选项包括:</span>
-  <span class="hljs-meta">-help</span>  <span class="hljs-string">--help  -?        输出此用法消息</span>
-  <span class="hljs-meta">-version</span>                 <span class="hljs-string">版本信息</span>
-  <span class="hljs-meta">-v</span>  <span class="hljs-string">-verbose             输出附加信息</span>
-  <span class="hljs-meta">-l</span>                       <span class="hljs-string">输出行号和本地变量表</span>
-  <span class="hljs-meta">-public</span>                  <span class="hljs-string">仅显示公共类和成员</span>
-  <span class="hljs-meta">-protected</span>               <span class="hljs-string">显示受保护的/公共类和成员</span>
-  <span class="hljs-meta">-package</span>                 <span class="hljs-string">显示程序包/受保护的/公共类</span>
-                           <span class="hljs-meta">和成员</span> <span class="hljs-string">(默认)</span>
-  <span class="hljs-meta">-p</span>  <span class="hljs-string">-private             显示所有类和成员</span>
-  <span class="hljs-meta">-c</span>                       <span class="hljs-string">对代码进行反汇编</span>
-  <span class="hljs-meta">-s</span>                       <span class="hljs-string">输出内部类型签名</span>
-  <span class="hljs-meta">-sysinfo</span>                 <span class="hljs-string">显示正在处理的类的</span>
-                           <span class="hljs-meta">系统信息</span> <span class="hljs-string">(路径, 大小, 日期, MD5 散列)</span>
-  <span class="hljs-meta">-constants</span>               <span class="hljs-string">显示最终常量</span>
-  <span class="hljs-meta">-classpath</span> <span class="hljs-string">&lt;path&gt;        指定查找用户类文件的位置</span>
-  <span class="hljs-meta">-cp</span> <span class="hljs-string">&lt;path&gt;               指定查找用户类文件的位置</span>
-  <span class="hljs-meta">-bootclasspath</span> <span class="hljs-string">&lt;path&gt;    覆盖引导类文件的位置</span></code></pre>
+<pre><code class="hljs properties"><span class="hljs-attr">用法</span>: <span class="hljs-string">javap &lt;options&gt; &lt;classes&gt;</span>
+<span class="hljs-attr">其中,</span> <span class="hljs-string">可能的选项包括:</span>
+  <span class="hljs-attr">-help</span>  <span class="hljs-string">--help  -?        输出此用法消息</span>
+  <span class="hljs-attr">-version</span>                 <span class="hljs-string">版本信息</span>
+  <span class="hljs-attr">-v</span>  <span class="hljs-string">-verbose             输出附加信息</span>
+  <span class="hljs-attr">-l</span>                       <span class="hljs-string">输出行号和本地变量表</span>
+  <span class="hljs-attr">-public</span>                  <span class="hljs-string">仅显示公共类和成员</span>
+  <span class="hljs-attr">-protected</span>               <span class="hljs-string">显示受保护的/公共类和成员</span>
+  <span class="hljs-attr">-package</span>                 <span class="hljs-string">显示程序包/受保护的/公共类</span>
+                           <span class="hljs-attr">和成员</span> <span class="hljs-string">(默认)</span>
+  <span class="hljs-attr">-p</span>  <span class="hljs-string">-private             显示所有类和成员</span>
+  <span class="hljs-attr">-c</span>                       <span class="hljs-string">对代码进行反汇编</span>
+  <span class="hljs-attr">-s</span>                       <span class="hljs-string">输出内部类型签名</span>
+  <span class="hljs-attr">-sysinfo</span>                 <span class="hljs-string">显示正在处理的类的</span>
+                           <span class="hljs-attr">系统信息</span> <span class="hljs-string">(路径, 大小, 日期, MD5 散列)</span>
+  <span class="hljs-attr">-constants</span>               <span class="hljs-string">显示最终常量</span>
+  <span class="hljs-attr">-classpath</span> <span class="hljs-string">&lt;path&gt;        指定查找用户类文件的位置</span>
+  <span class="hljs-attr">-cp</span> <span class="hljs-string">&lt;path&gt;               指定查找用户类文件的位置</span>
+  <span class="hljs-attr">-bootclasspath</span> <span class="hljs-string">&lt;path&gt;    覆盖引导类文件的位置</span></code></pre>
 
 
 
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>感谢以下博文及其作者：</p>
-<p><a href="https://juejin.im/post/5ea913d35188256d4576d199?utm_source=gold_browser_extension#heading-23" target="_blank" rel="noopener">面试官没想到一个Volatile，我都能跟他扯半小时</a></p>
-<p><a href="https://www.jianshu.com/p/e2054351bd95" target="_blank" rel="noopener">死磕Synchronized底层实现–概论</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5ea913d35188256d4576d199?utm_source=gold_browser_extension#heading-23">面试官没想到一个Volatile，我都能跟他扯半小时</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e2054351bd95">死磕Synchronized底层实现–概论</a></p>
 
             </article>
             <hr>
@@ -533,7 +499,7 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -566,30 +532,28 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/volatile和synchronized/';
+          this.page.identifier = '/2023/02/06/volatile和synchronized/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -653,24 +617,13 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -715,7 +668,7 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -802,13 +755,6 @@ SourceFile: <span class="hljs-string">"VolatileTest.java"</span></code></pre>
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

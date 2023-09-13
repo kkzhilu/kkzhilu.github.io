@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>建造者&amp;责任链&amp;备忘录 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26
+      27
        分钟
     </span>
   
@@ -204,70 +192,71 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="建造者-责任链-备忘录三连"><a href="#建造者-责任链-备忘录三连" class="headerlink" title="建造者 + 责任链 + 备忘录三连"></a>建造者 + 责任链 + 备忘录三连</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>【<font color="blue">开发</font>】：老大，你教了我挺多设计模式的，已经全部教完了吗？</p>
+              <h1 id="建造者-责任链-备忘录三连"><a href="#建造者-责任链-备忘录三连" class="headerlink" title="建造者 + 责任链 + 备忘录三连"></a>建造者 + 责任链 + 备忘录三连</h1><p>标签： #Share</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>【<font color="blue">开发</font>】：老大，你教了我挺多设计模式的，已经全部教完了吗？</p>
 <p>【<font color="red">BOSS</font>】：没呢，还有好几个设计模式没说过呢，今天再传授你三个吧，分别是建造者模式，责任链模式，备忘录模式，如何？</p>
 <p>【<font color="blue">开发</font>】：好啊，我最喜欢学习了！</p>
 <p><img src="/2023/02/06/%E5%BB%BA%E9%80%A0%E8%80%85&%E8%B4%A3%E4%BB%BB%E9%93%BE&%E5%A4%87%E5%BF%98%E5%BD%95/de80a5abgy1gg081efphlg208c02xq8z.gif" srcset="/img/loading.gif" alt="抖音猫咪摇头 GIF 动图"></p>
 <h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><h3 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h3><p>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
-<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h3><p><strong><em>定义建造接口</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Builder</span> </span>&#123;
+<h3 id="核心代码"><a href="#核心代码" class="headerlink" title="核心代码"></a>核心代码</h3><p><em><strong>定义建造接口</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Builder</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildPartOne</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildPartOne</span><span class="hljs-params">()</span>;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildPartTwo</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildPartTwo</span><span class="hljs-params">()</span>;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buildPartThr</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildPartThr</span><span class="hljs-params">()</span>;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 一般情况肯定是一个复杂的对象</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function">String <span class="hljs-title">getResult</span><span class="hljs-params">()</span></span>;
+    String <span class="hljs-title function_">getResult</span><span class="hljs-params">()</span>;
 &#125;</code></pre>
 
 
 
-<p><strong><em>定义实际建造工人</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteBuilder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Builder</span> </span>&#123;
+<p><em><strong>定义实际建造工人</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConcreteBuilder</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Builder</span> &#123;
 
-    <span class="hljs-keyword">private</span> StringBuffer buffer = <span class="hljs-keyword">new</span> StringBuffer();
+    <span class="hljs-keyword">private</span> <span class="hljs-type">StringBuffer</span> <span class="hljs-variable">buffer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuffer</span>();
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildPartOne</span><span class="hljs-params">()</span> </span>&#123;
-        buffer.append(<span class="hljs-string">"i am part one\n"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildPartOne</span><span class="hljs-params">()</span> &#123;
+        buffer.append(<span class="hljs-string">&quot;i am part one\n&quot;</span>);
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildPartTwo</span><span class="hljs-params">()</span> </span>&#123;
-        buffer.append(<span class="hljs-string">"i am part two\n"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildPartTwo</span><span class="hljs-params">()</span> &#123;
+        buffer.append(<span class="hljs-string">&quot;i am part two\n&quot;</span>);
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">buildPartThr</span><span class="hljs-params">()</span> </span>&#123;
-        buffer.append(<span class="hljs-string">"i am part Thr\n"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">buildPartThr</span><span class="hljs-params">()</span> &#123;
+        buffer.append(<span class="hljs-string">&quot;i am part Thr\n&quot;</span>);
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getResult</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getResult</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> buffer.toString();
     &#125;
 &#125;</code></pre>
 
 
 
-<h3 id="如何创建不同的表示？"><a href="#如何创建不同的表示？" class="headerlink" title="如何创建不同的表示？"></a>如何创建不同的表示？</h3><p><strong><em>定义督公</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Director</span> </span>&#123;
+<h3 id="如何创建不同的表示？"><a href="#如何创建不同的表示？" class="headerlink" title="如何创建不同的表示？"></a>如何创建不同的表示？</h3><p><em><strong>定义督公</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Director</span> &#123;
 
     <span class="hljs-keyword">private</span> Builder builder;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Director</span><span class="hljs-params">(Builder builder)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.builder = builder;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Director</span><span class="hljs-params">(Builder builder)</span> &#123;
+        <span class="hljs-built_in">this</span>.builder = builder;
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBuilder</span><span class="hljs-params">(Builder builder)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.builder = builder;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBuilder</span><span class="hljs-params">(Builder builder)</span> &#123;
+        <span class="hljs-built_in">this</span>.builder = builder;
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">construct</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">construct</span><span class="hljs-params">()</span> &#123;
         builder.buildPartOne();
         builder.buildPartTwo();
         builder.buildPartThr();
@@ -276,15 +265,15 @@
 
 
 
-<p><strong><em>模拟调用</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
+<p><em><strong>模拟调用</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> &#123;
 
     <span class="hljs-comment">/***</span>
 <span class="hljs-comment">     * 建造者模式</span>
 <span class="hljs-comment">     *     建造者模式（Builder Pattern）使用多个简单的对象一步一步构建成一个复杂的对象，这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * 主要解决</span>
-<span class="hljs-comment">     *     主要解决在软件系统中，有时候面临着"一个复杂对象"的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定</span>
+<span class="hljs-comment">     *     主要解决在软件系统中，有时候面临着&quot;一个复杂对象&quot;的创建工作，其通常由各个部分的子对象用一定的算法构成；由于需求的变化，这个复杂对象的各个部分经常面临着剧烈的变化，但是将它们组合在一起的算法却相对稳定</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * 何时使用</span>
 <span class="hljs-comment">     *      一些基本部件不会变，而其组合经常变化的时候。</span>
@@ -300,19 +289,19 @@
 <span class="hljs-comment">     * 建造者作为参数进入指导者构造方法，通过特定普遍的构造顺序或算法执行，得到产品</span>
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * 应用实例：</span>
-<span class="hljs-comment">     *     1.去肯德基，汉堡、可乐、薯条、炸鸡翅等是不变的，而其组合是经常变化的，生成出所谓的"套餐"</span>
+<span class="hljs-comment">     *     1.去肯德基，汉堡、可乐、薯条、炸鸡翅等是不变的，而其组合是经常变化的，生成出所谓的&quot;套餐&quot;</span>
 <span class="hljs-comment">     *     2.StringBuilder</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;
         <span class="hljs-comment">// 创建建造者接口并指向具体建造者 - 包含最终产品</span>
-        Builder concreteBuilder = <span class="hljs-keyword">new</span> ConcreteBuilder();
+        <span class="hljs-type">Builder</span> <span class="hljs-variable">concreteBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcreteBuilder</span>();
 
         <span class="hljs-comment">// 创建指导者, 把具体建造者即工人作为参数传入, 通过统一方法执行相应的构建命令</span>
-        Director director = <span class="hljs-keyword">new</span> Director(concreteBuilder);
+        <span class="hljs-type">Director</span> <span class="hljs-variable">director</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Director</span>(concreteBuilder);
         director.construct();
 
         <span class="hljs-comment">// 从工人即具体建造者获取产品</span>
-        String result = concreteBuilder.getResult();
+        <span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> concreteBuilder.getResult();
         System.out.println(result);
     &#125;
 &#125;</code></pre>
@@ -320,25 +309,25 @@
 
 
 <h3 id="建造者的延展思考：链式调用"><a href="#建造者的延展思考：链式调用" class="headerlink" title="建造者的延展思考：链式调用"></a>建造者的延展思考：链式调用</h3><p>链式调用让代码更优雅~</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBuilder</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBuilder</span> &#123;
 
     <span class="hljs-comment">// 省略不必要的代码</span>
 
-    <span class="hljs-function">MyBuilder <span class="hljs-title">withName</span><span class="hljs-params">(String name)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.setName(name);
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    MyBuilder <span class="hljs-title function_">withName</span><span class="hljs-params">(String name)</span> &#123;
+        <span class="hljs-built_in">this</span>.setName(name);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
     &#125;
 
 
-    <span class="hljs-function">MyBuilder <span class="hljs-title">withYear</span><span class="hljs-params">(String year)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.setYear(year);
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    MyBuilder <span class="hljs-title function_">withYear</span><span class="hljs-params">(String year)</span> &#123;
+        <span class="hljs-built_in">this</span>.setYear(year);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
     &#125;
 
 
-    <span class="hljs-function">MyBuilder <span class="hljs-title">withSex</span><span class="hljs-params">(String sex)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.setSex(sex);
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    MyBuilder <span class="hljs-title function_">withSex</span><span class="hljs-params">(String sex)</span> &#123;
+        <span class="hljs-built_in">this</span>.setSex(sex);
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;
     &#125;
 &#125;</code></pre>
 
@@ -350,71 +339,71 @@
 </blockquote>
 <h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><h3 id="意图-1"><a href="#意图-1" class="headerlink" title="意图"></a>意图</h3><p>使多个对象都有机会处理请求，从而避免请求的发送者和接收者之间的耦合关系。将这些对象连城一条链，并沿着这条链传递该请求，直到有一个对象处理它为止</p>
 <h3 id="典型应用"><a href="#典型应用" class="headerlink" title="典型应用"></a>典型应用</h3><p>Log4J 日志系统即是使用了责任链的思想，通过不同日志级别的传递，按级别处理日志</p>
-<h3 id="简单实现一个Log等级系统"><a href="#简单实现一个Log等级系统" class="headerlink" title="简单实现一个Log等级系统"></a>简单实现一个Log等级系统</h3><p><strong><em>抽象类</em></strong></p>
+<h3 id="简单实现一个Log等级系统"><a href="#简单实现一个Log等级系统" class="headerlink" title="简单实现一个Log等级系统"></a>简单实现一个Log等级系统</h3><p><em><strong>抽象类</strong></em></p>
 <p>定义日志等级，设置下一个处理器，抽象出写入方法</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractLogger</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AbstractLogger</span> &#123;
 
     <span class="hljs-comment">// 责任级别</span>
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> INFO = <span class="hljs-number">1</span>;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> DEBUG = <span class="hljs-number">2</span>;
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> ERROR = <span class="hljs-number">3</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">INFO</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEBUG</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">ERROR</span> <span class="hljs-operator">=</span> <span class="hljs-number">3</span>;
 
     <span class="hljs-comment">// 当前级别</span>
-    <span class="hljs-keyword">int</span> level;
+    <span class="hljs-type">int</span> level;
 
     <span class="hljs-comment">//责任链中的下一个元素</span>
     AbstractLogger nextLogger;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setNextLogger</span><span class="hljs-params">(AbstractLogger nextLogger)</span></span>&#123;
-        <span class="hljs-keyword">this</span>.nextLogger = nextLogger;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setNextLogger</span><span class="hljs-params">(AbstractLogger nextLogger)</span>&#123;
+        <span class="hljs-built_in">this</span>.nextLogger = nextLogger;
     &#125;
 
     <span class="hljs-comment">// 记录日志</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">logMessage</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String message)</span></span>&#123;
-        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.level &lt;= level)&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">logMessage</span><span class="hljs-params">(<span class="hljs-type">int</span> level, String message)</span>&#123;
+        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">this</span>.level &lt;= level)&#123;
             write(message);
         &#125;
 
-        <span class="hljs-keyword">if</span>(nextLogger != <span class="hljs-keyword">null</span>)&#123;
+        <span class="hljs-keyword">if</span>(nextLogger != <span class="hljs-literal">null</span>)&#123;
             nextLogger.logMessage(level, message);
         &#125;
     &#125;
 
     <span class="hljs-comment">// 抽象方法 -&gt; 重写具体日志输出类型</span>
-    <span class="hljs-function"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">(String message)</span></span>;
+    <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">write</span><span class="hljs-params">(String message)</span>;
 &#125;</code></pre>
 
 
 
-<p><strong><em>具体日志类</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InfoLoger</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractLogger</span> </span>&#123;
+<p><em><strong>具体日志类</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InfoLoger</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">AbstractLogger</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">InfoLoger</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level)</span></span>&#123;
-        <span class="hljs-keyword">this</span>.level = level;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">InfoLoger</span><span class="hljs-params">(<span class="hljs-type">int</span> level)</span>&#123;
+        <span class="hljs-built_in">this</span>.level = level;
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">(String message)</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"InfoLoger Console::Logger: "</span> + message);
+    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">write</span><span class="hljs-params">(String message)</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;InfoLoger Console::Logger: &quot;</span> + message);
     &#125;
 &#125;</code></pre>
 
 <blockquote>
 <p>为了避免重复，只展示一个类</p>
 </blockquote>
-<p><strong><em>实际调用</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
+<p><em><strong>实际调用</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> &#123;
     
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;
-        AbstractLogger log = getChainOfLoggers();
-        log.logMessage(AbstractLogger.INFO, <span class="hljs-string">"i am info"</span>);
-        log.logMessage(AbstractLogger.DEBUG, <span class="hljs-string">"i am debug"</span>);
-        log.logMessage(AbstractLogger.ERROR, <span class="hljs-string">"i am error"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;
+        <span class="hljs-type">AbstractLogger</span> <span class="hljs-variable">log</span> <span class="hljs-operator">=</span> getChainOfLoggers();
+        log.logMessage(AbstractLogger.INFO, <span class="hljs-string">&quot;i am info&quot;</span>);
+        log.logMessage(AbstractLogger.DEBUG, <span class="hljs-string">&quot;i am debug&quot;</span>);
+        log.logMessage(AbstractLogger.ERROR, <span class="hljs-string">&quot;i am error&quot;</span>);
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AbstractLogger <span class="hljs-title">getChainOfLoggers</span><span class="hljs-params">()</span></span>&#123;
-        AbstractLogger error = <span class="hljs-keyword">new</span> ErrorLoger(AbstractLogger.ERROR);
-        AbstractLogger debug = <span class="hljs-keyword">new</span> DebugLoger(AbstractLogger.DEBUG);
-        AbstractLogger info = <span class="hljs-keyword">new</span> InfoLoger(AbstractLogger.INFO);
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> AbstractLogger <span class="hljs-title function_">getChainOfLoggers</span><span class="hljs-params">()</span>&#123;
+        <span class="hljs-type">AbstractLogger</span> <span class="hljs-variable">error</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorLoger</span>(AbstractLogger.ERROR);
+        <span class="hljs-type">AbstractLogger</span> <span class="hljs-variable">debug</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DebugLoger</span>(AbstractLogger.DEBUG);
+        <span class="hljs-type">AbstractLogger</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InfoLoger</span>(AbstractLogger.INFO);
 
         error.setNextLogger(debug);
         debug.setNextLogger(info);
@@ -464,24 +453,24 @@
 <p>代码见下方~</p>
 </blockquote>
 <h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><h3 id="意图-2"><a href="#意图-2" class="headerlink" title="意图"></a>意图</h3><p>在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，这样以后可将对象恢复到原先保存的状态</p>
-<h3 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h3><p><strong><em>备忘录</em></strong></p>
+<h3 id="核心代码-1"><a href="#核心代码-1" class="headerlink" title="核心代码"></a>核心代码</h3><p><em><strong>备忘录</strong></em></p>
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * ******************************</span>
 <span class="hljs-comment"> * description:  备忘录，确定数据结构即可</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Memento</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Memento</span> &#123;
     Map&lt;String, String&gt; data;
 &#125;</code></pre>
 
 
 
-<p><strong><em>模拟短信场景</em></strong></p>
+<p><em><strong>模拟短信场景</strong></em></p>
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * ******************************</span>
 <span class="hljs-comment"> * description:  模拟短信场景</span>
 <span class="hljs-comment"> * ******************************</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MessageData</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MessageData</span> &#123;
 
     <span class="hljs-keyword">private</span> String time;
 
@@ -490,19 +479,19 @@
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 存储数据</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Memento <span class="hljs-title">saveMemento</span> <span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> Memento <span class="hljs-title function_">saveMemento</span> <span class="hljs-params">()</span> &#123;
         Map&lt;String, String&gt; map = Maps.newHashMap();
-        map.put(<span class="hljs-string">"TIME"</span>,    time);
-        map.put(<span class="hljs-string">"MESSAGE"</span>, message);
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Memento(map);
+        map.put(<span class="hljs-string">&quot;TIME&quot;</span>,    time);
+        map.put(<span class="hljs-string">&quot;MESSAGE&quot;</span>, message);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Memento</span>(map);
     &#125;
 
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 取出数据</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getFromMemento</span><span class="hljs-params">(Memento memento)</span></span>&#123;
-        time    = memento.getData().get(<span class="hljs-string">"TIME"</span>);
-        message = memento.getData().get(<span class="hljs-string">"MESSAGE"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getFromMemento</span><span class="hljs-params">(Memento memento)</span>&#123;
+        time    = memento.getData().get(<span class="hljs-string">&quot;TIME&quot;</span>);
+        message = memento.getData().get(<span class="hljs-string">&quot;MESSAGE&quot;</span>);
     &#125;
 
     <span class="hljs-comment">// 省略部分代码</span>
@@ -510,50 +499,50 @@
 
 
 
-<p><strong><em>备忘录存储容器</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MementoTaker</span> </span>&#123;
+<p><em><strong>备忘录存储容器</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MementoTaker</span> &#123;
 
-    <span class="hljs-keyword">private</span> List&lt;Memento&gt; mementoList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+    <span class="hljs-keyword">private</span> List&lt;Memento&gt; mementoList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(Memento state)</span></span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">add</span><span class="hljs-params">(Memento state)</span>&#123;
         mementoList.add(state);
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> Memento <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span></span>&#123;
+    <span class="hljs-keyword">public</span> Memento <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span>&#123;
         <span class="hljs-keyword">return</span> mementoList.get(index);
     &#125;
 &#125;</code></pre>
 
 
 
-<p><strong><em>核心调用代码</em></strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
+<p><em><strong>核心调用代码</strong></em></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> &#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;
 
         <span class="hljs-comment">// 创建备忘录管理者</span>
-        MementoTaker mementoTaker = <span class="hljs-keyword">new</span> MementoTaker();
+        <span class="hljs-type">MementoTaker</span> <span class="hljs-variable">mementoTaker</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MementoTaker</span>();
 
-        MessageData messageData = <span class="hljs-keyword">new</span> MessageData();
-        messageData.setTime(System.currentTimeMillis() + <span class="hljs-string">""</span>);
-        messageData.setMessage(<span class="hljs-string">"This is messgae first."</span>);
+        <span class="hljs-type">MessageData</span> <span class="hljs-variable">messageData</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MessageData</span>();
+        messageData.setTime(System.currentTimeMillis() + <span class="hljs-string">&quot;&quot;</span>);
+        messageData.setMessage(<span class="hljs-string">&quot;This is messgae first.&quot;</span>);
         mementoTaker.add(messageData.saveMemento());
 
-        System.out.println(<span class="hljs-string">"First: -&gt; "</span> + messageData);
+        System.out.println(<span class="hljs-string">&quot;First: -&gt; &quot;</span> + messageData);
 
         Thread.sleep(<span class="hljs-number">2000</span>);
 
-        messageData.setTime(System.currentTimeMillis() + <span class="hljs-string">""</span>);
-        messageData.setMessage(<span class="hljs-string">"This is messgae second."</span>);
+        messageData.setTime(System.currentTimeMillis() + <span class="hljs-string">&quot;&quot;</span>);
+        messageData.setMessage(<span class="hljs-string">&quot;This is messgae second.&quot;</span>);
         mementoTaker.add(messageData.saveMemento());
 
-        System.out.println(<span class="hljs-string">"Second: -&gt; "</span> + messageData);
+        System.out.println(<span class="hljs-string">&quot;Second: -&gt; &quot;</span> + messageData);
 
         Thread.sleep(<span class="hljs-number">2000</span>);
 
         <span class="hljs-comment">// 回复初次状态</span>
         messageData.getFromMemento(mementoTaker.get(<span class="hljs-number">0</span>));
 
-        System.out.println(<span class="hljs-string">"********************检测数据是否回到初始状态******************"</span>);
+        System.out.println(<span class="hljs-string">&quot;********************检测数据是否回到初始状态******************&quot;</span>);
         System.out.println(messageData);
     &#125;
 &#125;</code></pre>
@@ -568,12 +557,12 @@
 <li>数据库的事务管理</li>
 </ul>
 <h3 id="UML图-2"><a href="#UML图-2" class="headerlink" title="UML图"></a>UML图</h3><p><img src="/2023/02/06/%E5%BB%BA%E9%80%A0%E8%80%85&%E8%B4%A3%E4%BB%BB%E9%93%BE&%E5%A4%87%E5%BF%98%E5%BD%95/image-20200702235930286.png" srcset="/img/loading.gif" alt="image-20200702235930286"></p>
-<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<h2 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h2><p><a target="_blank" rel="noopener" href="https://github.com/kkzhilu/Kerwin-DesignPattern">GitHub地址</a></p>
 <ul>
 <li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
 <li>提供了友好的阅读指导</li>
 </ul>
-<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/172284a1c8caf324?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2020/5/18/172284a1c8caf324?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif"></p>
 
             </article>
             <hr>
@@ -597,16 +586,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2023/02/06/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">工厂模式</span>
+                        <span class="hidden-mobile">布隆过滤器</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -630,30 +619,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/建造者&amp;责任链&amp;备忘录/';
+          this.page.identifier = '/2023/02/06/建造者&amp;责任链&amp;备忘录/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -717,24 +704,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -779,7 +755,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -866,13 +842,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

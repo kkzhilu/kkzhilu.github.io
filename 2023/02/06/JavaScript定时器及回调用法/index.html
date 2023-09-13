@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>JavaScript定时器及回调用法 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      408 字
+      415 字
     </span>
   
 
@@ -204,33 +192,34 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="JavaScript定时器及回调用法"><a href="#JavaScript定时器及回调用法" class="headerlink" title="JavaScript定时器及回调用法"></a>JavaScript定时器及回调用法</h1><h3 id="循环定时任务"><a href="#循环定时任务" class="headerlink" title="循环定时任务"></a>循环定时任务</h3><pre><code class="hljs javascript"><span class="hljs-comment">// 假设现在有这样一个需求：我需要请求一个接口，根据返回结果判断需不需要重复请求，直到达到某一条件为止,停止请求执行某操作</span>
-&lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
+              <h1 id="JavaScript定时器及回调用法"><a href="#JavaScript定时器及回调用法" class="headerlink" title="JavaScript定时器及回调用法"></a>JavaScript定时器及回调用法</h1><p>标签： #Share</p>
+<h3 id="循环定时任务"><a href="#循环定时任务" class="headerlink" title="循环定时任务"></a>循环定时任务</h3><pre><code class="hljs javascript"><span class="hljs-comment">// 假设现在有这样一个需求：我需要请求一个接口，根据返回结果判断需不需要重复请求，直到达到某一条件为止,停止请求执行某操作</span>
+&lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;
     <span class="hljs-keyword">var</span> timer;
     <span class="hljs-keyword">var</span> index = <span class="hljs-number">0</span>;
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tim</span>(<span class="hljs-params"></span>)</span>&#123;
-        timer = setInterval(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">tim</span>(<span class="hljs-params"></span>)&#123;
+        timer = <span class="hljs-built_in">setInterval</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;
             index++;
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Math</span>.random())
+            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>())
             <span class="hljs-keyword">if</span> (index === <span class="hljs-number">5</span>) &#123;
-                <span class="hljs-built_in">window</span>.clearInterval(timer)
+                <span class="hljs-variable language_">window</span>.<span class="hljs-built_in">clearInterval</span>(timer)
             &#125;
         &#125;, <span class="hljs-number">500</span>);
     &#125;
-&lt;<span class="hljs-regexp">/script&gt;</span></code></pre>
+&lt;/script&gt;</code></pre>
 
 
 
 <h3 id="循环请求并获取返回值-拿到返回值后执行操作"><a href="#循环请求并获取返回值-拿到返回值后执行操作" class="headerlink" title="循环请求并获取返回值 - 拿到返回值后执行操作"></a>循环请求并获取返回值 - 拿到返回值后执行操作</h3><h4 id="回调函数方法"><a href="#回调函数方法" class="headerlink" title="回调函数方法"></a>回调函数方法</h4><pre><code class="hljs java">&lt;script&gt;
-    <span class="hljs-function">function <span class="hljs-title">getSomething</span><span class="hljs-params">(cb)</span> </span>&#123;
-         <span class="hljs-keyword">var</span> r = <span class="hljs-number">0</span>;
+    function <span class="hljs-title function_">getSomething</span><span class="hljs-params">(cb)</span> &#123;
+         <span class="hljs-type">var</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
          setTimeout(function() &#123;
              r = <span class="hljs-number">2</span>;
              cb(r);
          &#125;, <span class="hljs-number">100</span>);
     &#125;
 
-    <span class="hljs-function">function <span class="hljs-title">compute</span><span class="hljs-params">(x)</span> </span>&#123;
+    function <span class="hljs-title function_">compute</span><span class="hljs-params">(x)</span> &#123;
      	alert(x * <span class="hljs-number">2</span>);
     &#125;
     getSomething(compute);
@@ -238,9 +227,9 @@
 
 
 
-<h4 id="promise方法"><a href="#promise方法" class="headerlink" title="promise方法"></a>promise方法</h4><pre><code class="hljs java"><span class="hljs-function">function <span class="hljs-title">getSomething</span><span class="hljs-params">()</span> </span>&#123;
-     <span class="hljs-keyword">var</span> r = <span class="hljs-number">0</span>;
-     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise(function(resolve) &#123;
+<h4 id="promise方法"><a href="#promise方法" class="headerlink" title="promise方法"></a>promise方法</h4><pre><code class="hljs java">function <span class="hljs-title function_">getSomething</span><span class="hljs-params">()</span> &#123;
+     <span class="hljs-type">var</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(function(resolve) &#123;
          setTimeout(function() &#123;
           r = <span class="hljs-number">2</span>;
           resolve(r);
@@ -248,7 +237,7 @@
      &#125;);
 &#125;
 
-<span class="hljs-function">function <span class="hljs-title">compute</span><span class="hljs-params">(x)</span> </span>&#123;
+function <span class="hljs-title function_">compute</span><span class="hljs-params">(x)</span> &#123;
  	alert(x * <span class="hljs-number">2</span>);
 &#125;
 
@@ -256,68 +245,68 @@ getSomething().then(compute);</code></pre>
 
 
 
-<h4 id="generator"><a href="#generator" class="headerlink" title="generator"></a>generator</h4><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSomething</span>(<span class="hljs-params"></span>) </span>&#123;
+<h4 id="generator"><a href="#generator" class="headerlink" title="generator"></a>generator</h4><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getSomething</span>(<span class="hljs-params"></span>) &#123;
      <span class="hljs-keyword">var</span> r = <span class="hljs-number">0</span>;
-     setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+     <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
          r = <span class="hljs-number">2</span>;
-         it.next(r);
+         it.<span class="hljs-title function_">next</span>(r);
      &#125;, <span class="hljs-number">10</span>);
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-title">compute</span>(<span class="hljs-params">it</span>) </span>&#123;
-     <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">yield</span> getSomething();
-     alert(x * <span class="hljs-number">2</span>);
+<span class="hljs-keyword">function</span> *<span class="hljs-title function_">compute</span>(<span class="hljs-params">it</span>) &#123;
+     <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">yield</span> <span class="hljs-title function_">getSomething</span>();
+     <span class="hljs-title function_">alert</span>(x * <span class="hljs-number">2</span>);
 &#125;
 
-<span class="hljs-keyword">var</span> it = compute();
-it.next();</code></pre>
+<span class="hljs-keyword">var</span> it = <span class="hljs-title function_">compute</span>();
+it.<span class="hljs-title function_">next</span>();</code></pre>
 
 
 
-<h4 id="promise-generator"><a href="#promise-generator" class="headerlink" title="promise + generator"></a>promise + generator</h4><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSomething</span>(<span class="hljs-params"></span>) </span>&#123;
+<h4 id="promise-generator"><a href="#promise-generator" class="headerlink" title="promise + generator"></a>promise + generator</h4><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getSomething</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">var</span> r = <span class="hljs-number">0</span>;
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) </span>&#123;
-        setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) &#123;
+        <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
             r = <span class="hljs-number">2</span>;
-            resolve(r);
+            <span class="hljs-title function_">resolve</span>(r);
         &#125;, <span class="hljs-number">10</span>);
     &#125;);
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">compute</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">yield</span> getSomething();
-    alert(x * <span class="hljs-number">2</span>);
+<span class="hljs-keyword">function</span>* <span class="hljs-title function_">compute</span>(<span class="hljs-params"></span>) &#123;
+    <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">yield</span> <span class="hljs-title function_">getSomething</span>();
+    <span class="hljs-title function_">alert</span>(x * <span class="hljs-number">2</span>);
 &#125;
-<span class="hljs-keyword">var</span> it = compute();
-it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>&#123;
-    it.next(value);
+<span class="hljs-keyword">var</span> it = <span class="hljs-title function_">compute</span>();
+it.<span class="hljs-title function_">next</span>().<span class="hljs-property">value</span>.<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) &#123;
+    it.<span class="hljs-title function_">next</span>(value);
 &#125;);</code></pre>
 
 
 
-<h4 id="ES7-终极方案"><a href="#ES7-终极方案" class="headerlink" title="ES7 - 终极方案"></a>ES7 - 终极方案</h4><pre><code class="hljs javascript">&lt;script type=<span class="hljs-string">"text/javascript"</span>&gt;
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getSomething</span>(<span class="hljs-params"></span>) </span>&#123;
+<h4 id="ES7-终极方案"><a href="#ES7-终极方案" class="headerlink" title="ES7 - 终极方案"></a>ES7 - 终极方案</h4><pre><code class="hljs javascript">&lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;
+    <span class="hljs-keyword">function</span> <span class="hljs-title function_">getSomething</span>(<span class="hljs-params"></span>) &#123;
         <span class="hljs-keyword">var</span> r = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) </span>&#123;
-            setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">resolve</span>) &#123;
+            <span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;
                 r = <span class="hljs-number">2</span>;
-                resolve(r);
+                <span class="hljs-title function_">resolve</span>(r);
             &#125;, <span class="hljs-number">10</span>);
         &#125;);
     &#125;
 
-    <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">compute</span>(<span class="hljs-params"></span>) </span>&#123;
-        <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">await</span> getSomething();
-        alert(x * <span class="hljs-number">2</span>);
+    <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">compute</span>(<span class="hljs-params"></span>) &#123;
+        <span class="hljs-keyword">var</span> x = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getSomething</span>();
+        <span class="hljs-title function_">alert</span>(x * <span class="hljs-number">2</span>);
     &#125;
 	
     <span class="hljs-comment">// 直接调用compute()方法 -&gt; x为同步请求返回结果，输出4</span>
-    compute();
+    <span class="hljs-title function_">compute</span>();
 	
  	<span class="hljs-comment">// 表示getSomething获取返回值后执行resolve状态 -&gt;  </span>
     <span class="hljs-comment">// 当.then()前的方法执行完后再执行then()内部的程序，这样就避免了，数据没获取到等的问题</span>
-    getSomething().then(compute);
-&lt;<span class="hljs-regexp">/script&gt;</span></code></pre>
+    <span class="hljs-title function_">getSomething</span>().<span class="hljs-title function_">then</span>(compute);
+&lt;/script&gt;</code></pre>
 
             </article>
             <hr>
@@ -341,16 +330,16 @@ it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">func
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Java%20Bugs/">
+                      <a href="/2023/02/06/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java Bugs</span>
+                        <span class="hidden-mobile">Guava的两种本地缓存策略</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -358,8 +347,8 @@ it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">func
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/JavaScript-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
-                        <span class="hidden-mobile">JavaScript-回调函数</span>
+                      <a href="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/">
+                        <span class="hidden-mobile">Java语法糖之泛型</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -374,30 +363,28 @@ it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">func
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/JavaScript定时器及回调用法/';
+          this.page.identifier = '/2023/02/06/JavaScript定时器及回调用法/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -461,24 +448,13 @@ it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">func
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -523,7 +499,7 @@ it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">func
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -610,13 +586,6 @@ it.next().value.then(<span class="hljs-function"><span class="hljs-keyword">func
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

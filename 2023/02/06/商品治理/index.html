@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>商品治理 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="京东到家商品治理体系的建设"><a href="#京东到家商品治理体系的建设" class="headerlink" title="京东到家商品治理体系的建设"></a>京东到家商品治理体系的建设</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>京东到家作为一个即时零售的电商平台，在提供1小时送达极致服务的同时也力求将万千好物送到消费者的手中。为了不断提高平台露出商品的价值，提高用户的满意度，我们设计并投入使用了京东到家商品治理系统，其主要职责是对商品新建、修改、呈现的全链路流程进行干预及核验，旨在<code>发现</code>并<code>解决</code>商品信息中如：敏感词、虚假宣传、错误信息等不符合平台规范和质量要求的问题，保证商品与实物的匹配度，信息的正确性等。</p>
+              <h1 id="京东到家商品治理体系的建设"><a href="#京东到家商品治理体系的建设" class="headerlink" title="京东到家商品治理体系的建设"></a>京东到家商品治理体系的建设</h1><p>标签： #Share</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>京东到家作为一个即时零售的电商平台，在提供1小时送达极致服务的同时也力求将万千好物送到消费者的手中。为了不断提高平台露出商品的价值，提高用户的满意度，我们设计并投入使用了京东到家商品治理系统，其主要职责是对商品新建、修改、呈现的全链路流程进行干预及核验，旨在<code>发现</code>并<code>解决</code>商品信息中如：敏感词、虚假宣传、错误信息等不符合平台规范和质量要求的问题，保证商品与实物的匹配度，信息的正确性等。</p>
 <h2 id="系统架构介绍"><a href="#系统架构介绍" class="headerlink" title="系统架构介绍"></a>系统架构介绍</h2><p>京东到家各业务线采用的是标准化的微服务架构设计，各个系统在迭代过程中只用按需申请对应的组件即可，下图为治理系统所用到的技术组件：</p>
 <ul>
 <li>消息中间件：使用京东的MQ中间件，实现业务解耦。</li>
@@ -238,60 +227,7 @@
 <p>对于<code>合规问题</code>的定义，我们做出了如下解释，即：<code>不符合电商平台商品展示规范的如敏感词、虚假渲传等问题。</code></p>
 <p>例如商品名称中包含敏感词，会映射为敏感词问题，另外需要说明的是：在编码阶段中，一种可量化的具体规则可以确定对应的一种合规问题，且同一个商品可能同时存在多个不同的合规问题。</p>
 <p>目前到家治理系统所涉猎的合规问题主要有：</p>
-<table>
-<thead>
-<tr>
-<th>合规问题大类</th>
-<th>对外描述</th>
-<th>问题细节</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>商品毛重问题</td>
-<td>商品毛重不准确</td>
-<td>商品毛重与实际商品不符、商品毛重超过最大运力限制等</td>
-</tr>
-<tr>
-<td>商品信息不正确</td>
-<td>商品信息不正确，请检查具体内容</td>
-<td>商品名称包含敏感词、商品分类与实际商品不符、虚假宣传等</td>
-</tr>
-<tr>
-<td>商家商品经营范围问题</td>
-<td>当前售卖商品超出商家经营范围</td>
-<td>当前售卖商品超出商家经营范围等</td>
-</tr>
-<tr>
-<td>图片信息问题</td>
-<td>商品图片信息存在问题</td>
-<td>商品无主图、商品主图为默认图、商品主图为黑底图等</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>未来计划</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>商品价格问题</code></td>
-<td>–</td>
-<td>–</td>
-</tr>
-<tr>
-<td><code>商品画像问题</code></td>
-<td>–</td>
-<td>–</td>
-</tr>
-<tr>
-<td><code>...</code></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
+<p>| 合规问题大类         | 对外描述                       | 问题细节                                               |<br>| – |  |  |<br>| 商品毛重问题         | 商品毛重不准确                 | 商品毛重与实际商品不符、商品毛重超过最大运力限制等     |<br>| 商品信息不正确       | 商品信息不正确，请检查具体内容 | 商品名称包含敏感词、商品分类与实际商品不符、虚假宣传等 |<br>| 商家商品经营范围问题 | 当前售卖商品超出商家经营范围   | 当前售卖商品超出商家经营范围等                         |<br>| 图片信息问题         | 商品图片信息存在问题           | 商品无主图、商品主图为默认图、商品主图为黑底图等       |<br>|                      |                                |                                                        |<br>| <strong>未来计划</strong>         |                                |                                                        |<br>| <code>商品价格问题</code>       | –                             | –                                                     |<br>| <code>商品画像问题</code>       | –                             | –                                                     |<br>| <code>...</code>                |                                |                                                        |</p>
 <p>为了方便理解，我们可以将每一种<strong>合规问题看作是一种策略</strong>，而针对策略的顶层接口又定义了四个核心方法：</p>
 <ul>
 <li>映射关联的枚举：每一个问题都需要关联具体的问题原因</li>
@@ -315,7 +251,7 @@
 <p>如果是经验丰富的开发者一定会提出使用MQ的方式由图片核验系统发送核验结果至治理系统，来解决这个问题。实际上我们也是这么做的，只不过做的更彻底一些。</p>
 <p>在设计模式当中，我们通常会将一系列类似业务整合成一个公共接口向外提供能力，我们将它称之为：门面模式或者外观模式。</p>
 <p>对于上述的类似问题，我们找到了公共的处理思路，即：<code>将治理系统作为门面，其他系统作为组件，各系统都可以主动的向治理系统提供需要治理的内容</code>。</p>
-<p>该方案确定之后，各种令人头痛的业务场景也就变得简单起来，而且此举还扩大了治理系统的边界，例如商品无图合规问题，商品差评率高的问题，只需要对应系统将相关数据/结果以MQ的形式发送至治理系统，然后由治理系统为其绑定具体的合规问题即可。</p>
+<p>该方案确定之后，各种令人头痛的业务场景也就变得简单起来，而且此举还扩大了治理系统的边界，例如商品无图合规问题，商品差评率高的问题，只需要对应系统将相关数据&#x2F;结果以MQ的形式发送至治理系统，然后由治理系统为其绑定具体的合规问题即可。</p>
 <p>在编码层面我们采用的是最简单的MQ解耦的方式实现，示意图如下：</p>
 <p><img src="/2023/02/06/%E5%95%86%E5%93%81%E6%B2%BB%E7%90%86/image-20220518084104202.png" srcset="/img/loading.gif" alt="image-20220518084104202"></p>
 <h4 id="技术问题"><a href="#技术问题" class="headerlink" title="技术问题"></a>技术问题</h4><p>在治理迭代的过程中，有一系列的需求是针对平台商品的图片进行治理，以破损图逻辑为例。</p>
@@ -337,7 +273,7 @@
 <p>而对于触达需求，其实现就更简单了，因为我们在最初就定义好了治理业务沟通的基本要素是一个个具体的治理问题，我们只需要将存储好的数据以接口亦或是MQ的形式露出即可。</p>
 <p>至此，整个治理体系从编码层面也就建设完成，其核心逻辑在三个环节：</p>
 <ol>
-<li>商品变动MQ/其他系统治理内容通知触发具体合规问题核验。</li>
+<li>商品变动MQ&#x2F;其他系统治理内容通知触发具体合规问题核验。</li>
 <li>针对核验结果进行判断：人工处理或系统自动处理（处理的能力需借助于商品对外接口）。</li>
 <li>核验结果对外露出。</li>
 </ol>
@@ -374,7 +310,7 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
@@ -407,30 +343,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/商品治理/';
+          this.page.identifier = '/2023/02/06/商品治理/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -494,24 +428,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -556,7 +479,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -643,13 +566,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

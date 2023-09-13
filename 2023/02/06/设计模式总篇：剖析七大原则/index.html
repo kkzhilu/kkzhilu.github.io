@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>设计模式总篇：剖析七大原则 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="设计模式总篇：剖析七大原则"><a href="#设计模式总篇：剖析七大原则" class="headerlink" title="设计模式总篇：剖析七大原则"></a>设计模式总篇：剖析七大原则</h1><h2 id="聊聊为什么需要原则"><a href="#聊聊为什么需要原则" class="headerlink" title="聊聊为什么需要原则"></a>聊聊为什么需要<code>原则</code></h2><p>我们所有人都看过科幻电影，都看到过未来场景中人类和机器人和平相处的场景</p>
+              <h1 id="设计模式总篇：剖析七大原则"><a href="#设计模式总篇：剖析七大原则" class="headerlink" title="设计模式总篇：剖析七大原则"></a>设计模式总篇：剖析七大原则</h1><p>标签： #Share</p>
+<h2 id="聊聊为什么需要原则"><a href="#聊聊为什么需要原则" class="headerlink" title="聊聊为什么需要原则"></a>聊聊为什么需要<code>原则</code></h2><p>我们所有人都看过科幻电影，都看到过未来场景中人类和机器人和平相处的场景</p>
 <p><img src="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/image-20200704115010265.png" srcset="/img/loading.gif" alt="image-20200704115010265"></p>
 <p>为了让拥有<code>自主智能</code>的机器人不失控，人类为机器人制定了三大定律：</p>
 <ul>
@@ -217,9 +206,9 @@
 <p>但是各自为敌的情况出现，一般都是机器人觉醒了自我意识，不再遵守<code>三大定律</code></p>
 <p>从逻辑学来说，如果机器人完全遵守<code>三大定律及其衍生的条约</code>，那么机器人就可以和人类和平相处，当然也会有意外发生。</p>
 <h2 id="写代码为什么需要设计原则"><a href="#写代码为什么需要设计原则" class="headerlink" title="写代码为什么需要设计原则"></a>写代码为什么需要设计原则</h2><p>和机器人的<code>三大定律</code>相仿，几十年的编程经验，让几代人总结出来了一些代码设计上的<code>定律</code>，这就是<code>设计模式的七大原则</code></p>
-<p><strong><em>我们遵循七大原则，一定会写出最完美的代码吗？</em></strong></p>
+<p><em><strong>我们遵循七大原则，一定会写出最完美的代码吗？</strong></em></p>
 <p>答案当然是不一定，毕竟没有人能保证自己可以完全遵循七大原则，同时个人的编程能力也会起到决定性因素。</p>
-<p><strong><em>那我们为什么还要遵守？</em></strong></p>
+<p><em><strong>那我们为什么还要遵守？</strong></em></p>
 <p>我自己想到的一句名言（以后或许可以成为名言~）</p>
 <blockquote>
 <p>向着最好的方向去努力，总不会是最差的结果。</p>
@@ -227,25 +216,25 @@
 <h2 id="七大原则详解"><a href="#七大原则详解" class="headerlink" title="七大原则详解"></a>七大原则详解</h2><h3 id="开闭原则-★★★★★"><a href="#开闭原则-★★★★★" class="headerlink" title="开闭原则 ★★★★★"></a>开闭原则 ★★★★★</h3><blockquote>
 <p>软件实体对扩展是开放的，但对修改是关闭的，即在不修改一个软件实体的基础上去扩展其功能</p>
 </blockquote>
-<p><strong><em>例如：</em></strong></p>
+<p><em><strong>例如：</strong></em></p>
 <p>以策略模式为例，当我们新增一种策略的时候，只需要实现策略顶层接口，在调用的时指向新的策略即可</p>
 <p>针对这一条原则，在实现难度上要比单一职责更难，在编码期间，我们需要充分考虑未来的拓展性，规范接口，依赖抽象，这样才能在需要拓展的时候，非常方便的实现其效果</p>
-<p>最佳实践案例：<a href="https://juejin.im/post/5ede6ce151882543485772ea" target="_blank" rel="noopener">【一起学系列】之模板方法：写SSO我只要5分钟</a></p>
+<p>最佳实践案例：<a target="_blank" rel="noopener" href="https://juejin.im/post/5ede6ce151882543485772ea">【一起学系列】之模板方法：写SSO我只要5分钟</a></p>
 <p>说明：在接入第三方SSO时，如果需要新增接入方，基于文中的案例，只需实现固定接口，即可优雅的实现相应需求</p>
 <h3 id="依赖倒置原则-★★★★★"><a href="#依赖倒置原则-★★★★★" class="headerlink" title="依赖倒置原则  ★★★★★"></a>依赖倒置原则  ★★★★★</h3><blockquote>
 <p>要针对抽象层编程，而不要针对具体类编程</p>
 </blockquote>
-<p><strong><em>例如：</em></strong></p>
+<p><em><strong>例如：</strong></em></p>
 <p>以适配器模式为例，将一个类的接口转换成客户希望的另外一个接口，以此实现的前提便是代码中所依赖的都是抽象的，因为只有依赖抽象，才能在代码运行期间改变其实体，利用<code>多态</code>实现需要的效果</p>
 <p>针对该条原则，其实有一定编程经验的人一定会在无形中注意到，而且了解设计模式的话，会发现所有涉及接口和实现的设计模式都会遵从这一条原则</p>
-<p>最佳实践案例：<a href="https://juejin.im/post/5ede6ce151882543485772ea" target="_blank" rel="noopener">【一起学系列】之模板方法：写SSO我只要5分钟</a></p>
-<p>说明：和上一条原则的侧重点不同，在SSO中必然有其固定的流程，如登录-获取Token-获取用户信息-解析-退出等等，在代码的编写阶段，需要我们定义出接口/抽象类，然后依赖于抽象层，最终改变具体类，以此达到无缝切换的效果</p>
+<p>最佳实践案例：<a target="_blank" rel="noopener" href="https://juejin.im/post/5ede6ce151882543485772ea">【一起学系列】之模板方法：写SSO我只要5分钟</a></p>
+<p>说明：和上一条原则的侧重点不同，在SSO中必然有其固定的流程，如登录-获取Token-获取用户信息-解析-退出等等，在代码的编写阶段，需要我们定义出接口&#x2F;抽象类，然后依赖于抽象层，最终改变具体类，以此达到无缝切换的效果</p>
 <h3 id="合成复用原则-★★★★☆"><a href="#合成复用原则-★★★★☆" class="headerlink" title="合成复用原则  ★★★★☆"></a>合成复用原则  ★★★★☆</h3><blockquote>
 <p>总结一句话就是：多用组合，少用继承</p>
 </blockquote>
-<p><strong><em>例如：</em></strong></p>
+<p><em><strong>例如：</strong></em></p>
 <p>以单例模式和代理模式为例，它们都是该模式的最佳实践者，单例模式是把不同的策略接口通过<code>组合</code>的方式嵌入到<code>Context</code>类中，如代码所示：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Duck</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Duck</span> &#123;
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 飞行行为是动态的，可能会变的，因此抽成多个接口的组合，而不是让Duck类继承</span>
 <span class="hljs-comment">     */</span>
@@ -255,31 +244,32 @@
 <span class="hljs-comment">     * 每个鸭子的叫声不同，抽象成接口</span>
 <span class="hljs-comment">     */</span>
     QuackBehavior quackBehavior;
-&#125;</code></pre>
+&#125;
+</code></pre>
 
 <p>同理，代理模式也是如此，这里就考虑到一个问题，<code>为什么要多用组合而非继承？</code></p>
 <p>其实还是Java中单继承引发的问题，同时继承的<code>语义</code>过于苛刻，因此更多的时候建议<code>善用组合</code></p>
-<p>最佳实践案例：<a href="https://juejin.im/post/5eb67fc46fb9a043830f597a" target="_blank" rel="noopener">【一起学系列】之策略模式：好多鸭子啊</a></p>
+<p>最佳实践案例：<a target="_blank" rel="noopener" href="https://juejin.im/post/5eb67fc46fb9a043830f597a">【一起学系列】之策略模式：好多鸭子啊</a></p>
 <p>说明：策略模式就是合成复用原则的最佳实践者，没有之一</p>
 <h3 id="单一职责原则-★★★★☆"><a href="#单一职责原则-★★★★☆" class="headerlink" title="单一职责原则   ★★★★☆"></a>单一职责原则   ★★★★☆</h3><blockquote>
 <p>类的职责要单一，不能将太多的职责放在一个类中</p>
 </blockquote>
-<p><strong><em>例如：</em></strong></p>
+<p><em><strong>例如：</strong></em></p>
 <p>在代码设计中某种场景可能存在多种不同的状态，很可能就把代码混在一起了，这时我们利用<code>状态模式</code>进行设计，把各种状态对应的实现细节都用类的级别单独划分，即体现了<code>单一职则原则</code></p>
 <p>针对这一条原则，其实绝大多数人在设计之初都会考虑到，但问题就在于随着工作中人员职责的交叉，很有可能会破坏他人设计的最初目的，为了方便，让一个类拥有五花八门的功能</p>
-<p>最佳实践案例：<a href="https://juejin.im/post/5ee8f64be51d452f9c27e66a" target="_blank" rel="noopener">【一起学系列】之状态模式：你听过“流程”模式吗？</a></p>
+<p>最佳实践案例：<a target="_blank" rel="noopener" href="https://juejin.im/post/5ee8f64be51d452f9c27e66a">【一起学系列】之状态模式：你听过“流程”模式吗？</a></p>
 <p>说明：在状态模式中，每一种状态的处理都是独立的一个类，每个类只需要处理自身的核心逻辑，完美体现了<code>单一职责原则</code></p>
 <h3 id="里氏替换原则-★★★★☆"><a href="#里氏替换原则-★★★★☆" class="headerlink" title="里氏替换原则  ★★★★☆"></a>里氏替换原则  ★★★★☆</h3><blockquote>
 <p>在软件系统中，一个可以接受基类对象的地方必然可以接受一个子类对象</p>
 </blockquote>
 <p>当使用继承时，遵循里氏替换原则。类B继承类A时，除添加新的方法完成新增功能外，尽量不要重写父类A的方法，也尽量不要重载父类A的方法</p>
 <p>继承包含这样一层含义：父类中凡是已经实现好的方法（相对于抽象方法而言），实际上是在设定一系列的规范和契约，虽然它不强制要求所有的子类必须遵从这些契约，但是如果子类对这些非抽象方法任意修改，就会对整个继承体系造成破坏。而里氏替换原则就是表达了这一层含义</p>
-<p><strong><em>例如：</em></strong></p>
+<p><em><strong>例如：</strong></em></p>
 <p>我们都用过<code>ArrayList</code>，有谁看过 <code>forEach</code>方法的源码？</p>
 <pre><code class="hljs java"><span class="hljs-comment">// ArrayList 的父级接口 Iterable  定义的默认方法</span>
-<span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-keyword">super</span> T&gt; action)</span> </span>&#123;
+<span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> T&gt; action)</span> &#123;
     Objects.requireNonNull(action);
-    <span class="hljs-keyword">for</span> (T t : <span class="hljs-keyword">this</span>) &#123;
+    <span class="hljs-keyword">for</span> (T t : <span class="hljs-built_in">this</span>) &#123;
         action.accept(t);
     &#125;
 &#125;</code></pre>
@@ -288,17 +278,17 @@
 
 <p><code>ArrayList</code>重写的方法：</p>
 <pre><code class="hljs java"><span class="hljs-meta">@Override</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-keyword">super</span> E&gt; action)</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">forEach</span><span class="hljs-params">(Consumer&lt;? <span class="hljs-built_in">super</span> E&gt; action)</span> &#123;
     Objects.requireNonNull(action);
-    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> expectedModCount = modCount;
-    <span class="hljs-meta">@SuppressWarnings</span>(<span class="hljs-string">"unchecked"</span>)
-    <span class="hljs-keyword">final</span> E[] elementData = (E[]) <span class="hljs-keyword">this</span>.elementData;
-    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> size = <span class="hljs-keyword">this</span>.size;
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++) &#123;
+    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">expectedModCount</span> <span class="hljs-operator">=</span> modCount;
+    <span class="hljs-meta">@SuppressWarnings(&quot;unchecked&quot;)</span>
+    <span class="hljs-keyword">final</span> E[] elementData = (E[]) <span class="hljs-built_in">this</span>.elementData;
+    <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.size;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; modCount == expectedModCount &amp;&amp; i &lt; size; i++) &#123;
         action.accept(elementData[i]);
     &#125;
     <span class="hljs-keyword">if</span> (modCount != expectedModCount) &#123;
-        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ConcurrentModificationException();
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcurrentModificationException</span>();
     &#125;
 &#125;</code></pre>
 
@@ -308,9 +298,9 @@
 <h3 id="迪米特原则-★★★☆☆"><a href="#迪米特原则-★★★☆☆" class="headerlink" title="迪米特原则  ★★★☆☆"></a>迪米特原则  ★★★☆☆</h3><blockquote>
 <p>一个对象应该对其他对象保持最少的了解，又名：最少知道原则</p>
 </blockquote>
-<p><strong><em>例如：</em></strong></p>
+<p><em><strong>例如：</strong></em></p>
 <p>在代码设计场景中，某一个类的调用都会固定使用三个方法，是否可以考虑把三个方法抽取出来，提供一个公共的对外方法？这种思路就是<code>外观模式</code>，外观模式也是迪米特原则的最佳实践</p>
-<p>最佳实践案例：<a href="https://juejin.im/post/5ed688c051882543413c1168" target="_blank" rel="noopener">【一起学系列】之适配器模式：还有外观模式呢</a></p>
+<p>最佳实践案例：<a target="_blank" rel="noopener" href="https://juejin.im/post/5ed688c051882543413c1168">【一起学系列】之适配器模式：还有外观模式呢</a></p>
 <p>说明：利用<code>外观模式</code>构建统一的对外方法，屏蔽其内部实现，这样一旦内部实现需要更改，完全不会影响调用方，你Get了吗？</p>
 <h3 id="接口隔离原则-★★☆☆☆"><a href="#接口隔离原则-★★☆☆☆" class="headerlink" title="接口隔离原则  ★★☆☆☆"></a>接口隔离原则  ★★☆☆☆</h3><blockquote>
 <p>使用多个专门的接口来取代一个统一的接口</p>
@@ -318,101 +308,18 @@
 <p>这个模式其实也很好理解，比如我们定义了接口A，接口B实现了接口A，接口C实现了接口B，基类D其实只需要接口C的方法，但是此时不得不实现所有的方法</p>
 <p><font color="red">其实造成这个根本原因：对接口的抽象，设计出现了偏差</font></p>
 <p>毕竟看过JDK源码或者Spring源码的同学，可以经常发现某一个接口可能实现了一大堆的接口，但是对于普通开发者而言，没有这种强大的设计能力，就需要在设计的时候多思考，如果发现违背了<code>接口隔离原则</code>的情况，就应该对接口进行拆分</p>
-<h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/Kerwin-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%8E%9F%E5%88%99.png" srcset="/img/loading.gif" alt></p>
+<h2 id="思维导图"><a href="#思维导图" class="headerlink" title="思维导图"></a>思维导图</h2><p><img src="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/Kerwin-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%8E%9F%E5%88%99.png" srcset="/img/loading.gif"></p>
 <blockquote>
-<p>Processon分享地址：<a href="https://www.processon.com/view/link/5f0210aa7d9c0844204b4845" target="_blank" rel="noopener">https://www.processon.com/view/link/5f0210aa7d9c0844204b4845</a></p>
+<p>Processon分享地址：<a target="_blank" rel="noopener" href="https://www.processon.com/view/link/5f0210aa7d9c0844204b4845">https://www.processon.com/view/link/5f0210aa7d9c0844204b4845</a></p>
 <p>PS：需要源文件的小伙伴可以在文末扫描二维码，发送【设计模式】即可</p>
 </blockquote>
-<h2 id="设计模式的系列文章推荐"><a href="#设计模式的系列文章推荐" class="headerlink" title="设计模式的系列文章推荐"></a>设计模式的系列文章推荐</h2><table>
-<thead>
-<tr>
-<th>所属类型</th>
-<th>设计模式</th>
-<th>标题 &amp; 链接</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><font color="red">行为型模式</font></td>
-<td>策略模式</td>
-<td><a href="https://juejin.im/post/5eb67fc46fb9a043830f597a" target="_blank" rel="noopener">【一起学系列】之策略模式：好多鸭子啊</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>观察者模式</td>
-<td><a href="https://juejin.im/post/5ec2a1dde51d454ddf23697d" target="_blank" rel="noopener">【一起学系列】之观察者模式：我没有在监控你啊</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>命令模式</td>
-<td><a href="https://juejin.im/post/5ed5265851882543477c7abf" target="_blank" rel="noopener">【一起学系列】之命令模式：封装一个简单Jedis？</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>模板方法模式</td>
-<td><a href="https://juejin.im/post/5ede6ce151882543485772ea" target="_blank" rel="noopener">【一起学系列】之模板方法：写SSO我只要5分钟</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>迭代器模式</td>
-<td><a href="https://juejin.im/post/5ee64aade51d45789671b974" target="_blank" rel="noopener">【一起学系列】之迭代器&amp;组合：虽然有点用不上啦</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>状态模式</td>
-<td><a href="https://juejin.im/post/5ee8f64be51d452f9c27e66a" target="_blank" rel="noopener">【一起学系列】之状态模式：你听过“流程”模式吗？</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>职责链模式</td>
-<td><a href="https://juejin.im/post/5efe0653e51d4534a81a9121" target="_blank" rel="noopener">【一起学系列】之剩下的设计模式们</a></td>
-</tr>
-<tr>
-<td><font color="red">行为型模式</font></td>
-<td>备忘录模式</td>
-<td><a href="https://juejin.im/post/5efe0653e51d4534a81a9121" target="_blank" rel="noopener">【一起学系列】之剩下的设计模式们</a></td>
-</tr>
-<tr>
-<td><font color="blue">结构型模式</font></td>
-<td>装饰器模式</td>
-<td><a href="https://juejin.im/post/5ec2a87c5188256e9b728e70" target="_blank" rel="noopener">【一起学系列】之装饰器模式：不改代码增强功能？</a></td>
-</tr>
-<tr>
-<td><font color="blue">结构型模式</font></td>
-<td>适配器模式 &amp; 外观模式</td>
-<td><a href="https://juejin.im/post/5ed688c051882543413c1168" target="_blank" rel="noopener">【一起学系列】之适配器模式：还有外观模式呢</a></td>
-</tr>
-<tr>
-<td><font color="blue">结构型模式</font></td>
-<td>组合模式</td>
-<td><a href="https://juejin.im/post/5ee64aade51d45789671b974" target="_blank" rel="noopener">【一起学系列】之迭代器&amp;组合：虽然有点用不上啦</a></td>
-</tr>
-<tr>
-<td><font color="blue">结构型模式</font></td>
-<td>代理模式</td>
-<td><a href="https://juejin.im/post/5ef2b053f265da02e3401e5c" target="_blank" rel="noopener">【一起学系列】之代理模式：是为了控制访问啊！</a></td>
-</tr>
-<tr>
-<td><font color="green">创建型模式</font></td>
-<td>工厂模式<br>（工厂方法及抽象工厂）</td>
-<td><a href="https://juejin.im/post/5ecbcf19e51d4578a475ea5e" target="_blank" rel="noopener">【一起学系列】之工厂模式：产品？产品族?</a></td>
-</tr>
-<tr>
-<td><font color="green">创建型模式</font></td>
-<td>单例模式</td>
-<td><a href="https://juejin.im/post/5ecbcabc6fb9a047d070c779" target="_blank" rel="noopener">【一起学系列】之单例模式：只推荐三种~</a></td>
-</tr>
-<tr>
-<td><font color="green">创建型模式</font></td>
-<td>建造者模式</td>
-<td><a href="https://juejin.im/post/5efe0653e51d4534a81a9121" target="_blank" rel="noopener">【一起学系列】之剩下的设计模式们</a></td>
-</tr>
-</tbody></table>
-<h2 id="源码链接"><a href="#源码链接" class="headerlink" title="源码链接"></a>源码链接</h2><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<h2 id="设计模式的系列文章推荐"><a href="#设计模式的系列文章推荐" class="headerlink" title="设计模式的系列文章推荐"></a>设计模式的系列文章推荐</h2><p>| 所属类型                              | 设计模式                             | 标题 &amp; 链接                                                  |<br>| - |  |  |<br>| <font color="red">行为型模式</font>   | 策略模式                             | <a target="_blank" rel="noopener" href="https://juejin.im/post/5eb67fc46fb9a043830f597a">【一起学系列】之策略模式：好多鸭子啊</a> |<br>| <font color="red">行为型模式</font>   | 观察者模式                           | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ec2a1dde51d454ddf23697d">【一起学系列】之观察者模式：我没有在监控你啊</a> |<br>| <font color="red">行为型模式</font>   | 命令模式                             | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ed5265851882543477c7abf">【一起学系列】之命令模式：封装一个简单Jedis？</a> |<br>| <font color="red">行为型模式</font>   | 模板方法模式                         | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ede6ce151882543485772ea">【一起学系列】之模板方法：写SSO我只要5分钟</a> |<br>| <font color="red">行为型模式</font>   | 迭代器模式                           | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ee64aade51d45789671b974">【一起学系列】之迭代器&amp;组合：虽然有点用不上啦</a> |<br>| <font color="red">行为型模式</font>   | 状态模式                             | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ee8f64be51d452f9c27e66a">【一起学系列】之状态模式：你听过“流程”模式吗？</a> |<br>| <font color="red">行为型模式</font>   | 职责链模式                           | <a target="_blank" rel="noopener" href="https://juejin.im/post/5efe0653e51d4534a81a9121">【一起学系列】之剩下的设计模式们</a> |<br>| <font color="red">行为型模式</font>   | 备忘录模式                           | <a target="_blank" rel="noopener" href="https://juejin.im/post/5efe0653e51d4534a81a9121">【一起学系列】之剩下的设计模式们</a> |<br>| <font color="blue">结构型模式</font>  | 装饰器模式                           | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ec2a87c5188256e9b728e70">【一起学系列】之装饰器模式：不改代码增强功能？</a> |<br>| <font color="blue">结构型模式</font>  | 适配器模式 &amp; 外观模式                | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ed688c051882543413c1168">【一起学系列】之适配器模式：还有外观模式呢</a> |<br>| <font color="blue">结构型模式</font>  | 组合模式                             | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ee64aade51d45789671b974">【一起学系列】之迭代器&amp;组合：虽然有点用不上啦</a> |<br>| <font color="blue">结构型模式</font>  | 代理模式                             | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ef2b053f265da02e3401e5c">【一起学系列】之代理模式：是为了控制访问啊！</a> |<br>| <font color="green">创建型模式</font> | 工厂模式<br>（工厂方法及抽象工厂） | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ecbcf19e51d4578a475ea5e">【一起学系列】之工厂模式：产品？产品族?</a> |<br>| <font color="green">创建型模式</font> | 单例模式                             | <a target="_blank" rel="noopener" href="https://juejin.im/post/5ecbcabc6fb9a047d070c779">【一起学系列】之单例模式：只推荐三种~</a> |<br>| <font color="green">创建型模式</font> | 建造者模式                           | <a target="_blank" rel="noopener" href="https://juejin.im/post/5efe0653e51d4534a81a9121">【一起学系列】之剩下的设计模式们</a> |</p>
+<h2 id="源码链接"><a href="#源码链接" class="headerlink" title="源码链接"></a>源码链接</h2><p><a target="_blank" rel="noopener" href="https://github.com/kkzhilu/Kerwin-DesignPattern">GitHub地址</a></p>
 <ul>
 <li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
 <li>提供了友好的阅读指导</li>
 </ul>
-<p><img src="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/172284a1c8caf324" srcset="/img/loading.gif" alt></p>
+<p><img src="/2023/02/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%AF%87%EF%BC%9A%E5%89%96%E6%9E%90%E4%B8%83%E5%A4%A7%E5%8E%9F%E5%88%99/172284a1c8caf324" srcset="/img/loading.gif"></p>
 
             </article>
             <hr>
@@ -436,16 +343,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">
+                      <a href="/2023/02/06/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">观察者模式</span>
+                        <span class="hidden-mobile">装饰器模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -453,8 +360,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E9%99%90%E6%B5%81%E7%AF%87/">
-                        <span class="hidden-mobile">限流篇</span>
+                      <a href="/2023/02/06/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">跨域问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -469,30 +376,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/设计模式总篇：剖析七大原则/';
+          this.page.identifier = '/2023/02/06/设计模式总篇：剖析七大原则/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -556,24 +461,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -618,7 +512,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -705,13 +599,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

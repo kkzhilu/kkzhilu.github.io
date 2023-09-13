@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>Java语法糖之泛型 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,42 +192,43 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="聊一聊-JAVA-泛型中的通配符-T，E，K，V，？"><a href="#聊一聊-JAVA-泛型中的通配符-T，E，K，V，？" class="headerlink" title="聊一聊-JAVA 泛型中的通配符 T，E，K，V，？"></a>聊一聊-JAVA 泛型中的通配符 T，E，K，V，？</h1><blockquote>
+              <h1 id="聊一聊-JAVA-泛型中的通配符-T，E，K，V，？"><a href="#聊一聊-JAVA-泛型中的通配符-T，E，K，V，？" class="headerlink" title="聊一聊-JAVA 泛型中的通配符 T，E，K，V，？"></a>聊一聊-JAVA 泛型中的通配符 T，E，K，V，？</h1><p>标签： #Share</p>
+<blockquote>
 <p>原文来源：掘金</p>
-<p>原文链接：<a href="https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension" target="_blank" rel="noopener">https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension</a></p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension">https://juejin.im/post/5d5789d26fb9a06ad0056bd9?utm_source=gold_browser_extension</a></p>
 </blockquote>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时类型安全检测机制，该机制允许开发者在编译时检测到非法的类型。</p>
 <p>泛型的本质是参数化类型，也就是说所操作的数据类型被指定为一个参数。</p>
 <h2 id="泛型带来的好处"><a href="#泛型带来的好处" class="headerlink" title="泛型带来的好处"></a>泛型带来的好处</h2><p>在没有泛型的情况的下，通过对类型 Object 的引用来实现参数的“任意化”，“任意化”带来的缺点是要做显式的强制类型转换，而这种转换是要求开发者对实际参数类型可以预知的情况下进行的。对于强制类型转换错误的情况，编译器可能不提示错误，在运行的时候才出现异常，这是本身就是一个安全隐患。</p>
 <p>那么泛型的好处就是在编译的时候能够检查类型安全，并且所有的强制转换都是自动和隐式的。</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GlmapperGeneric</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">GlmapperGeneric</span>&lt;T&gt; &#123;
 		<span class="hljs-keyword">private</span> T t;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(T t)</span> </span>&#123; <span class="hljs-keyword">this</span>.t = t; &#125;
-    <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">get</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> t; &#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">set</span><span class="hljs-params">(T t)</span> &#123; <span class="hljs-built_in">this</span>.t = t; &#125;
+    <span class="hljs-keyword">public</span> T <span class="hljs-title function_">get</span><span class="hljs-params">()</span> &#123; <span class="hljs-keyword">return</span> t; &#125;
   
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
         <span class="hljs-comment">// do nothing</span>
     &#125;
 
   <span class="hljs-comment">/**</span>
 <span class="hljs-comment">    * 不指定类型</span>
 <span class="hljs-comment">    */</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">noSpecifyType</span><span class="hljs-params">()</span></span>&#123;
-    GlmapperGeneric glmapperGeneric = <span class="hljs-keyword">new</span> GlmapperGeneric();
-    glmapperGeneric.set(<span class="hljs-string">"test"</span>);
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">noSpecifyType</span><span class="hljs-params">()</span>&#123;
+    <span class="hljs-type">GlmapperGeneric</span> <span class="hljs-variable">glmapperGeneric</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GlmapperGeneric</span>();
+    glmapperGeneric.set(<span class="hljs-string">&quot;test&quot;</span>);
     <span class="hljs-comment">// 需要强制类型转换</span>
-    String test = (String) glmapperGeneric.get();
+    <span class="hljs-type">String</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> (String) glmapperGeneric.get();
     System.out.println(test);
   &#125;
 
   <span class="hljs-comment">/**</span>
 <span class="hljs-comment">    * 指定类型</span>
 <span class="hljs-comment">    */</span>
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">specifyType</span><span class="hljs-params">()</span></span>&#123;
-    GlmapperGeneric&lt;String&gt; glmapperGeneric = <span class="hljs-keyword">new</span> GlmapperGeneric();
-    glmapperGeneric.set(<span class="hljs-string">"test"</span>);
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">specifyType</span><span class="hljs-params">()</span>&#123;
+    GlmapperGeneric&lt;String&gt; glmapperGeneric = <span class="hljs-keyword">new</span> <span class="hljs-title class_">GlmapperGeneric</span>();
+    glmapperGeneric.set(<span class="hljs-string">&quot;test&quot;</span>);
     <span class="hljs-comment">// 不需要强制类型转换</span>
-    String test = glmapperGeneric.get();
+    <span class="hljs-type">String</span> <span class="hljs-variable">test</span> <span class="hljs-operator">=</span> glmapperGeneric.get();
     System.out.println(test);
   &#125;
 &#125;</code></pre>
@@ -253,16 +242,16 @@
 <li>K V (key value) 分别代表java键值中的Key Value</li>
 <li>E (element) 代表Element</li>
 </ul>
-<h3 id="？-无界通配符"><a href="#？-无界通配符" class="headerlink" title="？ 无界通配符"></a>？ <strong>无界通配符</strong></h3><p>先从一个小例子看起，原文在 <a href="https://link.juejin.im?target=https%3A%2F%2Fcodeday.me%2Fbug%2F20180113%2F116421.html">这里</a> 。</p>
+<h3 id="？-无界通配符"><a href="#？-无界通配符" class="headerlink" title="？ 无界通配符"></a>？ <strong>无界通配符</strong></h3><p>先从一个小例子看起，原文在 <a href="https://link.juejin.im/?target=https://codeday.me/bug/20180113/116421.html">这里</a> 。</p>
 <p>我有一个父类 Animal 和几个子类，如狗、猫等，现在我需要一个动物的列表，我的第一个想法是像这样的：</p>
 <pre><code class="hljs xml">List<span class="hljs-tag">&lt;<span class="hljs-name">Animal</span>&gt;</span> listAnimals</code></pre>
 
 <p>但是老板的想法确实这样的：</p>
-<pre><code class="hljs capnproto"><span class="hljs-built_in">List</span>&lt;? <span class="hljs-keyword">extends</span> Animal&gt; listAnimals</code></pre>
+<pre><code class="hljs php">List<span class="hljs-meta">&lt;?</span> <span class="hljs-keyword">extends</span> Animal&gt; listAnimals</code></pre>
 
 <p>为什么要使用通配符而不是简单的泛型呢？通配符其实在声明局部变量时是没有什么意义的，但是当你为一个方法声明一个参数时，它是非常重要的。</p>
-<pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">countLegs</span> <span class="hljs-params">(List&lt;? extends Animal &gt; animals )</span> </span>&#123;
-    <span class="hljs-keyword">int</span> retVal = <span class="hljs-number">0</span>;
+<pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countLegs</span> <span class="hljs-params">(List&lt;? extends Animal &gt; animals )</span> &#123;
+    <span class="hljs-type">int</span> <span class="hljs-variable">retVal</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> ( Animal animal : animals )
     &#123;
         retVal += animal.countLegs();
@@ -270,8 +259,8 @@
     <span class="hljs-keyword">return</span> retVal;
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">countLegs1</span> <span class="hljs-params">(List&lt; Animal &gt; animals )</span></span>&#123;
-    <span class="hljs-keyword">int</span> retVal = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">countLegs1</span> <span class="hljs-params">(List&lt; Animal &gt; animals )</span>&#123;
+    <span class="hljs-type">int</span> <span class="hljs-variable">retVal</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> ( Animal animal : animals )
     &#123;
         retVal += animal.countLegs();
@@ -279,8 +268,8 @@
     <span class="hljs-keyword">return</span> retVal;
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
-    List&lt;Dog&gt; dogs = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
+    List&lt;Dog&gt; dogs = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
  	<span class="hljs-comment">// 不会报错</span>
     countLegs( dogs );
 	<span class="hljs-comment">// 报错</span>
@@ -291,7 +280,7 @@
 
 <p><img src="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/image-20201104235544754.png" srcset="/img/loading.gif" alt="image-20201104235544754"></p>
 <p>所以，对于不确定或者不关心实际要操作的类型，可以使用无限制通配符（尖括号里一个问号，即 &lt;?&gt; ），表示可以持有任何类型。像 countLegs 方法中，限定了上届，但是不关心具体类型是什么，所以对于传入的 Animal 的所有子类都可以支持，并且不会报错。而 countLegs1 就不行。</p>
-<h3 id="上界通配符-lt-extends-E-gt"><a href="#上界通配符-lt-extends-E-gt" class="headerlink" title="上界通配符 &lt; ? extends E&gt;"></a>上界通配符 &lt; ? extends E&gt;</h3><blockquote>
+<h3 id="上界通配符-extends-E"><a href="#上界通配符-extends-E" class="headerlink" title="上界通配符 &lt; ? extends E&gt;"></a>上界通配符 &lt; ? extends E&gt;</h3><blockquote>
 <p>上届：用 extends 关键字声明，表示参数化的类型可能是所指定的类型，或者是此类型的子类。</p>
 </blockquote>
 <p>在类型参数中使用 extends 表示这个泛型中的参数必须是 E 或者 E 的子类，这样有两个好处：</p>
@@ -299,8 +288,8 @@
 <li>如果传入的类型不是 E 或者 E 的子类，编译不成功</li>
 <li>泛型中可以使用 E 的方法，要不然还得强转成 E 才能使用</li>
 </ul>
-<pre><code class="hljs aspectj"><span class="hljs-keyword">private</span> &lt;K <span class="hljs-keyword">extends</span> A, E <span class="hljs-keyword">extends</span> B&gt; <span class="hljs-function">E <span class="hljs-title">test</span><span class="hljs-params">(K arg1, E arg2)</span></span>&#123;
-    E result = arg2;
+<pre><code class="hljs java"><span class="hljs-keyword">private</span> &lt;K <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span>, E <span class="hljs-keyword">extends</span> <span class="hljs-title class_">B</span>&gt; E <span class="hljs-title function_">test</span><span class="hljs-params">(K arg1, E arg2)</span>&#123;
+    <span class="hljs-type">E</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> arg2;
     arg2.compareTo(arg1);
     <span class="hljs-comment">//.....</span>
     <span class="hljs-keyword">return</span> result;
@@ -310,7 +299,7 @@
 <blockquote>
 <p>类型参数列表中如果有多个类型参数上限，用逗号分开</p>
 </blockquote>
-<h3 id="下界通配符-lt-super-E-gt"><a href="#下界通配符-lt-super-E-gt" class="headerlink" title="下界通配符 &lt; ? super E&gt;"></a>下界通配符 &lt; ? super E&gt;</h3><blockquote>
+<h3 id="下界通配符-super-E"><a href="#下界通配符-super-E" class="headerlink" title="下界通配符 &lt; ? super E&gt;"></a>下界通配符 &lt; ? super E&gt;</h3><blockquote>
 <p>下界: 用 super 进行声明，表示参数化的类型可能是所指定的类型，或者是此类型的父类型，直至 Object</p>
 </blockquote>
 <p>在类型参数中使用 super 表示这个泛型中的参数必须是 E 或者 E 的父类。</p>
@@ -332,21 +321,21 @@ public static void main(<span class="hljs-type">String</span>[] args) &#123;
 
 <p>dst 类型 “大于等于” src 的类型，这里的“大于等于”是指 dst 表示的范围比 src 要大，因此装得下 dst 的容器也就能装 src 。</p>
 <h3 id="？-和-T-的区别"><a href="#？-和-T-的区别" class="headerlink" title="？ 和 T 的区别"></a>？ 和 T 的区别</h3><p><img src="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/image-20201104235617914.png" srcset="/img/loading.gif" alt="image-20201104235617914">？和 T 都表示不确定的类型，区别在于我们可以对 T 进行操作，但是对 ？ 不行，比如如下这种 ：</p>
-<pre><code class="hljs gcode"><span class="hljs-comment">// 可以</span>
-T t = operate<span class="hljs-comment">()</span>;
+<pre><code class="hljs abnf">// 可以
+T t <span class="hljs-operator">=</span> operate()<span class="hljs-comment">;</span>
 
-<span class="hljs-comment">// 不可以</span>
-？ car = operate<span class="hljs-comment">()</span>;</code></pre>
+// 不可以
+？ car <span class="hljs-operator">=</span> operate()<span class="hljs-comment">;</span></code></pre>
 
 <p>简单总结下：</p>
 <p>T 是一个 确定的 类型，通常用于泛型类和泛型方法的定义，？是一个 不确定 的类型，通常用于泛型方法的调用代码和形参，不能用于定义类和泛型方法。</p>
 <h4 id="区别1：通过-T-来-确保-泛型参数的一致性"><a href="#区别1：通过-T-来-确保-泛型参数的一致性" class="headerlink" title="区别1：通过 T 来 确保 泛型参数的一致性"></a>区别1：通过 T 来 确保 泛型参数的一致性</h4><pre><code class="hljs typescript"><span class="hljs-comment">// 通过 T 来 确保 泛型参数的一致性</span>
-<span class="hljs-keyword">public</span> &lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">Number</span>&gt; <span class="hljs-built_in">void</span>
-test(List&lt;T&gt; dest, List&lt;T&gt; src)
+<span class="hljs-keyword">public</span> &lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Number</span>&gt; <span class="hljs-built_in">void</span>
+<span class="hljs-title function_">test</span>(<span class="hljs-title class_">List</span>&lt;T&gt; dest, <span class="hljs-title class_">List</span>&lt;T&gt; src)
 
 <span class="hljs-comment">//通配符是 不确定的，所以这个方法不能保证两个 List 具有相同的元素类型</span>
 <span class="hljs-keyword">public</span> <span class="hljs-built_in">void</span>
-test(List&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-built_in">Number</span>&gt; dest, List&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-built_in">Number</span>&gt; src)
+<span class="hljs-title function_">test</span>(<span class="hljs-title class_">List</span>&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Number</span>&gt; dest, <span class="hljs-title class_">List</span>&lt;? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Number</span>&gt; src)
 复制代码</code></pre>
 
 <p>像下面的代码中，约定的 T 是 Number 的子类才可以，但是申明时是用的 String ，所以就会飘红报错。</p>
@@ -362,18 +351,18 @@ glmapperGeneric.testNon(dest,src);
 <h4 id="区别2：类型参数可以多重限定而通配符不行"><a href="#区别2：类型参数可以多重限定而通配符不行" class="headerlink" title="区别2：类型参数可以多重限定而通配符不行"></a>区别2：类型参数可以多重限定而通配符不行</h4><p><img src="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/image-20201104235710004.png" srcset="/img/loading.gif" alt="image-20201104235710004"></p>
 <p>使用 &amp; 符号设定多重边界（Multi Bounds)，指定泛型类型 T 必须是 MultiLimitInterfaceA 和 MultiLimitInterfaceB 的共有子类型，此时变量 t 就具有了所有限定的方法和属性。对于通配符来说，因为它不是一个确定的类型，所以不能进行多重限定。</p>
 <h4 id="区别3：通配符可以使用超类限定而类型参数不行"><a href="#区别3：通配符可以使用超类限定而类型参数不行" class="headerlink" title="区别3：通配符可以使用超类限定而类型参数不行"></a>区别3：通配符可以使用超类限定而类型参数不行</h4><p>类型参数 T 只具有 一种 类型限定方式：</p>
-<pre><code class="hljs actionscript">T <span class="hljs-keyword">extends</span> A</code></pre>
+<pre><code class="hljs actionscript">T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span></code></pre>
 
 <p>但是通配符 ? 可以进行 两种限定：</p>
-<pre><code class="hljs actionscript">? <span class="hljs-keyword">extends</span> A
+<pre><code class="hljs actionscript">? <span class="hljs-keyword">extends</span> <span class="hljs-title class_">A</span>
 ? <span class="hljs-keyword">super</span> A</code></pre>
 
-<h2 id="Class-lt-T-gt-和-Class-lt-gt-区别"><a href="#Class-lt-T-gt-和-Class-lt-gt-区别" class="headerlink" title="Class&lt;T&gt; 和 Class&lt;?&gt; 区别"></a><code>Class&lt;T&gt;</code> 和 <code>Class&lt;?&gt;</code> 区别</h2><p>前面介绍了 ？ 和 T 的区别，那么对于，<code>Class&lt;T&gt;</code> 和 <code>&lt;Class&lt;?&gt;</code> 又有什么区别呢？<br><code>Class&lt;T&gt;</code> 和 <code>Class&lt;?&gt;</code></p>
+<h2 id="Class-和-Class-区别"><a href="#Class-和-Class-区别" class="headerlink" title="Class&lt;T&gt; 和 Class&lt;?&gt; 区别"></a><code>Class&lt;T&gt;</code> 和 <code>Class&lt;?&gt;</code> 区别</h2><p>前面介绍了 ？ 和 T 的区别，那么对于，<code>Class&lt;T&gt;</code> 和 <code>&lt;Class&lt;?&gt;</code> 又有什么区别呢？<br><code>Class&lt;T&gt;</code> 和 <code>Class&lt;?&gt;</code></p>
 <p>最常见的是在反射场景下的使用，这里以用一段发射的代码来说明下。</p>
 <pre><code class="hljs reasonml"><span class="hljs-comment">// 通过反射的方式生成  multiLimit </span>
 <span class="hljs-comment">// 对象，这里比较明显的是，我们需要使用强制类型转换</span>
 MultiLimit multiLimit = (MultiLimit)
-<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span>for<span class="hljs-constructor">Name(<span class="hljs-string">"com.glmapper.bridge.boot.generic.MultiLimit"</span>)</span>.<span class="hljs-keyword">new</span><span class="hljs-constructor">Instance()</span>;
+<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Class</span>.</span></span><span class="hljs-keyword">for</span><span class="hljs-constructor">Name(<span class="hljs-string">&quot;com.glmapper.bridge.boot.generic.MultiLimit&quot;</span>)</span>.<span class="hljs-keyword">new</span><span class="hljs-constructor">Instance()</span>;
 复制代码</code></pre>
 
 <p>对于上述代码，在运行期，如果反射的类型不是 MultiLimit 类，那么一定会报 java.lang.ClassCastException 错误。</p>
@@ -389,7 +378,7 @@ MultiLimit multiLimit = (MultiLimit)
 <p>所以当不知道定声明什么类型的 Class 的时候可以定义一 个Class&lt;?&gt;。</p>
 <p><img src="/2023/02/06/Java%E8%AF%AD%E6%B3%95%E7%B3%96%E4%B9%8B%E6%B3%9B%E5%9E%8B/image-20201104235755696.png" srcset="/img/loading.gif" alt="image-20201104235755696"></p>
 <p>那如果也想 <code>public Class&lt;T&gt; clazzT;</code> 这样的话，就必须让当前的类也指定 T ，</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test3</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Test3</span>&lt;T&gt; &#123;
     <span class="hljs-keyword">public</span> Class&lt;?&gt; clazz;
     <span class="hljs-comment">// 不会报错</span>
     <span class="hljs-keyword">public</span> Class&lt;T&gt; clazzT;</code></pre>
@@ -415,16 +404,16 @@ MultiLimit multiLimit = (MultiLimit)
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Guava%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%9C%AC%E5%9C%B0%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5/">
+                      <a href="/2023/02/06/JavaScript%E5%AE%9A%E6%97%B6%E5%99%A8%E5%8F%8A%E5%9B%9E%E8%B0%83%E7%94%A8%E6%B3%95/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Guava的两种本地缓存策略</span>
+                        <span class="hidden-mobile">JavaScript定时器及回调用法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -432,8 +421,8 @@ MultiLimit multiLimit = (MultiLimit)
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/SQL%E4%BC%98%E5%8C%96%E4%B8%8E%E8%AF%8A%E6%96%AD/">
-                        <span class="hidden-mobile">SQL优化与诊断</span>
+                      <a href="/2023/02/06/Lambda%E5%88%9D%E6%AC%A1%E4%BD%BF%E7%94%A8%E5%BE%88%E6%85%A2%EF%BC%9F%E4%BB%8EJIT%E5%88%B0%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%86%8D%E5%88%B0%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+                        <span class="hidden-mobile">Lambda初次使用很慢？从JIT到类加载再到实现原理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -448,30 +437,28 @@ MultiLimit multiLimit = (MultiLimit)
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/Java语法糖之泛型/';
+          this.page.identifier = '/2023/02/06/Java语法糖之泛型/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -535,24 +522,13 @@ MultiLimit multiLimit = (MultiLimit)
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -597,7 +573,7 @@ MultiLimit multiLimit = (MultiLimit)
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -684,13 +660,6 @@ MultiLimit multiLimit = (MultiLimit)
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

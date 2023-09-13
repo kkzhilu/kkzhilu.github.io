@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>SpringBoot代码生成器 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      681 字
+      683 字
     </span>
   
 
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="Code-Generate-代码生成器"><a href="#Code-Generate-代码生成器" class="headerlink" title="Code-Generate 代码生成器"></a><a href="https://github.com/kkzhilu/Code-Generate" target="_blank" rel="noopener">Code-Generate</a> 代码生成器</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> 🚀  Code-Generate是一个基于原生Mysql &amp; SpringBoot &amp; Mybatis 的代码生成器，建表之后即可完全解放双手，1秒钟构建CRUD接口以及漂亮的LayUi前端界面，同时支持<code>在不改动任何老代码的情况下拓展新的模板</code>，适合：</p>
+              <h1 id="Code-Generate-代码生成器"><a href="#Code-Generate-代码生成器" class="headerlink" title="Code-Generate 代码生成器"></a><a target="_blank" rel="noopener" href="https://github.com/kkzhilu/Code-Generate">Code-Generate</a> 代码生成器</h1><p>标签： #Share</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> 🚀  Code-Generate是一个基于原生Mysql &amp; SpringBoot &amp; Mybatis 的代码生成器，建表之后即可完全解放双手，1秒钟构建CRUD接口以及漂亮的LayUi前端界面，同时支持<code>在不改动任何老代码的情况下拓展新的模板</code>，适合：</p>
 <ul>
 <li>规律性定制化开发</li>
 <li>解放劳动力，一键完成固有代码</li>
@@ -213,7 +202,7 @@
 <li>测试同学的测试Demo案例，1秒钟造一个，就说快不快</li>
 <li>学生党快速交作业（咳咳咳，如果你是该类，一定要关注加点赞啊！）</li>
 </ul>
-<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><p><img src="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/code-generate.gif" srcset="/img/loading.gif" alt></p>
+<h2 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h2><p><img src="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/code-generate.gif" srcset="/img/loading.gif"></p>
 <p>步骤说明：</p>
 <ol>
 <li>自行建立数据库及需要映射的数据表</li>
@@ -288,14 +277,13 @@
 <td align="center">自定义模板，默认*;全部</td>
 </tr>
 </tbody></table>
-<pre><code class="hljs Main方法">
-&#96;&#96;&#96;java
-public class App &#123;
-    &#x2F;***
-     * 执行 - 构建项目
-     *&#x2F;
-    public static void main(String[] args)&#123;
-        AbstractEngine engine &#x3D; AbstractEngine.init();
+<p><code>Main方法 @see App.java</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">App</span> &#123;
+    <span class="hljs-comment">/***</span>
+<span class="hljs-comment">     * 执行 - 构建项目</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;
+        <span class="hljs-type">AbstractEngine</span> <span class="hljs-variable">engine</span> <span class="hljs-operator">=</span> AbstractEngine.init();
         engine.execute();
     &#125;
 &#125;</code></pre>
@@ -324,7 +312,7 @@ public class App &#123;
 <li>拔插式拦截器（基于org.reflections实现），支持扫描指定接口</li>
 </ul>
 <h2 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h2><h3 id="GNU-General-Public-License-v3-0"><a href="#GNU-General-Public-License-v3-0" class="headerlink" title="GNU General Public License v3.0"></a>GNU General Public License v3.0</h3><h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>该项目是从无到有一点点构建出来的，适合初学者和刚入门的人进行学习，更加适合大佬们直接快速构建简单Demo，把时间花在更有价值的事情上，欢迎各位Star &amp; Fork.</p>
-<p>点我：<a href="https://github.com/kkzhilu/Code-Generate/tree/master" target="_blank" rel="noopener">GitHub地址</a></p>
+<p>点我：<a target="_blank" rel="noopener" href="https://github.com/kkzhilu/Code-Generate/tree/master">GitHub地址</a></p>
 <p><img src="/2023/02/06/SpringBoot%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81.png" srcset="/img/loading.gif" alt="微信二维码"></p>
 
             </article>
@@ -349,16 +337,16 @@ public class App &#123;
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/Spring-xsd/">
+                      <a href="/2023/02/06/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring-xsd</span>
+                        <span class="hidden-mobile">SpringBoot-自定义starter</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -366,8 +354,8 @@ public class App &#123;
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/SpringBoot-%E8%87%AA%E5%AE%9A%E4%B9%89starter/">
-                        <span class="hidden-mobile">SpringBoot-自定义starter</span>
+                      <a href="/2023/02/06/SpringBoot%E9%85%8D%E7%BD%AE%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
+                        <span class="hidden-mobile">SpringBoot配置多数据源</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -382,30 +370,28 @@ public class App &#123;
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/SpringBoot代码生成器/';
+          this.page.identifier = '/2023/02/06/SpringBoot代码生成器/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -469,24 +455,13 @@ public class App &#123;
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -531,7 +506,7 @@ public class App &#123;
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -618,13 +593,6 @@ public class App &#123;
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

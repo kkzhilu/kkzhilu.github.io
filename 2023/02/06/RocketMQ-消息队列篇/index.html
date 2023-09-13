@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>RocketMQ-消息队列篇 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,55 +192,48 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="RocketMQ-消息队列篇"><a href="#RocketMQ-消息队列篇" class="headerlink" title="RocketMQ-消息队列篇"></a>RocketMQ-消息队列篇</h1><h2 id="Windows安装部署"><a href="#Windows安装部署" class="headerlink" title="Windows安装部署"></a>Windows安装部署</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a><strong>下载</strong></h3><p>地址：[<a href="https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.5.2/rocketmq-all-4.5.2-bin-release.zip]" target="_blank" rel="noopener">https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.5.2/rocketmq-all-4.5.2-bin-release.zip]</a></p>
+              <h1 id="RocketMQ-消息队列篇"><a href="#RocketMQ-消息队列篇" class="headerlink" title="RocketMQ-消息队列篇"></a>RocketMQ-消息队列篇</h1><p>标签： #Share</p>
+<h2 id="Windows安装部署"><a href="#Windows安装部署" class="headerlink" title="Windows安装部署"></a>Windows安装部署</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a><strong>下载</strong></h3><p>地址：[<a target="_blank" rel="noopener" href="https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.5.2/rocketmq-all-4.5.2-bin-release.zip%5D">https://www.apache.org/dyn/closer.cgi?path=rocketmq/4.5.2/rocketmq-all-4.5.2-bin-release.zip]</a></p>
 <p>选择‘Binary’进行下载</p>
 <p>解压已下载工程</p>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><blockquote>
 <p>新增系统变量<br>ROCKETMQ_HOME  -&gt;  F:\RocketMQ\rocketmq-4.5.2</p>
 <p>JAVA_HOME             -&gt;  F:\Java_JDK\JDK1.8</p>
-<p>Path 系统变量新增：Maven/bin目录</p>
+<p>Path 系统变量新增：Maven&#x2F;bin目录</p>
 <p>PS：RocketMQ 消息存储在C:\Users\Administrator\store store目录中  <code>文件占用较大，注意删除不必要的内容</code></p>
 </blockquote>
 <h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><blockquote>
 <p>start mqnamesrv.cmd</p>
-<p>start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true</p>
+<p>start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable&#x3D;true</p>
 </blockquote>
 <h3 id="Rocket集成可视化监控插件"><a href="#Rocket集成可视化监控插件" class="headerlink" title="Rocket集成可视化监控插件"></a>Rocket集成可视化监控插件</h3><ol>
-<li><p>任意目录（拉取项目，随便哪里都行）git clone <a href="https://github.com/apache/rocketmq-externals.git" target="_blank" rel="noopener">https://github.com/apache/rocketmq-externals.git</a></p>
+<li><p>任意目录（拉取项目，随便哪里都行）git clone <a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-externals.git">https://github.com/apache/rocketmq-externals.git</a></p>
 </li>
 <li><p>进入‘rocketmq-externals\rocketmq-console\src\main\resources’文件夹，打开‘application.properties’进行配置</p>
 </li>
 <li><p>其实就是一个SpringBoot服务，确定好端口，别重复即可</p>
-<p>server.port=8100</p>
-<p>rocketmq.config.namesrvAddr=127.0.0.1:9876</p>
+<p>server.port&#x3D;8100</p>
+<p>rocketmq.config.namesrvAddr&#x3D;127.0.0.1:9876</p>
 </li>
-</ol>
-<ol start="4">
 <li><p>进入‘\rocketmq-externals\rocketmq-console’文件夹</p>
-<p>执行‘mvn clean package -Dmaven.test.skip=true’，编译生成target</p>
+<p>执行‘mvn clean package -Dmaven.test.skip&#x3D;true’，编译生成target</p>
 <p>java -jar rocketmq-console-ng-1.0.1.jar</p>
 </li>
-<li><p>根据配置地址访问： <a href="http://127.0.0.1:8100" target="_blank" rel="noopener">http://127.0.0.1:8100</a></p>
+<li><p>根据配置地址访问： <a target="_blank" rel="noopener" href="http://127.0.0.1:8100/">http://127.0.0.1:8100</a></p>
 </li>
 </ol>
-<pre><code class="hljs Rocket可视化监控插件">
-![1569294651705](RocketMQ-消息队列篇&#x2F;1569294651705.png)
-
-&gt; 4.5.2 版本 支持自动创建Topic
-&gt;
-&gt; 4.3.0 版本 必须通过监控程序配置Topic，否则执行程序报错，没有此路由
-
-
-
-### SpringBoot集成 RocketMQ
-
-&#96;&#96;&#96;xml
-&lt;!--RocketMQ--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.apache.rocketmq&lt;&#x2F;groupId&gt;
-    &lt;artifactId&gt;rocketmq-client&lt;&#x2F;artifactId&gt;
-    &lt;version&gt;4.5.2&lt;&#x2F;version&gt;
-&lt;&#x2F;dependency&gt;</code></pre>
+<p><code>Rocket可视化监控插件 增加Topic | 自动增加Topic（4.5.2版本）</code></p>
+<p><img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/1569294651705.png" srcset="/img/loading.gif" alt="1569294651705"></p>
+<blockquote>
+<p>4.5.2 版本 支持自动创建Topic</p>
+<p>4.3.0 版本 必须通过监控程序配置Topic，否则执行程序报错，没有此路由</p>
+</blockquote>
+<h3 id="SpringBoot集成-RocketMQ"><a href="#SpringBoot集成-RocketMQ" class="headerlink" title="SpringBoot集成 RocketMQ"></a>SpringBoot集成 RocketMQ</h3><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--RocketMQ--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.rocketmq<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>rocketmq-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.5.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></code></pre>
 
 
 
@@ -333,7 +314,7 @@
 <h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>Topic被分割成一个或多个消息队列。队列分为3中角色：异步主、同步主、从。如果你不能容忍消息丢失，我们建议你部署同步主，并加一个从队列。 如果你容忍丢失，但你希望队列总是可用，你可以部署异步主和从队列。如果你想最简单，你只需要一个异步主，不需要从队列。 消息保存磁盘的方式也有两种，推荐使用的是异步保存，同步保存是昂贵的并会导致性能损失，如果你想要可靠性，我们推荐你使用同步主+从的方式。</p>
 <h4 id="Tag（标签）"><a href="#Tag（标签）" class="headerlink" title="Tag（标签）"></a>Tag（标签）</h4><p>标签，用另外一个词来说，就是子主题，为用户提供额外的灵活性。具有相同Topic的消息可以有不同的tag。</p>
 <h4 id="Broker（队列）"><a href="#Broker（队列）" class="headerlink" title="Broker（队列）"></a>Broker（队列）</h4><p>Broker是RocketMQ的一个主要组件，它接收生产者发送的消息，存储它们并准备处理消费者的拉取请求。它也存储消息相关的元数据， 包括消费组，消费成功的偏移量，主题、队列的信息。</p>
-<h4 id="名称服务"><a href="#名称服务" class="headerlink" title="名称服务"></a>名称服务</h4><p>名称服务主要提供路由信息。生产者/消费者客户端寻找topic，并找到通信的队列列表。</p>
+<h4 id="名称服务"><a href="#名称服务" class="headerlink" title="名称服务"></a>名称服务</h4><p>名称服务主要提供路由信息。生产者&#x2F;消费者客户端寻找topic，并找到通信的队列列表。</p>
 <h4 id="消息的顺序"><a href="#消息的顺序" class="headerlink" title="消息的顺序"></a>消息的顺序</h4><p>当<code>DefaultMQPushConsumer</code>被使用，你就要决定消费消息时，是顺序消费还是同时消费</p>
 <ul>
 <li>顺序消费</li>
@@ -362,7 +343,7 @@
 </ol>
 <h2 id="MQ核心问题"><a href="#MQ核心问题" class="headerlink" title="MQ核心问题"></a>MQ核心问题</h2><h3 id="1-消息队列适合解决的问题"><a href="#1-消息队列适合解决的问题" class="headerlink" title="1.消息队列适合解决的问题"></a>1.消息队列适合解决的问题</h3><p>解决的核心问题主要是：异步、解耦、削峰</p>
 <p>但是引入消息队列也会有很多额外的问题，比如系统复杂性会大大增加，同时需要解决重复下发，重复消费，消费顺序，消息丢失，重试机制等等问题，因此不能滥用，合适的场景用合适的技术</p>
-<h3 id="2-消息模型：主题和队列的区别"><a href="#2-消息模型：主题和队列的区别" class="headerlink" title="2.消息模型：主题和队列的区别"></a>2.消息模型：主题和队列的区别</h3><p><strong><em>一、消息队列的演进</em></strong></p>
+<h3 id="2-消息模型：主题和队列的区别"><a href="#2-消息模型：主题和队列的区别" class="headerlink" title="2.消息模型：主题和队列的区别"></a>2.消息模型：主题和队列的区别</h3><p><em><strong>一、消息队列的演进</strong></em></p>
 <p><strong>1、初始阶段</strong></p>
 <p>最初的消息队列，就是一个严格意义上的队列。队列是一种数据结构，先进先出，在消息入队出队过程中，保证这些消息严格有序。<strong>早期的消息队列就是按照“队列”的数据结构设计的</strong>。</p>
 <p>队列模型：</p>
@@ -389,14 +370,14 @@
 <li>对比这两种模型，生产者就是发布者，消费者就是订阅者，队列就是主题，并没有本质的区别。它们最大的区别是：<strong>一份消息数据能不能被消费多次的问题</strong>。</li>
 <li>实际上，在这种发布 - 订阅模型中，如果只有一个订阅者，那它和队列模型就基本是一样的了。也就是说，发布 - 订阅模型在功能层面上是可以兼容队列模型的。</li>
 </ul>
-<p><strong><em>二、RabbitMQ 的消息模型</em></strong></p>
+<p><em><strong>二、RabbitMQ 的消息模型</strong></em></p>
 <p>少数依然坚持<strong>使用队列模型</strong>的产品之一。</p>
 <p>RabbitMQ 使用 <strong>Exchange 模块解决多个消费者的问题</strong>。Exchange 位于生产者和队列之间，生产者并不关心将消息发送给哪个队列，而是<strong>将消息发送给 Exchange</strong>，由 Exchange 上<strong>配置的策略</strong>来决定将消息投递到哪些队列中。</p>
 <p><img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/1513968-20190825145306466-1941619714.jpg" srcset="/img/loading.gif" alt="img"></p>
 <ul>
 <li>同一份消息如果需要被多个消费者来消费，需要<strong>配置 Exchange 将消息发送到多个队列</strong>，每个队列中都<strong>存放一份完整的消息数据</strong>，可以为一个消费者提供消费服务。</li>
 </ul>
-<p><strong><em>三、RocketMQ 的消息模型</em></strong></p>
+<p><em><strong>三、RocketMQ 的消息模型</strong></em></p>
 <p>RocketMQ 使用的消息模型是标准的<strong>发布 - 订阅模型</strong>。在 RocketMQ 也有队列（Queue）这个概念。</p>
 <p><strong>消息队列的消费机制：</strong></p>
 <p>几乎所有的消息队列产品都使用一种非常朴素的“<strong>请求 - 确认”机制</strong>，确保消息不会在传递过程中由于网络或服务器故障丢失。</p>
@@ -414,9 +395,9 @@
 <li><strong>消费组中包含多个消费者，同一个组内的消费者是竞争消费的关系</strong>，每个消费者负责消费组内的一部分消息。如果一条消息被消费者 Consumer1 消费了，那同组的其他消费者就不会再收到这条消息。</li>
 <li>由于消息需要被不同的组进行多次消费，所以消费完的消息并不会立即被删除，这就需要 RocketMQ <strong>为每个消费组在每个队列上维护一个消费位置（Consumer Offset）</strong>，这个位置之前的消息都被消费过，之后的消息都没有被消费过，每成功消费一条消息，消费位置就加一。我们在使用消息队列的时候<strong>，丢消息的原因大多是由于消费位置处理不当导致的</strong>。</li>
 </ul>
-<p><strong><em>四、Kafka 的消息模型</em></strong></p>
+<p><em><strong>四、Kafka 的消息模型</strong></em></p>
 <p>Kafka 的消息模型和 RocketMQ 是完全一样的，唯一的区别是，在 Kafka 中，队列这个概念的名称不一样，<strong>Kafka 中对应的名称是“分区（Partition）”</strong>，含义和功能是没有任何区别的。</p>
-<p><strong><em>五、总结</em></strong></p>
+<p><em><strong>五、总结</strong></em></p>
 <ul>
 <li>常用的消息队列中，<strong>RabbitMQ 采用的是队列模型</strong>，但是它一样可以实现发布 - 订阅的功能。<strong>RocketMQ 和 Kafka 采用的是发布 - 订阅模型</strong>，并且二者的消息模型是基本一致的。</li>
 </ul>
@@ -446,7 +427,7 @@
 <p>在编写消费代码时需要注意的是：不要在收到消息后就立即发送消费确认，而是应该<strong>在执行完所有消费业务逻辑之后，再发送消费确认</strong>。</p>
 <h3 id="4-处理消费过程中的重复消息"><a href="#4-处理消费过程中的重复消息" class="headerlink" title="4.处理消费过程中的重复消息"></a>4.处理消费过程中的重复消息</h3><p>在消息传递过程中，如果出现<strong>传递失败</strong>的情况，发送方会<strong>执行重试</strong>，重试过程中就有可能<strong>产生重复的消息</strong>。如果没有对重复消息进行处理，就可能导致系统的数据出现错误。</p>
 <p>比如，一个消费订单消息，统计下单金额的微服务，如果没有正确处理重复消息，那就会出现重复统计，导致统计结果错误。</p>
-<p><strong><em>一、消息重复的情况必然存在</em></strong></p>
+<p><em><strong>一、消息重复的情况必然存在</strong></em></p>
 <p>在MQTT协议中，给出了三种传递消息时能够提供的服务质量标准：</p>
 <ul>
 <li><strong>At most once</strong>：至多一次。最多会被送达一次，也就是说没有消息可靠性保证，允许丢消息。一般都是一些对消息可靠性要求不高的监控场景使用，比如每分钟上报一次机房温度数据，可以接受数据少量丢失。</li>
@@ -455,8 +436,8 @@
 </ul>
 <p>这个服务质量标准不仅适用于 MQTT，对所有的消息队列都是适用的。常用的<strong>绝大部分消息队列提供的服务质量都是 At least once，包括 RocketMQ、RabbitMQ 和 Kafka</strong> 。也就是说，消息队列很难保证消息不重复。</p>
 <p>注意：Kafka 支持的“Exactly once”和我们刚刚提到的消息传递的服务质量标准“Exactly once”是不一样的，它是 Kafka 提供的另外一个特性，Kafka 中支持的事务也和我们通常意义理解的事务有一定的差异。在 Kafka 中，事务和 Excactly once 主要是为了配合流计算使用的特性。</p>
-<p><strong><em>二、用幂等性解决重复消息问题</em></strong></p>
-<p>幂等本来是一个数学上的概念，它的定义是：如果一个函数f(x)满足：f(f(x)) = f(x)，则函数f(x)满足米幂等性。扩展到计算机领域，被用来描述一个操作、方法或者服务。</p>
+<p><em><strong>二、用幂等性解决重复消息问题</strong></em></p>
+<p>幂等本来是一个数学上的概念，它的定义是：如果一个函数f(x)满足：f(f(x)) &#x3D; f(x)，则函数f(x)满足米幂等性。扩展到计算机领域，被用来描述一个操作、方法或者服务。</p>
 <ul>
 <li>一个幂等操作的特点是，其<strong>任意多次执行所产生的影响均与一次执行的影响相同</strong>。</li>
 <li>一个幂等方法，使用同样的参数，对它进行多次调用和一次调用，对系统产生的影响是一样的。所以不用担心重复执行会对系统造成任何改变。</li>
@@ -464,7 +445,7 @@
 <p>举例：</p>
 <p>1、在不考虑并发的情况下，“将账户 X 的余额设置为 100 元”，执行一次后对系统的影响是，账户 X 的余额变成了 100 元。只要提供的参数 100 元不变，那即使再执行多少次，账户 X 的余额始终都是 100 元，不会变化，这个操作就是一个幂等的操作。</p>
 <p>2、“将账户 X 的余额加 100 元”，这个操作它就不是幂等的，每执行一次，账户余额就会增加 100 元，执行多次和执行一次对系统的影响（也就是账户的余额）是不一样的。</p>
-<p>如果消费消息的业务逻辑具备幂等性，那就不用担心消息重复的问题，因为同一条消息，<strong>消费一次和消费多次对系统的影响是完全一样的</strong>。消费多次等于消费一次。从对系统的影响结果来说：At least once + 幂等消费 = Exactly once。</p>
+<p>如果消费消息的业务逻辑具备幂等性，那就不用担心消息重复的问题，因为同一条消息，<strong>消费一次和消费多次对系统的影响是完全一样的</strong>。消费多次等于消费一次。从对系统的影响结果来说：At least once + 幂等消费 &#x3D; Exactly once。</p>
 <p>实现幂等操作最好的方式是，<strong>从业务逻辑设计上入手，将消费的业务逻辑设计成具备幂等性的操作</strong>。</p>
 <p><strong>常用的设计幂等操作的方法</strong>：</p>
 <p>（1）利用<strong>数据库的唯一约束</strong>实现幂等</p>
@@ -486,7 +467,7 @@
 <li>t1 时刻：Consumer B 收到条消息，检查消息执行状态，发现消息未处理过，因为这个时刻，Consumer A 还未来得及更新消息执行状态。</li>
 </ul>
 <p>这样就会导致账户被错误地增加了两次 100 元，这是一个在分布式系统中非常容易犯的错误，一定要引以为戒。对于这个问题，当然我们可以用事务来实现，也可以用锁来实现，但是在分布式系统中，无论是分布式事务还是分布式锁都是比较难解决问题。</p>
-<h3 id="5-利用事务消息实现分布式事务"><a href="#5-利用事务消息实现分布式事务" class="headerlink" title="5.利用事务消息实现分布式事务"></a>5.利用事务消息实现分布式事务</h3><p><strong><em>一、消息事务</em></strong></p>
+<h3 id="5-利用事务消息实现分布式事务"><a href="#5-利用事务消息实现分布式事务" class="headerlink" title="5.利用事务消息实现分布式事务"></a>5.利用事务消息实现分布式事务</h3><p><em><strong>一、消息事务</strong></em></p>
 <p>其实很多场景下，我们“发消息”这个过程，目的往往是<strong>通知另外一个系统或者模块去更新数据</strong>，消息队列中的“事务”，主要解决<strong>消息生产者和消息消费者的数据一致性问题</strong>。</p>
 <p>用户在电商APP上购物时，先把商品加到购物车里，然后几件商品一起下单，最后支付，完成购物流程。</p>
 <p>这个过程中有一个需要用到消息队列的步骤，订单系统创建订单后，发消息给购物车系统，将已下单的商品从购物车中删除。因为从购物车删除已下单商品这个步骤，并不是用户下单支付这个主要流程中必要的步骤，使用消息队列来异步清理购物车是更加合理。</p>
@@ -506,7 +487,7 @@
 <li>订单没创建成功，购物车里面的商品却被清掉了。</li>
 </ul>
 <p>所以我们需要解决的问题为：在上述任意步骤都有可能失败的情况下，还要保证订单库和购物车库这两个库的数据一致性。</p>
-<p><strong><em>二、分布式事务</em></strong></p>
+<p><em><strong>二、分布式事务</strong></em></p>
 <p>分布式事务就是要在分布式系统中实现事务。在分布式系统中，在保证可用性和不严重牺牲性能的前提下，光是要<strong>实现数据的一致性就已经非常困难了</strong>，显然实现严格的分布式事务是更加不可能完成的任务。所以目前大家所说的分布式事务，更多情况下，是在<strong>分布式系统中事务的不完整实现</strong>，在不同的应用场景中，有不同的实现，目的都是通过一些妥协来解决实际问题。</p>
 <p>常见的分布式事务实现：</p>
 <ul>
@@ -516,7 +497,7 @@
 </ul>
 <p>每一种实现都有其特定的使用场景，也有各自的问题，都不是完美的解决方案。</p>
 <p><strong>事务消息适用的场景</strong>主要是那些需要<strong>异步更新数据</strong>，并且<strong>对数据实时性要求不太高</strong>的场景。比如在创建订单后，如果出现短暂的几秒，购物车里的商品没有被及时情况，也不是完全不可接受的，只要最终购物车的数据和订单数据保持一致就可。</p>
-<p><strong><em>三、消息队列实现分布式事务</em></strong></p>
+<p><em><strong>三、消息队列实现分布式事务</strong></em></p>
 <p><strong>事务消息需要消息队列提供相应的功能才能实现，kafka和RocketMQ都提供了事务相关功能。</strong></p>
 <p><img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/1513968-20190826155000602-1180010007.jpg" srcset="/img/loading.gif" alt="img"></p>
 <p>对于订单系统：</p>
@@ -601,14 +582,14 @@
 <p>上图是RocketMQ顺序消息原理的介绍，将不同订单的消息路由到不同的分区中。文档只是给出了Producer顺序的处理，Consumer消费时通过一个分区只能有一个线程消费的方式来保证消息顺序，具体实现如下。</p>
 <p><strong>Producer端</strong></p>
 <p>Producer端确保消息顺序唯一要做的事情就是将消息路由到特定的分区，在RocketMQ中，通过MessageQueueSelector来实现分区的选择。</p>
-<p><img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/471426-20180519131230081-742966938.png" srcset="/img/loading.gif" alt="img">)<img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" srcset="/img/loading.gif" alt="img"></p>
+<p><img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/471426-20180519131230081-742966938.png" srcset="/img/loading.gif" alt="img"><img src="/2023/02/06/RocketMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E7%AF%87/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==" srcset="/img/loading.gif" alt="img"></p>
 <ul>
 <li>List<MessageQueue> mqs：消息要发送的Topic下所有的分区</MessageQueue></li>
 <li>Message msg：消息对象</li>
 <li>额外的参数：用户可以传递自己的参数</li>
 </ul>
 <p>比如如下实现就可以保证相同的订单的消息被路由到相同的分区：</p>
-<pre><code class="hljs vbnet"><span class="hljs-built_in">long</span> orderId = ((<span class="hljs-keyword">Order</span>) <span class="hljs-built_in">object</span>).getOrderId;
+<pre><code class="hljs vbnet"><span class="hljs-type">long</span> orderId = ((<span class="hljs-keyword">Order</span>) <span class="hljs-type">object</span>).getOrderId;
 <span class="hljs-keyword">return</span> mqs.<span class="hljs-keyword">get</span>(orderId % mqs.size());</code></pre>
 
 <p><strong>Consumer端</strong></p>
@@ -663,16 +644,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E7%AE%97%E6%B3%95%E7%AF%87/">
+                      <a href="/2023/02/06/Nginx%E7%AF%87/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法篇</span>
+                        <span class="hidden-mobile">Nginx篇</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -696,30 +677,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/RocketMQ-消息队列篇/';
+          this.page.identifier = '/2023/02/06/RocketMQ-消息队列篇/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -783,24 +762,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -845,7 +813,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -932,13 +900,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

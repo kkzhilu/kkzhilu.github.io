@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>算法实战篇 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -204,10 +192,11 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="算法实战篇-大数据量问题解决方案"><a href="#算法实战篇-大数据量问题解决方案" class="headerlink" title="算法实战篇 - 大数据量问题解决方案"></a>算法实战篇 - 大数据量问题解决方案</h1><h2 id="1-如何从大量的-URL-中找出相同的-URL？"><a href="#1-如何从大量的-URL-中找出相同的-URL？" class="headerlink" title="1. 如何从大量的 URL 中找出相同的 URL？"></a>1. 如何从大量的 URL 中找出相同的 URL？</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定 a、b 两个文件，各存放 50 亿个 URL，每个 URL 各占 64B，内存限制是 4G。请找出 a、b 两个文件共同的 URL。</p>
+              <h1 id="算法实战篇-大数据量问题解决方案"><a href="#算法实战篇-大数据量问题解决方案" class="headerlink" title="算法实战篇 - 大数据量问题解决方案"></a>算法实战篇 - 大数据量问题解决方案</h1><p>标签： #Share</p>
+<h2 id="1-如何从大量的-URL-中找出相同的-URL？"><a href="#1-如何从大量的-URL-中找出相同的-URL？" class="headerlink" title="1. 如何从大量的 URL 中找出相同的 URL？"></a>1. 如何从大量的 URL 中找出相同的 URL？</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定 a、b 两个文件，各存放 50 亿个 URL，每个 URL 各占 64B，内存限制是 4G。请找出 a、b 两个文件共同的 URL。</p>
 <h3 id="解答思路"><a href="#解答思路" class="headerlink" title="解答思路"></a>解答思路</h3><p>每个 URL 占 64B，那么 50 亿个 URL占用的空间大小约为 320GB。</p>
 <blockquote>
-<p>5,000,000,000 * 64B ≈ 5GB * 64 = 320GB</p>
+<p>5,000,000,000 * 64B ≈ 5GB * 64 &#x3D; 320GB</p>
 </blockquote>
 <p>由于内存大小只有 4G，因此，我们不可能一次性把所有 URL 加载到内存中处理。对于这种类型的题目，一般采用<strong>分治策略</strong>，即：把一个文件中的 URL 按照某个特征划分为多个小文件，使得每个小文件大小不超过 4G，这样就可以把这个小文件读到内存中进行处理了。</p>
 <p><strong>思路如下</strong>：</p>
@@ -239,25 +228,25 @@
 <li>求解<strong>最大</strong>的 TopN 个，用<strong>小顶堆</strong>；求解<strong>最小</strong>的 TopN 个，用<strong>大顶堆</strong>。</li>
 </ol>
 <h2 id="4-如何在大量的数据中找出不重复的整数？"><a href="#4-如何在大量的数据中找出不重复的整数？" class="headerlink" title="4. 如何在大量的数据中找出不重复的整数？"></a>4. 如何在大量的数据中找出不重复的整数？</h2><h3 id="题目描述-3"><a href="#题目描述-3" class="headerlink" title="题目描述"></a>题目描述</h3><p>在 2.5 亿个整数中找出不重复的整数。注意：内存不足以容纳这 2.5 亿个整数。</p>
-<h3 id="解答思路-3"><a href="#解答思路-3" class="headerlink" title="解答思路"></a>解答思路</h3><h4 id="方法一：分治法"><a href="#方法一：分治法" class="headerlink" title="方法一：分治法"></a>方法一：分治法</h4><p>与前面的题目方法类似，先将 2.5 亿个数划分到多个小文件，用 HashSet/HashMap 找出每个小文件中不重复的整数，再合并每个子结果，即为最终结果。</p>
+<h3 id="解答思路-3"><a href="#解答思路-3" class="headerlink" title="解答思路"></a>解答思路</h3><h4 id="方法一：分治法"><a href="#方法一：分治法" class="headerlink" title="方法一：分治法"></a>方法一：分治法</h4><p>与前面的题目方法类似，先将 2.5 亿个数划分到多个小文件，用 HashSet&#x2F;HashMap 找出每个小文件中不重复的整数，再合并每个子结果，即为最终结果。</p>
 <h4 id="方法二：位图法"><a href="#方法二：位图法" class="headerlink" title="方法二：位图法"></a>方法二：位图法</h4><p><strong>位图</strong>，就是用一个或多个 bit 来标记某个元素对应的值，而键就是该元素。采用位作为单位来存储数据，可以大大节省存储空间。</p>
 <p>位图通过使用位数组来表示某些元素是否存在。它可以用于快速查找，判重，排序等。不是很清楚？我先举个小例子。</p>
 <p>假设我们要对 <code>[0,7]</code> 中的 5 个元素 (6, 4, 2, 1, 5) 进行排序，可以采用位图法。0~7 范围总共有 8 个数，只需要 8bit，即 1 个字节。首先将每个位都置 0：</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>
+<pre><code class="hljs tap">0<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 0 </span>0 0
 复制代码</code></pre>
 
 <p>然后遍历 5 个元素，首先遇到 6，那么将下标为 6 的位的 0 置为 1；接着遇到 4，把下标为 4 的位 的 0 置为 1：</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span>
+<pre><code class="hljs tap">0<span class="hljs-number"> 0 </span>0<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 0 </span>1 0
 复制代码</code></pre>
 
 <p>依次遍历，结束后，位数组是这样的：</p>
-<pre><code class="hljs angelscript"><span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span>
+<pre><code class="hljs tap">0<span class="hljs-number"> 1 </span>1<span class="hljs-number"> 0 </span>1<span class="hljs-number"> 1 </span>1 0
 复制代码</code></pre>
 
 <p>每个为 1 的位，它的下标都表示了一个数：</p>
-<pre><code class="hljs matlab"><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> in range(<span class="hljs-number">8</span>):
-    <span class="hljs-keyword">if</span> bits[<span class="hljs-built_in">i</span>] == <span class="hljs-number">1</span>:
-        print(<span class="hljs-built_in">i</span>)
+<pre><code class="hljs stylus"><span class="hljs-keyword">for</span> <span class="hljs-selector-tag">i</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">8</span>):
+    <span class="hljs-keyword">if</span> bits<span class="hljs-selector-attr">[i]</span> == <span class="hljs-number">1</span>:
+        <span class="hljs-built_in">print</span>(i)
 复制代码</code></pre>
 
 <p>这样我们其实就已经实现了排序。</p>
@@ -268,7 +257,7 @@
 <li>01 表示这个数字出现过一次（即为题目所找的不重复整数）；</li>
 <li>10 表示这个数字出现了多次。</li>
 </ul>
-<p>那么这 232 个整数，总共所需内存为 232*2b=1GB。因此，当可用内存超过 1GB 时，可以采用位图法。假设内存满足位图法需求，进行下面的操作：</p>
+<p>那么这 232 个整数，总共所需内存为 232*2b&#x3D;1GB。因此，当可用内存超过 1GB 时，可以采用位图法。假设内存满足位图法需求，进行下面的操作：</p>
 <p>遍历 2.5 亿个整数，查看位图中对应的位，如果是 00，则变为 01，如果是 01 则变为 10，如果是 10 则保持不变。遍历结束后，查看位图，把对应位是 01 的整数输出即可。</p>
 <h3 id="方法总结-3"><a href="#方法总结-3" class="headerlink" title="方法总结"></a>方法总结</h3><p><strong>判断数字是否重复的问题</strong>，位图法是一种非常高效的方法。</p>
 <h2 id="5-如何在大量的数据中判断一个数是否存在？"><a href="#5-如何在大量的数据中判断一个数是否存在？" class="headerlink" title="5. 如何在大量的数据中判断一个数是否存在？"></a>5. 如何在大量的数据中判断一个数是否存在？</h2><h3 id="题目描述-4"><a href="#题目描述-4" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定 40 亿个不重复的没排过序的 unsigned int 型整数，然后再给定一个数，如何快速判断这个数是否在这 40 亿个整数当中？</p>
@@ -302,26 +291,26 @@
 <h3 id="解答思路-7"><a href="#解答思路-7" class="headerlink" title="解答思路"></a>解答思路</h3><p>如果这道题没有内存大小限制，则可以把所有数读到内存中排序后找出中位数。但是最好的排序算法的时间复杂度都为 <code>O(NlogN)</code>。这里使用其他方法。</p>
 <h4 id="方法一：双堆法"><a href="#方法一：双堆法" class="headerlink" title="方法一：双堆法"></a>方法一：双堆法</h4><p>维护两个堆，一个大顶堆，一个小顶堆。大顶堆中最大的数<strong>小于等于</strong>小顶堆中最小的数；保证这两个堆中的元素个数的差不超过 1。</p>
 <p>若数据总数为<strong>偶数</strong>，当这两个堆建好之后，<strong>中位数就是这两个堆顶元素的平均值</strong>。当数据总数为<strong>奇数</strong>时，根据两个堆的大小，<strong>中位数一定在数据多的堆的堆顶</strong>。</p>
-<pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MedianFinder</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MedianFinder</span> &#123;
     
     <span class="hljs-keyword">private</span> PriorityQueue&lt;Integer&gt; maxHeap;
     <span class="hljs-keyword">private</span> PriorityQueue&lt;Integer&gt; minHeap;
 
     <span class="hljs-comment">/** initialize your data structure here. */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MedianFinder</span><span class="hljs-params">()</span> </span>&#123;
-        maxHeap = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;(Comparator.reverseOrder());
-        minHeap = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;(Integer::compareTo);
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MedianFinder</span><span class="hljs-params">()</span> &#123;
+        maxHeap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;(Comparator.reverseOrder());
+        minHeap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;(Integer::compareTo);
     &#125;
     
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addNum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addNum</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;
         <span class="hljs-keyword">if</span> (maxHeap.isEmpty() || maxHeap.peek() &gt; num) &#123;
             maxHeap.offer(num);
         &#125; <span class="hljs-keyword">else</span> &#123;
             minHeap.offer(num);
         &#125;
         
-        <span class="hljs-keyword">int</span> size1 = maxHeap.size();
-        <span class="hljs-keyword">int</span> size2 = minHeap.size();
+        <span class="hljs-type">int</span> <span class="hljs-variable">size1</span> <span class="hljs-operator">=</span> maxHeap.size();
+        <span class="hljs-type">int</span> <span class="hljs-variable">size2</span> <span class="hljs-operator">=</span> minHeap.size();
         <span class="hljs-keyword">if</span> (size1 - size2 &gt; <span class="hljs-number">1</span>) &#123;
             minHeap.offer(maxHeap.poll());
         &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (size2 - size1 &gt; <span class="hljs-number">1</span>) &#123;
@@ -329,9 +318,9 @@
         &#125;
     &#125;
     
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">findMedian</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">int</span> size1 = maxHeap.size();
-        <span class="hljs-keyword">int</span> size2 = minHeap.size();
+    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">findMedian</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-type">int</span> <span class="hljs-variable">size1</span> <span class="hljs-operator">=</span> maxHeap.size();
+        <span class="hljs-type">int</span> <span class="hljs-variable">size2</span> <span class="hljs-operator">=</span> minHeap.size();
         
         <span class="hljs-keyword">return</span> size1 == size2 
             ? (maxHeap.peek() + minHeap.peek()) * <span class="hljs-number">1.0</span> / <span class="hljs-number">2</span>
@@ -340,7 +329,7 @@
 &#125;</code></pre>
 
 <blockquote>
-<p>见 LeetCode No.295：<a href="https://leetcode.com/problems/find-median-from-data-stream/" target="_blank" rel="noopener">leetcode.com/problems/fi…</a></p>
+<p>见 LeetCode No.295：<a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-median-from-data-stream/">leetcode.com&#x2F;problems&#x2F;fi…</a></p>
 </blockquote>
 <p>以上这种方法，需要把所有数据都加载到内存中。当数据量很大时，就不能这样了，因此，这种方法<strong>适用于数据量较小的情况</strong>。5 亿个数，每个数字占用 4B，总共需要 2G 内存。如果可用内存不足 2G，就不能使用这种方法了，下面介绍另一种方法。</p>
 <h4 id="方法二：分治法"><a href="#方法二：分治法" class="headerlink" title="方法二：分治法"></a>方法二：分治法</h4><p>分治法的思想是把一个大的问题逐渐转换为规模较小的问题来求解。</p>
@@ -391,16 +380,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E7%AC%AC6%E7%AB%A0%20%20%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+                      <a href="/2023/02/06/%E7%8A%B6%E6%80%81%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">第6章  查询性能优化</span>
+                        <span class="hidden-mobile">状态模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -408,8 +397,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/Hexo%E7%AF%87/">
-                        <span class="hidden-mobile">Hexo篇</span>
+                      <a href="/2023/02/06/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">
+                        <span class="hidden-mobile">策略模式</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -424,30 +413,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/算法实战篇/';
+          this.page.identifier = '/2023/02/06/算法实战篇/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -511,24 +498,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -573,7 +549,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -660,13 +636,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

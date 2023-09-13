@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>适配器模式和外观模式 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      20
        分钟
     </span>
   
@@ -204,7 +192,8 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p><font color="red">将一个类的接口转换成客户希望的另外一个接口</font>，adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作</p>
+              <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><p>标签： #Share</p>
+<h2 id="意图"><a href="#意图" class="headerlink" title="意图"></a>意图</h2><p><font color="red">将一个类的接口转换成客户希望的另外一个接口</font>，adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作</p>
 <p>别名：Wrapper包装器</p>
 <h2 id="适配器模式的诞生"><a href="#适配器模式的诞生" class="headerlink" title="适配器模式的诞生"></a>适配器模式的诞生</h2><p>【<font color="orange">产品</font>】：开发小哥，记得我们第一版的需求吗？</p>
 <p>【<font color="blue">开发</font>】：什么玩意？</p>
@@ -219,16 +208,16 @@
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 鸭子接口</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Duck</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Duck</span> &#123;
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 鸭叫</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">quack</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span>;
 
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 飞行</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;
 &#125;</code></pre>
 
 
@@ -237,17 +226,18 @@
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 火鸡接口</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Turkey</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Turkey</span> &#123;
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 火鸡叫</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">gobble</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">gobble</span><span class="hljs-params">()</span>;
 
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 飞行</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;
-&#125;</code></pre>
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span>;
+&#125;
+</code></pre>
 
 
 
@@ -255,15 +245,15 @@
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 火鸡实现类</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WildTurkey</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Turkey</span></span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WildTurkey</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Turkey</span>&#123;
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">gobble</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"咯咯"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">gobble</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;咯咯&quot;</span>);
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"我在飞，虽然我飞的很近"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;我在飞，虽然我飞的很近&quot;</span>);
     &#125;
 &#125;</code></pre>
 
@@ -274,22 +264,22 @@
 <span class="hljs-comment"> * 火鸡适配器</span>
 <span class="hljs-comment"> * 实现鸭子接口同时持有火鸡对象，在实现的接口处用火鸡对象的方法填充一下（同时还可以做额外的事情）</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TurkeyAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Duck</span></span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TurkeyAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Duck</span>&#123;
 
     Turkey turkey;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">quack</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quack</span><span class="hljs-params">()</span> &#123;
         turkey.gobble();
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">fly</span><span class="hljs-params">()</span> &#123;
         turkey.fly();
     &#125;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TurkeyAdapter</span><span class="hljs-params">(Turkey turkey)</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.turkey = turkey;
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">TurkeyAdapter</span><span class="hljs-params">(Turkey turkey)</span> &#123;
+        <span class="hljs-built_in">this</span>.turkey = turkey;
     &#125;
 &#125;</code></pre>
 
@@ -304,11 +294,11 @@
 </ul>
 <p>简单来说，当我们需要对<font color="blue">两个本不相关的接口</font>混合一起用时，<font color="blue">需要用一个适配器实现A接口，持有B对象，再用B对象的方法去填充A接口的方法</font>，同时还可以增加一些其他的逻辑</p>
 <h2 id="和装饰器很像？"><a href="#和装饰器很像？" class="headerlink" title="和装饰器很像？"></a>和装饰器很像？</h2><p>从编程语言的技巧上来看，的确非常的像，我们来梳理一下其相同点和异同点：</p>
-<p><strong><em>相同点：</em></strong></p>
+<p><em><strong>相同点：</strong></em></p>
 <ul>
 <li>实现技巧上，都是实现某个接口，同时持有某个对象，用对象的方法去填充需要实现的方法</li>
 </ul>
-<p><strong><em>不同点：</em></strong></p>
+<p><em><strong>不同点：</strong></em></p>
 <ul>
 <li>接口个数不同，装饰器一般是单个接口，而适配器则是2个以上接口混合工作</li>
 <li>目的不同，装饰器是为了增强对象的方法，而适配器则是让本不能一起工作的接口混在一起工作</li>
@@ -318,39 +308,39 @@
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 定义超多的方法</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">InterfaceClass</span> </span>&#123;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">a</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">b</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">c</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">d</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">e</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span></span>;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">InterfaceClass</span> &#123;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">a</span><span class="hljs-params">()</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">b</span><span class="hljs-params">()</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">c</span><span class="hljs-params">()</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">d</span><span class="hljs-params">()</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">e</span><span class="hljs-params">()</span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">f</span><span class="hljs-params">()</span>;
 &#125;</code></pre>
 
 
 
 <p>用一个抽象类去实现接口：</p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">InterfaceAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">InterfaceClass</span></span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">InterfaceAdapter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">InterfaceClass</span>&#123;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">a</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"i have override method a"</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">a</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;i have override method a&quot;</span>);
     &#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">b</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">b</span><span class="hljs-params">()</span> &#123;&#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">c</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">c</span><span class="hljs-params">()</span> &#123;&#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">d</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">d</span><span class="hljs-params">()</span> &#123;&#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">e</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">e</span><span class="hljs-params">()</span> &#123;&#125;
 
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">f</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">f</span><span class="hljs-params">()</span> &#123;&#125;
 &#125;</code></pre>
 
 
@@ -360,7 +350,7 @@
 <li>你想使用一个已经存在的类，而它的接口不符合你的需求</li>
 <li>你想创建一个可以复用的类，该类可以与其他不相关的类或可能不兼容的类一起工作</li>
 </ul>
-<h2 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h2><p>现在手机都追求全面屏，安卓手机和耳机之间需要一个转接头工作，此时的转接头就是一个适配器，它持有耳机对象，实现手机插孔的接口，最终提供功能的依然是耳机，但它让本来无法联接的物体产生了联系</p>
+<h2 id="Code-生活中的实际应用"><a href="#Code-生活中的实际应用" class="headerlink" title="Code&#x2F;生活中的实际应用"></a>Code&#x2F;生活中的实际应用</h2><p>现在手机都追求全面屏，安卓手机和耳机之间需要一个转接头工作，此时的转接头就是一个适配器，它持有耳机对象，实现手机插孔的接口，最终提供功能的依然是耳机，但它让本来无法联接的物体产生了联系</p>
 <h2 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h2><p><img src="/2023/02/06/%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/image-20200602234955490.png" srcset="/img/loading.gif" alt="image-20200602234955490"></p>
 <h1 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h1><h2 id="意图-1"><a href="#意图-1" class="headerlink" title="意图"></a>意图</h2><p>为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。</p>
 <p><strong>核心思想：为子系统们提供一套通用的对外接口（高级API）</strong></p>
@@ -368,67 +358,67 @@
 <pre><code class="hljs java"><span class="hljs-comment">/**</span>
 <span class="hljs-comment"> * 定义一个顶层接口</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Computer</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Computer</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">void</span> <span class="hljs-title function_">open</span><span class="hljs-params">()</span>;
 &#125;
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cpu</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Computer</span></span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Cpu</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Computer</span>&#123;
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"Cpu Open."</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">open</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Cpu Open.&quot;</span>);
     &#125;
 &#125;
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ram</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Computer</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Ram</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Computer</span> &#123;
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"Ram Open."</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">open</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;Ram Open.&quot;</span>);
     &#125;
 &#125;
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Ssd</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Computer</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Ssd</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Computer</span> &#123;
     <span class="hljs-meta">@Override</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">open</span><span class="hljs-params">()</span> </span>&#123;
-        System.out.println(<span class="hljs-string">"SSD Open."</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">open</span><span class="hljs-params">()</span> &#123;
+        System.out.println(<span class="hljs-string">&quot;SSD Open.&quot;</span>);
     &#125;
 &#125;</code></pre>
 
 
 
 <p><strong>外观类</strong></p>
-<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FacadeComputer</span> </span>&#123;
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FacadeComputer</span> &#123;
 
     <span class="hljs-keyword">private</span> Cpu cpu;
     <span class="hljs-keyword">private</span> Ram ram;
     <span class="hljs-keyword">private</span> Ssd ssd;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FacadeComputer</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.cpu = <span class="hljs-keyword">new</span> Cpu();
-        <span class="hljs-keyword">this</span>.ram = <span class="hljs-keyword">new</span> Ram();
-        <span class="hljs-keyword">this</span>.ssd = <span class="hljs-keyword">new</span> Ssd();
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">FacadeComputer</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-built_in">this</span>.cpu = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cpu</span>();
+        <span class="hljs-built_in">this</span>.ram = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Ram</span>();
+        <span class="hljs-built_in">this</span>.ssd = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Ssd</span>();
     &#125;
 
     <span class="hljs-comment">/** Cpu On **/</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCpu</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.cpu.open();
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onCpu</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-built_in">this</span>.cpu.open();
     &#125;
 
     <span class="hljs-comment">/** Ram On **/</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onRam</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.ram.open();
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onRam</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-built_in">this</span>.ram.open();
     &#125;
 
     <span class="hljs-comment">/** Ssd On **/</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSsd</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.ssd.open();
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSsd</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-built_in">this</span>.ssd.open();
     &#125;
 
     <span class="hljs-comment">/** All On **/</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">allOn</span><span class="hljs-params">()</span> </span>&#123;
-        <span class="hljs-keyword">this</span>.cpu.open();
-        <span class="hljs-keyword">this</span>.ram.open();
-        <span class="hljs-keyword">this</span>.ssd.open();
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">allOn</span><span class="hljs-params">()</span> &#123;
+        <span class="hljs-built_in">this</span>.cpu.open();
+        <span class="hljs-built_in">this</span>.ram.open();
+        <span class="hljs-built_in">this</span>.ssd.open();
     &#125;
 &#125;</code></pre>
 
@@ -441,11 +431,11 @@
 <span class="hljs-comment"> * <span class="hljs-doctag">@see</span> Cpu | Ram | Ssd</span>
 <span class="hljs-comment"> * <span class="hljs-doctag">@see</span> FacadeComputer</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;
     <span class="hljs-comment">// 不使用外观模式</span>
-    Computer cpu = <span class="hljs-keyword">new</span> Cpu();
-    Computer ram = <span class="hljs-keyword">new</span> Ram();
-    Computer ssd = <span class="hljs-keyword">new</span> Ssd();
+    <span class="hljs-type">Computer</span> <span class="hljs-variable">cpu</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cpu</span>();
+    <span class="hljs-type">Computer</span> <span class="hljs-variable">ram</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Ram</span>();
+    <span class="hljs-type">Computer</span> <span class="hljs-variable">ssd</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Ssd</span>();
     cpu.open();
     ram.open();
     ssd.open();
@@ -453,7 +443,7 @@
     CodeUtils.spilt();
 
     <span class="hljs-comment">// 使用外观模式</span>
-    FacadeComputer facadeComputer = <span class="hljs-keyword">new</span> FacadeComputer();
+    <span class="hljs-type">FacadeComputer</span> <span class="hljs-variable">facadeComputer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FacadeComputer</span>();
     facadeComputer.allOn();
 &#125;</code></pre>
 
@@ -464,13 +454,13 @@
 <li>客户程序与抽象类的实现部分之间存在着很大依赖性（分离逻辑，提高子系统的独立性和可移植性）</li>
 <li>需要构建一个层次结构的子系统时</li>
 </ul>
-<h2 id="Code-生活中的实际应用-1"><a href="#Code-生活中的实际应用-1" class="headerlink" title="Code/生活中的实际应用"></a>Code/生活中的实际应用</h2><p>外观模式在生活中最好的体现就是基金，基金的本质其实是由专业的团队去集资购买股票，购买股票本身有非常多的流程和注意事项，但是现在我们可以很轻松的下注基金，这就是外观模式的体现之一</p>
-<h1 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h1><p><a href="https://github.com/kkzhilu/Kerwin-DesignPattern" target="_blank" rel="noopener">GitHub地址</a></p>
+<h2 id="Code-生活中的实际应用-1"><a href="#Code-生活中的实际应用-1" class="headerlink" title="Code&#x2F;生活中的实际应用"></a>Code&#x2F;生活中的实际应用</h2><p>外观模式在生活中最好的体现就是基金，基金的本质其实是由专业的团队去集资购买股票，购买股票本身有非常多的流程和注意事项，但是现在我们可以很轻松的下注基金，这就是外观模式的体现之一</p>
+<h1 id="相关代码链接"><a href="#相关代码链接" class="headerlink" title="相关代码链接"></a>相关代码链接</h1><p><a target="_blank" rel="noopener" href="https://github.com/kkzhilu/Kerwin-DesignPattern">GitHub地址</a></p>
 <ul>
 <li>兼顾了《HeadFirst》以及《GOF》两本经典书籍中的案例</li>
 <li>提供了友好的阅读指导</li>
 </ul>
-<p><img src="https://user-gold-cdn.xitu.io/2020/6/1/17270943b7c5022b?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif" alt></p>
+<p><img src="https://user-gold-cdn.xitu.io/2020/6/1/17270943b7c5022b?w=487&h=185&f=png&s=17561" srcset="/img/loading.gif"></p>
 
             </article>
             <hr>
@@ -494,16 +484,16 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/">
+                      <a href="/2023/02/06/%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%92%8C%E7%BB%84%E5%90%88%E6%A8%A1%E5%BC%8F/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">跨域问题</span>
+                        <span class="hidden-mobile">迭代器和组合模式</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -511,8 +501,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/CV%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E4%B8%80%E6%AC%A1%E8%BF%9B%E6%AD%A5/">
-                        <span class="hidden-mobile">CV程序员的一次进步</span>
+                      <a href="/2023/02/06/%E9%99%90%E6%B5%81%E7%AF%87/">
+                        <span class="hidden-mobile">限流篇</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -527,30 +517,28 @@
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/适配器模式和外观模式/';
+          this.page.identifier = '/2023/02/06/适配器模式和外观模式/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -614,24 +602,13 @@
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -676,7 +653,7 @@
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -763,13 +740,6 @@
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

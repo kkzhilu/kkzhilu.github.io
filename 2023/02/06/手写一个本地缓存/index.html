@@ -16,7 +16,7 @@
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一切都是有可能的，甚至那些不可能的也是.">
   <meta name="author" content="Kerwin">
-  <meta name="keywords" content="Java;Python;Vue;前端;后端;多线程;设计模式;并发编程;数据库;">
+  <meta name="keywords" content="AI;AIGC;Java;分布式;后端;高并发;设计模式;并发编程;数据库;人工智能;">
   <title>手写一个本地缓存 - Kerwin&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -26,7 +26,7 @@
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/xcode.min.css" />
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
   
 
   
@@ -47,7 +47,7 @@
 
 
   <script  src="/js/utils.js" ></script>
-<meta name="generator" content="Hexo 4.2.1"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -55,7 +55,7 @@
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
-       href="/">&nbsp;<strong>Kerwin</strong>&nbsp;</a>
+       href="/">&nbsp;<strong>SuperKerwin's Blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -75,18 +75,6 @@
               <a class="nav-link" href="/">
                 <i class="iconfont icon-home-fill"></i>
                 首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
               </a>
             </li>
           
@@ -163,7 +151,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      809 字
+      822 字
     </span>
   
 
@@ -173,7 +161,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -204,8 +192,9 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="基于ConcurrentHashMap的本地缓存"><a href="#基于ConcurrentHashMap的本地缓存" class="headerlink" title="基于ConcurrentHashMap的本地缓存"></a>基于ConcurrentHashMap的本地缓存</h1><p>在系统中，有些数据，数据量小，但是访问十分频繁（例如国家标准行政区域数据），针对这种场景，需要将数据搞到应用的本地缓存中，以提升系统的访问效率，减少无谓的数据库访问（数据库访问占用数据库连接，同时网络消耗比较大），但是有一点需要注意，就是缓存的占用空间以及缓存的失效策略</p>
-<p>博文：<a href="https://www.jianshu.com/p/4194483127fe" target="_blank" rel="noopener">https://www.jianshu.com/p/4194483127fe</a></p>
+              <h1 id="基于ConcurrentHashMap的本地缓存"><a href="#基于ConcurrentHashMap的本地缓存" class="headerlink" title="基于ConcurrentHashMap的本地缓存"></a>基于ConcurrentHashMap的本地缓存</h1><p>标签： #Share</p>
+<p>在系统中，有些数据，数据量小，但是访问十分频繁（例如国家标准行政区域数据），针对这种场景，需要将数据搞到应用的本地缓存中，以提升系统的访问效率，减少无谓的数据库访问（数据库访问占用数据库连接，同时网络消耗比较大），但是有一点需要注意，就是缓存的占用空间以及缓存的失效策略</p>
+<p>博文：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/4194483127fe">https://www.jianshu.com/p/4194483127fe</a></p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.mine.localcache;
 
 <span class="hljs-keyword">import</span> java.util.Date;
@@ -223,14 +212,14 @@
 <span class="hljs-comment"> * version:      V1.0</span>
 <span class="hljs-comment"> * ******************************</span>
 <span class="hljs-comment"> */</span>
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LocalCache</span> </span>&#123;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LocalCache</span> &#123;
 
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 默认有效时长,单位:秒</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFUALT_TIMEOUT = <span class="hljs-number">3600</span> * <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">DEFUALT_TIMEOUT</span> <span class="hljs-operator">=</span> <span class="hljs-number">3600</span> * <span class="hljs-number">1000</span>;
 
-    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> SECOND_TIME = <span class="hljs-number">1000</span>;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">SECOND_TIME</span> <span class="hljs-operator">=</span> <span class="hljs-number">1000</span>;
 
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Map&lt;String, Object&gt; map;
 
@@ -240,27 +229,27 @@
 <span class="hljs-comment">     * 初始化</span>
 <span class="hljs-comment">     */</span>
     <span class="hljs-keyword">static</span> &#123;
-        timer = <span class="hljs-keyword">new</span> Timer();
-        map = <span class="hljs-keyword">new</span> ConcurrentHashMap&lt;&gt;();
+        timer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Timer</span>();
+        map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcurrentHashMap</span>&lt;&gt;();
     &#125;
 
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 私有构造函数,工具类不允许实例化</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">LocalCache</span><span class="hljs-params">()</span> </span>&#123;&#125;
+    <span class="hljs-keyword">private</span> <span class="hljs-title function_">LocalCache</span><span class="hljs-params">()</span> &#123;&#125;
 
     <span class="hljs-comment">/**</span>
 <span class="hljs-comment">     * 清除缓存任务类</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CleanWorkerTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TimerTask</span> </span>&#123;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CleanWorkerTask</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">TimerTask</span> &#123;
 
         <span class="hljs-keyword">private</span> String key;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">CleanWorkerTask</span><span class="hljs-params">(String key)</span> </span>&#123;
-            <span class="hljs-keyword">this</span>.key = key;
+        <span class="hljs-keyword">public</span> <span class="hljs-title function_">CleanWorkerTask</span><span class="hljs-params">(String key)</span> &#123;
+            <span class="hljs-built_in">this</span>.key = key;
         &#125;
 
-        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;
             LocalCache.remove(key);
         &#125;
     &#125;
@@ -271,9 +260,9 @@
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(String key, Object value)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">put</span><span class="hljs-params">(String key, Object value)</span> &#123;
         map.put(key, value);
-        timer.schedule(<span class="hljs-keyword">new</span> CleanWorkerTask(key), DEFUALT_TIMEOUT);
+        timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWorkerTask</span>(key), DEFUALT_TIMEOUT);
     &#125;
 
     <span class="hljs-comment">/**</span>
@@ -283,9 +272,9 @@
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> timeout 有效时长</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(String key, Object value, <span class="hljs-keyword">int</span> timeout)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">put</span><span class="hljs-params">(String key, Object value, <span class="hljs-type">int</span> timeout)</span> &#123;
         map.put(key, value);
-        timer.schedule(<span class="hljs-keyword">new</span> CleanWorkerTask(key), timeout * SECOND_TIME);
+        timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWorkerTask</span>(key), timeout * SECOND_TIME);
     &#125;
 
     <span class="hljs-comment">/**</span>
@@ -295,9 +284,9 @@
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> value</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> expireTime 过期时间</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(String key, Object value, Date expireTime)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">put</span><span class="hljs-params">(String key, Object value, Date expireTime)</span> &#123;
         map.put(key, value);
-        timer.schedule(<span class="hljs-keyword">new</span> CleanWorkerTask(key), expireTime);
+        timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWorkerTask</span>(key), expireTime);
     &#125;
 
 
@@ -306,11 +295,11 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> m</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putAll</span><span class="hljs-params">(Map&lt;String, Object&gt; m)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putAll</span><span class="hljs-params">(Map&lt;String, Object&gt; m)</span> &#123;
         map.putAll(m);
 
         <span class="hljs-keyword">for</span> (String key : m.keySet()) &#123;
-            timer.schedule(<span class="hljs-keyword">new</span> CleanWorkerTask(key), DEFUALT_TIMEOUT);
+            timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWorkerTask</span>(key), DEFUALT_TIMEOUT);
         &#125;
     &#125;
 
@@ -319,11 +308,11 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> m</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putAll</span><span class="hljs-params">(Map&lt;String, Object&gt; m, <span class="hljs-keyword">int</span> timeout)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putAll</span><span class="hljs-params">(Map&lt;String, Object&gt; m, <span class="hljs-type">int</span> timeout)</span> &#123;
         map.putAll(m);
 
         <span class="hljs-keyword">for</span> (String key : m.keySet()) &#123;
-            timer.schedule(<span class="hljs-keyword">new</span> CleanWorkerTask(key), timeout * SECOND_TIME);
+            timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWorkerTask</span>(key), timeout * SECOND_TIME);
         &#125;
     &#125;
 
@@ -332,11 +321,11 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> m</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">putAll</span><span class="hljs-params">(Map&lt;String, Object&gt; m, Date expireTime)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">putAll</span><span class="hljs-params">(Map&lt;String, Object&gt; m, Date expireTime)</span> &#123;
         map.putAll(m);
 
         <span class="hljs-keyword">for</span> (String key : m.keySet()) &#123;
-            timer.schedule(<span class="hljs-keyword">new</span> CleanWorkerTask(key), expireTime);
+            timer.schedule(<span class="hljs-keyword">new</span> <span class="hljs-title class_">CleanWorkerTask</span>(key), expireTime);
         &#125;
     &#125;
 
@@ -346,7 +335,7 @@
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title">get</span><span class="hljs-params">(String key)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title function_">get</span><span class="hljs-params">(String key)</span> &#123;
         <span class="hljs-keyword">return</span> map.get(key);
     &#125;
 
@@ -356,7 +345,7 @@
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">containsKey</span><span class="hljs-params">(String key)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">containsKey</span><span class="hljs-params">(String key)</span> &#123;
         <span class="hljs-keyword">return</span> map.containsKey(key);
     &#125;
 
@@ -365,7 +354,7 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> key</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(String key)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(String key)</span> &#123;
         map.remove(key);
     &#125;
 
@@ -374,7 +363,7 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@param</span> o</span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(Object o)</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">remove</span><span class="hljs-params">(Object o)</span> &#123;
         map.remove(o);
     &#125;
 
@@ -383,7 +372,7 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">return</span> map.size();
     &#125;
 
@@ -392,38 +381,38 @@
 <span class="hljs-comment">     *</span>
 <span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span>
 <span class="hljs-comment">     */</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span><span class="hljs-params">()</span> &#123;
         <span class="hljs-keyword">if</span> (size() &gt; <span class="hljs-number">0</span>) &#123;
             map.clear();
         &#125;
 
         <span class="hljs-comment">// 取消延时任务,重新创建Timer</span>
         timer.cancel();
-        timer = <span class="hljs-keyword">new</span> Timer();
+        timer = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Timer</span>();
     &#125;
 &#125;</code></pre>
 
 
 
-<h2 id="测试Demo"><a href="#测试Demo" class="headerlink" title="测试Demo"></a>测试Demo</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestDemo</span> </span>&#123;
+<h2 id="测试Demo"><a href="#测试Demo" class="headerlink" title="测试Demo"></a>测试Demo</h2><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestDemo</span> &#123;
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;
-            LocalCache.put(i + <span class="hljs-string">""</span>, <span class="hljs-string">"test for "</span> + i , <span class="hljs-number">20</span>);
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException &#123;
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;
+            LocalCache.put(i + <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-string">&quot;test for &quot;</span> + i , <span class="hljs-number">20</span>);
         &#125;
 
-        System.out.println(<span class="hljs-string">"ok"</span>);
+        System.out.println(<span class="hljs-string">&quot;ok&quot;</span>);
 
         Thread.sleep(<span class="hljs-number">10</span> * <span class="hljs-number">1000</span>);
 
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;
-            System.out.println(LocalCache.get(i + <span class="hljs-string">""</span>));
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;
+            System.out.println(LocalCache.get(i + <span class="hljs-string">&quot;&quot;</span>));
         &#125;
 
         Thread.sleep(<span class="hljs-number">15</span> * <span class="hljs-number">1000</span>);
 
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;
-            System.out.println(LocalCache.get(i + <span class="hljs-string">""</span>));
+        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20000</span>; i++) &#123;
+            System.out.println(LocalCache.get(i + <span class="hljs-string">&quot;&quot;</span>));
         &#125;
     &#125;
 &#125;</code></pre>
@@ -458,16 +447,16 @@ LRU：Least Recently Used，最近最少使用 算法实现等
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/06/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+                      <a href="/2023/02/06/%E6%82%84%E5%92%AA%E5%92%AA%E6%8F%90%E9%AB%98%E5%9B%A2%E9%98%9F%E5%B9%B8%E7%A6%8F%E6%84%9F%20&amp;%20Surprise%EF%BC%81/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">布隆过滤器</span>
+                        <span class="hidden-mobile">悄咪咪提高团队幸福感 & Surprise！</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -475,8 +464,8 @@ LRU：Least Recently Used，最近最少使用 算法实现等
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2023/02/06/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E9%80%9A%E7%94%A8%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
-                        <span class="hidden-mobile">深度分页通用解决方案</span>
+                      <a href="/2023/02/06/%E6%89%8B%E5%86%99%E7%AE%80%E6%98%93SpringMVC/">
+                        <span class="hidden-mobile">手写简易SpringMVC</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -491,30 +480,28 @@ LRU：Least Recently Used，最近最少使用 算法实现等
               <div class="comments" id="comments">
                 
                 
-  <div id="vcomments"></div>
-  <script type="text/javascript">
-    function loadValine() {
-      addScript('https://cdn.staticfile.org/valine/1.4.14/Valine.min.js', function () {
-        new Valine({
-          el: "#vcomments",
-          app_id: "6uM0Qq25J6ydLXiYqdyxxiMC-gzGzoHsz",
-          app_key: "oc2dzMKP9uJXsnOOhIxAr94f",
-          placeholder: "说点什么吧~",
-          path: window.location.pathname,
-          avatar: "retro",
-          meta: ["nick","mail","link"],
-          pageSize: "10",
-          lang: "zh-CN",
-          highlight: true,
-          recordIP: false,
-          serverURLs: "",
-        });
-      });
-    }
-    createObserver(loadValine, 'vcomments');
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://valine.js.org" target="_blank" rel="nofollow noopener noopener">comments
-      powered by Valine.</a></noscript>
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      function loadDisqus() {
+        var disqus_config = function () {
+          this.page.url = 'http://example.com/2023/02/06/手写一个本地缓存/';
+          this.page.identifier = '/2023/02/06/手写一个本地缓存/';
+        };
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + '' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      createObserver(loadDisqus, 'disqus_thread');
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
 
 
               </div>
@@ -578,24 +565,13 @@ LRU：Least Recently Used，最近最少使用 算法实现等
   <footer class="mt-5">
   <div class="text-center py-3">
     <div>
-      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <a href="https://juejin.cn/user/1275089220013336" target="_blank" rel="nofollow noopener"><span>掘金</span></a>
       <i class="iconfont icon-love"></i>
-      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
-        <span>Fluid</span></a>
-	  <i class="iconfont icon-love"></i>
-	  <a href="https://cloud.tencent.com/product/wh?from=12331" target="_blank" rel="nofollow noopener">
-        <span>Hosted BY 云开发 Cloudbase</span></a>
-    </div>
+      <a href="https://github.com/kkzhilu" target="_blank" rel="nofollow noopener">
+        <span>GitHub</span></a>
     
 
     
-  <!-- 备案信息 -->
-  <div class="beian">
-    <a href="http://beian.miit.gov.cn/" target="_blank"
-       rel="nofollow noopener">鄂ICP备18012070号</a>
-    
-  </div>
-
 
     
   </div>
@@ -640,7 +616,7 @@ LRU：Least Recently Used，最近最少使用 算法实现等
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 6,
+        collapseDepth: 0,
         scrollSmooth: true,
         headingsOffset: -boardTop
       });
@@ -727,13 +703,6 @@ LRU：Least Recently Used，最近最少使用 算法实现等
 
 
 
-
-  <script  src="https://cdn.staticfile.org/mermaid/8.5.0/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 
